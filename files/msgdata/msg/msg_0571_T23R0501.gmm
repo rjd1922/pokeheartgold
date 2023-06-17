@@ -23,7 +23,7 @@
 	</row>
 	<row id="msg_0571_T23R0501_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Kurt: It’ll take a day to make you a\nPoké Ball. Come back for it later.</language>
+		<language name="English">Kurt: It’ll take a day to make you your\nPoké Balls. Come back for it later.</language>
 	</row>
 	<row id="msg_0571_T23R0501_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
@@ -35,7 +35,7 @@
 	</row>
 	<row id="msg_0571_T23R0501_00008" index="8">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Kurt: Ah, {STRVAR_1 3, 0, 0}!\fI just finished your Poké Ball. Here!\r</language>
+		<language name="English">Kurt: Ah, {STRVAR_1 3, 0, 0}!\fI just finished your Poké Balls. Here!\r</language>
 	</row>
 	<row id="msg_0571_T23R0501_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
