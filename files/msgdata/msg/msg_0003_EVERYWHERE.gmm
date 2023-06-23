@@ -2222,15 +2222,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00555" index="555">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nFaint Attack!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nFeint Attack!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00556" index="556">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFaint Attack!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFeint Attack!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00557" index="557">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFaint Attack!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFeint Attack!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00558" index="558">
 		<attribute name="window_context_name">used</attribute>
