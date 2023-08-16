@@ -31515,7 +31515,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 60,
-          "species": "SPECIES_SLOWBRO",
+          "species": "SPECIES_SLOWKING",
           "item": "ITEM_NONE",
           "moves": [
             "MOVE_CURSE",
