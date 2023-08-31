@@ -1,6 +1,6 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public sub_02005FA0
+.public Sound_Stop
 .public sub_0201A728
 .public sub_0201A738
 .public sub_0201A79C
@@ -9,13 +9,13 @@
 .public AllocFromHeap
 .public FreeToHeap
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public CopyU16ArrayToString
 .public Save_PrepareForAsyncWrite
 .public Save_WriteFileAsync
 .public Save_Cancel
-.public Sav2_PlayerData_GetProfileAddr
+.public Save_PlayerData_GetProfileAddr
 .public PlayerProfile_GetPlayerName_NewString
 .public PlayerProfile_GetTrainerID
 .public PlayerProfile_GetTrainerGender

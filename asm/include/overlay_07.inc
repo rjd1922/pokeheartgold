@@ -22,8 +22,8 @@
 .public IsCryFinished
 .public ReadWholeNarcMemberByIdPair
 .public AllocAndReadWholeNarcMemberByIdPair
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public NARC_AllocAndReadWholeMember
 .public GfGfxLoader_LoadCharData
 .public GfGfxLoader_LoadScrnData
@@ -41,10 +41,10 @@
 .public sub_02009414
 .public sub_020094BC
 .public G2dRenderer_SetSubSurfaceCoords
-.public sub_0200B484
-.public sub_0200B528
-.public sub_0200B594
-.public sub_0200B5C0
+.public StartBrightnessTransition
+.public ScreenBrightnessData_InitAll
+.public DoAllScreenBrightnessTransitionStep
+.public IsBrightnessTransitionActive
 .public sub_0200CF38
 .public sub_0200CF6C
 .public sub_0200CFF4
@@ -147,9 +147,9 @@
 .public LCRandom
 .public GF_CreateNewVramTransferTask
 .public sub_02022808
-.public GF_Camera_SetAngle
-.public GF_Camera_GetAngle
-.public sub_0202365C
+.public Camera_SetAnglePos
+.public Camera_GetAngle
+.public Camera_SetLookAtCamTarget
 .public sub_02024B1C
 .public sub_02024B34
 .public sub_02024B68
@@ -236,7 +236,7 @@
 .public ov07_022377F4
 .public ov12_0223A8E4
 .public ov12_0223A8EC
-.public ov12_0223A938
+.public BattleSystem_GetPaletteData
 .public ov12_0223BB88
 .public ov12_0223C1C4
 .public ov12_0223C1F4

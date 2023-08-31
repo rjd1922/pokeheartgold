@@ -41,7 +41,7 @@ ov104_021E5900: ; 0x021E5900
 	mov r1, #0
 	strb r1, [r4, r0]
 	mov r0, #0x95
-	bl GF_Camera_Create
+	bl Camera_New
 	str r0, [r4]
 	bl ov104_021E5B88
 	add r0, r4, #0
@@ -240,7 +240,7 @@ _021E5AC2:
 	str r0, [r1, #4]
 	str r0, [r1, #8]
 	bl Thunk_G3X_Reset
-	bl sub_02023154
+	bl Camera_PushLookAtToNNSGlb
 	add r0, r4, #0
 	add r1, sp, #0
 	add r2, sp, #0x18
@@ -302,7 +302,7 @@ _021E5B36:
 	cmp r0, #3
 	blo _021E5B28
 	ldr r0, [r7]
-	bl sub_02023120
+	bl Camera_Delete
 	ldr r0, [sp]
 	bl OverlayManager_FreeData
 	bl sub_0201F63C
@@ -401,7 +401,7 @@ ov104_021E5BEC: ; 0x021E5BEC
 	ldr r1, [r1, r6]
 	add r3, r3, r5
 	ldrh r3, [r6, r3]
-	bl GF_Camera_InitFromTargetDistanceAndAngle
+	bl Camera_Init_FromTargetDistanceAndAngle
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldrb r1, [r4, r0]
@@ -413,7 +413,7 @@ ov104_021E5BEC: ; 0x021E5BEC
 	mul r0, r7
 	add r0, r1, r0
 	ldr r1, [r4]
-	bl GF_Camera_ShiftBy
+	bl Camera_OffsetLookAtPosAndTarget
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldrb r3, [r4, r0]
@@ -430,9 +430,9 @@ ov104_021E5BEC: ; 0x021E5BEC
 	ldr r2, [r4]
 	lsl r0, r0, #0xc
 	lsl r1, r1, #0xc
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	ldr r0, [r4]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -471,7 +471,7 @@ ov104_021E5CC8: ; 0x021E5CC8
 	str r0, [sp]
 	mov r0, #0xeb
 	mov r1, #0x95
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #8]
 	mov r1, #0x52
 	ldr r0, [sp]
@@ -656,7 +656,7 @@ _021E5DEA:
 	cmp r0, #3
 	blo _021E5D76
 	ldr r0, [sp, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	nop

@@ -51,7 +51,7 @@ _021E5916:
 	bl BgConfig_Alloc
 	str r0, [r4]
 	mov r0, #0x27
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0xc]
 	mov r0, #0
 	mov r1, #0x1b
@@ -87,7 +87,7 @@ _021E5916:
 	str r0, [r4, #8]
 	mov r0, #0x4e
 	mov r1, #0x27
-	bl NARC_ctor
+	bl NARC_New
 	add r7, r0, #0
 	add r0, r4, #0
 	add r1, r7, #0
@@ -139,7 +139,7 @@ _021E5A30:
 	bl sub_020356EC
 _021E5A48:
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [r5]
 	add r0, r0, #1
 	str r0, [r5]
@@ -365,7 +365,7 @@ _021E5BF8:
 	ldr r0, [r6, #0x10]
 	bl DestroyMsgData
 	ldr r0, [r6, #0xc]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r7]
 	add r0, r0, #1
 	str r0, [r7]
@@ -438,7 +438,7 @@ ov37_021E5CC8: ; 0x021E5CC8
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	add r0, r4, #0
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E5CE8 ; =0x027E0000
 	ldr r1, _021E5CEC ; =0x00003FF8
 	mov r0, #1
@@ -616,7 +616,7 @@ ov37_021E5E30: ; 0x021E5E30
 _021E5E46:
 	mov r0, #8
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r6, #0x14]
 	ldrb r1, [r4]
 	ldr r0, [sp, #4]
@@ -640,11 +640,11 @@ _021E5E46:
 	blt _021E5E46
 	mov r0, #0xa
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r7, #0x28]
 	mov r0, #0x50
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r7, #0x2c]
 	ldr r0, _021E5F0C ; =0x00004376
 	mov r2, #0
@@ -724,15 +724,15 @@ ov37_021E5F20: ; 0x021E5F20
 	add r5, r6, #0
 _021E5F38:
 	ldr r0, [r5, #0x14]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #5
 	blt _021E5F38
 	ldr r0, [r6, #0x2c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x28]
-	bl String_dtor
+	bl String_Delete
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _021E5F54: .word 0x000043C8
@@ -3651,7 +3651,7 @@ ov37_021E762C: ; 0x021E762C
 	mov r0, #0x50
 	mov r1, #0x27
 	add r4, r2, #0
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	ldr r0, [r5, #0x10]
 	add r1, r7, #0
@@ -3662,7 +3662,7 @@ ov37_021E762C: ; 0x021E762C
 	add r2, r6, #0
 	bl StringExpandPlaceholders
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0xb6
 	lsl r0, r0, #2
 	add r0, r5, r0

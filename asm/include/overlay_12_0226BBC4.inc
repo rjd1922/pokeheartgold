@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public sub_0200D504
 .public sub_0200D68C
 .public sub_0200D6EC
@@ -25,12 +25,12 @@
 .public _ll_mul
 .public _s32_div_f
 .public ov12_022399BC
-.public ov12_0226BBC4
-.public ov12_0226BC40
-.public ov12_0226BC68
-.public ov12_0226BCE4
+.public BattleFinger_LoadResources
+.public BattleFinger_FreeResources
+.public BattleFinger_New
+.public BattleFinger_Delete
 .public ov12_0226BCFC
 .public ov12_0226BD2C
-.public ov12_0226BD38
+.public BattleFinger_Disable
 .public ov12_0226BD4C
 .public ov12_0226BD50

@@ -9,6 +9,7 @@
 #include "pm_string.h"
 #include "mail_message.h"
 #include "pokemon_types_def.h"
+#include "global.h"
 
 typedef enum TrainerAttr {
     TRATTR_TYPE,
@@ -43,7 +44,7 @@ typedef struct TrainerMonSpecies {
     u16 level;
 
     // Bits 0-9: species
-    // Bits 10-15: forme
+    // Bits 10-15: form
     u16 species;
     u16 capsule;
 } TRPOKE_NOITEM_DFLTMOVES;
@@ -53,7 +54,7 @@ typedef struct TrainerMonSpeciesMoves {
     u8 genderAbilityOverride;
     u16 level;
     u16 species;
-    u16 moves[MON_MOVES];
+    u16 moves[MAX_MON_MOVES];
     u16 capsule;
 } TRPOKE_NOITEM_CUSTMOVES;
 
@@ -72,7 +73,7 @@ typedef struct TrainerMonSpeciesItemMoves {
     u16 level;
     u16 species;
     u16 item;
-    u16 moves[MON_MOVES];
+    u16 moves[MAX_MON_MOVES];
     u16 capsule;
 } TRPOKE_ITEM_CUSTMOVES;
 
@@ -91,24 +92,24 @@ typedef struct TrainerData {
     /*004*/ u16 items[4];
     /*00C*/ u32 ai_flags;
     /*010*/ u32 doubleBattle;
-    /*014*/ u16 name[OT_NAME_LENGTH + 1];
+    /*014*/ u16 name[PLAYER_NAME_LENGTH + 1];
     // Used in the Frontier
     /*024*/ MAIL_MESSAGE winMessage;
     /*02C*/ MAIL_MESSAGE loseMessage;
 } TRAINER; // size=0x34
 
-typedef struct BattleSetupStruct BATTLE_SETUP;
+typedef struct BattleSetup BattleSetup;
 
 void TrainerData_ReadTrData(u32 trno, TRAINER *dest);
 TrainerGender TrainerClass_GetGenderOrTrainerCount(int trainerClass);
 int TrainerData_GetAttr(u32 tr_idx, TrainerAttr attr_no);
-void EnemyTrainerSet_Init(BATTLE_SETUP *battleSetup, SAVEDATA *saveData, HeapID heap_id);
-BOOL TrainerMessageWithIdPairExists(u32 trainer_idx, u32 msg_id, HeapID heap_id);
-void GetTrainerMessageByIdPair(u32 trainer_idx, u32 msg_id, STRING * str, HeapID heap_id);
+void EnemyTrainerSet_Init(BattleSetup *battleSetup, SaveData *saveData, HeapID heapId);
+BOOL TrainerMessageWithIdPairExists(u32 trainer_idx, u32 msg_id, HeapID heapId);
+void GetTrainerMessageByIdPair(u32 trainer_idx, u32 msg_id, String * str, HeapID heapId);
 void TrainerData_ReadTrPoke(u32 idx, TRPOKE * dest);
-void CreateNPCTrainerParty(BATTLE_SETUP *enemies, int party_id, HeapID heap_id);
-void TrMon_OverridePidGender(int species, int forme, int overrideParam, u32 *pid);
-void TrMon_FrustrationCheckAndSetFriendship(POKEMON *pokemon);
+void CreateNPCTrainerParty(BattleSetup *enemies, int party_id, HeapID heapId);
+void TrMon_OverridePidGender(int species, int form, int overrideParam, u32 *pid);
+void TrMon_FrustrationCheckAndSetFriendship(Pokemon *mon);
 #endif //PM_ASM
 
 #endif //POKEHEARTGOLD_TRAINER_DATA_H

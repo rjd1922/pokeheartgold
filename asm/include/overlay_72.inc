@@ -13,8 +13,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharDataFromOpenNarc
 .public GfGfxLoader_LoadScrnDataFromOpenNarc
 .public GfGfxLoader_GXLoadPalFromOpenNarc
@@ -39,8 +39,8 @@
 .public DestroyMsgData
 .public ReadMsgDataIntoString
 .public NewString_ReadMsgData
-.public ScrStrBufs_new_custom
-.public ScrStrBufs_delete
+.public MessageFormat_New_Custom
+.public MessageFormat_Delete
 .public BufferIntegerAsString
 .public StringExpandPlaceholders
 .public sub_0200E33C
@@ -51,7 +51,7 @@
 .public LoadUserFrameGfx2
 .public DrawFrameAndWindow2
 .public ClearFrameAndWindow2
-.public sub_0200F0AC
+.public WaitingIcon_New
 .public sub_0200F450
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
@@ -82,7 +82,7 @@
 .public CopyWindowToVram
 .public ClearWindowTilemapAndCopyToVram
 .public FillWindowPixelBuffer
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ScheduleBgTilemapBufferTransfer
 .public TextPrinterCheckActive
 .public AddTextPrinterParameterized
@@ -110,12 +110,12 @@
 .public sub_02024B68
 .public sub_02025224
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public Save_PrepareForAsyncWrite
 .public Save_WriteFileAsync
-.public Sav2_SysInfo_GetField4C
-.public Sav2_SysInfo_SetField4C
+.public Save_SysInfo_GetField4C
+.public Save_SysInfo_SetField4C
 .public Options_GetFrame
 .public sub_0202D488
 .public sub_0202D568

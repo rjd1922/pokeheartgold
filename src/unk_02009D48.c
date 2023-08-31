@@ -1,3 +1,4 @@
+#include "global.h"
 #include "unk_02009D48.h"
 #include "unk_0200ACF0.h"
 #include "unk_02023694.h"
@@ -98,7 +99,6 @@ void sub_02009F24(ListOfUnkStruct_02009D48 *list) {
 }
 
 SpriteList *G2dRenderer_Init(int a0, GF_G2dRenderer *a1, HeapID heapId) {
-    struct SpriteList *ret;
     struct SpriteListParam param;
     NNSG2dViewRect rect;
 

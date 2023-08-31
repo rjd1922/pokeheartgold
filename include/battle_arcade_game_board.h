@@ -2,22 +2,21 @@
 #define POKEHEARTGOLD_BATTLE_ARCADE_GAME_BOARD_H
 
 #include "msgdata.h"
-#include "msgfmt.h"
+#include "message_format.h"
 #include "overlay_manager.h"
 #include "party.h"
 #include "player_data.h"
 #include "save.h"
 #include "save_frontier.h"
-#include "window.h"
+#include "bg_window.h"
 #include "unk_02009D48.h"
 #include "unk_02023694.h"
 
 #define ARCADE_ENEMY_POKEMON_MAX    4
-#define HEAP_ID_GAME_BOARD        110
 
 
 typedef struct GAME_BOARD_ARGS {
-    SAVEDATA *savedata;
+    SaveData *saveData;
     u8 type;
     u8 level;
     u8 unk6;
@@ -34,8 +33,8 @@ typedef struct GAME_BOARD_ARGS {
     u8 opponentLevelFlag[ARCADE_ENEMY_POKEMON_MAX];
     u8 opponentUnkFlag[ARCADE_ENEMY_POKEMON_MAX];
     u8 opponentMoveFlag[ARCADE_ENEMY_POKEMON_MAX];
-    PARTY *playerParty;
-    PARTY *opponentParty;
+    Party *playerParty;
+    Party *opponentParty;
     u16 returnWork;
     void *work;
     u16 unk;
@@ -69,7 +68,7 @@ typedef struct GAME_BOARD_SUB_3E8 {
 
 typedef struct GAME_BOARD_WORK {
     OVY_MANAGER *man;
-    FRONTIER_SAVE *frontierSavedata;
+    FRONTIER_SAVE *frontierSaveData;
     u8 substate;
     u8 type;
     u8 unkA;
@@ -101,22 +100,22 @@ typedef struct GAME_BOARD_WORK {
     u8 unk34[16];
     u8 unk44[32];
     u8 unk64;
-    MSGDATA *msgData;
-    MSGFMT *msgFmt;
-    STRING *unk70;
-    STRING *unk74;
-    STRING *unk78[2];
+    MsgData *msgData;
+    MessageFormat *msgFmt;
+    String *unk70;
+    String *unk74;
+    String *unk78[2];
     u16 unk80[8];
-    BGCONFIG *bgConfig;
-    WINDOW window[2];
+    BgConfig *bgConfig;
+    Window window[2];
     GAME_BOARD_SUB_3B4 unk3B4;
     void *unk3C0;
     GAME_BOARD_SUB_3C4 unk3C4[2];
     void *unk3D4;
     OPTIONS *options;
-    SAVEDATA *savedata;
-    void *arcadeSavedata;
-    void *arcadeScoreSavedata;
+    SaveData *saveData;
+    void *arcadeSaveData;
+    void *arcadeScoreSaveData;
     GAME_BOARD_SUB_3E8 unk3E8;
     void *cursor;
     void *panel[16];
@@ -127,8 +126,8 @@ typedef struct GAME_BOARD_WORK {
     void *button;
     int *weather;
     u16 *returnWork;
-    PARTY *playerParty;
-    PARTY *opponentParty;
+    Party *playerParty;
+    Party *opponentParty;
     NARC *narc;
     u16 sendBuffer[40];
     u8 multiCursorPos;
@@ -152,5 +151,8 @@ typedef struct BATTLE_ARCADE_OBJECT {
 BOOL BattleArcadeGameBoard_InitOverlay(OVY_MANAGER *man, int *state);
 BOOL BattleArcadeGameBoard_Main(OVY_MANAGER *man, int *state);
 BOOL ov84_0223DFF0(OVY_MANAGER *man, int *state);
+void ov84_0223ED34(int a0, int size, void *data, void *_work);
+void ov84_0223EDA8(int a0, int size, void *data, void *_work);
+void ov84_0223EE08(int a0, int size, void *data, void *_work);
 
 #endif

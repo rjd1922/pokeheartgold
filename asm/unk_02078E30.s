@@ -53,7 +53,7 @@ sub_02078E30: ; 0x02078E30
 	bl CreateHeap
 	mov r0, #0x15
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	add r0, r5, #0
 	bl sub_02079BD8
@@ -226,7 +226,7 @@ _02078FE4:
 	mov r1, #0xc
 	bl FontID_Alloc
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #1
 	add sp, #0xc
 	pop {r4, r5, pc}
@@ -437,7 +437,7 @@ _020791A6:
 	str r0, [r4]
 	b _020791EE
 _020791AE:
-	bl PartyMenu_AnimateIconFormeChange
+	bl PartyMenu_AnimateIconFormChange
 	cmp r0, #1
 	bne _020791C2
 	add r0, r5, #0
@@ -1022,24 +1022,24 @@ sub_020795E0: ; 0x020795E0
 	add r5, r6, #0
 _02079618:
 	ldr r0, [r5, r7]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, #0x30
 	cmp r4, #6
 	blo _02079618
 	ldr r0, _020796A0 ; =0x000007C8
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _020796A4 ; =0x000007CC
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r7, #0x7d
 	mov r5, #0
 	add r4, r6, #0
 	lsl r7, r7, #4
 _0207963E:
 	ldr r0, [r4, r7]
-	bl String_dtor
+	bl String_Delete
 	add r5, r5, #1
 	add r4, r4, #4
 	cmp r5, #0x14
@@ -1050,10 +1050,10 @@ _0207963E:
 	bl DestroyMsgData
 	ldr r0, _020796A8 ; =0x000007BC
 	ldr r0, [r6, r0]
-	bl MessagePrinter_delete
+	bl MessagePrinter_Delete
 	ldr r0, _020796AC ; =0x000007C4
 	ldr r0, [r6, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, _020796B0 ; =0x00000C74
 	ldr r0, [r6, r0]
 	cmp r0, #0
@@ -1104,7 +1104,7 @@ sub_020796B8: ; 0x020796B8
 	mov r2, #3
 	bl BgSetPosTextAndCommit
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl GF_RunVramTransferTasks
 	bl sub_0200D034
 	ldr r3, _020796F8 ; =OS_IRQTable
@@ -1743,11 +1743,11 @@ _02079C26:
 	mov r1, #0xe
 	mov r2, #0
 	mov r3, #0xc
-	bl MessagePrinter_new
+	bl MessagePrinter_New
 	ldr r1, _02079CD0 ; =0x000007BC
 	str r0, [r4, r1]
 	mov r0, #0xc
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	ldr r1, _02079CD4 ; =0x000007C4
 	mov r6, #0
 	add r7, r1, #0
@@ -1757,7 +1757,7 @@ _02079C26:
 _02079C5C:
 	mov r0, #0xb
 	mov r1, #0xc
-	bl String_ctor
+	bl String_New
 	str r0, [r5, r7]
 	add r6, r6, #1
 	add r5, #0x30
@@ -1766,13 +1766,13 @@ _02079C5C:
 	mov r0, #1
 	lsl r0, r0, #8
 	mov r1, #0xc
-	bl String_ctor
+	bl String_New
 	ldr r1, _02079CD8 ; =0x000007C8
 	str r0, [r4, r1]
 	mov r0, #1
 	lsl r0, r0, #8
 	mov r1, #0xc
-	bl String_ctor
+	bl String_New
 	ldr r1, _02079CDC ; =0x000007CC
 	mov r6, #0
 	str r0, [r4, r1]
@@ -1781,7 +1781,7 @@ _02079C5C:
 _02079C90:
 	mov r0, #0x20
 	mov r1, #0xc
-	bl String_ctor
+	bl String_New
 	str r0, [r5, r7]
 	add r6, r6, #1
 	add r5, r5, #4
@@ -2010,7 +2010,7 @@ sub_02079E38: ; 0x02079E38
 	ldr r0, _02079F88 ; =0x00000654
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	ldr r1, [sp]
 	cmp r0, r1
 	bgt _02079E68
@@ -2021,7 +2021,7 @@ _02079E68:
 	ldr r0, _02079F88 ; =0x00000654
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r7, r0, #0
@@ -2555,7 +2555,7 @@ sub_0207A2AC: ; 0x0207A2AC
 	add r6, r1, #0
 	mov r0, #0x14
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #8]
 	mov r4, #0
 _0207A2C0:
@@ -2673,7 +2673,7 @@ _0207A3A8:
 	cmp r4, #6
 	blo _0207A2C0
 	ldr r0, [sp, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -2690,7 +2690,7 @@ sub_0207A3C8: ; 0x0207A3C8
 	str r1, [sp, #4]
 	mov r0, #0x14
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #8]
 	mov r4, #0
 _0207A3DC:
@@ -2784,7 +2784,7 @@ _0207A496:
 	cmp r4, #6
 	blo _0207A3DC
 	ldr r0, [sp, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -2800,7 +2800,7 @@ sub_0207A4B4: ; 0x0207A4B4
 	str r1, [sp, #4]
 	mov r0, #0x14
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #8]
 	mov r4, #0
 _0207A4C8:
@@ -2894,7 +2894,7 @@ _0207A582:
 	cmp r4, #6
 	blo _0207A4C8
 	ldr r0, [sp, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -2910,7 +2910,7 @@ sub_0207A5A0: ; 0x0207A5A0
 	str r1, [sp, #4]
 	mov r0, #0x14
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #8]
 	mov r4, #0
 _0207A5B4:
@@ -3004,7 +3004,7 @@ _0207A66E:
 	cmp r4, #6
 	blo _0207A5B4
 	ldr r0, [sp, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -3020,7 +3020,7 @@ sub_0207A68C: ; 0x0207A68C
 	str r1, [sp, #4]
 	mov r0, #0x14
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #8]
 	mov r4, #0
 _0207A6A0:
@@ -3117,7 +3117,7 @@ _0207A762:
 	cmp r4, #6
 	blo _0207A6A0
 	ldr r0, [sp, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -3190,7 +3190,7 @@ sub_0207A7F4: ; 0x0207A7F4
 	add r6, r1, #0
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r1, _0207A874 ; =0x00000C63
 	ldrb r2, [r5, r1]
 	lsl r3, r2, #0x19
@@ -3978,7 +3978,7 @@ _0207AE0A:
 	ldr r0, _0207AFAC ; =0x00000654
 	ldr r0, [r4, r0]
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	bhs _0207AE44
 	ldr r0, _0207AFB0 ; =0x00000948
@@ -4308,7 +4308,7 @@ sub_0207B0B0: ; 0x0207B0B0
 	ldr r1, [sp]
 	ldr r0, [r0]
 	ldrb r1, [r1, r2]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	str r0, [sp, #8]
 	ldr r0, [sp, #4]
 	mov r1, #1
@@ -4687,7 +4687,7 @@ sub_0207B364: ; 0x0207B364
 	cmp r0, #0
 	beq _0207B392
 	ldr r0, [r2]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r0, #0
 	ldr r0, _0207B408 ; =0x00000654
 	ldr r2, _0207B40C ; =0x00000C74
@@ -4713,7 +4713,7 @@ _0207B392:
 	ldrh r0, [r2, r1]
 	add r1, #0xd
 	ldrb r1, [r2, r1]
-	bl IsPokemonLegendaryOrMythical
+	bl IsPokemonBannedFromBattleFrontier
 	cmp r0, #1
 	bne _0207B3B8
 	mov r0, #0
@@ -4788,7 +4788,7 @@ sub_0207B418: ; 0x0207B418
 	ldrh r0, [r2, r1]
 	add r1, #0xd
 	ldrb r1, [r2, r1]
-	bl IsPokemonLegendaryOrMythical
+	bl IsPokemonBannedFromBattleFrontier
 	cmp r0, #1
 	bne _0207B444
 	mov r0, #0
@@ -4862,7 +4862,7 @@ sub_0207B4A0: ; 0x0207B4A0
 	ldrh r0, [r2, r1]
 	add r1, #0xd
 	ldrb r1, [r2, r1]
-	bl IsPokemonLegendaryOrMythical
+	bl IsPokemonBannedFromBattleFrontier
 	cmp r0, #1
 	bne _0207B4CC
 	mov r0, #0
@@ -5094,7 +5094,7 @@ _0207B66C:
 	ldr r0, _0207B7CC ; =0x00000654
 	ldr r0, [r4, r0]
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r6, r0
 	blo _0207B67C
 _0207B67A:
@@ -5408,7 +5408,7 @@ _0207B8BE:
 	ldr r1, [r4, r1]
 	bl StringExpandPlaceholders
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	mov r1, #0
 	add r0, r4, #0
 	mvn r1, r1
@@ -6076,7 +6076,7 @@ _0207BE06:
 	ldr r0, _0207BFB8 ; =0x00000654
 	ldr r0, [r4, r0]
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blo _0207BE16
 _0207BE14:
@@ -6202,7 +6202,7 @@ _0207BF02:
 	ldr r0, [r4, r0]
 	ldrb r1, [r4, r1]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r6, r0, #0
 	mov r0, #0x1f
 	lsl r0, r0, #6
@@ -6234,7 +6234,7 @@ _0207BF02:
 	ldr r1, [r4, r1]
 	bl StringExpandPlaceholders
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	mov r1, #0
 	add r0, r4, #0
 	mvn r1, r1
@@ -6390,7 +6390,7 @@ _0207C0AA:
 	add r1, r6, #0
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldrh r1, [r7, r4]
 	add r2, sp, #0
 	str r1, [sp]
@@ -6455,7 +6455,7 @@ _0207C12C:
 	ldr r0, _0207C268 ; =0x00000654
 	ldr r0, [r4, r0]
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	bhs _0207C204
 	ldr r0, _0207C26C ; =0x00000948
@@ -6636,7 +6636,7 @@ sub_0207C288: ; 0x0207C288
 	ldr r1, _0207C3C8 ; =0x00000C65
 	ldr r0, [r2]
 	ldrb r1, [r5, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	bl Mon_CanUseGracidea
 	cmp r0, #1
 	bne _0207C2D2
@@ -6717,7 +6717,7 @@ _0207C326:
 	ldr r0, [r5, r0]
 	ldrb r1, [r5, r1]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r0, #0
 	ldr r0, _0207C3C0 ; =0x00000654
 	mov r2, #3
@@ -6805,7 +6805,7 @@ sub_0207C400: ; 0x0207C400
 	mov r4, #0
 	ldr r0, [r0]
 	mvn r4, r4
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r1, _0207C5C4 ; =0x00000654
 	add r7, r0, #0
 	ldr r1, [r5, r1]
@@ -7031,9 +7031,9 @@ sub_0207C5D4: ; 0x0207C5D4
 	add r2, sp, #0
 	bl SetMonData
 	add r0, r6, #0
-	bl Pokemon_UpdateArceusForme
+	bl Pokemon_UpdateArceusForm
 	add r0, r6, #0
-	bl Mon_UpdateGiratinaForme
+	bl Mon_UpdateGiratinaForm
 	str r0, [r4]
 	ldr r1, _0207C650 ; =0x00000C65
 	ldr r0, _0207C64C ; =0x00000654
@@ -7092,9 +7092,9 @@ sub_0207C658: ; 0x0207C658
 	add r2, sp, #0x1c
 	bl SetMonData
 	add r0, r5, #0
-	bl Pokemon_UpdateArceusForme
+	bl Pokemon_UpdateArceusForm
 	add r0, r5, #0
-	bl Mon_UpdateGiratinaForme
+	bl Mon_UpdateGiratinaForm
 	ldr r1, _0207C6B4 ; =0x00000C65
 	mov r2, #0x30
 	ldrb r3, [r4, r1]
@@ -7168,7 +7168,7 @@ _0207C708: .word 0x00000C64
 sub_0207C70C: ; 0x0207C70C
 	push {r4, lr}
 	add r4, r0, #0
-	bl PartyMenu_AnimateIconFormeChange
+	bl PartyMenu_AnimateIconFormChange
 	cmp r0, #1
 	bne _0207C722
 	add r0, r4, #0
@@ -7226,7 +7226,7 @@ _0207C766:
 	ldr r0, [r5, r0]
 	ldrb r1, [r5, r1]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	str r0, [sp]
 	ldr r0, _0207C8A4 ; =0x00000654
 	add r2, sp, #4
@@ -7420,7 +7420,7 @@ sub_0207C908: ; 0x0207C908
 	ldr r0, [r5, r0]
 	ldrb r1, [r5, r1]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r7, r0, #0
 	ldr r0, _0207CA20 ; =0x00000654
 	add r2, sp, #4
@@ -7688,7 +7688,7 @@ sub_0207CB20: ; 0x0207CB20
 	mov r0, #0x82
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl ListMenuItems_dtor
+	bl ListMenuItems_Delete
 	pop {r4, pc}
 	.balign 4, 0
 _0207CB38: .word 0x00000824
@@ -7717,7 +7717,7 @@ sub_0207CB54: ; 0x0207CB54
 	mov r1, #2
 	bl HandleLoadOverlay
 	add r0, r4, #0
-	bl PartyMenu_InitIconFormeChangeWork
+	bl PartyMenu_InitIconFormChangeData
 	pop {r4, pc}
 	.balign 4, 0
 _0207CB68: .word FS_OVERLAY_ID(OVY_94)

@@ -16,7 +16,7 @@
 .public LoadUserFrameGfx1
 .public LoadUserFrameGfx2
 .public DrawFrameAndWindow2
-.public sub_0200F0AC
+.public WaitingIcon_New
 .public sub_0200F450
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
@@ -38,7 +38,7 @@
 .public AddWindow
 .public RemoveWindow
 .public FillWindowPixelRect
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ResetAllTextPrinters
 .public TextPrinterCheckActive
 .public AddTextPrinterParameterized
@@ -46,8 +46,8 @@
 .public GX_DisableEngineALayers
 .public GX_DisableEngineBLayers
 .public GX_BothDispOn
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public Save_DeleteAllData
 .public OS_ResetSystem
 .public memset

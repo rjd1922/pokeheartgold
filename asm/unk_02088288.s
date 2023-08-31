@@ -22,7 +22,7 @@ sub_02088288: ; 0x02088288
 	thumb_func_start sub_0208828C
 sub_0208828C: ; 0x0208828C
 	push {r3, lr}
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	bl CheckFlag982
 	pop {r3, pc}
 	thumb_func_end sub_0208828C
@@ -69,11 +69,11 @@ sub_02088298: ; 0x02088298
 	bl CreateHeap
 	mov r0, #0x27
 	mov r1, #0x13
-	bl NARC_ctor
+	bl NARC_New
 	add r7, r0, #0
 	mov r0, #0xa2
 	mov r1, #0x13
-	bl NARC_ctor
+	bl NARC_New
 	add r5, r0, #0
 	ldr r1, _02088414 ; =0x000007D8
 	add r0, r6, #0
@@ -105,7 +105,7 @@ sub_02088298: ; 0x02088298
 	str r0, [r4, r1]
 	mov r0, #0xb4
 	mov r1, #0x13
-	bl NARC_ctor
+	bl NARC_New
 	ldr r1, _02088418 ; =0x000007B8
 	str r0, [r4, r1]
 	mov r0, #0
@@ -167,9 +167,9 @@ sub_02088298: ; 0x02088298
 	bl sub_02004EC4
 	bl sub_0203A964
 	add r0, r5, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -374,7 +374,7 @@ sub_0208856C: ; 0x0208856C
 	bl FontID_Release
 	ldr r0, _020885D4 ; =0x000007B8
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0
 	bl FontID_SetAccessLazy
 	ldr r0, _020885D8 ; =0x04000050
@@ -396,7 +396,7 @@ sub_020885DC: ; 0x020885DC
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	mov r0, #0x2a
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
@@ -742,34 +742,34 @@ sub_02088894: ; 0x02088894
 	mov r0, #1
 	mov r1, #2
 	mov r3, #0x13
-	bl MessagePrinter_new
+	bl MessagePrinter_New
 	ldr r1, _02088948 ; =0x0000079C
 	str r0, [r4, r1]
 	mov r0, #0x13
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	ldr r1, _0208894C ; =0x000007A8
 	str r0, [r4, r1]
 	mov r0, #0xc
 	mov r1, #0x13
-	bl String_ctor
+	bl String_New
 	mov r1, #0x23
 	lsl r1, r1, #4
 	str r0, [r4, r1]
 	mov r0, #0xc
 	mov r1, #0x13
-	bl String_ctor
+	bl String_New
 	mov r1, #0x8d
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #8
 	mov r1, #0x13
-	bl String_ctor
+	bl String_New
 	mov r1, #0x8e
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0x80
 	mov r1, #0x13
-	bl String_ctor
+	bl String_New
 	ldr r1, _02088950 ; =0x000007AC
 	ldr r2, _02088954 ; =0x000002EE
 	str r0, [r4, r1]
@@ -781,7 +781,7 @@ sub_02088894: ; 0x02088894
 	str r0, [r4, r1]
 	mov r0, #8
 	mov r1, #0x13
-	bl String_ctor
+	bl String_New
 	mov r2, #0x7b
 	lsl r2, r2, #4
 	str r0, [r4, r2]
@@ -821,29 +821,29 @@ sub_0208895C: ; 0x0208895C
 	bl DestroyMsgData
 	ldr r0, _020889C4 ; =0x0000079C
 	ldr r0, [r4, r0]
-	bl MessagePrinter_delete
+	bl MessagePrinter_Delete
 	ldr r0, _020889C8 ; =0x000007A8
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r0, #0x23
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x8d
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x8e
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _020889CC ; =0x000007AC
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x7b
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	pop {r4, pc}
 	.balign 4, 0
 _020889BC: .word 0x000007B4
@@ -4055,7 +4055,7 @@ _0208A35C:
 	cmp r5, r0
 	bge _0208A3C6
 	ldr r0, [r2]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r5, r0, #0
@@ -4215,7 +4215,7 @@ _0208A480:
 _0208A486:
 	ldr r0, [r1]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -4317,7 +4317,7 @@ _0208A538:
 _0208A546:
 	ldrb r1, [r4, #0x14]
 	ldr r0, [r4]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	pop {r4, pc}
 _0208A550:
 	bl sub_02070D94

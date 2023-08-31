@@ -6,9 +6,9 @@
 .public GetMetatileBehaviorAt
 .public sub_02054940
 .public sub_020549A8
-.public sub_0205B6E8
+.public MetatileBehavior_IsEncounterGrass
 .public sub_0205B6F4
-.public sub_0205B778
+.public MetatileBehavior_IsSurfableWater
 .public sub_0205B78C
 .public sub_0205B798
 .public sub_0205B7A4
@@ -29,7 +29,7 @@
 .public sub_0205BA6C
 .public sub_0205BA70
 .public sub_0205BA94
-.public MapObjectMan_GetCount
+.public MapObjectManager_GetCount
 .public sub_0205F1AC
 .public sub_0205F1C4
 .public MapObject_GetFlagsWord
@@ -57,10 +57,10 @@
 .public sub_0205F610
 .public MapObject_IsSingleMovementActive
 .public MapObject_SetFlag2
-.public MapObject_CheckFlag9
+.public MapObject_CheckVisible
 .public sub_0205F714
 .public sub_0205F73C
-.public MapObject_CheckFlag23
+.public MapObject_CheckIgnoreHeights
 .public MapObject_SetFlag26
 .public MapObject_CheckFlag26
 .public MapObject_SetFlag28

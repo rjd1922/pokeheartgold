@@ -28,7 +28,7 @@
 .public sub_020249D4
 .public sub_02024ADC
 .public sub_02024B1C
-.public GetMonBaseStat_HandleAlternateForme
+.public GetMonBaseStat_HandleAlternateForm
 .public CalcBoxMonPokeathlonPerformance
 .public CalcBoxmonPokeathlonStars
 .public GetMoveAttr
@@ -37,7 +37,7 @@
 .public GetMonIconPaletteEx
 .public Boxmon_GetIconPalette
 .public Pokemon_GetIconPalette
-.public GetPartyMonByIndex
+.public Party_GetMonByIndex
 .public Party_GetUnkSubSlot
 .public sub_02077678
 .public sub_0207769C

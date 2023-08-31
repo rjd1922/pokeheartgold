@@ -1,3 +1,4 @@
+#include "config.h"
 	.include "asm/macros.inc"
 	.include "overlay_73.inc"
 	.include "global.inc"
@@ -42,7 +43,7 @@ _021E5916:
 	bl CreateHeap
 	mov r0, #0x54
 	mov r1, #0x32
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	ldr r1, _021E5A9C ; =0x00004A8C
 	add r0, r7, #0
@@ -68,7 +69,7 @@ _021E5916:
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0x32
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x24]
 	ldr r2, _021E5AA4 ; =0x000001A6
 	mov r0, #0
@@ -156,7 +157,7 @@ _021E5A54:
 	bl sub_0200E33C
 	str r0, [r4, #0x20]
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [r5]
 	add r0, r0, #1
 	str r0, [r5]
@@ -353,7 +354,7 @@ _021E5BD8:
 	ldr r0, [r6, #0x28]
 	bl DestroyMsgData
 	ldr r0, [r6, #0x24]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r6, #8]
 	mov r1, #0xc5
 	lsl r1, r1, #2
@@ -444,7 +445,7 @@ ov73_021E5CD8: ; 0x021E5CD8
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E5CF8 ; =0x027E0000
 	ldr r1, _021E5CFC ; =0x00003FF8
 	mov r0, #1
@@ -596,7 +597,7 @@ ov73_021E5E0C: ; 0x021E5E0C
 _021E5E1C:
 	mov r0, #8
 	mov r1, #0x32
-	bl String_ctor
+	bl String_New
 	str r0, [r6, #0x2c]
 	mov r0, #0xce
 	mov r1, #0
@@ -623,12 +624,12 @@ _021E5E1C:
 	blt _021E5E1C
 	mov r0, #0xb4
 	mov r1, #0x32
-	bl String_ctor
+	bl String_New
 	ldr r1, [sp]
 	str r0, [r1, #0x44]
 	mov r0, #0x28
 	mov r1, #0x32
-	bl String_ctor
+	bl String_New
 	ldr r1, [sp]
 	mov r2, #0
 	str r0, [r1, #0x48]
@@ -694,15 +695,15 @@ ov73_021E5ED4: ; 0x021E5ED4
 	add r5, r6, #0
 _021E5EF0:
 	ldr r0, [r5, #0x2c]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #5
 	blt _021E5EF0
 	ldr r0, [r6, #0x48]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x44]
-	bl String_dtor
+	bl String_Delete
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov73_021E5ED4
 
@@ -3152,7 +3153,7 @@ ov73_021E7230: ; 0x021E7230
 	asr r3, r6, #1
 	bl AddTextPrinterParameterized2
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 _021E7286:
 	mov r1, #0
 	ldr r0, _021E72F0 ; =0x00004A38
@@ -3188,7 +3189,7 @@ _021E7286:
 	asr r3, r6, #1
 	bl AddTextPrinterParameterized2
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4]
 	mov r1, #1
 	bl ScheduleBgTilemapBufferTransfer
@@ -3372,7 +3373,7 @@ _021E7410:
 	bl AddTextPrinterParameterized2
 _021E7442:
 	ldr r0, [sp, #0x18]
-	bl String_dtor
+	bl String_Delete
 _021E7448:
 	ldr r0, [sp, #0x20]
 	add r7, #8
@@ -3551,7 +3552,7 @@ ov73_021E756C: ; 0x021E756C
 	mov r0, #0xb4
 	mov r1, #0x32
 	add r6, r2, #0
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r0, [r5, #0x28]
 	add r1, r7, #0
@@ -3562,7 +3563,7 @@ ov73_021E756C: ; 0x021E756C
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0xaa
 	lsl r0, r0, #2
 	add r0, r5, r0
@@ -3841,7 +3842,7 @@ ov73_021E77A4: ; 0x021E77A4
 	ldr r0, [sp, #0x18]
 	add r1, r3, #0
 	add r5, r2, #0
-	bl sub_0205B464
+	bl SpriteToUnionRoomAvatarIdx
 	add r4, r0, #0
 	ldr r0, [r6, #4]
 	mov r2, #6
@@ -4294,7 +4295,7 @@ ov73_021E7AC0: ; 0x021E7AC0
 	add r5, r1, #0
 	add r7, r2, #0
 	str r3, [sp]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r4, r0, #0
 	mov r0, #0
 	str r0, [sp, #4]
@@ -4829,7 +4830,7 @@ _021E7E62:
 	mov r0, #0xb
 	mov r1, #0x20
 	mov r2, #0x96
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	mov r1, #0xbd
 	lsl r1, r1, #4
 	str r0, [r4, r1]
@@ -5049,7 +5050,7 @@ ov73_021E808C: ; 0x021E808C
 	mov r0, #0xbd
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r4, #0
 	bl ov73_021E8164
 	bl sub_02034DE0
@@ -5076,7 +5077,7 @@ ov73_021E8100: ; 0x021E8100
 	add r4, r0, #0
 	bl GF_RunVramTransferTasks
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl OamManager_ApplyAndResetBuffers
 	ldr r3, _021E8120 ; =0x027E0000
 	ldr r1, _021E8124 ; =0x00003FF8
@@ -5163,7 +5164,7 @@ ov73_021E8198: ; 0x021E8198
 	add r6, r0, #0
 	mov r0, #0x64
 	mov r1, #0x96
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x14]
 	bl NNS_G2dInitOamManagerModule
 	mov r0, #0
@@ -5267,7 +5268,7 @@ _021E81E8:
 	ldr r0, [r6, r0]
 	bl sub_0200AF94
 	ldr r0, [sp, #0x14]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -5854,7 +5855,7 @@ ov73_021E8730: ; 0x021E8730
 	ldr r4, [r0, #4]
 	mov r0, #0x58
 	mov r1, #0x96
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0
 	str r2, [sp]
 	mov r1, #0x96
@@ -6096,7 +6097,7 @@ _021E8902:
 	ldr r1, [sp, #0x10]
 	str r0, [r1, r2]
 	ldr r0, [sp, #0x2c]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x3c
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -6358,18 +6359,18 @@ ov73_021E8B64: ; 0x021E8B64
 	add r4, r0, #0
 	mov r0, #0xb4
 	mov r1, #0x96
-	bl String_ctor
+	bl String_New
 	mov r1, #0xbe
 	lsl r1, r1, #4
 	str r0, [r4, r1]
 	mov r0, #4
 	mov r1, #0x96
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E8BB0 ; =0x00000BE8
 	str r0, [r4, r1]
 	mov r0, #3
 	mov r1, #0x96
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E8BB4 ; =0x00000BEC
 	str r0, [r4, r1]
 	sub r1, #0x18
@@ -6381,7 +6382,7 @@ ov73_021E8B64: ; 0x021E8B64
 	mov r0, #1
 	lsl r0, r0, #8
 	mov r1, #0x96
-	bl String_ctor
+	bl String_New
 	mov r1, #0xbf
 	lsl r1, r1, #4
 	str r0, [r4, r1]
@@ -6399,20 +6400,20 @@ ov73_021E8BBC: ; 0x021E8BBC
 	mov r0, #0xbf
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E8BF0 ; =0x00000BE4
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E8BF4 ; =0x00000BEC
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E8BF8 ; =0x00000BE8
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0xbe
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	pop {r4, pc}
 	nop
 _021E8BF0: .word 0x00000BE4
@@ -6756,17 +6757,17 @@ ov73_021E8E7C: ; 0x021E8E7C
 	add r5, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl Sav2_SysInfo_GetField4C
+	bl Save_SysInfo_GetField4C
 	cmp r0, #0
 	bne _021E8E96
 	ldr r1, [r5]
 	ldr r0, [r1, #8]
 	ldr r1, [r1, #0x1c]
-	bl Sav2_SysInfo_SetField4C
+	bl Save_SysInfo_SetField4C
 _021E8E96:
 	ldr r0, [r5]
 	ldr r0, [r0, #8]
-	bl Sav2_SysInfo_GetField4C
+	bl Save_SysInfo_GetField4C
 	add r4, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #0x14]
@@ -8986,7 +8987,7 @@ ov73_021E9F34: ; 0x021E9F34
 	ldr r1, _021E9F98 ; =0x00000BF4
 	str r0, [r5, r1]
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r3, r4, r5, r6, pc}
 	.balign 4, 0
@@ -9248,7 +9249,7 @@ ov73_021EA15C: ; 0x021EA15C
 	ldr r0, _021EA17C ; =0x00000DD8
 	mov r1, #1
 	add r0, r4, r0
-	bl sub_0200F0AC
+	bl WaitingIcon_New
 	ldr r1, _021EA178 ; =0x00000F0C
 	str r0, [r4, r1]
 _021EA176:
@@ -9285,7 +9286,7 @@ ov73_021EA19C: ; 0x021EA19C
 	add r6, r1, #0
 	lsl r0, r0, #8
 	mov r1, #0x96
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r0, _021EA20C ; =0x00000BDC
 	add r1, r6, #0
@@ -9323,7 +9324,7 @@ ov73_021EA19C: ; 0x021EA19C
 	ldr r1, _021EA214 ; =0x00000BF4
 	str r0, [r5, r1]
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r3, r4, r5, r6, pc}
 	nop
@@ -9370,7 +9371,7 @@ _021EA258: .word 0x00000DD8
 	thumb_func_start ov73_021EA25C
 ov73_021EA25C: ; 0x021EA25C
 	push {r3, lr}
-	bl Save_FriendGroup_get
+	bl Save_FriendGroup_Get
 	bl ov73_021E795C
 	pop {r3, pc}
 	thumb_func_end ov73_021EA25C
@@ -9380,7 +9381,7 @@ ov73_021EA268: ; 0x021EA268
 	push {r4, r5, r6, lr}
 	add r4, r1, #0
 	add r5, r2, #0
-	bl Save_FriendGroup_get
+	bl Save_FriendGroup_Get
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
@@ -9400,7 +9401,7 @@ ov73_021EA290: ; 0x021EA290
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #4]
-	bl Save_FriendGroup_get
+	bl Save_FriendGroup_Get
 	add r2, r0, #0
 	ldr r0, [r4, #8]
 	ldr r1, [r4, #0xc]
@@ -9412,7 +9413,7 @@ ov73_021EA290: ; 0x021EA290
 	thumb_func_start ov73_021EA2A8
 ov73_021EA2A8: ; 0x021EA2A8
 	push {r3, lr}
-	bl Save_DressupData_get
+	bl Save_FashionData_Get
 	bl sub_0202B994
 	pop {r3, pc}
 	thumb_func_end ov73_021EA2A8
@@ -9422,7 +9423,7 @@ ov73_021EA2B4: ; 0x021EA2B4
 	push {r4, r5, r6, lr}
 	add r4, r1, #0
 	add r5, r2, #0
-	bl Save_DressupData_get
+	bl Save_FashionData_Get
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
@@ -9444,7 +9445,7 @@ ov73_021EA2E0: ; 0x021EA2E0
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #4]
-	bl Save_DressupData_get
+	bl Save_FashionData_Get
 	add r2, r0, #0
 	ldr r0, [r4, #8]
 	ldr r1, [r4, #0xc]

@@ -9,9 +9,9 @@
 typedef struct VoltorbFlipAppArgs {
     OPTIONS *options;
     u16 *coins;
-    int unk8;
-    PLAYERPROFILE *profile;
-    SAVEDATA *savedata;
+    u32 *unk8;
+    PlayerProfile *profile;
+    SaveData *saveData;
 } VoltorbFlipAppArgs;
 
 BOOL VoltorbFlipApp_OvyInit(OVY_MANAGER *man, int *state);

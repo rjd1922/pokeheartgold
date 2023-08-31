@@ -4,13 +4,13 @@
 .public FreeToHeap
 .public TaskManager_Call
 .public CallApplicationAsTask
-.public TaskManager_GetSys
+.public TaskManager_GetFieldSystem
 .public TaskManager_GetEnv
 .public sub_0205525C
 .public sub_020552A4
 .public PalleteFadeUntilFinished
 .public sub_0205532C
-.public Field_CreateTask_TradeAnim
+.public CallTask_NPCTrade
 .public AllocMonZeroed
 .public memset
 .public NPCTrade_ReceiveMonToSlot

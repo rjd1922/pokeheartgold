@@ -1,3 +1,4 @@
+#include "global.h"
 #include "move.h"
 #include "filesystem.h"
 #include "constants/moves.h"
@@ -29,7 +30,7 @@ u32 GetMoveTblAttr(MOVE * moveTbl, MoveAttr attr) {
     case MOVEATTR_EFFECT:
         return moveTbl->effect;
     case MOVEATTR_CLASS:
-        return moveTbl->class;
+        return moveTbl->category;
     case MOVEATTR_POWER:
         return moveTbl->power;
     case MOVEATTR_TYPE:
@@ -40,8 +41,8 @@ u32 GetMoveTblAttr(MOVE * moveTbl, MoveAttr attr) {
         return moveTbl->pp;
     case MOVEATTR_EFFECT_CHANCE:
         return moveTbl->effectChance;
-    case MOVEATTR_UNK7:
-        return moveTbl->unk8;
+    case MOVEATTR_RANGE:
+        return moveTbl->range;
     case MOVEATTR_PRIORTY:
         return moveTbl->priority;
     case MOVEATTR_UNK9:

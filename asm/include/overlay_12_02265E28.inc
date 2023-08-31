@@ -1,8 +1,8 @@
 #include <nitro/fs/overlay.h>
 #pragma once
 .public PaletteData_LoadNarc
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public sub_0200D504
 .public sub_0200D68C
 .public sub_0200D6EC
@@ -19,7 +19,7 @@
 .public MIi_CpuClearFast
 .public ov12_0223A8E4
 .public ov12_0223A8EC
-.public ov12_0223A938
+.public BattleSystem_GetPaletteData
 .public ov12_0223B52C
 .public ov12_02265FC4
 .public ov12_02265FD4

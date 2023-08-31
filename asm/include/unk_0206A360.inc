@@ -16,11 +16,11 @@
 .public GetBgPriority
 .public AllocWindows
 .public AddWindowParameterized
-.public WindowArray_dtor
+.public WindowArray_Delete
 .public GF_AssertFail
-.public FieldSys_GetBgConfigPtr
+.public FieldSystem_GetBgConfigPtr
 .public TaskManager_Call
-.public TaskManager_GetSys
+.public TaskManager_GetFieldSystem
 .public TaskManager_GetEnv
 .public PlayerAvatar_GetMapObject
 .public PlayerAvatar_ToggleAutomaticHeightUpdating_NowApply
@@ -37,6 +37,6 @@
 .public G2x_SetBlendAlpha_
 .public gSystem
 .public NNS_G3dGlb
-.public ov01_PlayerAvatar_OrrTransitionFlags
-.public ov01_PlayerAvatar_ApplyTransitionFlags
+.public Field_PlayerAvatar_OrrTransitionFlags
+.public Field_PlayerAvatar_ApplyTransitionFlags
 .public ov01_02205790

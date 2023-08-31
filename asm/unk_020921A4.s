@@ -516,7 +516,7 @@ _02092588:
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #0xa
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x14]
 	ldr r0, [r5, #0x1c]
 	ldr r2, [r5, #0x14]
@@ -535,7 +535,7 @@ _02092588:
 	cmp r4, #0
 	bne _020925E8
 	ldr r0, [r5, #0x14]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #0xc]
 	add r0, r0, #1
 	str r0, [r5, #0xc]
@@ -552,7 +552,7 @@ _020925F0:
 	cmp r0, #0
 	bne _02092628
 	ldr r0, [r5, #0x14]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #0xc]
 	add r0, r0, #1
 	str r0, [r5, #0xc]

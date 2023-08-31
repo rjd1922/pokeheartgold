@@ -5,9 +5,9 @@
 #include "player_data.h"
 
 typedef struct TRADE_ANIM_WORK {
-    BOXMON *my_boxmon;
-    BOXMON *trade_boxmon;
-    PLAYERPROFILE *trade_profile;
+    BoxPokemon *my_boxmon;
+    BoxPokemon *trade_boxmon;
+    PlayerProfile *trade_profile;
     int time_of_day;
     int is_ingame;
     OPTIONS *options;

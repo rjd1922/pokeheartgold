@@ -11,13 +11,13 @@
 .public AllocWindows
 .public AddWindowParameterized
 .public RemoveWindow
-.public WindowArray_dtor
+.public WindowArray_Delete
 .public ScheduleWindowCopyToVram
 .public ClearWindowTilemapAndCopyToVram
 .public FillWindowPixelBuffer
 .public GX_EngineAToggleLayers
-.public GF_Camera_SetDistance
-.public GF_Camera_GetDistance
+.public Camera_SetDistance
+.public Camera_GetDistance
 .public sub_0202457C
 .public Sprite_Delete
 .public sub_020247D4

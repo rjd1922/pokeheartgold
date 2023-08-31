@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/pokemon.h"
 #include "constants/sndseq.h"
 	.include "asm/macros.inc"
@@ -219,7 +220,7 @@ _02237A64:
 _02237A6A:
 	add r1, sp, #0x20
 	add r2, sp, #0x1c
-	bl ov12_0223B5EC
+	bl BattleSystem_CheckEvolution
 	add r6, r0, #0
 	beq _02237ACC
 	mov r0, #3
@@ -228,7 +229,7 @@ _02237A6A:
 	bl CreateHeap
 	ldr r0, [r5, #4]
 	ldr r1, [sp, #0x20]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r2, #0x59
 	lsl r2, r2, #2
 	add r1, r0, #0
@@ -402,17 +403,17 @@ _02237BDE:
 	bl MIi_CpuClear16
 	mov r0, #7
 	mov r1, #5
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	mov r0, #8
 	mov r1, #5
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	add r0, r5, #0
 	bl ov12_0223BFC0
 	add r1, r0, #0
 	add r0, r5, #0
-	bl ov12_0223AAC8
+	bl BattleSystem_GetTrainerGender
 	add r3, r0, #0
 	mov r0, #7
 	lsl r0, r0, #6
@@ -458,9 +459,9 @@ _02237BDE:
 	add r0, r4, #0
 	bl ov12_02266644
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #1
 	bl sub_020027F0
 	add r0, r5, #0
@@ -504,7 +505,7 @@ ov12_02237CC4: ; 0x02237CC4
 	mov r1, #3
 	bl FreeBgTilemapBuffer
 	add r0, r4, #0
-	bl ov12_0223BCC8
+	bl BattleSystem_SetHpBarDisabled
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov12_02237CC4
@@ -565,7 +566,7 @@ _02237D1A:
 	add r1, r0, #0
 	bl GX_EngineAToggleLayers
 	add r0, r5, #0
-	bl ov12_0223B708
+	bl BattleSystem_GetFrame
 	add r4, r0, #0
 	lsl r0, r4, #0x18
 	lsr r0, r0, #0x18
@@ -783,7 +784,7 @@ ov12_02237F18: ; 0x02237F18
 	mov r1, #2
 	mov r2, #0xf
 	mov r3, #5
-	bl MessagePrinter_new
+	bl MessagePrinter_New
 	mov r1, #0x6a
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -844,17 +845,17 @@ _02237FD8:
 	bl GF_CreateVramTransferManager
 	mov r0, #7
 	mov r1, #5
-	bl NARC_ctor
+	bl NARC_New
 	add r5, r0, #0
 	mov r0, #8
 	mov r1, #5
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	add r0, r4, #0
 	bl ov12_0223BFC0
 	add r1, r0, #0
 	add r0, r4, #0
-	bl ov12_0223AAC8
+	bl BattleSystem_GetTrainerGender
 	add r3, r0, #0
 	mov r0, #7
 	lsl r0, r0, #6
@@ -868,9 +869,9 @@ _02237FD8:
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	add r0, r5, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r1, [r4, #4]
 	add r0, r4, #0
 	bl ov12_022387AC
@@ -951,11 +952,11 @@ _02237FD8:
 	bl ov12_02266390
 	mov r0, #7
 	mov r1, #5
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	mov r0, #8
 	mov r1, #5
-	bl NARC_ctor
+	bl NARC_New
 	add r5, r0, #0
 	mov r0, #1
 	str r0, [sp]
@@ -973,9 +974,9 @@ _02237FD8:
 	add r0, r5, #0
 	bl ov12_02266644
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r5, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #5
 	bl sub_02007FD4
 	add r1, r4, #0
@@ -988,7 +989,7 @@ _02237FD8:
 	mov r2, #0xc0
 	bl sub_02009408
 	add r0, r4, #0
-	bl ov12_0223BC48
+	bl BattleSystem_HpBar_Init
 	bl ov12_022396F0
 	mov r0, #5
 	bl ov07_0221BEDC
@@ -1013,12 +1014,12 @@ _02237FD8:
 	bl NewMsgDataFromNarc
 	str r0, [r4, #0x10]
 	mov r0, #5
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x14]
 	mov r0, #5
 	lsl r0, r0, #6
 	mov r1, #5
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x18]
 	ldr r0, [r4, #0x28]
 	mov r1, #0
@@ -1146,7 +1147,7 @@ _02237FD8:
 	add r0, r4, #0
 	bl ov12_0223A620
 	add r0, r4, #0
-	bl ov12_0223AA84
+	bl BattleSystem_GetBagCursor
 	bl BagCursor_Battle_Init
 	mov r0, #5
 	mov r1, #4
@@ -1220,7 +1221,7 @@ ov12_02238358: ; 0x02238358
 	cmp r1, #0
 	beq _02238380
 	ldr r1, [r4, #0x30]
-	bl ov12_022486B0
+	bl BattleMain
 _02238380:
 	ldr r0, [r4, #0x44]
 	mov r6, #0
@@ -1244,7 +1245,7 @@ _0223839E:
 	beq _022383BA
 	ldr r1, [r4, #0x30]
 	add r0, r4, #0
-	bl ov12_022486B0
+	bl BattleMain
 	ldr r1, _02238438 ; =0x000023FE
 	strb r0, [r4, r1]
 	add r0, r4, #0
@@ -1280,7 +1281,7 @@ _022383E0:
 	beq _02238404
 	ldr r1, [r4, #0x30]
 	add r0, r4, #0
-	bl ov12_022486B0
+	bl BattleMain
 	ldr r1, _02238438 ; =0x000023FE
 	strb r0, [r4, r1]
 	add r0, r4, #0
@@ -1375,14 +1376,14 @@ _022384A0:
 	add r1, r5, #0
 	bl sub_0200FBF4
 	add r0, r4, #0
-	bl ov12_0223B798
+	bl BattleSystem_TryChangeForm
 	ldr r0, _02238784 ; =0x00002420
 	ldrb r0, [r4, r0]
 	cmp r0, #4
 	beq _022384CE
 	ldr r0, [r4, #0x6c]
 	mov r1, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r0, #0
 	add r0, r4, #0
 	bl ov12_0223B870
@@ -1394,14 +1395,14 @@ _022384CE:
 _022384D6:
 	ldr r0, [r5, #0x68]
 	ldr r1, [r6, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [r5, #0x68]
 	bl FreeToHeap
 	add r1, r6, #0
 	add r1, #0xf8
 	ldr r0, [r5, #0x48]
 	ldr r1, [r1]
-	bl PlayerProfile_copy
+	bl PlayerProfile_Copy
 	ldr r0, [r5, #0x48]
 	bl FreeToHeap
 	ldr r0, [sp]
@@ -1419,14 +1420,14 @@ _022384D6:
 	lsl r1, r1, #2
 	ldr r0, [r4, #0x58]
 	ldr r1, [r7, r1]
-	bl Sav2_Bag_copy
+	bl Save_Bag_Copy
 	ldr r0, [r4, #0x58]
 	bl FreeToHeap
 	mov r1, #0x11
 	lsl r1, r1, #4
 	ldr r0, [r4, #0x60]
 	ldr r1, [r7, r1]
-	bl Pokedex_copy
+	bl Pokedex_Copy
 	ldr r0, [r4, #0x60]
 	bl FreeToHeap
 	mov r0, #0x45
@@ -1568,7 +1569,7 @@ _0223861E:
 	ldr r0, [r4, #0x10]
 	bl DestroyMsgData
 	ldr r0, [r4, #0x14]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r0, #0x72
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -1579,7 +1580,7 @@ _0223861E:
 	ldr r0, [r0]
 	bl ov07_0221BFE0
 	ldr r0, [r4, #0x30]
-	bl ov12_022486FC
+	bl BattleContext_Delete
 	ldr r0, [r4, #0x44]
 	mov r6, #0
 	cmp r0, #0
@@ -1616,7 +1617,7 @@ _022386C0:
 	bl sub_02002B8C
 	ldr r0, [r4, #8]
 	mov r1, #3
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	ldr r0, [r4, #4]
 	bl FreeToHeap
 	mov r0, #0x22
@@ -1630,7 +1631,7 @@ _022386C0:
 	mov r0, #0x6a
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl MessagePrinter_delete
+	bl MessagePrinter_Delete
 	ldr r0, [r4, #0x1c]
 	bl DestroySysTask
 	ldr r0, [r4, #0x20]
@@ -1642,7 +1643,7 @@ _022386C0:
 	ldr r0, [r4, r0]
 	bl SetLCRNGSeed
 	add r0, r4, #0
-	bl ov12_0223BD2C
+	bl BattleSystem_GetCriticalHpMusicFlag
 	cmp r0, #0
 	beq _0223872E
 	ldr r0, _0223879C ; =0x00000704
@@ -1658,7 +1659,7 @@ _0223872E:
 	cmp r0, #0
 	beq _02238748
 	mov r0, #0x7f
-	bl sub_020059D0
+	bl Sound_SetMasterVolume
 _02238748:
 	mov r0, #0x92
 	lsl r0, r0, #6
@@ -1803,7 +1804,7 @@ _02238838:
 	add r0, r4, #0
 	bl ov12_0226604C
 	add r0, r5, #0
-	bl ov12_0223B708
+	bl BattleSystem_GetFrame
 	add r7, r0, #0
 	lsl r0, r7, #0x18
 	lsr r0, r0, #0x18
@@ -1930,7 +1931,7 @@ _022389B4: .word ov12_02239730
 ov12_022389B8: ; 0x022389B8
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
-	bl BattleSys_GetTerrainId
+	bl BattleSystem_GetTerrainId
 	add r4, r0, #0
 	mov r0, #0x5f
 	lsl r0, r0, #2
@@ -1947,7 +1948,7 @@ ov12_022389B8: ; 0x022389B8
 	add r3, r4, #0
 	bl ov12_02265FD4
 	add r0, r5, #0
-	bl ov12_0223A7E4
+	bl BattleSystem_GetBattleContext
 	str r0, [sp]
 	ldr r0, [r5, #0x44]
 	mov r4, #0
@@ -1967,7 +1968,7 @@ _022389F4:
 	bl BattleSystem_GetPartyMon
 	add r1, r0, #0
 	add r0, r5, #0
-	bl ov12_0223AA88
+	bl BattleSystem_GetMonBall
 	add r2, r0, #0
 	ldr r1, [r6, #0x34]
 	add r0, r5, #0
@@ -2026,13 +2027,13 @@ ov12_02238A68: ; 0x02238A68
 	add r5, r1, #0
 _02238A7A:
 	mov r0, #5
-	bl PlayerProfile_new
+	bl PlayerProfile_New
 	add r1, r0, #0
 	add r0, r5, #0
 	str r1, [r6, #0x48]
 	add r0, #0xf8
 	ldr r0, [r0]
-	bl PlayerProfile_copy
+	bl PlayerProfile_Copy
 	mov r0, #0x46
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
@@ -2083,23 +2084,23 @@ _02238AB8:
 	sub r1, #0x28
 	str r0, [r4, r1]
 	mov r0, #5
-	bl Sav2_Bag_new
+	bl Save_Bag_New
 	str r0, [r4, #0x58]
 	mov r1, #0x42
 	ldr r0, [sp, #4]
 	lsl r1, r1, #2
 	ldr r0, [r0, r1]
 	ldr r1, [r4, #0x58]
-	bl Sav2_Bag_copy
+	bl Save_Bag_Copy
 	mov r0, #5
-	bl Pokedex_new
+	bl Pokedex_New
 	str r0, [r4, #0x60]
 	mov r1, #0x11
 	ldr r0, [sp, #4]
 	lsl r1, r1, #4
 	ldr r0, [r0, r1]
 	ldr r1, [r4, #0x60]
-	bl Pokedex_copy
+	bl Pokedex_Copy
 	mov r1, #0x45
 	lsl r1, r1, #2
 	ldr r0, [sp, #4]
@@ -2299,14 +2300,14 @@ _02238C7E:
 	cmp r0, #4
 	blt _02238C6A
 	add r0, r4, #0
-	bl ov12_02248660
+	bl BattleContext_New
 	ldr r7, _02238D58 ; =0x0000248C
 	str r0, [r4, #0x30]
 	mov r5, #0
 	add r6, r4, #0
 _02238CB2:
 	mov r0, #5
-	bl SavArray_Party_alloc
+	bl SaveArray_Party_Alloc
 	str r0, [r6, #0x68]
 	ldr r0, [sp, #4]
 	add r6, r6, #4
@@ -2325,13 +2326,13 @@ _02238CB2:
 _02238CD6:
 	ldr r0, [r6, #4]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02238D08
 _02238CE2:
 	ldr r0, [r6, #4]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r7, r0, #0
 	bl GetMonGender
 	str r0, [sp, #0x44]
@@ -2341,7 +2342,7 @@ _02238CE2:
 	bl SetMonData
 	ldr r0, [r6, #4]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _02238CE2
 _02238D08:
@@ -2408,7 +2409,7 @@ _02238D86:
 	ldr r0, [sp, #4]
 	ldr r1, [r5, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [sp, #4]
 	add r6, r6, #1
 	add r0, r0, #4
@@ -2425,13 +2426,13 @@ _02238D86:
 _02238DB2:
 	ldr r0, [r7, #0x68]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02238DFC
 _02238DBE:
 	ldr r0, [r7, #0x68]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -2453,7 +2454,7 @@ _02238DBE:
 _02238DF0:
 	ldr r0, [r7, #0x68]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _02238DBE
 _02238DFC:
@@ -2516,7 +2517,7 @@ _02238E68:
 	ldr r0, [sp, #4]
 	ldr r1, [r5, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [sp, #4]
 	add r6, r6, #1
 	add r0, r0, #4
@@ -2533,13 +2534,13 @@ _02238E68:
 _02238E94:
 	ldr r0, [r7, #0x68]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02238EDE
 _02238EA0:
 	ldr r0, [r7, #0x68]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -2561,7 +2562,7 @@ _02238EA0:
 _02238ED2:
 	ldr r0, [r7, #0x68]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _02238EA0
 _02238EDE:
@@ -2619,7 +2620,7 @@ _02238F42:
 	ldr r0, [sp, #4]
 	ldr r1, [r5, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [sp, #4]
 	add r6, r6, #1
 	add r0, r0, #4
@@ -2641,13 +2642,13 @@ _02238F64:
 	add r7, r4, r0
 	ldr r0, [r7, #0x68]
 	mov r6, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02238FFC
 _02238F7C:
 	ldr r0, [r7, #0x68]
 	add r1, r6, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r1, [sp, #0x18]
 	add r5, r0, #0
 	cmp r1, #1
@@ -2699,7 +2700,7 @@ _02238FC8:
 _02238FF0:
 	ldr r0, [r7, #0x68]
 	add r6, r6, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r6, r0
 	blt _02238F7C
 _02238FFC:
@@ -2749,16 +2750,16 @@ _02239050:
 	ldr r0, [sp, #4]
 	ldr r1, [r7, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [r7, #0x68]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _022390A4
 _02239066:
 	ldr r0, [r7, #0x68]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -2780,7 +2781,7 @@ _02239066:
 _02239098:
 	ldr r0, [r7, #0x68]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _02239066
 _022390A4:
@@ -2844,7 +2845,7 @@ _0223911A:
 	ldr r0, [sp, #4]
 	ldr r1, [r5, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [sp, #4]
 	add r6, r6, #1
 	add r0, r0, #4
@@ -2860,7 +2861,7 @@ _0223913A:
 	add r0, r4, #0
 	add r1, r7, #0
 	mov r5, #0
-	bl BattleSys_GetPartySize
+	bl BattleSystem_GetPartySize
 	cmp r0, #0
 	ble _022391BE
 _02239148:
@@ -2914,7 +2915,7 @@ _022391B0:
 	add r0, r4, #0
 	add r1, r7, #0
 	add r5, r5, #1
-	bl BattleSys_GetPartySize
+	bl BattleSystem_GetPartySize
 	cmp r5, r0
 	blt _02239148
 _022391BE:
@@ -2971,7 +2972,7 @@ _02239220:
 	ldr r0, [sp, #4]
 	ldr r1, [r5, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [sp, #4]
 	add r6, r6, #1
 	add r0, r0, #4
@@ -2988,13 +2989,13 @@ _02239220:
 _02239244:
 	ldr r0, [r7, #0x68]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _0223928E
 _02239250:
 	ldr r0, [r7, #0x68]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -3016,7 +3017,7 @@ _02239250:
 _02239282:
 	ldr r0, [r7, #0x68]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _02239250
 _0223928E:
@@ -3074,7 +3075,7 @@ _022392F2:
 	ldr r0, [sp, #4]
 	ldr r1, [r5, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [sp, #4]
 	add r6, r6, #1
 	add r0, r0, #4
@@ -3096,13 +3097,13 @@ _02239314:
 	add r7, r4, r0
 	ldr r0, [r7, #0x68]
 	mov r6, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _022393AC
 _0223932C:
 	ldr r0, [r7, #0x68]
 	add r1, r6, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r1, [sp, #0x24]
 	add r5, r0, #0
 	cmp r1, #1
@@ -3154,7 +3155,7 @@ _02239378:
 _022393A0:
 	ldr r0, [r7, #0x68]
 	add r6, r6, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r6, r0
 	blt _0223932C
 _022393AC:
@@ -3207,16 +3208,16 @@ _02239408:
 	ldr r0, [sp, #4]
 	ldr r1, [r7, #0x68]
 	ldr r0, [r0, #4]
-	bl Party_copy
+	bl Party_Copy
 	ldr r0, [r7, #0x68]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _0223945C
 _0223941E:
 	ldr r0, [r7, #0x68]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -3238,7 +3239,7 @@ _0223941E:
 _02239450:
 	ldr r0, [r7, #0x68]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _0223941E
 _0223945C:
@@ -3271,7 +3272,7 @@ _0223948A:
 	beq _022394A6
 	ldr r0, [r4, #0x6c]
 	mov r1, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r2, r4, #0
 	mov r1, #0x90
 	add r2, #0xf4
@@ -3295,7 +3296,7 @@ _022394A6:
 _022394C8:
 	ldr r0, [r4, #0x68]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02239516
 	ldr r7, _022394E8 ; =0x00002408
@@ -3309,7 +3310,7 @@ _022394E8: .word 0x00002408
 _022394EC:
 	ldr r0, [r4, #0x68]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r2, [r4, r7]
 	add r6, r0, #0
 	lsl r2, r2, #0x10
@@ -3321,20 +3322,20 @@ _022394EC:
 	bl ApplyMonMoodModifier
 	ldr r0, [r4, #0x68]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _022394EC
 _02239516:
 	ldr r0, [r4, #0x70]
 	mov r5, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _0223954E
 	ldr r7, _022395B0 ; =0x00002408
 _02239524:
 	ldr r0, [r4, #0x70]
 	add r1, r5, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r2, [r4, r7]
 	add r6, r0, #0
 	lsl r2, r2, #0x10
@@ -3346,7 +3347,7 @@ _02239524:
 	bl ApplyMonMoodModifier
 	ldr r0, [r4, #0x70]
 	add r5, r5, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r5, r0
 	blt _02239524
 _0223954E:
@@ -3367,7 +3368,7 @@ _0223954E:
 _0223956A:
 	add r0, r4, #0
 	add r1, r5, #0
-	bl BattleSys_GetPlayerProfile
+	bl BattleSystem_GetPlayerProfile
 	bl PlayerProfile_GetVersion
 	cmp r0, #GAME_VERSION
 	beq _0223957C
@@ -3674,7 +3675,7 @@ _02239798:
 	ldr r0, [r4, #0x28]
 	bl sub_0200398C
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _022397DC ; =0x027E0000
 	ldr r1, _022397E0 ; =0x00003FF8
 	mov r0, #1
@@ -3701,7 +3702,7 @@ ov12_022397E4: ; 0x022397E4
 	bl sub_0200398C
 	bl GF_RunVramTransferTasks
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _02239808 ; =0x027E0000
 	ldr r1, _0223980C ; =0x00003FF8
 	mov r0, #1
@@ -3754,14 +3755,14 @@ ov12_02239854: ; 0x02239854
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r1, #0
 	add r0, r5, #0
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	str r0, [sp]
 	add r0, r5, #0
 	mov r6, #0
-	bl ov12_0223BD2C
+	bl BattleSystem_GetCriticalHpMusicFlag
 	add r4, r0, #0
 	add r0, r5, #0
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	mov r1, #0x22
 	lsl r1, r1, #4
 	tst r0, r1
@@ -3779,7 +3780,7 @@ _0223987A:
 	bl StopSE
 	add r0, r5, #0
 	mov r1, #2
-	bl ov12_0223BD3C
+	bl BattleSystem_SetCriticalHpMusicFlag
 	pop {r3, r4, r5, r6, r7, pc}
 _02239898:
 	ldr r0, [sp]
@@ -3789,30 +3790,30 @@ _02239898:
 _022398A0:
 	add r0, r5, #0
 	add r1, r4, #0
-	bl BattleSys_GetOpponentDataByBattlerId
+	bl BattleSystem_GetOpponentData
 	add r7, r0, #0
 	bl ov12_02261264
 	cmp r0, #0
 	bne _022398BE
 	add r0, r5, #0
-	bl BattleSys_GetBattleFlags
+	bl BattleSystem_GetBattleSpecial
 	mov r1, #0x10
 	tst r0, r1
 	beq _022398D6
 _022398BE:
 	add r0, r5, #0
 	add r1, r4, #0
-	bl BattleSys_GetFieldSide
+	bl BattleSystem_GetFieldSide
 	cmp r0, #0
 	bne _022398FE
 	add r0, r5, #0
-	bl BattleSys_GetBattleFlags
+	bl BattleSystem_GetBattleSpecial
 	mov r1, #0x10
 	tst r0, r1
 	beq _022398FE
 _022398D6:
 	add r0, r7, #0
-	bl ov12_0226127C
+	bl OpponentData_GetHpBar
 	add r1, r0, #0
 	beq _022398FE
 	ldr r0, [r1, #0x28]
@@ -3837,23 +3838,23 @@ _02239906:
 	cmp r6, #0
 	beq _0223992C
 	add r0, r5, #0
-	bl ov12_0223BD2C
+	bl BattleSystem_GetCriticalHpMusicFlag
 	cmp r0, #0
 	bne _0223992C
 	ldr r0, _02239988 ; =0x00000704
 	bl PlaySE
 	add r0, r5, #0
 	mov r1, #1
-	bl ov12_0223BD3C
+	bl BattleSystem_SetCriticalHpMusicFlag
 	add r0, r5, #0
 	mov r1, #4
-	bl ov12_0223BD68
+	bl BattleSystem_SetCriticalHpMusicDelay
 	b _0223994A
 _0223992C:
 	cmp r6, #0
 	bne _0223994A
 	add r0, r5, #0
-	bl ov12_0223BD2C
+	bl BattleSystem_GetCriticalHpMusicFlag
 	cmp r0, #0
 	beq _0223994A
 	ldr r0, _02239988 ; =0x00000704
@@ -3861,14 +3862,14 @@ _0223992C:
 	bl StopSE
 	add r0, r5, #0
 	mov r1, #0
-	bl ov12_0223BD3C
+	bl BattleSystem_SetCriticalHpMusicFlag
 _0223994A:
 	add r0, r5, #0
-	bl ov12_0223BD2C
+	bl BattleSystem_GetCriticalHpMusicFlag
 	cmp r0, #0
 	beq _02239984
 	add r0, r5, #0
-	bl ov12_0223BD58
+	bl BattleSystem_GetCriticalHpMusicDelay
 	add r4, r0, #0
 	ldr r0, _02239988 ; =0x00000704
 	bl IsSEPlaying
@@ -3880,13 +3881,13 @@ _0223994A:
 	bl PlaySE
 	add r0, r5, #0
 	mov r1, #4
-	bl ov12_0223BD68
+	bl BattleSystem_SetCriticalHpMusicDelay
 	pop {r3, r4, r5, r6, r7, pc}
 _0223997A:
 	lsl r1, r1, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov12_0223BD68
+	bl BattleSystem_SetCriticalHpMusicDelay
 _02239984:
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -4137,7 +4138,7 @@ _02239A46:
 	mov r0, #1
 	lsl r0, r0, #8
 	mov r1, #5
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	ldr r1, _02239C18 ; =0x0000039B
 	add r0, r4, #0
@@ -4152,7 +4153,7 @@ _02239A46:
 	add r2, r6, #0
 	bl AddTextPrinterParameterized
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	bl DestroyMsgData
 	ldr r0, _02239C1C ; =ov12_022397E4
@@ -4169,7 +4170,7 @@ _02239A46:
 	bl sub_02003370
 	ldr r0, [r5, #8]
 	mov r1, #1
-	bl sub_0200F0AC
+	bl WaitingIcon_New
 	ldr r1, _02239C24 ; =0x00001024
 	str r0, [r5, r1]
 	bl ov12_0223A7A0
@@ -4750,7 +4751,7 @@ ov12_0223A088: ; 0x0223A088
 	bl PaletteData_Free
 	ldr r0, [r4, #8]
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	mov r0, #2
 	mov r1, #0
 	bl GX_EngineAToggleLayers
@@ -4847,7 +4848,7 @@ _0223A16E:
 	str r1, [r0, #4]
 	add r0, r4, #0
 	add r1, r5, #0
-	bl BattleSys_GetBattlerIdPartner
+	bl BattleSystem_GetBattlerIdPartner
 	lsl r0, r0, #2
 	add r0, r4, r0
 	ldr r1, [r0, #0x68]
@@ -4859,7 +4860,7 @@ _0223A16E:
 _0223A194:
 	add r0, r4, #0
 	add r1, r5, #0
-	bl BattleSys_GetBattlerIdPartner
+	bl BattleSystem_GetBattlerIdPartner
 	lsl r0, r0, #2
 	add r0, r4, r0
 	ldr r2, [r0, #0x68]
@@ -5763,3 +5764,6 @@ ov12_0226C1C8: ; 0x0226C1C8
 
 ov12_0226C2DC: ; 0x0226C2DC
 	.byte 0x02, 0x03, 0x04, 0x05
+
+	.section .sinit,4
+	.word ov12_022399BC

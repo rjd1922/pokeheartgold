@@ -25,7 +25,7 @@
 .public ScriptReadHalfword
 .public VarGet
 .public TaskManager_Call
-.public TaskManager_GetSys
+.public TaskManager_GetFieldSystem
 .public TaskManager_GetEnv
 .public TaskManager_GetStatePtr
 .public GetIdxOfFirstAliveMonInParty_CrashIfNone
@@ -45,7 +45,7 @@
 .public MapObject_GetManager
 .public sub_0205F484
 .public MapObject_GetFieldSysPtr
-.public MapObject_CheckFlag9
+.public MapObject_CheckVisible
 .public MapObject_PauseMovement
 .public MapObject_UnpauseMovement
 .public sub_0205F714
@@ -74,7 +74,7 @@
 .public GetFollowPokePermissionBySpeciesAndMap
 .public sub_0206A040
 .public sub_0206A054
-.public SavArray_PlayerParty_get
+.public SaveArray_Party_Get
 .public NNS_G3dGetTex
 .public MIi_CpuCopy16
 .public MI_CpuFill8

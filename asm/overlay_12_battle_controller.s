@@ -14,7 +14,7 @@ BattleController_SendData: ; 0x02262098
 	str r2, [sp, #4]
 	cmp r1, #1
 	bne _022620BE
-	bl BattleSys_GetRecvBufferPtr
+	bl BattleSystem_GetRecvBufferPtr
 	add r4, r0, #0
 	add r0, r7, #0
 	bl ov12_0223A984
@@ -23,7 +23,7 @@ BattleController_SendData: ; 0x02262098
 	bl ov12_0223A990
 	b _022620D2
 _022620BE:
-	bl BattleSys_GetSendBufferPtr
+	bl BattleSystem_GetSendBufferPtr
 	add r4, r0, #0
 	add r0, r7, #0
 	bl ov12_0223A960
@@ -174,7 +174,7 @@ ov12_022621C4: ; 0x022621C4
 	add r5, r0, #0
 	cmp r1, #1
 	bne _022621EA
-	bl BattleSys_GetRecvBufferPtr
+	bl BattleSystem_GetRecvBufferPtr
 	add r6, r0, #0
 	add r0, r5, #0
 	bl ov12_0223A978
@@ -186,7 +186,7 @@ ov12_022621C4: ; 0x022621C4
 	bl ov12_0223A990
 	b _02262206
 _022621EA:
-	bl BattleSys_GetSendBufferPtr
+	bl BattleSystem_GetSendBufferPtr
 	add r6, r0, #0
 	add r0, r5, #0
 	bl ov12_0223A954
@@ -306,7 +306,7 @@ BattleController_EmitPlayEncounterAnimation: ; 0x022622C8
 	mov r1, #1
 	add r5, r0, #0
 	str r1, [sp, #4]
-	bl ov12_0223BDC4
+	bl BattleSystem_GetRandTemp
 	str r0, [sp, #8]
 	mov r0, #8
 	str r0, [sp]
@@ -536,7 +536,7 @@ BattleController_EmitPokemonSlideIn: ; 0x022623F0
 	add r1, r7, #0
 	str r0, [sp, #0x14]
 	add r0, r6, #0
-	bl BattleSys_GetBattlerIdPartner
+	bl BattleSystem_GetBattlerIdPartner
 	ldr r1, [r6, #0x30]
 	ldr r2, [sp, #0x10]
 	add r1, r1, r0
@@ -1191,7 +1191,7 @@ BattleController_EmitThrowPokeball: ; 0x022629A4
 	add r5, r0, #0
 	strb r2, [r3, #1]
 	add r4, r1, #0
-	bl BattleSys_GetBattlerIdPartner
+	bl BattleSystem_GetBattlerIdPartner
 	ldr r1, [r5, #0x30]
 	add r2, r4, #0
 	add r1, r1, r0
@@ -1301,7 +1301,7 @@ BattleController_EmitHealthbarSlideIn: ; 0x02262A2C
 	ldrb r0, [r7, r4]
 	strb r0, [r3, #6]
 	add r0, r5, #0
-	bl ov12_02250CFC
+	bl GetBattlerStatusCondition
 	add r1, sp, #0x14
 	ldrb r2, [r1, #7]
 	mov r3, #0x1f
@@ -1383,7 +1383,7 @@ _02262AE2:
 	orr r0, r1
 	strb r0, [r3, #7]
 	ldr r0, [sp, #4]
-	bl ov12_0223B6B4
+	bl BattleSystem_GetSafariBallCount
 	str r0, [sp, #0x24]
 	ldr r0, [sp, #8]
 	add r1, sp, #0x14
@@ -1435,19 +1435,19 @@ ov12_02262B80: ; 0x02262B80
 	add r6, r3, #0
 	bl MIi_CpuClearFast
 	ldr r0, [sp, #4]
-	bl ov12_0223A7E4
+	bl BattleSystem_GetBattleContext
 	ldr r1, [sp, #0xc]
 	bl ov12_0224EDC0
 	mov r5, #0
 	ldr r0, [sp, #4]
 	add r4, r5, #0
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	cmp r0, #0
 	ble _02262BD0
 _02262BB0:
 	ldr r0, [sp, #8]
 	add r1, r4, #0
-	bl ov12_022567A0
+	bl Battler_CanSelectAction
 	cmp r0, #0
 	bne _02262BC4
 	add r0, r4, #0
@@ -1456,7 +1456,7 @@ _02262BB0:
 _02262BC4:
 	ldr r0, [sp, #4]
 	add r4, r4, #1
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	cmp r4, r0
 	blt _02262BB0
 _02262BD0:
@@ -1472,7 +1472,7 @@ _02262BD0:
 	add r0, sp, #0x48
 	strb r1, [r0, #9]
 	ldr r0, [sp, #4]
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	mov r1, #2
 	str r0, [sp, #0x20]
 	tst r0, r1
@@ -1491,10 +1491,10 @@ _02262C06:
 _02262C08:
 	ldr r0, [sp, #4]
 	add r1, r4, #0
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	str r0, [sp, #0x24]
 	mov r7, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02262C9E
 	mov r0, #6
@@ -1512,7 +1512,7 @@ _02262C32:
 	ldr r1, _02262ED4 ; =0x0000312C
 	ldr r0, [sp, #0x24]
 	ldrb r1, [r6, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	add r4, r0, #0
@@ -1560,7 +1560,7 @@ _02262C90:
 	ldr r0, [sp, #0x24]
 	add r6, r6, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _02262C32
 _02262C9E:
@@ -1582,7 +1582,7 @@ _02262C9E:
 _02262CBC:
 	ldr r0, [sp, #4]
 	ldr r1, [sp, #0xc]
-	bl BattleSys_GetFieldSide
+	bl BattleSystem_GetFieldSide
 	cmp r0, #0
 	beq _02262CD2
 	ldr r0, [sp, #4]
@@ -1597,10 +1597,10 @@ _02262CDA:
 	add r4, r0, #0
 	ldr r0, [sp, #4]
 	add r1, r4, #0
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	str r0, [sp, #0x10]
 	mov r7, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02262D56
 	mov r0, #6
@@ -1613,7 +1613,7 @@ _02262CFC:
 	ldr r1, _02262ED4 ; =0x0000312C
 	ldr r0, [sp, #0x10]
 	ldrb r1, [r4, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	add r6, r0, #0
@@ -1651,13 +1651,13 @@ _02262D48:
 	ldr r0, [sp, #0x10]
 	add r4, r4, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _02262CFC
 _02262D56:
 	ldr r0, [sp, #4]
 	ldr r1, [sp, #0xc]
-	bl BattleSys_GetFieldSide
+	bl BattleSystem_GetFieldSide
 	cmp r0, #0
 	beq _02262D6C
 	ldr r0, [sp, #4]
@@ -1672,10 +1672,10 @@ _02262D74:
 	add r4, r0, #0
 	ldr r0, [sp, #4]
 	add r1, r4, #0
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	str r0, [sp, #0x14]
 	mov r7, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02262E7A
 	mov r0, #6
@@ -1689,7 +1689,7 @@ _02262D98:
 	ldr r1, _02262ED4 ; =0x0000312C
 	ldr r0, [sp, #0x14]
 	ldrb r1, [r4, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	add r6, r0, #0
@@ -1727,7 +1727,7 @@ _02262DE4:
 	ldr r0, [sp, #0x14]
 	add r4, r4, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _02262D98
 	b _02262E7A
@@ -1739,10 +1739,10 @@ _02262DF4:
 	add r4, r0, #0
 	ldr r0, [sp, #4]
 	add r1, r4, #0
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	str r0, [sp, #0x18]
 	mov r7, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02262E7A
 	mov r0, #6
@@ -1755,7 +1755,7 @@ _02262E20:
 	ldr r1, _02262ED4 ; =0x0000312C
 	ldr r0, [sp, #0x18]
 	ldrb r1, [r4, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	add r6, r0, #0
@@ -1793,7 +1793,7 @@ _02262E6C:
 	ldr r0, [sp, #0x18]
 	add r4, r4, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _02262E20
 _02262E7A:
@@ -1905,7 +1905,7 @@ ov12_02262F40: ; 0x02262F40
 	str r2, [sp, #0xc]
 	str r0, [sp, #4]
 	str r1, [sp, #8]
-	bl ov12_0223A7E4
+	bl BattleSystem_GetBattleContext
 	ldr r1, [sp, #0xc]
 	bl ov12_0224EDC0
 	mov r0, #0xf
@@ -2004,7 +2004,7 @@ ov12_02262FFC: ; 0x02262FFC
 	str r3, [sp, #0xc]
 	bl ov12_0224EDC0
 	ldr r0, [sp, #4]
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	mov r2, #0x10
 	add r1, sp, #0x1c
 	strb r2, [r1]
@@ -2213,7 +2213,7 @@ _02263170:
 	cmp r1, #4
 	blt _02263162
 	ldr r0, [sp, #4]
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	cmp r0, #0x4a
 	bne _0226324E
 	mov r0, #1
@@ -2305,7 +2305,7 @@ _0226324A:
 	b _02263298
 _0226324E:
 	ldr r0, [sp, #4]
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	cmp r0, #0
 	bne _0226328E
 	mov r2, #0xba
@@ -2540,8 +2540,8 @@ BattleController_EmitPrintMessage: ; 0x022633F0
 	pop {r3, r4, pc}
 	thumb_func_end BattleController_EmitPrintMessage
 
-	thumb_func_start ov12_0226340C
-ov12_0226340C: ; 0x0226340C
+	thumb_func_start BattleController_SetMoveAnimation
+BattleController_SetMoveAnimation: ; 0x0226340C
 	push {r4, r5, r6, lr}
 	sub sp, #0x68
 	mov r3, #0
@@ -2564,7 +2564,7 @@ ov12_0226340C: ; 0x0226340C
 	bl ov12_02262240
 	add sp, #0x68
 	pop {r4, r5, r6, pc}
-	thumb_func_end ov12_0226340C
+	thumb_func_end BattleController_SetMoveAnimation
 
 	thumb_func_start ov12_0226343C
 ov12_0226343C: ; 0x0226343C
@@ -3254,7 +3254,7 @@ BattleController_EmitPrintFirstSendOutMessage: ; 0x02263950
 	add r6, r0, #0
 	strb r2, [r1]
 	mov r4, #0
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	cmp r0, #0
 	ble _02263982
 	add r5, sp, #8
@@ -3266,7 +3266,7 @@ _0226396C:
 	strb r0, [r5, #4]
 	add r0, r6, #0
 	add r5, r5, #1
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	cmp r4, r0
 	blt _0226396C
 _02263982:
@@ -3307,7 +3307,7 @@ ov12_022639B8: ; 0x022639B8
 	sub sp, #0x2c
 	add r4, r1, #0
 	add r5, r0, #0
-	bl ov12_0223A7E4
+	bl BattleSystem_GetBattleContext
 	add r1, r4, #0
 	bl ov12_0224EDC0
 	mov r1, #0x25
@@ -3398,7 +3398,7 @@ ov12_02263A1C: ; 0x02263A1C
 	ldrb r0, [r7, r4]
 	strb r0, [r3, #6]
 	add r0, r5, #0
-	bl ov12_02250CFC
+	bl GetBattlerStatusCondition
 	add r1, sp, #0x10
 	ldrb r2, [r1, #7]
 	mov r3, #0x1f
@@ -3480,7 +3480,7 @@ _02263AD0:
 	orr r0, r1
 	strb r0, [r3, #7]
 	ldr r0, [sp, #4]
-	bl ov12_0223B6B4
+	bl BattleSystem_GetSafariBallCount
 	str r0, [sp, #0x20]
 	mov r0, #0x14
 	str r0, [sp]
@@ -3547,7 +3547,7 @@ BattleController_EmitBattleMonToPartyMonCopy: ; 0x02263B4C
 	ldrh r1, [r3, r1]
 	strh r1, [r2, #0xc]
 	ldr r1, [sp, #8]
-	bl BattleSys_GetFieldSide
+	bl BattleSystem_GetFieldSide
 	lsl r0, r0, #3
 	add r1, r6, r0
 	mov r0, #0x71
@@ -3743,7 +3743,7 @@ ov12_02263D14: ; 0x02263D14
 	add r7, r0, #0
 	add r4, r2, #0
 	add r6, r3, #0
-	bl ov12_0223A7E4
+	bl BattleSystem_GetBattleContext
 	add r1, r5, #0
 	bl ov12_0224EDC0
 	mov r1, #0x2b
@@ -3783,8 +3783,8 @@ BattleController_EmitPlayMosaicAnimation: ; 0x02263D48
 	.balign 4, 0
 	thumb_func_end BattleController_EmitPlayMosaicAnimation
 
-	thumb_func_start BattleController_EmitChangeForme
-BattleController_EmitChangeForme: ; 0x02263D6C
+	thumb_func_start BattleController_EmitChangeForm
+BattleController_EmitChangeForm: ; 0x02263D6C
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	add r7, r1, #0
@@ -3858,7 +3858,7 @@ _02263DD6:
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 _02263DF8: .word 0x00002D66
-	thumb_func_end BattleController_EmitChangeForme
+	thumb_func_end BattleController_EmitChangeForm
 
 	thumb_func_start BattleController_EmitSetBattleBackground
 BattleController_EmitSetBattleBackground: ; 0x02263DFC
@@ -4043,7 +4043,7 @@ BattleController_EmitShowWaitMessage: ; 0x02263F30
 	sub sp, #0x24
 	add r5, r0, #0
 	add r4, r1, #0
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	mov r2, #0x37
 	add r1, sp, #4
 	strb r2, [r1]
@@ -4229,7 +4229,7 @@ BattleController_EmitRunAwayMessage: ; 0x0226408C
 	sub sp, #0x28
 	add r6, r0, #0
 	add r5, r1, #0
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	str r0, [sp, #4]
 	mov r1, #0x3c
 	add r0, sp, #8
@@ -4238,7 +4238,7 @@ BattleController_EmitRunAwayMessage: ; 0x0226408C
 	strb r4, [r0, #1]
 	strh r4, [r0, #2]
 	add r0, r6, #0
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	cmp r0, #0
 	ble _022640D4
 	add r7, sp, #8
@@ -4256,7 +4256,7 @@ _022640C6:
 	add r0, r6, #0
 	add r5, #0x10
 	add r4, r4, #1
-	bl BattleSys_GetMaxBattlers
+	bl BattleSystem_GetMaxBattlers
 	cmp r4, r0
 	blt _022640B2
 _022640D4:
@@ -4301,7 +4301,7 @@ BattleController_EmitForefitMessage: ; 0x02264120
 	push {r3, r4, lr}
 	sub sp, #0x24
 	add r4, r0, #0
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	mov r2, #0x3d
 	add r1, sp, #4
 	strb r2, [r1]
@@ -4490,13 +4490,13 @@ BattleController_EmitSetBattleResults: ; 0x02264288
 	push {r3, r4, r5, lr}
 	sub sp, #0x28
 	add r5, r0, #0
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	add r4, r0, #0
 	mov r1, #0x41
 	add r0, sp, #4
 	strb r1, [r0]
 	add r0, r5, #0
-	bl ov12_0223BD14
+	bl BattleSystem_GetBattleOutcomeFlags
 	str r0, [sp, #8]
 	mov r1, #0
 	add r0, sp, #4
@@ -4679,7 +4679,7 @@ ov12_022643C8: ; 0x022643C8
 	ldr r1, [sp, #0x20]
 	str r3, [r4, #0x4c]
 	str r1, [r4, #0x50]
-	bl BattleSys_GetTerrainId
+	bl BattleSystem_GetTerrainId
 	str r0, [r4, #0x54]
 	ldrh r1, [r4, #0xe]
 	mov r0, #4
@@ -4955,7 +4955,7 @@ ov12_022645F8: ; 0x022645F8
 	add r6, r3, #0
 	bl MIi_CpuClearFast
 	ldr r0, [sp]
-	bl BattleSys_GetBattleType
+	bl BattleSystem_GetBattleType
 	add r4, r0, #0
 	mov r0, #0xc
 	and r0, r4
@@ -4967,7 +4967,7 @@ ov12_022645F8: ; 0x022645F8
 	beq _02264636
 	ldr r0, [sp]
 	ldr r1, [sp, #0x38]
-	bl BattleSys_GetFieldSide
+	bl BattleSystem_GetFieldSide
 	cmp r0, #0
 	bne _0226464C
 _02264636:
@@ -4975,7 +4975,7 @@ _02264636:
 	bne _02264646
 	ldr r0, [sp]
 	ldr r1, [sp, #0x38]
-	bl BattleSys_GetFieldSide
+	bl BattleSystem_GetFieldSide
 	cmp r0, #0
 	bne _0226464C
 _02264646:
@@ -4997,22 +4997,22 @@ _02264664:
 	ldr r6, [sp, #0x38]
 	ldr r0, [sp]
 	add r1, r6, #0
-	bl BattleSys_GetBattlerIdPartner
+	bl BattleSystem_GetBattlerIdPartner
 	str r0, [sp, #0x38]
 	b _0226467C
 _02264672:
 	ldr r0, [sp]
 	ldr r1, [sp, #0x38]
-	bl BattleSys_GetBattlerIdPartner
+	bl BattleSystem_GetBattlerIdPartner
 	add r6, r0, #0
 _0226467C:
 	ldr r0, [sp]
 	add r1, r6, #0
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	mov r4, #0
 	str r0, [sp, #0x10]
 	add r7, r4, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _022646FC
 	mov r0, #6
@@ -5024,7 +5024,7 @@ _0226469C:
 	ldr r1, _0226481C ; =0x0000312C
 	ldr r0, [sp, #0x10]
 	ldrb r1, [r6, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	str r0, [sp, #0x14]
@@ -5065,17 +5065,17 @@ _022646EE:
 	ldr r0, [sp, #0x10]
 	add r6, r6, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _0226469C
 _022646FC:
 	ldr r0, [sp]
 	ldr r1, [sp, #0x38]
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	str r0, [sp, #8]
 	mov r4, #3
 	mov r7, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	bgt _02264714
 	b _02264816
@@ -5089,7 +5089,7 @@ _0226471E:
 	ldr r1, _0226481C ; =0x0000312C
 	ldr r0, [sp, #8]
 	ldrb r1, [r6, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	str r0, [sp, #0x18]
@@ -5130,7 +5130,7 @@ _02264770:
 	ldr r0, [sp, #8]
 	add r6, r6, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _0226471E
 	add sp, #0x20
@@ -5149,11 +5149,11 @@ _02264782:
 _02264796:
 	ldr r0, [sp]
 	ldr r1, [sp, #0x38]
-	bl BattleSys_GetParty
+	bl BattleSystem_GetParty
 	mov r4, #0
 	str r0, [sp, #0xc]
 	add r7, r4, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _02264816
 	ldr r0, [sp, #0x38]
@@ -5165,7 +5165,7 @@ _022647B6:
 	ldr r1, _0226481C ; =0x0000312C
 	ldr r0, [sp, #0xc]
 	ldrb r1, [r6, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	str r0, [sp, #0x1c]
@@ -5206,7 +5206,7 @@ _02264808:
 	ldr r0, [sp, #0xc]
 	add r6, r6, #1
 	add r7, r7, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	blt _022647B6
 _02264816:

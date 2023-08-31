@@ -176,7 +176,7 @@ _021E5A52:
 	add r0, r7, #0
 	add r1, r4, #0
 	mov r2, #1
-	bl Pokedex_GetSeenFormeByIdx_Unown
+	bl Pokedex_GetSeenFormByIdx_Unown
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
 	add r1, r0, #0
@@ -207,7 +207,7 @@ ov113_021E5A7C: ; 0x021E5A7C
 	str r0, [r5, #0x14]
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r4, r0, #0
 	bl Options_GetTextFrameDelay
 	strb r0, [r5, #0x18]
@@ -216,12 +216,12 @@ ov113_021E5A7C: ; 0x021E5A7C
 	strb r0, [r5, #0x19]
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
-	bl Sav2_Pokedex_get
+	bl Save_Pokedex_Get
 	str r0, [r5, #0xc]
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
-	bl SavArray_Flags_get
-	bl ScriptState_GetUnownReportLevel
+	bl Save_VarsFlags_Get
+	bl Save_VarsFlags_GetUnownReportLevel
 	add r1, r5, #0
 	add r1, #0x3c
 	strb r0, [r1]
@@ -230,7 +230,7 @@ ov113_021E5A7C: ; 0x021E5A7C
 	strb r0, [r5, #0x1d]
 	ldr r0, [r5, #0xc]
 	mov r1, #1
-	bl Pokedex_GetSeenFormeNum_Unown
+	bl Pokedex_GetSeenFormNum_Unown
 	strb r0, [r5, #0x1f]
 	add r0, r5, #0
 	add r0, #0x3c
@@ -274,7 +274,7 @@ _021E5B1A:
 	ldr r0, [r5, #0xc]
 	add r1, r4, #0
 	add r2, r6, #0
-	bl Pokedex_GetSeenFormeByIdx_Unown
+	bl Pokedex_GetSeenFormByIdx_Unown
 	add r1, r5, r4
 	add r1, #0x20
 	strb r0, [r1]
@@ -1294,7 +1294,7 @@ ov113_021E62B0: ; 0x021E62B0
 _021E62C0:
 	bl GF_RunVramTransferTasks
 	ldr r0, [r4, #0x40]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E62D8 ; =0x027E0000
 	ldr r1, _021E62DC ; =0x00003FF8
 	mov r0, #1
@@ -1570,7 +1570,7 @@ ov113_021E650C: ; 0x021E650C
 	add r5, r0, #0
 	ldr r1, [r5]
 	mov r0, #0xf1
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0
 	str r2, [sp]
 	ldr r1, [r5]
@@ -1678,7 +1678,7 @@ ov113_021E650C: ; 0x021E650C
 	mov r2, #0xf
 	bl ov113_021E64DC
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldrb r0, [r5, #0x19]
 	mov r1, #1
 	add r2, r1, #0
@@ -1750,17 +1750,17 @@ ov113_021E6680: ; 0x021E6680
 	mov r0, #0x10
 	ldr r2, [r4]
 	add r1, r0, #0
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	str r0, [r4, #0x48]
 	mov r0, #2
 	ldr r1, [r4]
 	lsl r0, r0, #8
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x4c]
 	mov r0, #2
 	ldr r1, [r4]
 	lsl r0, r0, #8
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x50]
 	ldr r0, [r4, #0x44]
 	mov r1, #0
@@ -1772,7 +1772,7 @@ ov113_021E6680: ; 0x021E6680
 	str r0, [r4, #0x58]
 	ldr r0, [r4, #4]
 	ldr r0, [r0, #4]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	ldr r1, [r4]
 	bl PlayerProfile_GetPlayerName_NewString
 	str r0, [r4, #0x5c]
@@ -1784,17 +1784,17 @@ ov113_021E66E4: ; 0x021E66E4
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x5c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x58]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x54]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x50]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x4c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x48]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r4, #0x44]
 	bl DestroyMsgData
 	mov r0, #4
@@ -1938,7 +1938,7 @@ ov113_021E677C: ; 0x021E677C
 	bl sub_0200E2B4
 	ldr r1, [r5]
 	mov r0, #0x14
-	bl NARC_ctor
+	bl NARC_New
 	add r1, r5, #0
 	add r1, #0xfc
 	str r0, [r1]
@@ -2079,7 +2079,7 @@ ov113_021E6930: ; 0x021E6930
 	add r0, r4, #0
 	add r0, #0xfc
 	ldr r0, [r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r4, #0
 	add r0, #0xac
 	ldr r0, [r0]

@@ -13,8 +13,8 @@
 .public MailMsg_GetFieldI
 .public MailMsg_GetMsgBank
 .public MailMsg_GetMsgNo
-.public MailMsg_copy
-.public SaveEasyChat_SetGreetingFlag
+.public MailMsg_Copy
+.public Save_EasyChat_SetGreetingFlag
 .public FreeToHeap
 .public LCRandom
 .public GF_AssertFail
@@ -59,7 +59,7 @@
 .public sub_0205ABD8
 .public sub_0205AC4C
 .public sub_0205AC70
-.public sub_0205B46C
+.public GetUnionRoomAvatarAttrBySprite
 .public sub_02068FC8
 .public sub_020691A8
 .public MI_CpuFill8

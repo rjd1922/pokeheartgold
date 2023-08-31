@@ -47,13 +47,13 @@ ov64_021E5900: ; 0x021E5900
 	add r0, r5, #0
 	bl OverlayManager_GetArgs
 	str r0, [r4]
-	bl Sav2_HOF_GetNumRecords
+	bl Save_HOF_GetNumRecords
 	mov r1, #0x6e
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0xb4
 	mov r1, #0x3b
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x61
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -106,7 +106,7 @@ ov64_021E59C8: ; 0x021E59C8
 	mov r0, #0x61
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	bl sub_02021238
 	add r0, r5, #0
 	bl OverlayManager_FreeData
@@ -180,7 +180,7 @@ _021E5A74:
 ov64_021E5A88: ; 0x021E5A88
 	push {r3, lr}
 	ldr r0, [r0, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl sub_0200D034
 	ldr r3, _021E5AA4 ; =0x027E0000
 	ldr r1, _021E5AA8 ; =0x00003FF8
@@ -347,7 +347,7 @@ ov64_021E5B10: ; 0x021E5B10
 	bl InitBgFromTemplate
 	mov r0, #0x61
 	mov r1, #0x3b
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -412,7 +412,7 @@ ov64_021E5B10: ; 0x021E5B10
 	mov r3, #0
 	bl GfGfxLoader_GXLoadPalFromOpenNarc
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r1, #0x1e
 	mov r0, #0
 	lsl r1, r1, #4
@@ -523,7 +523,7 @@ ov64_021E5CD0: ; 0x021E5CD0
 	bl G2dRenderer_SetSubSurfaceCoords
 	mov r0, #8
 	mov r1, #0x3b
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r0, #0
 	str r0, [sp]
@@ -604,10 +604,10 @@ ov64_021E5CD0: ; 0x021E5CD0
 	mov r3, #0x4e
 	bl sub_0200D71C
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0x61
 	mov r1, #0x3b
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	mov r0, #1
 	str r0, [sp]
@@ -724,7 +724,7 @@ _021E5EF0:
 	cmp r4, r0
 	bls _021E5EF0
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r1, #0x13
 	lsl r1, r1, #4
 	ldr r0, [r5, r1]
@@ -918,35 +918,35 @@ ov64_021E607C: ; 0x021E607C
 	lsl r1, r1, #4
 	str r0, [r4, r1]
 	mov r0, #0x3b
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	mov r1, #0x49
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	sub r1, #0x24
 	add r0, r1, #0
 	mov r1, #0x3b
-	bl String_ctor
+	bl String_New
 	mov r1, #0x4a
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	sub r1, #0x28
 	add r0, r1, #0
 	mov r1, #0x3b
-	bl String_ctor
+	bl String_New
 	mov r1, #0x4b
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	sub r1, #0x2c
 	add r0, r1, #0
 	mov r1, #0x3b
-	bl String_ctor
+	bl String_New
 	mov r1, #0x69
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	sub r1, #0xa4
 	add r0, r1, #0
 	mov r1, #0x3b
-	bl String_ctor
+	bl String_New
 	mov r1, #0x6a
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -970,23 +970,23 @@ ov64_021E6118: ; 0x021E6118
 	mov r0, #0x6a
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x69
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x4b
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x4a
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x49
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r0, #0x12
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
@@ -1587,14 +1587,14 @@ _021E65BA:
 	lsl r1, r1, #2
 	ldr r0, [r5]
 	ldr r1, [r5, r1]
-	bl Sav2_HOF_TranslateRecordIdx
+	bl Save_HOF_TranslateRecordIdx
 	mov r1, #0x1b
 	lsl r1, r1, #4
 	str r0, [r5, r1]
 	add r1, r1, #4
 	ldr r0, [r5]
 	ldr r1, [r5, r1]
-	bl Sav2_HOF_RecordCountMons
+	bl Save_HOF_RecordCountMons
 	mov r1, #0x6b
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -1632,7 +1632,7 @@ _021E660A:
 	ldr r1, [r5, r1]
 	add r2, r4, #0
 	add r3, r5, r3
-	bl Sav2_HOF_GetMonStatsByIndexPair
+	bl Save_HOF_GetMonStatsByIndexPair
 	ldr r0, [sp, #0x14]
 	add r1, r7, #0
 	add r3, r0, r4
@@ -1684,7 +1684,7 @@ _021E6656:
 	lsl r1, r1, #2
 	ldr r0, [r5]
 	ldr r1, [r5, r1]
-	bl Sav2_HOF_TranslateRecordIdx
+	bl Save_HOF_TranslateRecordIdx
 	mov r1, #0
 	add r2, r0, #0
 	str r1, [sp]
@@ -1700,7 +1700,7 @@ _021E6656:
 	ldr r0, [r5]
 	ldr r1, [r5, r1]
 	add r2, sp, #0x18
-	bl Sav2_HOF_GetClearDate
+	bl Save_HOF_GetClearDate
 	mov r0, #0
 	str r0, [sp]
 	mov r1, #1
@@ -1842,7 +1842,7 @@ _021E67D0:
 	ldr r0, [r5]
 	add r2, r6, #0
 	add r3, r5, r3
-	bl Sav2_HOF_GetMonStatsByIndexPair
+	bl Save_HOF_GetMonStatsByIndexPair
 	mov r1, #0x66
 	lsl r1, r1, #2
 	ldrh r0, [r5, r1]
@@ -2377,7 +2377,7 @@ ov64_021E6C1C: ; 0x021E6C1C
 	bl ReadWholeNarcMemberByIdPair
 	mov r0, #0x61
 	mov r1, #0x3b
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	add r0, sp, #0x30
 	ldrb r0, [r0, #1]
@@ -2406,7 +2406,7 @@ _021E6C60:
 	add r2, r4, #0
 	bl sub_0200D504
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r4, _021E6E20 ; =ov64_021E6FD4
 	add r3, sp, #0x34
 	mov r2, #6
@@ -2621,7 +2621,7 @@ _021E6E46:
 	ldr r1, _021E6E78 ; =0x00000129
 	add r4, r0, r1
 	add r0, r5, #0
-	bl OverworldModelLookupHasFemaleForme
+	bl OverworldModelLookupHasFemaleForm
 	cmp r0, #0
 	beq _021E6E60
 	cmp r7, #1
@@ -2630,7 +2630,7 @@ _021E6E46:
 	b _021E6E6E
 _021E6E60:
 	add r0, r5, #0
-	bl OverworldModelLookupFormeCount
+	bl OverworldModelLookupFormCount
 	cmp r6, r0
 	ble _021E6E6C
 	mov r6, #0

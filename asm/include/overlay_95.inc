@@ -13,7 +13,7 @@
 .public sub_02003B44
 .public sub_02003B50
 .public sub_02004EC4
-.public sub_02005FA0
+.public Sound_Stop
 .public PlaySE
 .public PlayCry
 .public IsCryFinished
@@ -23,8 +23,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharData
 .public GfGfxLoader_LoadScrnData
 .public GfGfxLoader_LoadCharDataFromOpenNarc
@@ -44,8 +44,8 @@
 .public DestroyMsgData
 .public NewString_ReadMsgData
 .public ReadMsgData_ExpandPlaceholders
-.public ScrStrBufs_new
-.public ScrStrBufs_delete
+.public MessageFormat_New
+.public MessageFormat_Delete
 .public BufferBoxMonSpeciesName
 .public StringExpandPlaceholders
 .public sub_0200CF18
@@ -121,7 +121,7 @@
 .public CopyWindowToVram
 .public ClearWindowTilemapAndCopyToVram
 .public FillWindowPixelBuffer
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public TextPrinterCheckActive
 .public AddTextPrinterParameterized
 .public AddTextPrinterParameterized2
@@ -135,12 +135,12 @@
 .public GX_DisableEngineBLayers
 .public GX_EngineBToggleLayers
 .public GX_BothDispOn
-.public GF_Camera_SetClipBounds
+.public Camera_SetPerspectiveClippingPlane
 .public sub_02024B34
 .public sub_02025224
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public Thunk_G3X_Reset
 .public sub_02026E50
 .public GF_3DVramMan_Create

@@ -277,7 +277,7 @@ ov95_021E5B24: ; 0x021E5B24
 	ldr r0, [r4, #8]
 	bl sub_0200398C
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E5B50 ; =0x027E0000
 	ldr r1, _021E5B54 ; =0x00003FF8
 	mov r0, #1
@@ -478,7 +478,7 @@ ov95_021E5CAC: ; 0x021E5CAC
 	bl NewMsgDataFromNarc
 	add r7, r0, #0
 	mov r0, #0x46
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	add r5, r0, #0
 	add r0, r7, #0
 	add r1, r4, #0
@@ -486,7 +486,7 @@ ov95_021E5CAC: ; 0x021E5CAC
 	str r0, [sp, #0x14]
 	mov r0, #0xff
 	mov r1, #0x46
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r0, [sp, #0x10]
 	bl Mon_GetBoxMon
@@ -510,11 +510,11 @@ ov95_021E5CAC: ; 0x021E5CAC
 	add r0, r7, #0
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x14]
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r6, #0
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
@@ -630,7 +630,7 @@ ov95_021E5DD0: ; 0x021E5DD0
 	mov r1, #0xe1
 	lsl r0, r0, #0xc
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 _021E5E08:
 	add r0, r4, #0
 	add sp, #8
@@ -1396,7 +1396,7 @@ _021E63DC:
 	bl IsPaletteFadeFinished
 	cmp r0, #1
 	bne _021E6412
-	bl sub_02005FA0
+	bl Sound_Stop
 	ldr r1, _021E6598 ; =0x000003F3
 	mov r0, #0xd
 	mov r2, #1
@@ -2626,7 +2626,7 @@ ov95_021E6D70: ; 0x021E6D70
 	str r0, [r4, #0x3c]
 	mov r0, #0xb4
 	mov r1, #0x46
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r4, #0x40]
 	mov r0, #0x46
 	bl BgConfig_Alloc
@@ -2690,7 +2690,7 @@ ov95_021E6D70: ; 0x021E6D70
 	add r1, r4, #0
 	add r1, #0x88
 	str r0, [r1]
-	bl sub_02005FA0
+	bl Sound_Stop
 	ldr r0, _021E6E84 ; =ov95_021E5B24
 	add r1, r4, #0
 	bl Main_SetVBlankIntrCB
@@ -2823,7 +2823,7 @@ ov95_021E6F0C: ; 0x021E6F0C
 	ldr r0, [r4, #0x58]
 	bl sub_02016F2C
 	ldr r0, [r4, #0x40]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r4, #4
 	bl ov95_021E6228
 	add r0, r5, #0
@@ -2916,7 +2916,7 @@ _021E7042:
 	str r5, [r4, #0xc]
 	str r6, [r4, #4]
 	str r7, [r4, #8]
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x14]
 	ldr r1, [r4]
 	mov r0, #4
@@ -2942,7 +2942,7 @@ _021E7082:
 	mov r0, #4
 	bl FontID_Release
 	ldr r0, [r4, #0x14]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r4, #0xc]
 	mov r1, #4
 	bl FreeBgTilemapBuffer
@@ -2981,7 +2981,7 @@ _021E70DA:
 _021E70E2:
 	ldr r1, [r5]
 	mov r0, #0xef
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r0, #0
 	str r0, [sp]
@@ -3107,7 +3107,7 @@ _021E70E2:
 	mov r1, #1
 	bl GX_EngineAToggleLayers
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov95_021E70BC
@@ -3297,7 +3297,7 @@ ov95_021E7328: ; 0x021E7328
 	add r0, r7, #0
 	bl DestroyMsgData
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	nop

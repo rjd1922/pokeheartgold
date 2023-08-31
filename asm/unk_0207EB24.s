@@ -110,7 +110,7 @@ sub_0207EBE4: ; 0x0207EBE4
 	add r4, r2, #0
 	ldr r0, [r0]
 	add r7, r1, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	lsl r1, r4, #0x10
 	asr r6, r1, #0x10
 	add r4, r7, #0
@@ -225,7 +225,7 @@ sub_0207ECE0: ; 0x0207ECE0
 	add r6, r1, #0
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r7, r0, #0
 	mov r1, #5
 	mov r2, #0
@@ -238,7 +238,7 @@ sub_0207ECE0: ; 0x0207ECE0
 	str r0, [sp, #8]
 	mov r0, #0x14
 	mov r1, #0xc
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x10]
 	mov r0, #0x30
 	add r4, r6, #0
@@ -313,7 +313,7 @@ _0207ED8E:
 	add r1, r2, #1
 	bl sub_0200DD08
 	ldr r0, [sp, #0x10]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -1021,7 +1021,7 @@ sub_0207F334: ; 0x0207F334
 	ldr r0, [r7, r0]
 	mov r4, #0
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _0207F398
 	mov r0, #0x72
@@ -1057,7 +1057,7 @@ _0207F36A:
 	add r5, r5, #4
 	ldr r0, [r0]
 	add r4, r4, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r4, r0
 	blt _0207F36A
 _0207F398:
@@ -1077,7 +1077,7 @@ sub_0207F3A4: ; 0x0207F3A4
 	ldr r0, [r7, r0]
 	mov r4, #0
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	ble _0207F3E8
 	add r6, r7, #0
@@ -1098,7 +1098,7 @@ _0207F3BE:
 	add r5, r5, #4
 	ldr r0, [r0]
 	add r4, r4, #1
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r4, r0
 	blt _0207F3BE
 _0207F3E8:

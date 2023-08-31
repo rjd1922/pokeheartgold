@@ -7,8 +7,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharDataFromOpenNarc
 .public GfGfxLoader_LoadScrnDataFromOpenNarc
 .public GfGfxLoader_GXLoadPalFromOpenNarc
@@ -61,7 +61,7 @@
 .public BgClearTilemapBufferAndCommit
 .public ScheduleWindowCopyToVram
 .public FillWindowPixelBuffer
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ScheduleSetBgPosText
 .public sub_02020A0C
 .public GX_DisableEngineALayers
@@ -70,13 +70,13 @@
 .public GX_EngineBToggleLayers
 .public sub_0202529C
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public CopyU16ArrayToString
 .public PlayerProfile_GetTrainerGender
 .public Pokedex_GetSeenSpindaPersonality
 .public Pokedex_SpeciesGetLastSeenGender
-.public Pokedex_GetSeenFormeByIdx
+.public Pokedex_GetSeenFormByIdx
 .public sub_02031974
 .public sub_02031978
 .public sub_0203197C

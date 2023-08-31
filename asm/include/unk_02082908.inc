@@ -18,8 +18,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadScrnData
 .public GfGfxLoader_GXLoadPal
 .public GfGfxLoader_GetCharData
@@ -47,8 +47,8 @@
 .public DestroyMsgData
 .public NewString_ReadMsgData
 .public ReadMsgData_ExpandPlaceholders
-.public ScrStrBufs_new
-.public ScrStrBufs_delete
+.public MessageFormat_New
+.public MessageFormat_Delete
 .public BufferString
 .public BufferBoxMonSpeciesName
 .public BufferPCBoxName
@@ -117,9 +117,9 @@
 .public sub_02024B68
 .public sub_02024B78
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
-.public StringCopy
+.public String_New
+.public String_Delete
+.public String_Copy
 .public CopyU16ArrayToString
 .public CopyStringToU16Array
 .public Options_GetFrame

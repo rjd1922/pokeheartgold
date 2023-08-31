@@ -63,7 +63,7 @@
 .public ClearWindowTilemapAndCopyToVram
 .public FillWindowPixelBuffer
 .public FillWindowPixelRect
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public TextPrinterCheckActive
 .public sub_020200A0
 .public AddTextPrinterParameterized2
@@ -79,9 +79,9 @@
 .public Set2dSpriteAnimSeqNo
 .public sub_02024B68
 .public sub_02025224
-.public String_ctor
-.public String_dtor
-.public StringSetEmpty
+.public String_New
+.public String_Delete
+.public String_SetEmpty
 .public Options_SetButtonModeOnMain
 .public Options_GetTextSpeed
 .public Options_SetTextSpeed

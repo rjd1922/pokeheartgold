@@ -68,7 +68,7 @@ ov80_02229F04: ; 0x02229F04
 	mov r2, #8
 	bl CopyStringToU16Array
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	bl DestroyMsgData
 	add r0, r6, #0
@@ -496,7 +496,7 @@ _0222A1BC:
 	add r2, r7, #0
 	bl SetMonData
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	bl DestroyMsgData
 	b _0222A2F0
@@ -550,7 +550,7 @@ ov80_0222A334: ; 0x0222A334
 	sub sp, #0xc
 	add r4, r1, #0
 	add r5, r0, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r6, r0, #0
 	add r0, r4, #0
 	mov r1, #7
@@ -558,7 +558,7 @@ ov80_0222A334: ; 0x0222A334
 	bl GetMonData
 	str r0, [sp, #8]
 	add r0, r5, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	mov r3, #0
 	add r1, r0, #0
 	str r3, [sp]
@@ -594,7 +594,7 @@ ov80_0222A334: ; 0x0222A334
 	add r2, sp, #8
 	bl SetMonData
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	bl DestroyMsgData
 	add sp, #0xc
@@ -612,7 +612,7 @@ ov80_0222A3BC: ; 0x0222A3BC
 	bl ov80_0222A334
 	add r0, r5, #0
 	add r1, r4, #0
-	bl AddMonToParty
+	bl Party_AddMon
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end ov80_0222A3BC

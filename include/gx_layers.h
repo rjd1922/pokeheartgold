@@ -4,7 +4,7 @@
 typedef enum {
     GX_LAYER_TOGGLE_OFF,
     GX_LAYER_TOGGLE_ON,
-} GX_LayerToggle;
+} GXLayerToggle;
 
 enum GFBgLayer {
     GF_BG_LYR_MAIN_0 = 0,
@@ -33,7 +33,7 @@ enum GFBgLayer {
     GF_BG_LYR_UNALLOC = 0xFF,
 };
 
-typedef struct GXBanksConfig {
+typedef struct GraphicsBanks {
     GXVRamBG bg;
     GXVRamBGExtPltt bgextpltt;
     GXVRamSubBG subbg;
@@ -44,14 +44,14 @@ typedef struct GXBanksConfig {
     GXVRamSubOBJExtPltt subobjextpltt;
     GXVRamTex tex;
     GXVRamTexPltt texpltt;
-} GF_GXBanksConfig;
+} GraphicsBanks;
 
-void GX_SetBanks(const GF_GXBanksConfig *banks);
+void GX_SetBanks(const GraphicsBanks *banks);
 void GX_DisableEngineALayers(void);
-void GX_EngineAToggleLayers(u32 layer_mask, GX_LayerToggle enable);
+void GX_EngineAToggleLayers(u32 layer_mask, GXLayerToggle enable);
 void GX_EngineASetLayers(u32 layers);
 void GX_DisableEngineBLayers(void);
-void GX_EngineBToggleLayers(u32 layer_mask, GX_LayerToggle enable);
+void GX_EngineBToggleLayers(u32 layer_mask, GXLayerToggle enable);
 void GX_EngineBSetLayers(u32 layers);
 void GX_BothDispOn(void);
 void GX_SwapDisplay(void);

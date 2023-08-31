@@ -1000,7 +1000,7 @@ ov62_021E60D4: ; 0x021E60D4
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _021E60E0
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 _021E60E0:
 	pop {r3, pc}
 	.balign 4, 0
@@ -1063,7 +1063,7 @@ _021E6102:
 	mov r3, #0
 	bl AddTextPrinterParameterized2
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	bl CopyWindowToVram
 	add r6, r6, #1

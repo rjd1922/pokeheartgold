@@ -2,8 +2,8 @@
 #pragma once
 .public PlaySE
 .public StopSE
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public NARC_AllocAndReadWholeMember
 .public GfGfxLoader_LoadFromNarc
 .public CreateSpriteResourcesHeader
@@ -45,8 +45,8 @@
 .public MTRandom
 .public sub_02020E10
 .public GX_EngineAToggleLayers
-.public GF_Camera_GetPerspectiveAngle
-.public GF_Camera_GetDistance
+.public Camera_GetPerspectiveAngle
+.public Camera_GetDistance
 .public SpriteList_Create
 .public sub_02024504
 .public sub_0202457C

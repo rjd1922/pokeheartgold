@@ -632,7 +632,7 @@ ov80_0223690C: ; 0x0223690C
 	bl BattleSetup_New
 	add r7, r0, #0
 	ldr r0, [r4, #8]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #8]
 	ldr r0, [r4, #0xc]
 	mov r1, #0
@@ -654,7 +654,7 @@ ov80_0223690C: ; 0x0223690C
 	add r4, r0, #0
 	ldrb r1, [r5, #0xe]
 	ldr r0, [r7, #4]
-	bl InitPartyWithMaxSize
+	bl Party_InitWithMaxSize
 	ldrb r0, [r5, #0xe]
 	mov r6, #0
 	cmp r0, #0
@@ -664,7 +664,7 @@ _02236964:
 	add r1, #0x2a
 	ldrb r1, [r1]
 	ldr r0, [sp, #8]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r4, #0
 	bl CopyPokemonToPokemon
 	add r0, r4, #0
@@ -690,7 +690,7 @@ _022369A6:
 	add r0, r7, #0
 	add r1, r4, #0
 	mov r2, #0
-	bl sub_02051C9C
+	bl BattleSetup_AddMonToParty
 	ldrb r0, [r5, #0xe]
 	add r6, r6, #1
 	cmp r6, r0
@@ -699,7 +699,7 @@ _022369B8:
 	add r0, r4, #0
 	bl FreeToHeap
 	add r0, r7, #0
-	bl sub_02052580
+	bl BattleSetup_SetAllySideBattlersToPlayer
 	ldr r0, [r5, #4]
 	add r1, r5, #0
 	str r0, [sp]
@@ -790,7 +790,7 @@ _02236A62:
 	ldr r0, [sp, #0xc]
 	add r1, r4, #0
 	ldr r0, [r0, #4]
-	bl AddMonToParty
+	bl Party_AddMon
 	add r6, r6, #1
 	add r5, #0x38
 	cmp r6, r7

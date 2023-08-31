@@ -10,7 +10,7 @@
 .public GF_AssertFail
 .public GetFirstAliveMonInParty_CrashIfNone
 .public GetMapObjectByID
-.public MapObjectMan_GetFieldSysPtr
+.public MapObjectManager_GetFieldSysPtr
 .public MapObject_SetFlagsBits
 .public MapObject_ClearFlagsBits
 .public MapObject_TestFlagsBits
@@ -40,12 +40,12 @@
 .public sub_02064084
 .public FollowingPokemon_GetSpriteID
 .public FollowPokeMapObjectSetParams
-.public FollowPokeFsysParamSet
-.public FsysUnkSub108_Set
+.public FieldSystem_SetFollowPokeParam
+.public FieldSystemUnkSub108_Set
 .public GetMonData
 .public GetMonGender
 .public MonIsShiny
-.public SavArray_PlayerParty_get
+.public SaveArray_Party_Get
 .public _s32_div_f
 .public ov01_021F1640
 .public ov01_021F72DC

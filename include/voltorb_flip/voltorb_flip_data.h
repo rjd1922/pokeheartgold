@@ -3,7 +3,7 @@
 
 #include "unk_0200CF18.h"
 #include "unk_020183F0.h"
-#include "window.h"
+#include "bg_window.h"
 
 typedef struct Ov122_021E9278 {
     u8 unk0[5][2];
@@ -22,7 +22,7 @@ typedef struct Ov122_021E6C2C {
 } Ov122_021E6C2C;
 
 typedef struct BgTemplates {
-    BGTEMPLATE unk0[6];
+    BgTemplate unk0[6];
 } BgTemplates;
 
 const u8 sMainMenuMsgNos[];

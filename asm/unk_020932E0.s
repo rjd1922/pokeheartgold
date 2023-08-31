@@ -326,7 +326,7 @@ _020935B2:
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _020935D8 ; =OS_IRQTable
 	ldr r1, _020935DC ; =0x00003FF8
 	mov r0, #1
@@ -2116,7 +2116,7 @@ sub_02094400: ; 0x02094400
 	add r5, r0, #0
 	ldr r1, [r5, #4]
 	mov r0, #0x14
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x1c]
 	mov r1, #1
 	ldr r0, [r5, #4]
@@ -2208,7 +2208,7 @@ _020944BA:
 	ldr r0, [sp, #0x20]
 	bl FreeToHeap
 	ldr r0, [sp, #0x1c]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r1, _0209451C ; =sub_02094758
 	ldr r0, _02094520 ; =0x00004644
 	str r1, [r5, r0]
@@ -2255,7 +2255,7 @@ sub_02094528: ; 0x02094528
 	add r6, r0, #0
 	ldr r1, [r6, #4]
 	mov r0, #0x14
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x20]
 	mov r1, #1
 	ldr r0, [r6, #4]
@@ -2264,7 +2264,7 @@ sub_02094528: ; 0x02094528
 	str r0, [sp, #0x24]
 	ldr r0, _02094654 ; =0x00004640
 	ldr r0, [r6, r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
 	mov r4, #0
@@ -2362,7 +2362,7 @@ _02094606:
 	ldr r0, [sp, #0x24]
 	bl FreeToHeap
 	ldr r0, [sp, #0x20]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r1, _0209465C ; =sub_02094758
 	ldr r0, _02094660 ; =0x00004644
 	str r1, [r6, r0]
@@ -2410,7 +2410,7 @@ sub_02094668: ; 0x02094668
 	mov r0, #0x14
 	add r7, r2, #0
 	add r6, r3, #0
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x14]
 	mov r1, #1
 	ldr r0, [r4, #4]
@@ -2503,7 +2503,7 @@ _0209472A:
 	ldr r0, [sp, #0x18]
 	bl FreeToHeap
 	ldr r0, [sp, #0x14]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r1, _02094750 ; =sub_02094758
 	ldr r0, _02094754 ; =0x00004644
 	str r1, [r4, r0]
@@ -2807,7 +2807,7 @@ _0209495C:
 	blt _0209495C
 	ldr r1, [r5, #4]
 	mov r0, #0x14
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r1, #1
 	ldr r0, [r5, #4]
@@ -2847,7 +2847,7 @@ _0209495C:
 	add r0, r7, #0
 	bl FreeToHeap
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r1, _020949EC ; =sub_02094758
 	ldr r0, _020949F0 ; =0x00004644
 	str r1, [r5, r0]
@@ -3218,7 +3218,7 @@ sub_02094C88: ; 0x02094C88
 _02094CB2:
 	ldr r1, [r5, #4]
 	mov r0, #0x40
-	bl String_ctor
+	bl String_New
 	ldr r3, _02094D10 ; =0x0000463C
 	add r2, r6, #0
 	ldr r1, [r5, r3]
@@ -3252,7 +3252,7 @@ _02094CC8:
 	add r0, r5, r0
 	bl CopyWindowToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r4, r5, r6, pc}
 	nop
@@ -3309,7 +3309,7 @@ _02094D78:
 	add r0, r5, r0
 	bl CopyWindowToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
 	bl DestroyMsgData
 	add sp, #0x10
@@ -3509,7 +3509,7 @@ sub_02094F14: ; 0x02094F14
 	add r4, r2, #0
 	ldr r2, _02094F58 ; =0x00004640
 	ldr r0, [r0, r2]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r5, r0, #0
 	mov r1, #MON_DATA_SPECIES
 	mov r2, #0
@@ -3521,7 +3521,7 @@ sub_02094F14: ; 0x02094F14
 	bl GetMonData
 	strh r0, [r4, #8]
 	add r0, r5, #0
-	mov r1, #MON_DATA_FORME
+	mov r1, #MON_DATA_FORM
 	mov r2, #0
 	bl GetMonData
 	strh r0, [r4, #0xa]
@@ -3684,7 +3684,7 @@ sub_0209501C: ; 0x0209501C
 	str r3, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	bl DestroyMsgData
 	ldr r0, _020950B4 ; =0x00004660

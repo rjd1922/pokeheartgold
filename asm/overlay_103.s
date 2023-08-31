@@ -25,11 +25,11 @@ ov103_021EC940: ; 0x021EC940
 	bl OverlayManager_GetArgs
 	str r0, [r4, #8]
 	ldr r0, [r0]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	str r0, [r4]
 	ldr r0, [r4, #8]
 	ldr r0, [r0]
-	bl Sav2_Mailbox_get
+	bl Save_Mailbox_Get
 	str r0, [r4, #4]
 	mov r0, #8
 	str r0, [r4, #0x28]
@@ -70,7 +70,7 @@ ov103_021EC9B4: ; 0x021EC9B4
 	push {r3, lr}
 	ldr r0, [r0, #0xc]
 	ldr r0, [r0]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl sub_0200D034
 	ldr r3, _021EC9D0 ; =0x027E0000
 	ldr r1, _021EC9D4 ; =0x00003FF8
@@ -353,7 +353,7 @@ ov103_021ECC1C: ; 0x021ECC1C
 	add r5, r0, #0
 	mov r0, #0xfc
 	mov r1, #0x9d
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -458,7 +458,7 @@ ov103_021ECC1C: ; 0x021ECC1C
 	add r0, r7, #0
 	bl FreeToHeap
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov103_021ECC1C
@@ -605,14 +605,14 @@ ov103_021ECE18: ; 0x021ECE18
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0x9d
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	mov r1, #0x8b
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #1
 	lsl r0, r0, #0xa
 	mov r1, #0x9d
-	bl String_ctor
+	bl String_New
 	mov r1, #0x23
 	lsl r1, r1, #4
 	str r0, [r4, r1]
@@ -631,11 +631,11 @@ ov103_021ECE54: ; 0x021ECE54
 	mov r0, #0x23
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x8b
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r0, #0x8a
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -722,7 +722,7 @@ ov103_021ECEEC: ; 0x021ECEEC
 	bl ov103_021ED2B8
 	mov r1, #0x9d
 	add r6, r0, #0
-	bl ListMenuItems_ctor
+	bl ListMenuItems_New
 	mov r1, #0x92
 	lsl r1, r1, #2
 	ldr r2, [r5, #0xc]
@@ -764,7 +764,7 @@ ov103_021ECF48: ; 0x021ECF48
 	ldr r1, [r4, #0xc]
 	lsl r0, r0, #2
 	ldr r0, [r1, r0]
-	bl ListMenuItems_dtor
+	bl ListMenuItems_Delete
 	mov r0, #9
 	ldr r1, [r4, #0xc]
 	lsl r0, r0, #6
@@ -1167,7 +1167,7 @@ ov103_021ED23C: ; 0x021ED23C
 	add r5, r0, #0
 	mov r0, #0x4f
 	mov r1, #0x9d
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	ldrb r0, [r5, #0x1f]
 	ldr r1, [r5, #0xc]
@@ -1214,7 +1214,7 @@ ov103_021ED23C: ; 0x021ED23C
 	mov r3, #5
 	bl GfGfxLoader_LoadScrnDataFromOpenNarc
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x10
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -1225,8 +1225,8 @@ ov103_021ED2B8: ; 0x021ED2B8
 	push {r3, lr}
 	ldr r0, [r0, #8]
 	ldr r0, [r0]
-	bl SavArray_PlayerParty_get
-	bl GetPartyCount
+	bl SaveArray_Party_Get
+	bl Party_GetCount
 	cmp r0, #0
 	ble _021ED2CE
 	mov r0, #4
@@ -1551,14 +1551,14 @@ ov103_021ED568: ; 0x021ED568
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x10]
-	bl OverlayManager_run
+	bl OverlayManager_Run
 	cmp r0, #0
 	bne _021ED57A
 	mov r0, #7
 	pop {r4, pc}
 _021ED57A:
 	ldr r0, [r4, #0x10]
-	bl OverlayManager_delete
+	bl OverlayManager_Delete
 	ldr r2, [r4, #0x18]
 	mov r1, #0xc
 	add r3, r2, #0
@@ -2434,7 +2434,7 @@ ov103_021EDC00: ; 0x021EDC00
 	add r5, r0, #0
 	ldr r0, [r5, #8]
 	ldr r0, [r0]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r4, r0, #0
 	ldrb r0, [r5, #0x1f]
 	ldr r1, [r5, #0xc]
@@ -2501,11 +2501,11 @@ ov103_021EDC68: ; 0x021EDC68
 	bl MI_CpuFill8
 	ldr r0, [r5, #8]
 	ldr r0, [r0]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [r4]
 	ldr r0, [r5, #8]
 	ldr r0, [r0]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	str r0, [r4, #4]
 	ldr r0, [r5]
 	mov r1, #0
@@ -2540,7 +2540,7 @@ ov103_021EDCC8: ; 0x021EDCC8
 	ldr r0, _021EDCDC ; =_0210159C
 	ldr r1, [r4, #0x14]
 	mov r2, #0x9c
-	bl OverlayManager_new
+	bl OverlayManager_New
 	str r0, [r4, #0x10]
 	mov r0, #0
 	pop {r4, pc}
@@ -2559,9 +2559,9 @@ ov103_021EDCE0: ; 0x021EDCE0
 	bhi _021EDD08
 	ldr r0, [r5, #8]
 	ldr r0, [r0]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r2, r0, #0
 	ldrb r1, [r5, #0x1f]
 	ldr r0, [r5, #4]
@@ -2639,7 +2639,7 @@ ov103_021EDD54: ; 0x021EDD54
 	str r0, [r4, #0x14]
 	ldr r0, _021EDD94 ; =ov103_021EEC58
 	ldr r1, [r4, #0x14]
-	bl OverlayManager_new
+	bl OverlayManager_New
 	str r0, [r4, #0x10]
 	mov r0, #0
 	add sp, #4
@@ -2659,19 +2659,19 @@ ov103_021EDD98: ; 0x021EDD98
 	bne _021EDDD8
 	ldr r0, [r4, #8]
 	ldr r0, [r0]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r1, r4, #0
 	add r1, #0x21
 	ldrb r1, [r1]
 	lsl r1, r1, #0x19
 	lsr r1, r1, #0x19
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r0, #0
 	ldr r0, [r4, #0x14]
 	bl sub_02090F70
 	ldr r0, [r4, #8]
 	ldr r0, [r0]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	ldrh r1, [r4, #0x22]
 	mov r2, #1
 	mov r3, #0x9c
@@ -3137,7 +3137,7 @@ ov103_021EE13C: ; 0x021EE13C
 	add r4, r0, #0
 	mov r0, #0x14
 	mov r1, #0x9d
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x9d
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -3148,11 +3148,11 @@ ov103_021EE13C: ; 0x021EE13C
 ov103_021EE150: ; 0x021EE150
 	mov r1, #0x9d
 	lsl r1, r1, #2
-	ldr r3, _021EE15C ; =NARC_dtor
+	ldr r3, _021EE15C ; =NARC_Delete
 	ldr r0, [r0, r1]
 	bx r3
 	nop
-_021EE15C: .word NARC_dtor
+_021EE15C: .word NARC_Delete
 	thumb_func_end ov103_021EE150
 
 	thumb_func_start ov103_021EE160
@@ -3346,7 +3346,7 @@ ov103_021EE2E0: ; 0x021EE2E0
 	add r5, r0, #0
 	mov r0, #0xfc
 	mov r1, #0x9d
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r0, #1
 	str r0, [sp]
@@ -3402,7 +3402,7 @@ ov103_021EE2E0: ; 0x021EE2E0
 	mov r3, #9
 	bl sub_0200D71C
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -3539,7 +3539,7 @@ ov103_021EE430: ; 0x021EE430
 	add r1, r6, #0
 	bl ov103_021EE3E4
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r3, r4, r5, r6, pc}
 	thumb_func_end ov103_021EE430
@@ -3844,7 +3844,7 @@ ov103_021EE644: ; 0x021EE644
 	add r2, r6, #0
 	bl StringExpandPlaceholders
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	mov r1, #0x23
 	ldr r2, [r5, #0xc]
 	lsl r1, r1, #4
@@ -3898,7 +3898,7 @@ ov103_021EE644: ; 0x021EE644
 	add r2, r6, #0
 	bl StringExpandPlaceholders
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	mov r1, #0x6e
 	ldr r2, [r5, #0xc]
 	mov r3, #0
@@ -3938,7 +3938,7 @@ ov103_021EE784: ; 0x021EE784
 	ldr r5, [r1, r0]
 	mov r0, #8
 	mov r1, #0x9d
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	add r0, r5, #0
 	bl Mail_GetAuthorNamePtr
@@ -3960,7 +3960,7 @@ ov103_021EE784: ; 0x021EE784
 	add r2, r4, #0
 	bl BufferString
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -4024,7 +4024,7 @@ ov103_021EE824: ; 0x021EE824
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	bl ov103_021EE7DC
 	pop {r3, r4, r5, pc}
@@ -4254,7 +4254,7 @@ ov103_021EE9C8: ; 0x021EE9C8
 	add r3, r2, #0
 	bl ov103_021EE3E4
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 _021EEA1C:
 	add sp, #0xc
 	pop {r3, r4, r5, r6, pc}
@@ -4475,7 +4475,7 @@ ov103_021EEC30: ; 0x021EEC30
 	.byte 0x01, 0x00, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00
 
 ov103_021EEC58: ; 0x021EEC58
-	.word ov55_021E5924, ov55_021E598C, ov55_021E5AE8, FS_OVERLAY_ID(OVY_55)
+	.word ov55_UnkApp_Init, ov55_UnkApp_Main, ov55_UnkApp_Exit, FS_OVERLAY_ID(OVY_55)
 
 ov103_021EEC68: ; 0x021EEC68
 	.word ov103_021EDDE4, ov103_021ED9D8

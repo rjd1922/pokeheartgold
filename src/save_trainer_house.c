@@ -1,3 +1,4 @@
+#include "global.h"
 #include "save_trainer_house.h"
 #include "string_util.h"
 #include "constants/species.h"
@@ -6,11 +7,11 @@ u32 Save_TrainerHouse_sizeof(void) {
     return sizeof(TrainerHouseSave);
 }
 
-TrainerHouseSave *Save_TrainerHouse_get(SAVEDATA *saveData) {
-    return SavArray_get(saveData, SAVE_TRAINER_HOUSE);
+TrainerHouseSave *Save_TrainerHouse_Get(SaveData *saveData) {
+    return SaveArray_Get(saveData, SAVE_TRAINER_HOUSE);
 }
 
-void Save_TrainerHouse_init(TrainerHouseSave *th) {
+void Save_TrainerHouse_Init(TrainerHouseSave *th) {
     int i;
 
     MI_CpuClear8(th, sizeof(TrainerHouseSave));
@@ -26,7 +27,7 @@ void TrainerHouseMon_SetZero(TrainerHouseMon *mon) {
 
 void TrainerHouseTrainer_SetZero(TrainerHouseTrainer *trainer) {
     MI_CpuClear8(trainer, sizeof(TrainerHouseTrainer));
-    StringFillEOS(trainer->otName, OT_NAME_LENGTH + 1);
+    StringFillEOS(trainer->otName, PLAYER_NAME_LENGTH + 1);
 }
 
 void TrainerHouseSet_SetZero(TrainerHouseSet *set) {

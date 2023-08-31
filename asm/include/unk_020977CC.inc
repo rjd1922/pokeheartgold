@@ -9,12 +9,12 @@
 .public AllocFromHeapAtEnd
 .public FreeToHeap
 .public GF_AssertFail
-.public Sav2_PlayerData_GetProfileAddr
+.public Save_PlayerData_GetProfileAddr
 .public PlayerProfile_GetTrainerGender
 .public sub_0203FC68
 .public TaskManager_Call
-.public FieldSys_ApplicationIsRunning
-.public TaskManager_GetSys
+.public FieldSystem_ApplicationIsRunning
+.public TaskManager_GetFieldSystem
 .public TaskManager_GetEnv
 .public TaskManager_GetStatePtr
 .public sub_020537F0

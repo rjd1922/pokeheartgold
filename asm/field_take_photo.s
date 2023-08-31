@@ -12,8 +12,8 @@
 
 	.text
 
-	thumb_func_start FieldSys_TakePhoto
-FieldSys_TakePhoto: ; 0x0206A798
+	thumb_func_start FieldSystem_TakePhoto
+FieldSystem_TakePhoto: ; 0x0206A798
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x28
 	add r5, r0, #0
@@ -58,8 +58,8 @@ FieldSys_TakePhoto: ; 0x0206A798
 	strb r0, [r1]
 _0206A7FE:
 	add r0, r5, #0
-	bl FieldSys_GetSaveDataPtr
-	bl Save_PhotoAlbum_get
+	bl FieldSystem_GetSaveData
+	bl Save_PhotoAlbum_Get
 	bl PhotoAlbum_GetIndexOfFirstEmptySlot
 	cmp r0, #0xff
 	beq _0206A858
@@ -101,7 +101,7 @@ _0206A858:
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 _0206A85C: .word sub_0206B270
-	thumb_func_end FieldSys_TakePhoto
+	thumb_func_end FieldSystem_TakePhoto
 
 	thumb_func_start sub_0206A860
 sub_0206A860: ; 0x0206A860
@@ -135,7 +135,7 @@ sub_0206A860: ; 0x0206A860
 	add r0, #0x9a
 	strh r1, [r0]
 	ldr r0, [r5, #0xc]
-	bl Save_PhotoAlbum_get
+	bl Save_PhotoAlbum_Get
 	add r1, r4, #0
 	add r1, #0xb8
 	str r0, [r1]
@@ -177,7 +177,7 @@ sub_0206A8DC: ; 0x0206A8DC
 sub_0206A8E4: ; 0x0206A8E4
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r6, r0, #0
 	add r0, r5, #0
 	bl TaskManager_GetEnv
@@ -287,7 +287,7 @@ sub_0206A9A0: ; 0x0206A9A0
 sub_0206A9B4: ; 0x0206A9B4
 	push {r3, r4, r5, lr}
 	add r5, r2, #0
-	bl FieldSys_ApplicationIsRunning
+	bl FieldSystem_ApplicationIsRunning
 	cmp r0, #0
 	beq _0206A9C4
 	mov r0, #1
@@ -578,7 +578,7 @@ sub_0206ABB0: ; 0x0206ABB0
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x54
 	add r7, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r6, r0, #0
 	add r0, r7, #0
 	bl TaskManager_GetEnv
@@ -653,8 +653,8 @@ _0206AC36:
 	ldr r0, _0206AEAC ; =NNS_G3dGlb + 0x80
 	str r1, [r0, #0x20]
 	add r0, r6, #0
-	bl FieldSys_GetSaveDataPtr
-	bl Sav2_PlayerData_GetProfileAddr
+	bl FieldSystem_GetSaveData
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	add r5, #0x30
 	lsl r0, r0, #0x18
@@ -1091,23 +1091,23 @@ sub_0206AFD0: ; 0x0206AFD0
 	ldr r0, _0206B008 ; =_021100C4
 	add r1, r4, #0
 	ldr r0, [r0]
-	bl GF_Camera_SetDistance
+	bl Camera_SetDistance
 	ldr r0, _0206B00C ; =_021100C4 + 4
 	add r1, r4, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	ldr r0, _0206B008 ; =_021100C4
 	add r1, r4, #0
 	ldrh r0, [r0, #0xe]
-	bl GF_Camera_SetPerspectiveAngle
+	bl Camera_SetPerspectiveAngle
 	ldr r0, _0206B008 ; =_021100C4
 	add r1, r4, #0
 	ldrh r0, [r0, #0xc]
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
-	bl sub_020233D8
+	bl Camera_ApplyPerspectiveType
 	ldr r0, _0206B010 ; =_021100C4 + 24
 	add r1, r4, #0
-	bl GF_Camera_ShiftBy
+	bl Camera_OffsetLookAtPosAndTarget
 	pop {r4, pc}
 	.balign 4, 0
 _0206B008: .word _021100C4
@@ -1124,15 +1124,15 @@ sub_0206B014: ; 0x0206B014
 	add r0, r4, #0
 	str r2, [sp]
 	str r3, [sp, #4]
-	bl FieldSys_GetSaveDataPtr
+	bl FieldSystem_GetSaveData
 	add r7, r0, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r6, r0, #0
 	add r0, r7, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #8]
 	add r0, r5, #0
-	bl Photo_init
+	bl Photo_Init
 	add r0, sp, #0x2c
 	bl GF_RTC_CopyDate
 	ldr r0, [sp, #0x34]
@@ -1149,7 +1149,7 @@ sub_0206B014: ; 0x0206B014
 	orr r0, r2
 	str r0, [r5, #0x38]
 	ldr r0, [sp, #8]
-	bl GetPartyCount
+	bl Party_GetCount
 	str r0, [sp, #0xc]
 	add r0, r6, #0
 	bl PlayerProfile_GetNamePtr
@@ -1257,7 +1257,7 @@ _0206B128:
 _0206B13C:
 	ldr r0, [sp, #8]
 	add r1, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0x4c
 	mov r2, #0
 	add r6, r0, #0
@@ -1410,7 +1410,7 @@ sub_0206B270: ; 0x0206B270
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x60
 	add r6, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r5, r0, #0
 	add r0, r6, #0
 	bl TaskManager_GetEnv
@@ -1512,8 +1512,8 @@ _0206B332:
 	b _0206B824
 _0206B346:
 	add r0, r5, #0
-	bl FieldSys_GetSaveDataPtr
-	bl Sav2_PlayerData_GetProfileAddr
+	bl FieldSystem_GetSaveData
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	ldr r1, [r4, #0x40]
 	lsl r0, r0, #0x18
@@ -1898,8 +1898,8 @@ _0206B652:
 	cmp r0, #0
 	beq _0206B6EA
 	add r0, r5, #0
-	bl FieldSys_GetSaveDataPtr
-	bl Save_PhotoAlbum_get
+	bl FieldSystem_GetSaveData
+	bl Save_PhotoAlbum_Get
 	add r5, r0, #0
 	bl PhotoAlbum_GetIndexOfFirstEmptySlot
 	add r6, r0, #0

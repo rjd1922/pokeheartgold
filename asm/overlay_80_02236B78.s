@@ -568,7 +568,7 @@ ov80_02236F24: ; 0x02236F24
 	str r1, [r4, r0]
 	ldr r0, [r4, #4]
 	ldr r1, [sp, #0x10]
-	bl InitPartyWithMaxSize
+	bl Party_InitWithMaxSize
 	mov r0, #0xb
 	bl AllocMonZeroed
 	add r7, r0, #0
@@ -580,13 +580,13 @@ _02236F94:
 	ldr r0, _022370EC ; =0x000004D4
 	add r1, r6, #0
 	ldr r0, [r5, r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r7, #0
 	bl CopyPokemonToPokemon
 	add r0, r4, #0
 	add r1, r7, #0
 	mov r2, #0
-	bl sub_02051C9C
+	bl BattleSetup_AddMonToParty
 	ldr r0, [sp, #0x10]
 	add r6, r6, #1
 	cmp r6, r0
@@ -595,7 +595,7 @@ _02236FB6:
 	add r0, r7, #0
 	bl FreeToHeap
 	add r0, r4, #0
-	bl sub_02052580
+	bl BattleSetup_SetAllySideBattlersToPlayer
 	ldrb r1, [r5, #6]
 	add r0, sp, #0x14
 	mov r2, #0xb
@@ -617,7 +617,7 @@ _02236FB6:
 	bl ov80_02236DF8
 	add r1, r0, #0
 	ldr r0, [r4, #8]
-	bl InitPartyWithMaxSize
+	bl Party_InitWithMaxSize
 	mov r7, #0
 	add r6, r4, #0
 _02236FFC:
@@ -639,13 +639,13 @@ _0223701C:
 	ldr r0, _022370F0 ; =0x000004D8
 	add r1, r6, #0
 	ldr r0, [r5, r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r7, #0
 	bl CopyPokemonToPokemon
 	add r0, r4, #0
 	add r1, r7, #0
 	mov r2, #1
-	bl sub_02051C9C
+	bl BattleSetup_AddMonToParty
 	ldr r0, [sp, #0xc]
 	add r6, r6, #1
 	cmp r6, r0
@@ -660,7 +660,7 @@ _0223703E:
 	bne _022370E4
 _0223704E:
 	add r0, r4, #0
-	bl sub_02052580
+	bl BattleSetup_SetAllySideBattlersToPlayer
 	bl sub_0203769C
 	mov r1, #1
 	sub r0, r1, r0
@@ -668,7 +668,7 @@ _0223704E:
 	mov r1, #1
 	lsl r1, r1, #8
 	ldr r1, [r4, r1]
-	bl PlayerProfile_copy
+	bl PlayerProfile_Copy
 	ldrb r1, [r5, #6]
 	add r0, sp, #0x14
 	mov r2, #0xb
@@ -691,7 +691,7 @@ _0223704E:
 	bl ov80_02236DF8
 	add r1, r0, #0
 	ldr r0, [r4, #0x10]
-	bl InitPartyWithMaxSize
+	bl Party_InitWithMaxSize
 	mov r0, #0xb
 	bl AllocMonZeroed
 	add r7, r0, #0
@@ -705,13 +705,13 @@ _022370B6:
 	ldr r0, _022370F0 ; =0x000004D8
 	add r1, r6, #0
 	ldr r0, [r5, r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r7, #0
 	bl CopyPokemonToPokemon
 	add r0, r4, #0
 	add r1, r7, #0
 	mov r2, #3
-	bl sub_02051C9C
+	bl BattleSetup_AddMonToParty
 	ldr r0, [sp, #8]
 	add r6, r6, #1
 	add r1, r0, #1
@@ -803,7 +803,7 @@ ov80_02237130: ; 0x02237130
 	bl ov80_0222A52C
 	ldr r0, _022371A8 ; =0x000004D4
 	ldr r0, [r5, r0]
-	bl SavArray_Party_init
+	bl SaveArray_Party_Init
 	mov r0, #0xb
 	bl AllocMonZeroed
 	add r6, r0, #0
@@ -844,7 +844,7 @@ ov80_022371B0: ; 0x022371B0
 	add r5, r0, #0
 	ldr r0, _02237248 ; =0x000004D4
 	ldr r0, [r5, r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	add r4, r0, #0
 	cmp r4, #2
 	ble _022371D4
@@ -852,7 +852,7 @@ ov80_022371B0: ; 0x022371B0
 _022371C6:
 	ldr r0, [r5, r6]
 	sub r1, r4, #1
-	bl RemoveMonFromParty
+	bl Party_RemoveMon
 	sub r4, r4, #1
 	cmp r4, #2
 	bgt _022371C6

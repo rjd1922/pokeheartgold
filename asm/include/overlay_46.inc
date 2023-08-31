@@ -8,8 +8,8 @@
 .public OverlayManager_CreateAndGetData
 .public OverlayManager_GetData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharData
 .public GfGfxLoader_LoadScrnData
 .public GfGfxLoader_GXLoadPal
@@ -17,8 +17,8 @@
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public ReadMsgDataIntoString
-.public ScrStrBufs_new
-.public ScrStrBufs_delete
+.public MessageFormat_New
+.public MessageFormat_Delete
 .public BufferIntegerAsString
 .public StringExpandPlaceholders
 .public sub_0200E33C
@@ -29,7 +29,7 @@
 .public LoadUserFrameGfx2
 .public DrawFrameAndWindow2
 .public ClearFrameAndWindow2
-.public sub_0200F0AC
+.public WaitingIcon_New
 .public sub_0200F450
 .public BeginNormalPaletteFade
 .public IsPaletteFadeFinished
@@ -55,7 +55,7 @@
 .public ScheduleWindowCopyToVram
 .public ClearWindowTilemapAndScheduleTransfer
 .public FillWindowPixelBuffer
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public TextPrinterCheckActive
 .public sub_020200A0
 .public AddTextPrinterParameterized
@@ -65,12 +65,12 @@
 .public GX_SwapDisplay
 .public System_GetTouchNew
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
-.public Sav2_PlayerData_GetOptionsAddr
+.public String_New
+.public String_Delete
+.public Save_PlayerData_GetOptionsAddr
 .public Options_GetTextFrameDelay
 .public Options_GetFrame
-.public Sav2_GameStats_get
+.public Save_GameStats_Get
 .public GameStats_AddSpecial
 .public sub_02037D78
 .public sub_02039274

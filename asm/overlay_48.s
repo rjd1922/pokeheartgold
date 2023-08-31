@@ -28,7 +28,7 @@ ov48_02258800: ; 0x02258800
 	bl sub_0202CA44
 	str r0, [r4, #0xc]
 	ldr r0, [r5, #4]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	str r0, [r4, #0x10]
 	ldr r0, [r4, #0xc]
 	bl sub_0202CA8C
@@ -300,7 +300,7 @@ ov48_02258A80: ; 0x02258A80
 	mov r0, #0x62
 	add r1, r2, #0
 	str r2, [sp, #0x10]
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0
 	str r2, [r5]
 	str r2, [sp]
@@ -411,7 +411,7 @@ _02258B64:
 	blt _02258B00
 _02258B72:
 	ldr r0, [sp, #0x24]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x30
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov48_02258A80
@@ -1613,7 +1613,7 @@ ov48_02259464: ; 0x02259464
 	add r6, r1, #0
 	mov r0, #0xc0
 	add r1, r4, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x51
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -1644,7 +1644,7 @@ ov48_022594A8: ; 0x022594A8
 	mov r0, #0x51
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	bl GF_DestroyVramTransferManager
 	add r0, r4, #0
 	bl ov48_02259650
@@ -1669,7 +1669,7 @@ _022594D8: .word sub_0202457C
 ov48_022594DC: ; 0x022594DC
 	push {r3, lr}
 	ldr r0, [r0]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl OamManager_ApplyAndResetBuffers
 	bl GF_RunVramTransferTasks
 	pop {r3, pc}
@@ -2580,7 +2580,7 @@ ov48_02259BC0: ; 0x02259BC0
 	sub sp, #8
 	add r4, r0, #0
 	add r0, r3, #0
-	bl GF_Camera_Create
+	bl Camera_New
 	str r0, [r4]
 	mov r3, #0
 	str r3, [sp]
@@ -2589,17 +2589,17 @@ ov48_02259BC0: ; 0x02259BC0
 	str r0, [sp, #4]
 	ldr r0, _02259C30 ; =ov48_0225B184
 	ldr r2, _02259C34 ; =0x000005C1
-	bl sub_02023308
+	bl Camera_Init_FromTargetAndPos
 	mov r1, #0x19
 	ldr r2, [r4]
 	mov r0, #0
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	ldr r1, [r4]
 	mov r0, #0
-	bl sub_020233D8
+	bl Camera_ApplyPerspectiveType
 	ldr r0, [r4]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	ldr r0, [sp, #0x14]
 	lsl r0, r0, #0x1f
 	lsr r0, r0, #0x1f
@@ -2618,7 +2618,7 @@ _02259C16:
 	str r0, [r4, #0xc]
 	ldr r0, [r4, #0xc]
 	ldr r1, [r4]
-	bl GF_Camera_SetDistance
+	bl Camera_SetDistance
 	add sp, #8
 	pop {r4}
 	pop {r3}
@@ -2632,19 +2632,19 @@ _02259C34: .word 0x000005C1
 
 	thumb_func_start ov48_02259C38
 ov48_02259C38: ; 0x02259C38
-	ldr r3, _02259C40 ; =sub_02023120
+	ldr r3, _02259C40 ; =Camera_Delete
 	ldr r0, [r0]
 	bx r3
 	nop
-_02259C40: .word sub_02023120
+_02259C40: .word Camera_Delete
 	thumb_func_end ov48_02259C38
 
 	thumb_func_start ov48_02259C44
 ov48_02259C44: ; 0x02259C44
-	ldr r3, _02259C48 ; =sub_02023154
+	ldr r3, _02259C48 ; =Camera_PushLookAtToNNSGlb
 	bx r3
 	.balign 4, 0
-_02259C48: .word sub_02023154
+_02259C48: .word Camera_PushLookAtToNNSGlb
 	thumb_func_end ov48_02259C44
 
 	thumb_func_start ov48_02259C4C
@@ -2738,7 +2738,7 @@ _02259CE0:
 _02259CEA:
 	ldr r0, [r2, #0xc]
 	ldr r1, [r2]
-	bl GF_Camera_SetDistance
+	bl Camera_SetDistance
 	mov r0, #0
 	pop {r3, pc}
 	nop
@@ -2996,12 +2996,12 @@ ov48_02259EAC: ; 0x02259EAC
 	add r5, r0, #0
 	bl memset
 	add r0, r7, #0
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	bl Options_GetTextFrameDelay
 	str r0, [r5, #8]
 	ldr r1, [sp, #0x28]
 	mov r0, #0x80
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0xc]
 	mov r2, #1
 	add r1, r5, #0
@@ -3048,7 +3048,7 @@ ov48_02259F14: ; 0x02259F14
 	bl sub_020200A0
 _02259F30:
 	ldr r0, [r4, #0xc]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x20]
 	bl sub_02016624
 	add r4, #0x10
@@ -5413,15 +5413,15 @@ ov48_0225B068: ; 0x0225B068
 	mov r0, #8
 	mov r1, #0x40
 	add r2, r4, #0
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	str r0, [r5, #4]
 	mov r0, #0x80
 	add r1, r4, #0
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #8]
 	mov r0, #0x80
 	add r1, r4, #0
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0xc]
 	pop {r3, r4, r5, pc}
 	nop
@@ -5435,11 +5435,11 @@ ov48_0225B0A4: ; 0x0225B0A4
 	ldr r0, [r4]
 	bl DestroyMsgData
 	ldr r0, [r4, #4]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r4, #8]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0xc]
-	bl String_dtor
+	bl String_Delete
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov48_0225B0A4
@@ -5492,7 +5492,7 @@ ov48_0225B108: ; 0x0225B108
 	ldr r0, [r5, #4]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl ScrStrBufs_ResetBuffers
+	bl MessageFormat_ResetBuffers
 	ldr r0, [r5]
 	ldr r2, [r5, #0xc]
 	mov r1, #3

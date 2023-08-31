@@ -1,10 +1,12 @@
+#include "global.h"
 #include "coins.h"
 #include "font.h"
 #include "game_stats.h"
+#include "global.h"
 #include "gf_gfx_loader.h"
 #include "list_menu_items.h"
 #include "math_util.h"
-#include "msgfmt.h"
+#include "message_format.h"
 #include "options.h"
 #include "overlay_manager.h"
 #include "player_data.h"
@@ -14,16 +16,17 @@
 #include "text.h"
 #include "unk_02005D10.h"
 #include "unk_02009D48.h"
-#include "unk_0200B380.h"
+#include "brightness.h"
 #include "unk_0200CF18.h"
-#include "unk_0200E398.h"
+#include "render_window.h"
 #include "unk_0200FA24.h"
 #include "unk_0201660C.h"
 #include "unk_020183F0.h"
 #include "unk_02023694.h"
 #include "unk_02025154.h"
-#include "window.h"
+#include "bg_window.h"
 #include "constants/sndseq.h"
+#include "constants/game_stat.h"
 #include "msgdata/msg/msg_0039.h"
 #include "voltorb_flip/voltorb_flip.h"
 #include "voltorb_flip/voltorb_flip_data.h"
@@ -32,8 +35,8 @@
 #include "voltorb_flip/voltorb_flip_internal.h"
 #include "voltorb_flip/voltorb_flip_work.h"
 #include "voltorb_flip/voltorb_flip_workflow.h"
-
-#define HEAPID_VOLTORB_FLIP 160
+#include "msgdata/msg.naix"
+#include "application/voltorb_flip.naix"
 
 typedef enum CoinDisplay {
     COIN_DISPLAY_TOTAL,
@@ -81,8 +84,8 @@ static void PrintBoardVoltorbs(VoltorbFlipAppWork *);
 static void PrintBoardPoints(VoltorbFlipAppWork *);
 static int ov122_021E6E10(u8, u8);
 static void ov122_021E6E34(u16 *, int);
-static void ov122_021E6E60(BGCONFIG *, GameState *, int, int);
-static void ov122_021E6F04(BGCONFIG *, GameState *, int, int);
+static void ov122_021E6E60(BgConfig *, GameState *, int, int);
+static void ov122_021E6F04(BgConfig *, GameState *, int, int);
 static void ov122_021E6F9C(Ov122_021E70B8 *);
 static BOOL ov122_021E6FB0(Ov122_021E70B8 *);
 static void ov122_021E6FE4(Ov122_021E70B8 *);
@@ -103,8 +106,8 @@ static int ov122_021E7514(VoltorbFlipAppWork *);
 static void RenderTopScreen(VoltorbFlipAppWork *);
 static void AddWindows(VoltorbFlipAppWork *);
 static void ov122_021E765C(VoltorbFlipAppWork *);
-static void PaintMessageOnWindow(VoltorbFlipAppWork *, u8, u8, WINDOW *, u8, u8);
-static void PrintMessageOnWindow(VoltorbFlipAppWork *, FontID, u8, WINDOW *, u8, u8, u32);
+static void PaintMessageOnWindow(VoltorbFlipAppWork *, u8, u8, Window *, u8, u8);
+static void PrintMessageOnWindow(VoltorbFlipAppWork *, FontID, u8, Window *, u8, u8, u32);
 static void PrintMessageToSmallWindow(VoltorbFlipAppWork *, int);
 static void PrintTextWindow(VoltorbFlipAppWork *, int, int);
 static BOOL IsPrinterFinished(VoltorbFlipAppWork *);
@@ -133,25 +136,25 @@ static void ov122_021E8068(void);
 static void ov122_021E8094(OVY_MANAGER *);
 static void FreeOverlayData(OVY_MANAGER *);
 
-extern const GF_GXBanksConfig sVoltorbFlipGXBanksConfig;
+extern const GraphicsBanks sVoltorbFlipGraphicsBanks;
 extern const MsgNoList sMenuMsgNos[];
 extern const Ov122_021E9278 ov122_021E9278;
 extern const u16 ov122_021E92A0[8];
 extern const u8 ov122_021E92B0[4][4];
-extern const struct GFBgModeSet sVoltorbFlipBgModeSet;
+extern const struct GraphicsModes sVoltorbFlipBgModeSet;
 extern const Unk122_021E92D0 ov122_021E92D0;
 extern const Unk122_021E92E4 ov122_021E92E4;
 extern const Unk122_021E92FC ov122_021E92FC;
 extern const Ov122_021E6C2C ov122_021E9344[4];
 extern const Unk122_021E9374 ov122_021E9374;
 extern const Unk122_021E9374 ov122_021E93A8;
-extern const WINDOWTEMPLATE sVoltorbFlipWindowTemplates[];
+extern const WindowTemplate sVoltorbFlipWindowTemplates[];
 extern const BgTemplates sVoltorbFlipBgTemplates;
 extern VoltorbFlipWorkflows sVoltorbFlipWorkflows;
 
 static void RenderCoinPayoutScreen(VoltorbFlipAppWork *work) {
     BgClearTilemapBufferAndCommit(work->bgConfig, 5);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, 6, work->bgConfig, 4, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000006_bin, work->bgConfig, GF_BG_LYR_SUB_0, 0, 0, 1, work->heapId);
 
     int payout = GamePayout(work->game);
     u16 coins = (u32)CheckCoins(work->coins);
@@ -167,7 +170,7 @@ static void RenderCoinPayoutScreen(VoltorbFlipAppWork *work) {
 
 static void RenderHowToPlayScreen(VoltorbFlipAppWork *work) {
     BgClearTilemapBufferAndCommit(work->bgConfig, 5);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, 8, work->bgConfig, 4, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000008_bin, work->bgConfig, GF_BG_LYR_SUB_0, 0, 0, 1, work->heapId);
 
     // "Quit" (on blue button)
     PaintMessageOnWindow(work, 4, msg_0039_00008, &work->wTutorialQuit, 0, 0);
@@ -181,7 +184,7 @@ static void RenderHowToPlayScreen(VoltorbFlipAppWork *work) {
 
 static void RenderHintScreen(VoltorbFlipAppWork *work) {
     BgClearTilemapBufferAndCommit(work->bgConfig, 5);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, 7, work->bgConfig, 4, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000007_bin, work->bgConfig, GF_BG_LYR_SUB_0, 0, 0, 1, work->heapId);
 
     // "By looking at the numbers on the sides of..."
     PaintMessageOnWindow(work, 0, msg_0039_00009, &work->wHint, 0, 0);
@@ -189,7 +192,7 @@ static void RenderHintScreen(VoltorbFlipAppWork *work) {
 
 static void RenderAboutMemoScreen(VoltorbFlipAppWork *work) {
     BgClearTilemapBufferAndCommit(work->bgConfig, 5);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, 9, work->bgConfig, 4, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000009_bin, work->bgConfig, GF_BG_LYR_SUB_0, 0, 0, 1, work->heapId);
 
     // "Open Memo" (text in button)
     PaintMessageOnWindow(work, 4, msg_0039_00006, &work->wAboutMemoOpen, 0, 0);
@@ -615,8 +618,8 @@ BOOL AwaitCardFlipAndResult(WorkflowEngine *workflow, VoltorbFlipAppWork *work) 
 
             int var9 = GamePayout(work->game);
 
-            BufferIntegerAsString(work->msgFmt, 0, type, 1, 0, 1);
-            BufferIntegerAsString(work->msgFmt, 1, var9, 5, 0, 1);
+            BufferIntegerAsString(work->msgFmt, 0, type, 1, PRINTING_MODE_LEFT_ALIGN, 1);
+            BufferIntegerAsString(work->msgFmt, 1, var9, 5, PRINTING_MODE_LEFT_ALIGN, 1);
             sub_0200DDB8(work->unk14C[1], var5, var7);
             sub_0200DC4C(work->unk14C[1], 0);
 
@@ -701,7 +704,7 @@ BOOL AwardCoins(WorkflowEngine *workflow, VoltorbFlipAppWork *work) {
     switch (state) {
     case 0:
         int var2 = GamePayout(work->game);
-        BufferIntegerAsString(work->msgFmt, 0, var2, 5, 0, 1);
+        BufferIntegerAsString(work->msgFmt, 0, var2, 5, PRINTING_MODE_LEFT_ALIGN, 1);
         BufferPlayersName(work->msgFmt, 1, work->profile);
         // "{} received {} Coin(s)!"
         PrintTextWindow(work, msg_0039_00040, 1);
@@ -926,7 +929,7 @@ BOOL PrintAreYouSureYouWantToQuit(WorkflowEngine *workflow, VoltorbFlipAppWork *
         } else {
             // "If you quit now, you will receive {} Coin(s)..."
             msgNo = msg_0039_00034;
-            BufferIntegerAsString(work->msgFmt, 0, payout, 5, 0, 1);
+            BufferIntegerAsString(work->msgFmt, 0, payout, 5, PRINTING_MODE_LEFT_ALIGN, 1);
         }
         ov122_021E7888(&work->unk25C);
         PrintTextWindow(work, msgNo, 1);
@@ -1175,7 +1178,7 @@ static void ov122_021E6E34(u16 *a0, int a1) {
     }
 }
 
-static void ov122_021E6E60(BGCONFIG *a0, GameState *game, int cardId, int a3) {
+static void ov122_021E6E60(BgConfig *a0, GameState *game, int cardId, int a3) {
     u16 temp1[9];
 
     int var1 = (cardId % 5) * 4 + 1;
@@ -1202,7 +1205,7 @@ static void ov122_021E6E60(BGCONFIG *a0, GameState *game, int cardId, int a3) {
     LoadRectToBgTilemapRect(a0, 0, temp1, var1, var2, 3, 3);
 }
 
-static void ov122_021E6F04(BGCONFIG *a0, GameState *game, int cardId, int a3) {
+static void ov122_021E6F04(BgConfig *a0, GameState *game, int cardId, int a3) {
     u16 temp1[9];
 
     int var1 = (cardId % 5) * 4 + 1;
@@ -1445,7 +1448,7 @@ static void ov122_021E73FC(VoltorbFlipAppWork *work) {
     work->unk1C = sub_02018424(work->heapId, 0);
 
     for (int i = 0; i < 2; i++) {
-        work->menuItems[i] = ListMenuItems_ctor(sMenuMsgNos[i].size, work->heapId);
+        work->menuItems[i] = ListMenuItems_New(sMenuMsgNos[i].size, work->heapId);
 
         for (int j = 0; j < sMenuMsgNos[i].size; j++) {
             const u8 *msgNos = sMenuMsgNos[i].msgNos;
@@ -1456,96 +1459,26 @@ static void ov122_021E73FC(VoltorbFlipAppWork *work) {
 
 static void ov122_021E745C(VoltorbFlipAppWork *work) {
     for (int i = 0; i < 2; i++) {
-        ListMenuItems_dtor(work->menuItems[i]);
+        ListMenuItems_Delete(work->menuItems[i]);
         work->menuItems[i] = NULL;
     }
     sub_02018474(work->unk1C);
 }
 
-// decomp.me: https://decomp.me/scratch/xZj2x
-#ifdef NONMATCHING
-static void ov122_021E7488(VoltorbFlipAppWork *work, int a1) {
-    Ov122_021E7488 temp1 = {0};
+void ov122_021E7488(VoltorbFlipAppWork *a0, int a1)
+{    
+    Ov122_021E7488 temp1 = {0};   
     const MsgNoList *ptr = &sMenuMsgNos[a1];
-    GF_ASSERT(work->bgConfig != 0);
+    GF_ASSERT(a0->bgConfig != 0);
 
     temp1.unk0 = ov122_021E9278.unkA;
 
-    temp1.unkC = work->menuItems[a1];
-    temp1.unk10 = work->bgConfig;
+    temp1.unkC = a0->menuItems[a1];
+    temp1.unk10 = a0->bgConfig;
     temp1.unk14 = ptr->size;
-
-    work->unk20 = sub_020185FC(work->unk1C, &temp1, work->unk228, 17, 17 - ptr->size * 3, 13, 0);
+    
+    a0->unk20 = sub_020185FC(a0->unk1C, &temp1, a0->unk228, 17, 17 - ptr->size * 3, 13, 0);
 }
-#else
-asm void ov122_021E7488(VoltorbFlipAppWork *work, int a1) {
-	push {r3, r4, r5, r6, lr}
-	sub sp, #0x24
-	add r5, r0, #0
-	add r6, r1, #0
-	add r1, sp, #0xc
-	mov r0, #0
-	str r0, [r1]
-	str r0, [r1, #4]
-	str r0, [r1, #8]
-	str r0, [r1, #0xc]
-	str r0, [r1, #0x10]
-	str r0, [r1, #0x14]
-	ldr r1, =sMenuMsgNos
-	lsl r0, r6, #3
-	add r4, r1, r0
-	ldr r0, [r5, #0x18]
-	cmp r0, #0
-	bne _021E74B0
-	bl GF_AssertFail
-_021E74B0:
-	ldr r2, =ov122_021E9278
-	add r0, sp, #0xc
-	ldrh r3, [r2, #0xa]
-	add r1, sp, #0xc
-	strh r3, [r0]
-	ldrh r3, [r2, #0xc]
-	strh r3, [r0, #2]
-	ldrh r3, [r2, #0xe]
-	strh r3, [r0, #4]
-	ldrh r3, [r2, #0x10]
-	strh r3, [r0, #6]
-	ldrh r3, [r2, #0x12]
-	ldrh r2, [r2, #0x14]
-	strh r3, [r0, #8]
-	strh r2, [r0, #0xa]
-	lsl r2, r6, #2
-	add r3, r5, r2
-	mov r2, #0x4d
-	lsl r2, r2, #2
-	ldr r3, [r3, r2]
-	add r2, #0xf4
-	str r3, [sp, #0x18]
-	ldr r3, [r5, #0x18]
-	str r3, [sp, #0x1c]
-	ldr r3, [r4, #4]
-	strb r3, [r0, #0x14]
-	ldr r3, [r4, #4]
-	lsl r0, r3, #1
-	add r0, r3, r0
-	mov r3, #0x11
-	sub r0, r3, r0
-	lsl r0, r0, #0x18
-	lsr r0, r0, #0x18
-	str r0, [sp]
-	mov r0, #0xd
-	str r0, [sp, #4]
-	mov r0, #0
-	str r0, [sp, #8]
-	ldrb r2, [r5, r2]
-	ldr r0, [r5, #0x1c]
-	bl sub_020185FC
-	str r0, [r5, #0x20]
-	add sp, #0x24
-	pop {r3, r4, r5, r6, pc}
-	nop
-}
-#endif // NONMATCHING
 
 static int ov122_021E7514(VoltorbFlipAppWork *work) {
     int var1 = sub_020186A4(work->unk20);
@@ -1563,7 +1496,7 @@ static void RenderTopScreen(VoltorbFlipAppWork *work) {
     PaintMessageOnWindow(work, 4, msg_0039_00008, &work->wQuit, 0, 0);
     BgCommitTilemapBufferToVram(work->bgConfig, 1);
 
-    BufferIntegerAsString(work->msgFmt, 0, 1, 1, 0, 1);
+    BufferIntegerAsString(work->msgFmt, 0, 1, 1, PRINTING_MODE_LEFT_ALIGN, 1);
 
     PrintMessageOnWindow(work, 0, msg_0039_00000, &work->wCurrentLevel, 0, 0, 0x000f0100);
     PrintMessageOnWindow(work, 0, msg_0039_00001, &work->wFlipCardsAndCollectCoins, 0, 0, 0x000f0100);
@@ -1592,40 +1525,40 @@ static void ov122_021E765C(VoltorbFlipAppWork *work) {
 }
 
 // Like PrintMessageOnWindow but it gets printed all at once.
-static void PaintMessageOnWindow(VoltorbFlipAppWork *work, FontID fontId, u8 msgNo, WINDOW *window, u8 x, u8 y) {
+static void PaintMessageOnWindow(VoltorbFlipAppWork *work, FontID fontId, u8 msgNo, Window *window, u8 x, u8 y) {
     PrintMessageOnWindow(work, fontId, msgNo, window, x, y, 0x00010200);
 }
 
-static void PrintMessageOnWindow(VoltorbFlipAppWork *work, FontID fontId, u8 msgNo, WINDOW *window, u8 x, u8 y, u32 textSpeed) {
+static void PrintMessageOnWindow(VoltorbFlipAppWork *work, FontID fontId, u8 msgNo, Window *window, u8 x, u8 y, u32 textSpeed) {
     FillWindowPixelBuffer(window, 0);
 
-    STRING *str = ReadMsgData_ExpandPlaceholders(work->msgFmt, work->msgData, msgNo, work->heapId);
+    String *str = ReadMsgData_ExpandPlaceholders(work->msgFmt, work->msgData, msgNo, work->heapId);
     AddTextPrinterParameterized2(window, fontId, str, x, y, 0xff, textSpeed, 0);
 
     ScheduleWindowCopyToVram(window);
-    String_dtor(str);
+    String_Delete(str);
 }
 
 static void PrintMessageToSmallWindow(VoltorbFlipAppWork *work, int msgNo) {
-    WINDOW *window = &work->wSmall;
+    Window *window = &work->wSmall;
 
     FillWindowPixelBuffer(window, 15);
 
-    STRING *str = ReadMsgData_ExpandPlaceholders(work->msgFmt, work->msgData, msgNo, work->heapId);
+    String *str = ReadMsgData_ExpandPlaceholders(work->msgFmt, work->msgData, msgNo, work->heapId);
 
     FillBgTilemapRect(work->bgConfig, 3, 0, 0, 20, 32, 4, 0);
     DrawFrameAndWindow2(window, 1, 1, 13);
 
     AddTextPrinterParameterized(window, 1, str, 0, 0, 0xff, 0);
     ScheduleWindowCopyToVram(window);
-    String_dtor(str);
+    String_Delete(str);
     BgCommitTilemapBufferToVram(work->bgConfig, 3);
 }
 
 // Prints a message in the main text window.
 static void PrintTextWindow(VoltorbFlipAppWork *work, int msgNo, int a2) {
-    STRING *str;
-    WINDOW *window = &work->wMain;
+    String *str;
+    Window *window = &work->wMain;
 
     GF_ASSERT(work->string == NULL);
 
@@ -1651,7 +1584,7 @@ static void PrintTextWindow(VoltorbFlipAppWork *work, int msgNo, int a2) {
 static BOOL IsPrinterFinished(VoltorbFlipAppWork *work) {
     if (!TextPrinterCheckActive(work->printerId)) {
         if (work->string != NULL) {
-            String_dtor(work->string);
+            String_Delete(work->string);
             work->string = NULL;
         }
         return TRUE;
@@ -1662,41 +1595,41 @@ static BOOL IsPrinterFinished(VoltorbFlipAppWork *work) {
 static void FormatGameLevel(VoltorbFlipAppWork *work, int idx) {
     u8 displayLevel = 8 - GameLevel(work->game);
 
-    BufferIntegerAsString(work->msgFmt, idx, displayLevel, 1, 0, 1);
+    BufferIntegerAsString(work->msgFmt, idx, displayLevel, 1, PRINTING_MODE_LEFT_ALIGN, 1);
 }
 
 static void ov122_021E7888(Ov122_021E7888 *a0) {
     if (a0->unk0 == 0) {
-        sub_0200B554(1);
-        sub_0200B484(4, -8, 0, 55, 1);
+        InitScreenBrightnessData(SCREEN_MASK_MAIN);
+        StartBrightnessTransition(4, -8, 0, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BD | GX_BLEND_PLANEMASK_OBJ | GX_BLEND_PLANEMASK_BG2 | GX_BLEND_PLANEMASK_BG1 | GX_BLEND_PLANEMASK_BG0), SCREEN_MASK_MAIN);
         a0->unk0 = 1;
     }
 }
 
 static void ov122_021E78B4(Ov122_021E7888 *a0) {
-    sub_0200B554(1);
-    sub_0200B484(4, 0, -8, 55, 1);
+    InitScreenBrightnessData(SCREEN_MASK_MAIN);
+    StartBrightnessTransition(4, 0, -8, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BD | GX_BLEND_PLANEMASK_OBJ | GX_BLEND_PLANEMASK_BG2 | GX_BLEND_PLANEMASK_BG1 | GX_BLEND_PLANEMASK_BG0), SCREEN_MASK_MAIN);
     a0->unk0 = 0;
 }
 
 static void ov122_021E78DC(Ov122_021E7888 *a0) {
     if (a0->unk0 == 0) {
-        sub_0200B554(1);
-        sub_0200B484(1, -6, 0, 33, 1);
+        InitScreenBrightnessData(SCREEN_MASK_MAIN);
+        StartBrightnessTransition(1, -6, 0, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BD | GX_BLEND_PLANEMASK_BG0), SCREEN_MASK_MAIN);
         a0->unk0 = 1;
     }
 }
 
 static void ov122_021E7904(Ov122_021E7888 *a0) {
-    sub_0200B554(1);
-    sub_0200B484(1, 0, -6, 33, 1);
+    InitScreenBrightnessData(SCREEN_MASK_MAIN);
+    StartBrightnessTransition(1, 0, -6, (GXBlendPlaneMask)(GX_BLEND_PLANEMASK_BD | GX_BLEND_PLANEMASK_BG0), SCREEN_MASK_MAIN);
     a0->unk0 = 0;
 }
 
 static void ov122_021E7928(VoltorbFlipAppWork *work) {
     work->bgConfig = BgConfig_Alloc(work->heapId);
 
-    const struct GFBgModeSet temp1 = sVoltorbFlipBgModeSet;
+    const struct GraphicsModes temp1 = sVoltorbFlipBgModeSet;
     SetBothScreensModesAndDisable(&temp1);
 
     BgTemplates temp2 = sVoltorbFlipBgTemplates;
@@ -1704,8 +1637,8 @@ static void ov122_021E7928(VoltorbFlipAppWork *work) {
     for (int i = 0; i < 6; i++) {
         InitBgFromTemplate(work->bgConfig, ov122_021E9270[i], &temp2.unk0[i], 0);
         BgClearTilemapBufferAndCommit(work->bgConfig, ov122_021E9270[i]);
-        BG_FillCharDataRange(work->bgConfig, ov122_021E9270[i], 0, 1, 0);
-        ToggleBgLayer(ov122_021E9270[i], 1);
+        BG_FillCharDataRange(work->bgConfig, (enum GFBgLayer)ov122_021E9270[i], 0, 1, 0);
+        ToggleBgLayer(ov122_021E9270[i], GX_LAYER_TOGGLE_ON);
     }
 }
 
@@ -1722,18 +1655,18 @@ static void ov122_021E79D0(VoltorbFlipAppWork *work) {
     FontID_Alloc(4, work->heapId);
     GF_ASSERT(work->narc != 0);
 
-    GfGfxLoader_GXLoadPalFromOpenNarc(work->narc, 0, 0, 0, 0, work->heapId);
-    GfGfxLoader_GXLoadPal(16, 9, 0, 0x1c0, 32, work->heapId);
-    LoadFontPal1(0, 0x180, work->heapId);
-    LoadFontPal0(4, 0x180, work->heapId);
-    GfGfxLoader_GXLoadPal(16, 9, 4, 0x1a0, 32, work->heapId);
-    LoadUserFrameGfx2(work->bgConfig, 3, 1, 13, work->unk229, work->heapId);
-    GfGfxLoader_LoadCharDataFromOpenNarc(work->narc, 2, work->bgConfig, 0, 0, 0, 1, work->heapId);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, 4, work->bgConfig, 0, 0, 0, 1, work->heapId);
-    GfGfxLoader_LoadCharDataFromOpenNarc(work->narc, 2, work->bgConfig, 2, 0, 0, 1, work->heapId);
-    GfGfxLoader_GXLoadPalFromOpenNarc(work->narc, 1, 4, 0, 0, work->heapId);
-    GfGfxLoader_LoadCharDataFromOpenNarc(work->narc, 3, work->bgConfig, 4, 0, 0, 1, work->heapId);
-    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, 6, work->bgConfig, 4, 0, 0, 1, work->heapId);
+    GfGfxLoader_GXLoadPalFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000000_bin, GF_BG_LYR_MAIN_0, 0, 0, work->heapId);
+    GfGfxLoader_GXLoadPal(NARC_graphic_font, 9, GF_BG_LYR_MAIN_0, 0x1c0, 32, work->heapId);
+    LoadFontPal1(GF_BG_LYR_MAIN_0, 0x180, work->heapId);
+    LoadFontPal0(GF_BG_LYR_SUB_0, 0x180, work->heapId);
+    GfGfxLoader_GXLoadPal(NARC_graphic_font, 9, GF_BG_LYR_SUB_0, 0x1a0, 32, work->heapId);
+    LoadUserFrameGfx2(work->bgConfig, GF_BG_LYR_MAIN_3, 1, 13, work->unk229, work->heapId);
+    GfGfxLoader_LoadCharDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000002_bin, work->bgConfig, GF_BG_LYR_MAIN_0, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000004_bin, work->bgConfig, GF_BG_LYR_MAIN_0, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadCharDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000002_bin, work->bgConfig, GF_BG_LYR_MAIN_2, 0, 0, 1, work->heapId);
+    GfGfxLoader_GXLoadPalFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000001_bin, GF_BG_LYR_SUB_0, 0, 0, work->heapId);
+    GfGfxLoader_LoadCharDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000003_bin, work->bgConfig, GF_BG_LYR_SUB_0, 0, 0, 1, work->heapId);
+    GfGfxLoader_LoadScrnDataFromOpenNarc(work->narc, NARC_voltorb_flip_voltorb_flip_00000006_bin, work->bgConfig, GF_BG_LYR_SUB_0, 0, 0, 1, work->heapId);
 }
 
 static void ov122_021E7AEC(VoltorbFlipAppWork *work) {
@@ -1769,15 +1702,15 @@ static void ov122_021E7BD4(VoltorbFlipAppWork *work) {
     Unk122_021E7C9C *var1 = work->unk144;
     void *var2 = work->unk148;
 
-    sub_0200D5D4(var1, var2, work->narc, 10, 0, 5, 1, 0);
-    sub_0200D504(var1, var2, work->narc, 11, 1, 1, 0);
-    sub_0200D6EC(var1, var2, work->narc, 12, 1, 0);
-    sub_0200D71C(var1, var2, work->narc, 13, 1, 0);
+    sub_0200D5D4(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000010_bin, 0, 5, 1, 0);
+    sub_0200D504(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000011_bin, 1, 1, 0);
+    sub_0200D6EC(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000012_bin, 1, 0);
+    sub_0200D71C(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000013_bin, 1, 0);
 
-    sub_0200D5D4(var1, var2, work->narc, 14, 0, 1, 2, 1);
-    sub_0200D504(var1, var2, work->narc, 15, 1, 2, 1);
-    sub_0200D6EC(var1, var2, work->narc, 16, 1, 1);
-    sub_0200D71C(var1, var2, work->narc, 17, 1, 1);
+    sub_0200D5D4(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000014_bin, 0, 1, 2, 1);
+    sub_0200D504(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000015_bin, 1, 2, 1);
+    sub_0200D6EC(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000016_bin, 1, 1);
+    sub_0200D71C(var1, var2, work->narc, NARC_voltorb_flip_voltorb_flip_00000017_bin, 1, 1);
 }
 #else
 asm void ov122_021E7BD4(VoltorbFlipAppWork *work) {
@@ -1980,14 +1913,14 @@ static void ov122_021E8004(VoltorbFlipAppWork *work) {
 
     sub_0200D020(work->unk148);
     sub_0200D034();
-    BgConfig_HandleScheduledScrollAndTransferOps(work->bgConfig);
+    DoScheduledBgGpuUpdates(work->bgConfig);
 
     REGType32v *regBase = (REGType32v *)0x027e0000;
     *(regBase + 0xffe) |= 1;
 }
 
 static void SetGXBanks(void) {
-    GF_GXBanksConfig banks = sVoltorbFlipGXBanksConfig;
+    GraphicsBanks banks = sVoltorbFlipGraphicsBanks;
     GX_SetBanks(&banks);
 }
 
@@ -2010,11 +1943,11 @@ static void ov122_021E8094(OVY_MANAGER *man) {
     ov122_021E8068();
     SetGXBanks();
 
-    CreateHeap(3, HEAPID_VOLTORB_FLIP, 0x50000);
+    CreateHeap(3, HEAP_ID_VOLTORB_FLIP, 0x50000);
 
-    VoltorbFlipAppWork *work = OverlayManager_CreateAndGetData(man, sizeof(VoltorbFlipAppWork), HEAPID_VOLTORB_FLIP);
+    VoltorbFlipAppWork *work = OverlayManager_CreateAndGetData(man, sizeof(VoltorbFlipAppWork), HEAP_ID_VOLTORB_FLIP);
     MI_CpuFill8(work, 0, sizeof(VoltorbFlipAppWork));
-    work->heapId = HEAPID_VOLTORB_FLIP;
+    work->heapId = HEAP_ID_VOLTORB_FLIP;
     work->options = args->options;
     work->coins = args->coins;
     work->unkC = args->unk8;
@@ -2023,9 +1956,9 @@ static void ov122_021E8094(OVY_MANAGER *man) {
     work->unk229 = Options_GetFrame(work->options);
     work->unk22A = Options_GetTextFrameDelay(work->options);
 
-    work->narc = NARC_ctor(0x10a, work->heapId);
-    work->msgData = NewMsgDataFromNarc(0, 0x1b, 0x27, work->heapId);
-    work->msgFmt = ScrStrBufs_new(work->heapId);
+    work->narc = NARC_New(NARC_application_voltorb_flip, work->heapId);
+    work->msgData = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, NARC_msg_msg_0039_bin, work->heapId);
+    work->msgFmt = MessageFormat_New(work->heapId);
     work->unk13C = sub_0201660C(work->heapId);
 
     ov122_021E7928(work);
@@ -2046,15 +1979,15 @@ static void ov122_021E8094(OVY_MANAGER *man) {
     PrintBoardVoltorbsAndPoints(work);
 
     sub_02004EC4(0x46, 0, 0);
-    GX_EngineAToggleLayers(16, 1);
-    GX_EngineBToggleLayers(16, 1);
+    GX_EngineAToggleLayers(16, GX_LAYER_TOGGLE_ON);
+    GX_EngineBToggleLayers(16, GX_LAYER_TOGGLE_ON);
     sub_0200FBDC(0);
     sub_0200FBDC(1);
-    TextFlags_SetCanABSpeedUpPrint(1);
-    sub_02002B8C(1);
+    TextFlags_SetCanABSpeedUpPrint(TRUE);
+    sub_02002B8C(TRUE);
 
     Main_SetVBlankIntrCB((GFIntrCB)ov122_021E8004, work);
-    GameStats_AddSpecial(Sav2_GameStats_get(args->savedata), 6);
+    GameStats_AddSpecial(Save_GameStats_Get(args->saveData), GAME_STAT_UNK6);
 }
 
 static void FreeOverlayData(OVY_MANAGER *man) {
@@ -2070,12 +2003,12 @@ static void FreeOverlayData(OVY_MANAGER *man) {
     ov122_021E765C(work);
     ov122_021E79A4(work);
 
-    ScrStrBufs_delete(work->msgFmt);
+    MessageFormat_Delete(work->msgFmt);
     DestroyMsgData(work->msgData);
-    NARC_dtor(work->narc);
+    NARC_Delete(work->narc);
     ov122_021E8068();
     OverlayManager_FreeData(man);
-    DestroyHeap(HEAPID_VOLTORB_FLIP);
+    DestroyHeap(HEAP_ID_VOLTORB_FLIP);
 }
 
 BOOL VoltorbFlipApp_OvyInit(OVY_MANAGER *man, int *state) {

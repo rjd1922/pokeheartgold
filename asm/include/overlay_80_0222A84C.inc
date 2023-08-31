@@ -3,13 +3,13 @@
 .public AllocAndReadWholeNarcMemberByIdPair
 .public NewMsgDataFromNarc
 .public DestroyMsgData
-.public ScrStrBufs_new_custom
-.public ScrStrBufs_delete
+.public MessageFormat_New_Custom
+.public MessageFormat_Delete
 .public AllocFromHeap
 .public FreeToHeap
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public sub_0209680C
 .public MI_CpuFill8
 .public ov80_0222A84C

@@ -1,11 +1,11 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public EasyChatManager_new
-.public EasyChatManager_delete
+.public EasyChatManager_New
+.public EasyChatManager_Delete
 .public EasyChatManager_ReadWordIntoString
 .public GetECWordIndexByPair
-.public SaveEasyChat_GetTrendySayingFlag
-.public SaveEasyChat_GetGreetingsFlag
+.public Save_EasyChat_GetTrendySayingFlag
+.public Save_EasyChat_GetGreetingsFlag
 .public AllocFromHeap
 .public FreeToHeap
 .public Pokedex_CheckMonSeenFlag

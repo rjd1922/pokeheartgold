@@ -11,10 +11,10 @@
 .public IsPaletteFadeFinished
 .public FreeToHeap
 .public System_GetTouchHeld
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public String16_FormatInteger
-.public StringCat
+.public String_Cat
 .public sub_02026C44
 .public sub_02026CC4
 .public sub_0203A4AC

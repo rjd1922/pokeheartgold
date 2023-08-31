@@ -15,8 +15,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadFromNarc_GetSizeOut
 .public GfGfxLoader_LoadCharDataFromOpenNarc
 .public GfGfxLoader_LoadScrnDataFromOpenNarc
@@ -26,8 +26,8 @@
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public NewString_ReadMsgData
-.public ScrStrBufs_new
-.public ScrStrBufs_delete
+.public MessageFormat_New
+.public MessageFormat_Delete
 .public BufferString
 .public BufferIntegerAsString
 .public StringExpandPlaceholders
@@ -85,7 +85,7 @@
 .public ClearWindowTilemapAndScheduleTransfer
 .public FillWindowPixelBuffer
 .public GetWindowWidth
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ScheduleBgTilemapBufferTransfer
 .public ScheduleSetBgPosText
 .public AddTextPrinterParameterized2
@@ -97,12 +97,12 @@
 .public GX_EngineBToggleLayers
 .public sub_02025224
 .public sub_02025320
-.public String_ctor
-.public String_dtor
-.public Sav2_PlayerData_GetOptionsAddr
+.public String_New
+.public String_Delete
+.public Save_PlayerData_GetOptionsAddr
 .public Options_GetFrame
 .public sub_0202D5DC
-.public Save_FrontierData_get
+.public Save_FrontierData_Get
 .public sub_02030AD4
 .public sub_02030AE8
 .public sub_02030E08
@@ -129,7 +129,7 @@
 .public sub_0205C2E8
 .public sub_0205C310
 .public sub_0205C350
-.public GetDexZknDataNarcID
+.public GetPokedexDataNarcID
 .public MIi_CpuCopy16
 .public memset
 .public _s32_div_f

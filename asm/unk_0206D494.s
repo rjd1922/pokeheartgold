@@ -34,7 +34,7 @@ sub_0206D494: ; 0x0206D494
 	ldr r1, _0206D4DC ; =sub_0206D4E4
 	add r0, r6, #0
 	add r2, r4, #0
-	bl FieldSys_CreateTask
+	bl FieldSystem_CreateTask
 	ldr r0, _0206D4E0 ; =0x00000905
 	bl PlaySE
 	mov r0, #1
@@ -51,7 +51,7 @@ _0206D4E0: .word 0x00000905
 sub_0206D4E4: ; 0x0206D4E4
 	push {r4, r5, r6, lr}
 	add r4, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r6, r0, #0
 	add r0, r4, #0
 	bl TaskManager_GetEnv
@@ -202,10 +202,10 @@ sub_0206D614: ; 0x0206D614
 	add r6, r1, #0
 	add r7, r2, #0
 	str r3, [sp]
-	bl MapObjectMan_GetObjects
+	bl MapObjectManager_GetObjects
 	str r0, [sp, #4]
 	add r0, r4, #0
-	bl MapObjectMan_GetCount
+	bl MapObjectManager_GetCount
 	add r5, r0, #0
 _0206D62E:
 	ldr r0, [sp, #4]
@@ -515,7 +515,7 @@ _0206D892:
 
 	thumb_func_start MonIsInGameTradePoke
 MonIsInGameTradePoke: ; 0x0206D894
-	; BOOL MonIsInGameTradePoke(struct Pokemon *poke, int tradeno);
+	; BOOL MonIsInGameTradePoke(Pokemon *poke, int tradeno);
 	push {r3, r4, r5, r6, lr}
 	sub sp, #4
 	add r5, r0, #0
@@ -553,10 +553,10 @@ sub_0206D8D0: ; 0x0206D8D0
 	add r6, r1, #0
 	add r5, r0, #0
 	add r0, r6, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r4, r0, #0
 	add r0, r6, #0
-	bl Sav2_Misc_get
+	bl Save_Misc_Get
 	add r6, r0, #0
 	add r0, r5, #0
 	mov r1, #5
@@ -673,7 +673,7 @@ _0206D9CC: .word gGameVersion
 
 	thumb_func_start MonIsInGameTradePokeEx
 MonIsInGameTradePokeEx: ; 0x0206D9D0
-	; BOOL MonIsInGameTradePokeEx(struct Pokemon *poke, struct InGameTrade *trade, int tradeno);
+	; BOOL MonIsInGameTradePokeEx(Pokemon *poke, struct InGameTrade *trade, int tradeno);
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #8
 	add r5, r1, #0
@@ -771,7 +771,7 @@ _0206DA80:
 	add r5, r0, #0
 	mov r0, #0xc
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	str r0, [sp]
 	ldr r2, [sp]
 	add r0, r4, #0
@@ -783,12 +783,12 @@ _0206DA80:
 	str r0, [sp, #4]
 	ldr r0, [sp]
 	ldr r1, [sp, #4]
-	bl StringCompare
+	bl String_Compare
 	add r7, r0, #0
 	ldr r0, [sp, #4]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp]
-	bl String_dtor
+	bl String_Delete
 	cmp r7, #0
 	beq _0206DAD2
 	add r0, r5, #0
@@ -799,7 +799,7 @@ _0206DA80:
 _0206DAD2:
 	mov r0, #8
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	add r0, r4, #0
 	mov r1, #0x91
@@ -812,12 +812,12 @@ _0206DAD2:
 	add r6, r0, #0
 	add r0, r7, #0
 	add r1, r6, #0
-	bl StringCompare
+	bl String_Compare
 	add r4, r0, #0
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	cmp r4, #0
 	beq _0206DB18
 	add r0, r5, #0
@@ -835,13 +835,13 @@ _0206DB18:
 _0206DB24: .word gGameVersion
 	thumb_func_end MonIsInGameTradePokeEx
 
-	thumb_func_start FieldSys_BugContest_get
-FieldSys_BugContest_get: ; 0x0206DB28
+	thumb_func_start FieldSystem_BugContest_Get
+FieldSystem_BugContest_Get: ; 0x0206DB28
 	mov r1, #0x46
 	lsl r1, r1, #2
 	ldr r0, [r0, r1]
 	bx lr
-	thumb_func_end FieldSys_BugContest_get
+	thumb_func_end FieldSystem_BugContest_Get
 
 	thumb_func_start BugContest_GetSportBallsAddr
 BugContest_GetSportBallsAddr: ; 0x0206DB30
@@ -849,16 +849,16 @@ BugContest_GetSportBallsAddr: ; 0x0206DB30
 	bx lr
 	thumb_func_end BugContest_GetSportBallsAddr
 
-	thumb_func_start FieldSys_IncrementBugContestTimer
-FieldSys_IncrementBugContestTimer: ; 0x0206DB34
+	thumb_func_start FieldSystem_IncrementBugContestTimer
+FieldSystem_IncrementBugContestTimer: ; 0x0206DB34
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	add r6, r1, #0
-	bl FieldSys_BugContest_get
+	bl FieldSystem_BugContest_Get
 	add r4, r0, #0
 	beq _0206DB56
 	ldr r0, [r5, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	bl CheckFlag996
 	cmp r0, #0
 	beq _0206DB56
@@ -867,7 +867,7 @@ FieldSys_IncrementBugContestTimer: ; 0x0206DB34
 	str r0, [r4, #0x1c]
 _0206DB56:
 	pop {r4, r5, r6, pc}
-	thumb_func_end FieldSys_IncrementBugContestTimer
+	thumb_func_end FieldSystem_IncrementBugContestTimer
 
 	thumb_func_start sub_0206DB58
 sub_0206DB58: ; 0x0206DB58
@@ -875,7 +875,7 @@ sub_0206DB58: ; 0x0206DB58
 	sub sp, #0x14
 	add r5, r0, #0
 	ldr r0, [r1, #0xc]
-	bl Save_FlyPoints_get
+	bl Save_LocalFieldData_Get
 	mov r1, #0x60
 	str r1, [sp]
 	sub r1, #0x61
@@ -888,9 +888,9 @@ sub_0206DB58: ; 0x0206DB58
 	str r1, [sp, #0x10]
 	add r4, r0, #0
 	add r1, sp, #0
-	bl FlyPoints_SetDynamicWarp
+	bl LocalFieldData_SetDynamicWarp
 	add r0, r4, #0
-	bl FlyPoints_GetDynamicWarp
+	bl LocalFieldData_GetDynamicWarp
 	add r1, r0, #0
 	add r0, r5, #0
 	bl sub_020537A8
@@ -925,13 +925,13 @@ _0206DBBC: .word sub_0206DBC0
 sub_0206DBC0: ; 0x0206DBC0
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r7, r0, #0
 	add r0, r6, #0
 	bl TaskManager_GetEnv
 	add r4, r0, #0
 	add r0, r7, #0
-	bl FieldSys_BugContest_get
+	bl FieldSystem_BugContest_Get
 	add r5, r0, #0
 	add r0, r6, #0
 	bl TaskManager_GetStatePtr
@@ -963,7 +963,7 @@ _0206DBFC:
 	b _0206DC4C
 _0206DC10:
 	add r0, r7, #0
-	bl FieldSys_ApplicationIsRunning
+	bl FieldSystem_ApplicationIsRunning
 	cmp r0, #0
 	bne _0206DC4C
 	ldr r0, [r4, #8]
@@ -1026,7 +1026,7 @@ ScrCmd_807: ; 0x0206DC50
 	add r7, r0, #0
 	ldr r0, [r4]
 	ldr r0, [r0, #0xc]
-	bl Save_TrainerHouse_get
+	bl Save_TrainerHouse_Get
 	add r4, r0, #0
 	mov r0, #6
 	lsl r0, r0, #6
@@ -1052,18 +1052,18 @@ _0206DCBA:
 _0206DCC0: .word 0x00004021
 	thumb_func_end ScrCmd_807
 
-	thumb_func_start Fsys_InitMystriStageGymmick
-Fsys_InitMystriStageGymmick: ; 0x0206DCC4
+	thumb_func_start FieldSystem_InitMystriStageGymmick
+FieldSystem_InitMystriStageGymmick: ; 0x0206DCC4
 	push {r4, lr}
-	bl FieldSys_GetSaveDataPtr
-	bl Sav2_GetGymmickPtr
+	bl FieldSystem_GetSaveData
+	bl Save_GetGymmickPtr
 	add r4, r0, #0
 	mov r1, #9
-	bl SavGymmick_Init
+	bl Save_Gymmick_Init
 	add r0, r4, #0
 	mov r1, #9
-	bl SavGymmick_AssertMagic_GetData
+	bl Save_Gymmick_AssertMagic_GetData
 	mov r1, #0
 	str r1, [r0]
 	pop {r4, pc}
-	thumb_func_end Fsys_InitMystriStageGymmick
+	thumb_func_end FieldSystem_InitMystriStageGymmick

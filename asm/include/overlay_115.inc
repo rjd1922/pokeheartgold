@@ -7,8 +7,8 @@
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public ReadMsgDataIntoString
-.public ScrStrBufs_new
-.public ScrStrBufs_delete
+.public MessageFormat_New
+.public MessageFormat_Delete
 .public BufferRivalsName
 .public BufferTrainerName
 .public StringExpandPlaceholders
@@ -36,11 +36,11 @@
 .public Set2dSpriteAnimSeqNo
 .public sub_02024A04
 .public sub_02024B34
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public Thunk_G3X_Reset
 .public sub_02026E50
-.public Sav2_PlayerData_GetProfileAddr
+.public Save_PlayerData_GetProfileAddr
 .public PlayerProfile_GetTrainerGender
 .public NNS_G2dGetImagePaletteLocation
 .public G2x_SetBlendAlpha_

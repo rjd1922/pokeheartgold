@@ -69,7 +69,7 @@ _021E5960:
 	ldr r1, _021E5A20 ; =0x0000C334
 	str r0, [r5, r1]
 	add r0, r4, #0
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	str r0, [r5, #8]
 	bl ov69_021E60F8
 	bl ov69_021E6118
@@ -86,11 +86,11 @@ _021E5960:
 	ldr r2, [r5]
 	mov r0, #8
 	mov r1, #0x40
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	ldr r1, _021E5A28 ; =0x0000C080
 	str r0, [r5, r1]
 	ldr r0, [r5]
-	bl GF_Camera_Create
+	bl Camera_New
 	ldr r1, _021E5A2C ; =0x0000C2DC
 	str r0, [r5, r1]
 	mov r0, #0
@@ -191,7 +191,7 @@ _021E5A9A:
 	str r0, [r4, r1]
 	ldr r1, [r4]
 	mov r0, #0x7b
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r6, #0
@@ -200,7 +200,7 @@ _021E5A9A:
 	add r1, r6, #0
 	bl ov69_021E64CC
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0
 	ldr r1, _021E5D84 ; =0x0000C2FC
 	add r3, r0, #0
@@ -900,10 +900,10 @@ ov69_021E6080: ; 0x021E6080
 	bl GX_EngineBToggleLayers
 	ldr r0, _021E60E8 ; =0x0000C2DC
 	ldr r0, [r4, r0]
-	bl sub_02023120
+	bl Camera_Delete
 	ldr r0, _021E60EC ; =0x0000C080
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	bl sub_0201F63C
 	ldr r0, _021E60F0 ; =0x0000C010
 	ldr r0, [r4, r0]
@@ -974,7 +974,7 @@ ov69_021E6138: ; 0x021E6138
 	ldr r1, [sp, #8]
 	mov r0, #0x62
 	ldr r1, [r1]
-	bl NARC_ctor
+	bl NARC_New
 	ldr r1, [sp, #8]
 	mov r2, #0
 	str r2, [r1, #0xc]
@@ -1090,7 +1090,7 @@ _021E6224:
 	blt _021E61C0
 _021E6232:
 	ldr r0, [sp, #0x1c]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x28
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov69_021E6138
@@ -1641,7 +1641,7 @@ ov69_021E64CC: ; 0x021E64CC
 	bl BG_SetMaskColor
 	ldr r1, [r4]
 	mov r0, #0x10
-	bl String_ctor
+	bl String_New
 	add r5, r0, #0
 	ldr r1, [r4]
 	mov r0, #4
@@ -1740,7 +1740,7 @@ ov69_021E64CC: ; 0x021E64CC
 	str r3, [sp, #8]
 	bl AddTextPrinterParameterized
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #4
 	bl FontID_Release
 	add sp, #0x18
@@ -1834,7 +1834,7 @@ _021E682C:
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #0xa
-	bl String_ctor
+	bl String_New
 	ldr r2, _021E68C8 ; =0x0000C07C
 	add r1, r6, #0
 	str r0, [r5, r2]
@@ -1871,7 +1871,7 @@ _021E6886:
 	bne _021E68BC
 	ldr r0, _021E68C8 ; =0x0000C07C
 	ldr r0, [r5, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E68C4 ; =0x0000C074
 	mov r1, #2
 	str r1, [r5, r0]
@@ -1926,7 +1926,7 @@ ov69_021E68EC: ; 0x021E68EC
 	bl AddWindow
 	ldrh r0, [r6, #0x10]
 	ldr r1, [r5]
-	bl ListMenuItems_ctor
+	bl ListMenuItems_New
 	ldr r1, _021E6980 ; =0x0000C068
 	mov r7, #0
 	str r0, [r5, r1]
@@ -2012,7 +2012,7 @@ ov69_021E6994: ; 0x021E6994
 	str r0, [sp, #8]
 	ldr r1, [r5]
 	add r0, r6, #0
-	bl ListMenuItems_ctor
+	bl ListMenuItems_New
 	ldr r1, _021E6A44 ; =0x0000C068
 	mov r4, #0
 	str r0, [r5, r1]
@@ -2099,7 +2099,7 @@ ov69_021E6A54: ; 0x021E6A54
 	bl DestroyListMenu
 	ldr r0, _021E6A88 ; =0x0000C068
 	ldr r0, [r4, r0]
-	bl ListMenuItems_dtor
+	bl ListMenuItems_Delete
 	pop {r4, pc}
 	.balign 4, 0
 _021E6A80: .word 0x0000C024
@@ -2115,12 +2115,12 @@ ov69_021E6A8C: ; 0x021E6A8C
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #0xa
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #0xa
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E6B40 ; =0x0000C010
 	add r6, r0, #0
 	ldr r0, [r5, r1]
@@ -2178,9 +2178,9 @@ ov69_021E6A8C: ; 0x021E6A8C
 	str r1, [sp, #8]
 	bl AddTextPrinterParameterized
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E6B48 ; =0x0000C054
 	add r0, r5, r0
 	bl CopyWindowToVram
@@ -2205,11 +2205,11 @@ ov69_021E6B5C: ; 0x021E6B5C
 	ldr r1, [r5]
 	mov r0, #0x40
 	add r4, r2, #0
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	ldr r1, [r5]
 	mov r0, #0x40
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E6C04 ; =0x0000C010
 	add r6, r0, #0
 	ldr r0, [r5, r1]
@@ -2264,9 +2264,9 @@ _021E6BD8:
 	str r1, [sp, #8]
 	bl AddTextPrinterParameterized
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E6C0C ; =0x0000C054
 	add r0, r5, r0
 	bl CopyWindowToVram
@@ -2467,7 +2467,7 @@ ov69_021E6D5C: ; 0x021E6D5C
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #0xa
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	mov r0, #0xd8
 	str r0, [sp]
@@ -2494,7 +2494,7 @@ ov69_021E6D5C: ; 0x021E6D5C
 	str r3, [sp, #8]
 	bl AddTextPrinterParameterized
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r4, r5, r6, pc}
 _021E6DB6:
@@ -2504,11 +2504,11 @@ _021E6DB6:
 	beq _021E6E6E
 	ldr r1, [r5]
 	mov r0, #0x40
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	ldr r1, [r5]
 	mov r0, #0x40
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	mov r0, #0xd8
 	str r0, [sp]
@@ -2561,9 +2561,9 @@ _021E6E2A:
 	str r3, [sp, #8]
 	bl AddTextPrinterParameterized
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0xc]
 	mov r1, #0x30
 	add r2, r0, #0
@@ -2779,20 +2779,20 @@ ov69_021E6FE8: ; 0x021E6FE8
 	ldr r2, _021E7064 ; =0x000005C1
 	str r0, [sp, #4]
 	add r0, r7, #0
-	bl sub_02023308
+	bl Camera_Init_FromTargetAndPos
 	ldr r2, _021E7060 ; =0x0000C2DC
 	mov r1, #0x19
 	ldr r2, [r4, r2]
 	mov r0, #0
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	ldr r1, _021E7060 ; =0x0000C2DC
 	mov r0, #0
 	ldr r1, [r4, r1]
-	bl sub_020233D8
+	bl Camera_ApplyPerspectiveType
 	ldr r0, _021E7060 ; =0x0000C2DC
 	ldr r0, [r4, r0]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	ldr r0, _021E7068 ; =0x0000C304
 	ldrh r1, [r4, r0]
 	cmp r1, #0
@@ -3239,7 +3239,7 @@ ov69_021E737C: ; 0x021E737C
 	add r5, r0, #0
 	ldr r0, _021E7400 ; =0x0000C2DC
 	ldr r0, [r5, r0]
-	bl GF_Camera_GetDistance
+	bl Camera_GetDistance
 	ldr r1, _021E7404 ; =0x0000C2E8
 	mov r4, #0
 	ldrh r2, [r5, r1]
@@ -3300,7 +3300,7 @@ _021E73EE:
 _021E73F4:
 	ldr r1, _021E7400 ; =0x0000C2DC
 	ldr r1, [r5, r1]
-	bl GF_Camera_SetDistance
+	bl Camera_SetDistance
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -3342,7 +3342,7 @@ _021E7414:
 	pop {r3, r4, r5, r6, r7, pc}
 _021E7446:
 	bl Thunk_G3X_Reset
-	bl sub_02023154
+	bl Camera_PushLookAtToNNSGlb
 	ldr r1, _021E7500 ; =0x0000C2C4
 	add r0, sp, #0x4c
 	add r1, r5, r1

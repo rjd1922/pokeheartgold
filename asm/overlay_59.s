@@ -190,7 +190,7 @@ ov59_02237E94: ; 0x02237E94
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x18]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r4, r0, #0
 	bl Options_GetTextFrameDelay
 	add r1, r5, #0
@@ -213,7 +213,7 @@ ov59_02237E94: ; 0x02237E94
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x18]
-	bl Save_ApricornBox_get
+	bl Save_ApricornBox_Get
 	str r0, [r5, #0x10]
 	add r0, r5, #0
 	bl ov59_02238768
@@ -2924,7 +2924,7 @@ ov59_022393D4: ; 0x022393D4
 _022393E6:
 	bl NNS_GfdDoVramTransfer
 	ldr r0, [r4, #0x54]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _02239400 ; =0x027E0000
 	ldr r1, _02239404 ; =0x00003FF8
 	mov r0, #1
@@ -3173,7 +3173,7 @@ ov59_02239604: ; 0x02239604
 	add r5, r0, #0
 	ldr r1, [r5]
 	mov r0, #0xdc
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0
 	str r2, [sp]
 	ldr r1, [r5]
@@ -3277,7 +3277,7 @@ ov59_022396E4: ; 0x022396E4
 	mov r1, #0x29
 	lsl r1, r1, #4
 	ldr r0, [r0, r1]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r1, #0
 	ldr r0, _02239700 ; =0x04000050
 	add r2, r1, #0
@@ -3305,17 +3305,17 @@ ov59_02239704: ; 0x02239704
 	ldr r2, [r5]
 	mov r0, #0x10
 	mov r1, #0x20
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	str r0, [r5, #0x60]
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #8
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x64]
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #8
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x68]
 	ldr r0, [r5, #0x5c]
 	mov r1, #1
@@ -3364,7 +3364,7 @@ _02239794:
 	add r0, r5, #0
 	add r0, #0xd0
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #7
@@ -3373,21 +3373,21 @@ _02239794:
 	add r4, r6, #0
 _022397AA:
 	ldr r0, [r4, #0x78]
-	bl String_dtor
+	bl String_Delete
 	add r5, r5, #1
 	add r4, r4, #4
 	cmp r5, #0x16
 	blt _022397AA
 	ldr r0, [r6, #0x74]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x6c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x68]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x64]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x60]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r6, #0x5c]
 	bl DestroyMsgData
 	mov r0, #4
@@ -3527,7 +3527,7 @@ ov59_022398CC: ; 0x022398CC
 	ldr r1, [r6]
 	add r5, r0, r7
 	ldrh r0, [r0, r7]
-	bl ListMenuItems_ctor
+	bl ListMenuItems_New
 	mov r1, #0xa5
 	lsl r1, r1, #2
 	str r0, [r6, r1]
@@ -3565,7 +3565,7 @@ ov59_02239918: ; 0x02239918
 	mov r0, #0xa5
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl ListMenuItems_dtor
+	bl ListMenuItems_Delete
 	mov r0, #0xa5
 	mov r1, #0
 	lsl r0, r0, #2
@@ -5798,7 +5798,7 @@ ov59_0223A9E4: ; 0x0223A9E4
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0x18]
 	str r0, [r5, #8]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r4, r0, #0
 	bl Options_GetTextFrameDelay
 	add r1, r5, #0
@@ -5810,7 +5810,7 @@ ov59_0223A9E4: ; 0x0223A9E4
 	add r1, #0x4c
 	strb r0, [r1]
 	ldr r0, [r5, #8]
-	bl Save_ApricornBox_get
+	bl Save_ApricornBox_Get
 	str r0, [r5, #0x14]
 	ldr r1, [r5, #4]
 	add r2, r5, #0
@@ -6356,9 +6356,9 @@ ov59_0223AE20: ; 0x0223AE20
 	sub sp, #0xc
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [r5, #0x10]
-	bl GetPartyCount
+	bl Party_GetCount
 	mov r6, #0
 	add r4, r6, #0
 	str r0, [sp, #4]
@@ -6371,7 +6371,7 @@ ov59_0223AE20: ; 0x0223AE20
 _0223AE44:
 	ldr r0, [r5, #0x10]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0x4c
 	mov r2, #0
 	add r7, r0, #0
@@ -7123,7 +7123,7 @@ _0223B3EE:
 	bl ov59_0223C374
 	bl GF_RunVramTransferTasks
 	ldr r0, [r4, #0x54]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _0223B40C ; =0x027E0000
 	ldr r1, _0223B410 ; =0x00003FF8
 	mov r0, #1
@@ -7318,7 +7318,7 @@ ov59_0223B590: ; 0x0223B590
 	add r5, r0, #0
 	ldr r1, [r5]
 	mov r0, #0xf4
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0
 	str r2, [sp]
 	ldr r1, [r5]
@@ -7421,7 +7421,7 @@ ov59_0223B66C: ; 0x0223B66C
 	mov r1, #0xba
 	lsl r1, r1, #2
 	ldr r0, [r0, r1]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r1, #0
 	ldr r0, _0223B688 ; =0x04000050
 	add r2, r1, #0
@@ -7453,17 +7453,17 @@ ov59_0223B68C: ; 0x0223B68C
 	mov r0, #0x10
 	ldr r2, [r6]
 	add r1, r0, #0
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	str r0, [r6, #0x60]
 	mov r0, #1
 	ldr r1, [r6]
 	lsl r0, r0, #8
-	bl String_ctor
+	bl String_New
 	str r0, [r6, #0x64]
 	mov r0, #1
 	ldr r1, [r6]
 	lsl r0, r0, #8
-	bl String_ctor
+	bl String_New
 	str r0, [r6, #0x68]
 	ldr r0, [r6, #0x5c]
 	mov r1, #4
@@ -7490,17 +7490,17 @@ ov59_0223B6FC: ; 0x0223B6FC
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x74]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x70]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x6c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x68]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x64]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x60]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r4, #0x5c]
 	bl DestroyMsgData
 	mov r0, #0
@@ -7937,13 +7937,13 @@ ov59_0223BA64: ; 0x0223BA64
 	add r1, r0, #0
 	ldrh r0, [r5, #4]
 	mov r2, #0x1c
-	bl GetMonBaseStat_HandleAlternateForme
+	bl GetMonBaseStat_HandleAlternateForm
 	mov r1, #1
 	eor r0, r1
 	strb r0, [r5, #9]
 	ldr r1, [sp, #0x10]
 	mov r0, #0xc
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0xc]
 	ldr r2, [r5, #0xc]
 	add r0, r4, #0
@@ -7964,11 +7964,11 @@ ov59_0223BA64: ; 0x0223BA64
 
 	thumb_func_start ov59_0223BADC
 ov59_0223BADC: ; 0x0223BADC
-	ldr r3, _0223BAE4 ; =String_dtor
+	ldr r3, _0223BAE4 ; =String_Delete
 	ldr r0, [r0, #0xc]
 	bx r3
 	nop
-_0223BAE4: .word String_dtor
+_0223BAE4: .word String_Delete
 	thumb_func_end ov59_0223BADC
 
 	thumb_func_start ov59_0223BAE8
@@ -9010,7 +9010,7 @@ ov59_0223C304: ; 0x0223C304
 	bl sub_0201543C
 	bl Thunk_G3X_Reset
 	bl NNS_G2dSetupSoftwareSpriteCamera
-	bl sub_02023154
+	bl Camera_PushLookAtToNNSGlb
 	ldr r2, _0223C348 ; =0x04000440
 	mov r3, #0
 	add r1, r2, #0
@@ -9039,7 +9039,7 @@ ov59_0223C350: ; 0x0223C350
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #8]
-	bl sub_02023120
+	bl Camera_Delete
 	ldr r0, [r4, #0xc]
 	bl sub_02008524
 	add r0, r4, #0
@@ -9318,7 +9318,7 @@ ov59_0223C53C: ; 0x0223C53C
 	mov r1, #0xe1
 	lsl r0, r0, #0xc
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 _0223C574:
 	add r0, r4, #0
 	add sp, #8
@@ -9381,7 +9381,7 @@ ov59_0223C5C4: ; 0x0223C5C4
 	strh r0, [r1, #4]
 	strh r0, [r1, #6]
 	add r0, r2, #0
-	bl GF_Camera_Create
+	bl Camera_New
 	str r0, [r4, #8]
 	mov r1, #1
 	str r1, [sp]
@@ -9391,16 +9391,16 @@ ov59_0223C5C4: ; 0x0223C5C4
 	add r0, sp, #0x10
 	lsl r1, r1, #0x10
 	add r2, sp, #8
-	bl sub_020232BC
+	bl Camera_Init_FromPosDistanceAndAngle
 	mov r1, #0x19
 	ldr r2, [r4, #8]
 	mov r0, #0
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	ldr r0, [r4, #8]
-	bl sub_02023234
+	bl Camera_ClearFixedTarget
 	ldr r0, [r4, #8]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	add sp, #0x1c
 	pop {r4, r5, pc}
 	.balign 4, 0

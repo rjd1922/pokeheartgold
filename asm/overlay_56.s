@@ -538,7 +538,7 @@ _021E5FF2:
 	bl FillWindowPixelBuffer
 	ldr r1, [r5]
 	mov r0, #0x4c
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r0, [r5, #0x20]
 	mov r1, #2
@@ -556,7 +556,7 @@ _021E5FF2:
 	str r3, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	b _021E6088
 _021E603E:
 	ldr r1, _021E6098 ; =gSystem
@@ -731,7 +731,7 @@ _021E6162:
 	bl FillWindowPixelBuffer
 	ldr r1, [r5]
 	mov r0, #0x4c
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r0, [r5, #0x20]
 	mov r1, #3
@@ -751,7 +751,7 @@ _021E6162:
 	bl AddTextPrinterParameterized2
 	strb r0, [r5, #0xf]
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	bl ov56_021E5D08
 	ldrb r0, [r5, #0x16]
@@ -1022,7 +1022,7 @@ _021E63CE:
 _021E63DC:
 	bl NNS_GfdDoVramTransfer
 	ldr r0, [r4, #0x18]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E63F4 ; =0x027E0000
 	ldr r1, _021E63F8 ; =0x00003FF8
 	mov r0, #1
@@ -1340,7 +1340,7 @@ ov56_021E6650: ; 0x021E6650
 	add r0, #0x18
 	str r0, [sp, #0x20]
 	mov r0, #0x4f
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	add r4, r0, #0
@@ -1559,7 +1559,7 @@ _021E6768:
 	add r1, #0x48
 	bl NNS_G2dGetUnpackedScreenData
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r3, #0
 	str r3, [sp]
 	mov r0, #0x20
@@ -1863,7 +1863,7 @@ _021E6AB2:
 	mov r3, #0
 	bl AddTextPrinterParameterized2
 	ldr r0, [sp, #0x10]
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
 	bl CopyWindowToVram
 _021E6AF4:
@@ -1883,7 +1883,7 @@ _021E6AF4:
 	str r0, [r4, #0x20]
 	ldr r1, [r4]
 	mov r0, #0x10
-	bl String_ctor
+	bl String_New
 	add r5, r0, #0
 	add r0, r4, #0
 	str r0, [sp, #0x18]
@@ -1892,7 +1892,7 @@ _021E6AF4:
 	str r0, [sp, #0x18]
 _021E6B26:
 	add r0, r5, #0
-	bl StringSetEmpty
+	bl String_SetEmpty
 	ldr r0, [r4, #0x20]
 	add r1, r6, #0
 	add r2, r5, #0
@@ -1931,7 +1931,7 @@ _021E6B26:
 	cmp r6, #2
 	blt _021E6B26
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x1c
 	pop {r4, r5, r6, r7, pc}
 _021E6B88:

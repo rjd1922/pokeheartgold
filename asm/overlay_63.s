@@ -50,33 +50,33 @@ ov63_0221BE20: ; 0x0221BE20
 	add r1, #0x84
 	str r0, [r1]
 	mov r0, #0x3e
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	add r1, r5, #0
 	add r1, #0x88
 	str r0, [r1]
 	mov r0, #0x7d
 	lsl r0, r0, #2
 	mov r1, #0x3e
-	bl String_ctor
+	bl String_New
 	add r1, r5, #0
 	add r1, #0x8c
 	str r0, [r1]
 	mov r0, #0x7d
 	lsl r0, r0, #2
 	mov r1, #0x3e
-	bl String_ctor
+	bl String_New
 	add r1, r5, #0
 	add r1, #0x90
 	str r0, [r1]
 	mov r0, #0x65
 	mov r1, #0x3e
-	bl NARC_ctor
+	bl NARC_New
 	add r1, r5, #0
 	add r1, #0x94
 	str r0, [r1]
 	mov r0, #0xb4
 	mov r1, #0x3e
-	bl NARC_ctor
+	bl NARC_New
 	add r1, r5, #0
 	add r1, #0x98
 	str r0, [r1]
@@ -126,23 +126,23 @@ ov63_0221BF28: ; 0x0221BF28
 	add r0, r4, #0
 	add r0, #0x98
 	ldr r0, [r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r4, #0
 	add r0, #0x94
 	ldr r0, [r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r4, #0
 	add r0, #0x8c
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	add r0, #0x90
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	add r0, #0x88
 	ldr r0, [r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r4, #0x84
 	ldr r0, [r4]
 	bl DestroyMsgData
@@ -208,7 +208,7 @@ ov63_0221BFCC: ; 0x0221BFCC
 	str r0, [r4, #8]
 _0221BFE2:
 	ldr r0, [r4, #0x10]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	add r4, #0xa0
 	ldr r0, [r4]
 	bl sub_0200D020
@@ -1122,7 +1122,7 @@ ov63_0221C6FC: ; 0x0221C6FC
 	add r5, r0, #0
 	mov r0, #8
 	mov r1, #0x3e
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r0, #0
 	str r0, [sp]
@@ -1270,7 +1270,7 @@ ov63_0221C6FC: ; 0x0221C6FC
 	mov r3, #0x4b
 	bl sub_0200D5D4
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -4266,12 +4266,12 @@ ov63_0221E114: ; 0x0221E114
 	stmia r2!, {r0, r1}
 	mov r0, #0xb4
 	mov r1, #0x3e
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x18]
 	ldr r0, [r6]
 	mov r7, #0
 	ldr r0, [r0, #4]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	bhi _0221E148
 	b _0221E2EC
@@ -4284,7 +4284,7 @@ _0221E150:
 	ldr r0, [r6]
 	add r1, r7, #0
 	ldr r0, [r0, #4]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r4, r0, #0
 	bl AcquireMonLock
 	str r0, [sp, #0x14]
@@ -4466,13 +4466,13 @@ _0221E2D4:
 	ldr r0, [r6]
 	add r7, r7, #1
 	ldr r0, [r0, #4]
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r7, r0
 	bhs _0221E2EC
 	b _0221E150
 _0221E2EC:
 	ldr r0, [sp, #0x18]
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x50
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -4573,7 +4573,7 @@ _0221E39C:
 	add r5, #0x90
 	ldr r0, [r0]
 	ldr r1, [r5]
-	bl StringCompare
+	bl String_Compare
 	cmp r0, #0
 	beq _0221E3CC
 	mov r5, #2
@@ -4628,7 +4628,7 @@ _0221E41A:
 	ldr r1, _0221E44C ; =0x00000129
 	add r4, r0, r1
 	add r0, r5, #0
-	bl OverworldModelLookupHasFemaleForme
+	bl OverworldModelLookupHasFemaleForm
 	cmp r0, #0
 	beq _0221E434
 	cmp r7, #1
@@ -4637,7 +4637,7 @@ _0221E41A:
 	b _0221E442
 _0221E434:
 	add r0, r5, #0
-	bl OverworldModelLookupFormeCount
+	bl OverworldModelLookupFormCount
 	cmp r6, r0
 	ble _0221E440
 	mov r6, #0
@@ -5264,7 +5264,7 @@ _0221E912:
 	add r0, r4, #0
 	bl ov63_0221F1D0
 	ldr r0, [r4, #0x10]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	add r4, #0xa0
 	ldr r0, [r4]
 	bl sub_0200D020
@@ -5639,7 +5639,7 @@ ov63_0221EC1C: ; 0x0221EC1C
 	stmia r2!, {r0, r1}
 	mov r0, #8
 	mov r1, #0x3e
-	bl NARC_ctor
+	bl NARC_New
 	add r7, r0, #0
 	mov r0, #0
 	str r0, [sp]
@@ -5751,7 +5751,7 @@ _0221EC72:
 	mov r3, #0x4b
 	bl sub_0200D5D4
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #1
 	str r0, [sp]
 	ldr r0, _0221EFB8 ; =0x0000D8DB
@@ -6214,7 +6214,7 @@ ov63_0221F130: ; 0x0221F130
 	sub sp, #0x18
 	add r4, r0, #0
 	mov r0, #0x3e
-	bl GF_Camera_Create
+	bl Camera_New
 	add r1, r4, #0
 	add r1, #0xe0
 	str r0, [r1]
@@ -6251,7 +6251,7 @@ ov63_0221F130: ; 0x0221F130
 	add r0, #0xe4
 	lsl r1, r1, #0xc
 	add r2, #0xf0
-	bl GF_Camera_InitFromTargetDistanceAndAngle
+	bl Camera_Init_FromTargetDistanceAndAngle
 	mov r1, #0
 	mov r0, #1
 	lsl r0, r0, #0xc
@@ -6262,18 +6262,18 @@ ov63_0221F130: ; 0x0221F130
 	add r1, #0xe0
 	ldr r1, [r1]
 	add r0, sp, #0xc
-	bl GF_Camera_SetBindTarget
+	bl Camera_SetLookAtCamUp
 	add r0, r4, #0
 	add r0, #0xe0
 	ldr r0, [r0]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	add r4, #0xe0
 	mov r0, #1
 	mov r1, #0x7d
 	ldr r2, [r4]
 	lsl r0, r0, #0xc
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	add sp, #0x18
 	pop {r4, pc}
 	nop
@@ -6282,12 +6282,12 @@ _0221F1C0: .word 0x00000FA4
 
 	thumb_func_start ov63_0221F1C4
 ov63_0221F1C4: ; 0x0221F1C4
-	ldr r3, _0221F1CC ; =sub_02023120
+	ldr r3, _0221F1CC ; =Camera_Delete
 	add r0, #0xe0
 	ldr r0, [r0]
 	bx r3
 	.balign 4, 0
-_0221F1CC: .word sub_02023120
+_0221F1CC: .word Camera_Delete
 	thumb_func_end ov63_0221F1C4
 
 	thumb_func_start ov63_0221F1D0

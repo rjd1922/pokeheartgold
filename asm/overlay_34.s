@@ -26,7 +26,7 @@ ov34_0225D520: ; 0x0225D520
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -95,7 +95,7 @@ _0225D5C4: ; jump table
 	.short _0225D5F4 - _0225D5C4 - 2 ; case 4
 	.short _0225D5F4 - _0225D5C4 - 2 ; case 5
 _0225D5D0:
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	bne _0225D5E0
 	add r0, r4, #0
@@ -137,7 +137,7 @@ ov34_0225D5F8: ; 0x0225D5F8
 	sub r1, #0xa
 	mov r0, #4
 	strh r2, [r4, r1]
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x18]
 	ldr r2, _0225D64C ; =0x000002E2
 	mov r0, #0
@@ -350,7 +350,7 @@ ov34_0225D7A8: ; 0x0225D7A8
 	ldr r0, [r0]
 	str r0, [r4, #8]
 	ldr r0, [r5, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	str r0, [r4, #0x10]
 	mov r0, #2
 	mov r1, #0xa9
@@ -453,7 +453,7 @@ _0225D8B2:
 	ldr r0, [r6, #0x1c]
 	bl DestroyMsgData
 	ldr r0, [r6, #0x18]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r1, #0x72
 	lsl r1, r1, #2
 	add r0, r6, r1
@@ -1542,7 +1542,7 @@ ov34_0225E164: ; 0x0225E164
 	ldr r0, [r5, #0xc]
 	mov r4, #0
 	mvn r4, r4
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	bne _0225E19A
 	add r0, r5, #0
@@ -1745,7 +1745,7 @@ _0225E2F4:
 	sub r5, r4, #2
 	mov r0, #0xa
 	mov r1, #0x57
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	add r0, r6, #0
 	add r1, r5, #0
@@ -1764,7 +1764,7 @@ _0225E2F4:
 	add r3, r1, #0
 	bl BufferString
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 _0225E332:
 	ldr r1, [sp, #8]
 	add r0, r7, #0
@@ -1812,7 +1812,7 @@ _0225E372:
 	ldr r0, [r0, #4]
 	cmp r0, #0
 	beq _0225E386
-	bl String_dtor
+	bl String_Delete
 _0225E386:
 	ldr r1, [r5]
 	mov r0, #0x1c
@@ -1821,7 +1821,7 @@ _0225E386:
 	ldr r0, [r0, #8]
 	cmp r0, #0
 	beq _0225E398
-	bl String_dtor
+	bl String_Delete
 _0225E398:
 	ldr r0, [sp, #8]
 	bl PlayerProfile_GetNamePtr
@@ -1922,7 +1922,7 @@ _0225E450:
 	bne _0225E464
 	ldr r0, [sp]
 	add r1, #0x14
-	bl MailMsg_compare
+	bl MailMsg_Compare
 	cmp r0, #0
 	bne _0225E478
 _0225E464:
@@ -1957,7 +1957,7 @@ _0225E48E:
 	beq _0225E4A2
 	ldr r0, [sp]
 	add r1, #0x14
-	bl MailMsg_compare
+	bl MailMsg_Compare
 _0225E4A2:
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -2012,7 +2012,7 @@ ov34_0225E4F8: ; 0x0225E4F8
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	bne _0225E55C
 	mov r4, #0

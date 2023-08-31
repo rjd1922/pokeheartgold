@@ -547,15 +547,15 @@ ov117_0225F470: ; 0x0225F470
 	bl NewMsgDataFromNarc
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	add r4, r0, #0
 	mov r0, #0x80
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	mov r0, #0x80
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	add r5, r0, #0
 	add r0, r6, #0
 	mov r1, #0
@@ -572,9 +572,9 @@ ov117_0225F470: ; 0x0225F470
 	add r0, r6, #0
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov117_0225F470
@@ -816,7 +816,7 @@ _0225F560:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0
 	str r0, [sp]
 	mov r0, #2
@@ -1074,7 +1074,7 @@ _0225F892:
 	mov r1, #0
 	mov r2, #0x10
 	mov r3, #0x1e
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	ldr r1, _0225F8F4 ; =0x000014A5
 	b _0225F8F8
 	nop
@@ -1124,7 +1124,7 @@ _0225F91E:
 	b _0225FA98
 _0225F944:
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	beq _0225F96E
 	mov r0, #0x6d

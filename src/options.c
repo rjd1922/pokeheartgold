@@ -1,18 +1,19 @@
+#include "global.h"
 #include "system.h"
 #include "options.h"
 #include "player_data.h"
 
-OPTIONS* Options_new(HeapID heap_id) {
-    OPTIONS* ret = AllocFromHeap(heap_id, sizeof(OPTIONS));
-    Options_init(ret);
+OPTIONS* Options_New(HeapID heapId) {
+    OPTIONS* ret = AllocFromHeap(heapId, sizeof(OPTIONS));
+    Options_Init(ret);
     return ret;
 }
 
-void Options_copy(OPTIONS* src, OPTIONS* dest) {
+void Options_Copy(OPTIONS* src, OPTIONS* dest) {
     MI_CpuCopy8(src, dest, sizeof(OPTIONS));
 }
 
-void Options_init(OPTIONS* options) {
+void Options_Init(OPTIONS* options) {
     MI_CpuClear8(options, sizeof(OPTIONS));
 
     options->textSpeed = 1;   // mid speed
@@ -23,9 +24,9 @@ void Options_init(OPTIONS* options) {
     options->frame = 0;       // frame 1
 }
 
-void Options_SetButtonModeOnMain(SAVEDATA* savedata, u32 buttonMode) {
-    if (savedata != NULL) {
-        buttonMode = Options_GetButtonMode(Sav2_PlayerData_GetOptionsAddr(savedata));
+void Options_SetButtonModeOnMain(SaveData* saveData, u32 buttonMode) {
+    if (saveData != NULL) {
+        buttonMode = Options_GetButtonMode(Save_PlayerData_GetOptionsAddr(saveData));
     }
 
     switch (buttonMode) {

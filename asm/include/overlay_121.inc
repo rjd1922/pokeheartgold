@@ -29,8 +29,8 @@
 .public DestroyMsgData
 .public NewString_ReadMsgData
 .public ReadMsgData_ExpandPlaceholders
-.public ScrStrBufs_new_custom
-.public ScrStrBufs_delete
+.public MessageFormat_New_Custom
+.public MessageFormat_Delete
 .public BufferString
 .public BufferIntegerAsString
 .public StringExpandPlaceholders
@@ -61,7 +61,7 @@
 .public CopyWindowToVram
 .public ClearWindowTilemapAndCopyToVram
 .public FillWindowPixelBuffer
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ResetAllTextPrinters
 .public AddTextPrinterParameterized2
 .public GF_RunVramTransferTasks
@@ -87,9 +87,9 @@
 .public System_GetTouchHeld
 .public System_GetTouchNew
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
-.public Sav2_PlayerData_GetOptionsAddr
+.public String_New
+.public String_Delete
+.public Save_PlayerData_GetOptionsAddr
 .public Options_GetFrame
 .public sub_0202E4B0
 .public sub_0202E4BC

@@ -10,8 +10,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public sub_0200D034
 .public sub_0200D108
 .public sub_0200D998
@@ -25,7 +25,7 @@
 .public InitBgFromTemplate
 .public FreeBgTilemapBuffer
 .public BgClearTilemapBufferAndCommit
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public GF_RunVramTransferTasks
 .public sub_020210BC
 .public sub_02021148
@@ -37,8 +37,8 @@
 .public GX_EngineBToggleLayers
 .public GX_SwapDisplay
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public sub_02026CAC
 .public sub_0203A880
 .public sub_0203A914

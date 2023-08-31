@@ -18,14 +18,14 @@ scr_seq_0164_000:
 	lockall
 	npc_msg msg_0267_00000
 	closemsg
-	scrcmd_602 0
-	scrcmd_603
-	scrcmd_604 55
+	toggle_following_pokemon_movement 0
+	wait_following_pokemon_movement
+	following_pokemon_movement 55
 	apply_movement obj_player, _0100
 	wait_movement
-	scrcmd_603
-	scrcmd_602 1
-	scrcmd_604 48
+	wait_following_pokemon_movement
+	toggle_following_pokemon_movement 1
+	following_pokemon_movement 48
 	npc_msg msg_0267_00001
 	giveitem_no_check ITEM_PAL_PAD, 1
 	goto _005C
@@ -135,7 +135,7 @@ _0215:
 	get_partymon_species VAR_TEMP_x400A, VAR_SPECIAL_RESULT
 	compare VAR_SPECIAL_RESULT, 172
 	goto_if_ne _0241
-	get_partymon_forme VAR_TEMP_x400A, VAR_SPECIAL_RESULT
+	get_partymon_form VAR_TEMP_x400A, VAR_SPECIAL_RESULT
 	compare VAR_SPECIAL_RESULT, 1
 	goto_if_ne _0241
 	goto _04F8

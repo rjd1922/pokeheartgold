@@ -3,6 +3,7 @@
 
 #include "save.h"
 #include "constants/pokemon.h"
+#include "global.h"
 
 #define TRAINER_HALL_SET_MAX           10
 
@@ -12,15 +13,15 @@ typedef struct TrainerHouseTrainer {
     u8 language;
     u8 version;
     u8 unk7;
-    u16 otName[OT_NAME_LENGTH + 1];
+    u16 otName[PLAYER_NAME_LENGTH + 1];
     u8 filler_18[0x18];
 } TrainerHouseTrainer; // size=0x30
 
 typedef struct TrainerHouseMon {
     u16 species:11;
-    u16 forme:5;
+    u16 form:5;
     u16 item;
-    u16 moves[MON_MOVES];
+    u16 moves[MAX_MON_MOVES];
     u32 pid;
     u32 otid;
     u32 hpIv:5;
@@ -50,8 +51,8 @@ typedef struct TrainerHouseSave {
 } TrainerHouseSave; // size=0xF00
 
 u32 Save_TrainerHouse_sizeof(void);
-TrainerHouseSave *Save_TrainerHouse_get(SAVEDATA *saveData);
-void Save_TrainerHouse_init(TrainerHouseSave *th);
+TrainerHouseSave *Save_TrainerHouse_Get(SaveData *saveData);
+void Save_TrainerHouse_Init(TrainerHouseSave *th);
 void TrainerHouseMon_SetZero(TrainerHouseMon *mon);
 void TrainerHouseTrainer_SetZero(TrainerHouseTrainer *trainer);
 void TrainerHouseSet_SetZero(TrainerHouseSet *set);

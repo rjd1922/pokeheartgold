@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadFromOpenNarc
 .public G2dRenderer_SetSubSurfaceCoords
 .public sub_0200CF18
@@ -33,8 +33,8 @@
 .public GetMonData
 .public Pokemon_GetIconNaix
 .public GetMonIconPaletteEx
-.public GetPartyCount
-.public GetPartyMonByIndex
+.public Party_GetCount
+.public Party_GetMonByIndex
 .public ItemIdIsMail
 .public sub_0207B5EC
 .public sub_0207EB24

@@ -64,7 +64,7 @@ ov81_0223DD60: ; 0x0223DD60
 	add r2, #0x14
 	str r0, [r4, r2]
 	ldr r0, [r4, r3]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	mov r1, #0x6e
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -1836,7 +1836,7 @@ ov81_0223EC88: ; 0x0223EC88
 	cmp r0, #0
 	bne _0223ECDA
 	ldr r0, [r4, #4]
-	bl OverlayManager_run
+	bl OverlayManager_Run
 	cmp r0, #1
 	bne _0223ECDA
 	mov r1, #7
@@ -2086,7 +2086,7 @@ _0223EE8C:
 	ldr r0, _0223EF58 ; =_02103A1C
 	ldr r1, [r4, r1]
 	mov r2, #0x64
-	bl OverlayManager_new
+	bl OverlayManager_New
 	str r0, [r4, #4]
 	ldrb r1, [r4, #0x13]
 	mov r0, #2
@@ -2956,7 +2956,7 @@ _0223F5C0:
 	ldr r0, _0223F680 ; =_02103A1C
 	ldr r1, [r4, r1]
 	mov r2, #0x64
-	bl OverlayManager_new
+	bl OverlayManager_New
 	str r0, [r4, #4]
 	ldrb r1, [r4, #0x13]
 	mov r0, #2
@@ -4349,7 +4349,7 @@ _02240114:
 	add r1, #8
 	ldrh r1, [r4, r1]
 	add r1, r1, #2
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	bl Mon_GetBoxMon
 	add r2, r0, #0
 	add r0, r4, #0
@@ -4360,7 +4360,7 @@ _02240114:
 	ldr r0, [r4, r1]
 	add r1, r1, #6
 	ldrh r1, [r4, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	bl Mon_GetBoxMon
 	add r2, r0, #0
 	add r0, r4, #0
@@ -4377,7 +4377,7 @@ _02240114:
 	mov r0, #0x6f
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	bl Options_GetTextFrameDelay
 	mov r3, #1
 	str r3, [sp]
@@ -4439,7 +4439,7 @@ ov81_022401C8: ; 0x022401C8
 	bl sub_0200398C
 _022401EA:
 	ldr r0, [r4, #0x4c]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	ldr r3, _02240208 ; =0x027E0000
@@ -5331,11 +5331,11 @@ ov81_022408C4: ; 0x022408C4
 	ldr r0, [r0, r1]
 	str r2, [sp, #0x10]
 	add r6, r3, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r7, r0, #0
 	mov r0, #8
 	mov r1, #0x64
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	add r0, r5, #0
 	mov r1, #0
@@ -5368,7 +5368,7 @@ _0224090C:
 	add r2, r4, #0
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	bl ScheduleWindowCopyToVram
 	add sp, #0x14
@@ -5391,7 +5391,7 @@ ov81_0224093C: ; 0x0224093C
 	add r7, r0, #0
 	mov r0, #8
 	mov r1, #0x64
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	add r0, r5, #0
 	mov r1, #0
@@ -5422,7 +5422,7 @@ _02240980:
 	add r2, r4, #0
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	bl ScheduleWindowCopyToVram
 	add sp, #0x14
@@ -5445,11 +5445,11 @@ ov81_022409B0: ; 0x022409B0
 	bl FillWindowPixelBuffer
 	ldr r0, [sp, #0x4c]
 	add r1, r6, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r7, r0, #0
 	mov r0, #0xb
 	mov r1, #0x64
-	bl String_ctor
+	bl String_New
 	str r0, [sp, #0x18]
 	ldr r0, [r5, #0x1c]
 	mov r1, #0x1c
@@ -5490,9 +5490,9 @@ ov81_022409B0: ; 0x022409B0
 	add r1, r6, #0
 	bl AddTextPrinterParameterized2
 	ldr r0, [sp, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x18]
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	mov r1, #0xb0
 	mov r2, #0
@@ -5530,7 +5530,7 @@ ov81_022409B0: ; 0x022409B0
 	add r0, r4, #0
 	bl AddTextPrinterParameterized2
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	b _02240AC8
 _02240A96:
 	cmp r7, #1
@@ -5554,7 +5554,7 @@ _02240A96:
 	add r2, r5, #0
 	bl AddTextPrinterParameterized2
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 _02240AC8:
 	add r0, r4, #0
 	bl ScheduleWindowCopyToVram
@@ -5639,7 +5639,7 @@ _02240B68:
 	lsl r7, r7, #0xa
 _02240B6C:
 	add r0, r4, #0
-	bl StringSetEmpty
+	bl String_SetEmpty
 	add r0, sp, #0x4c
 	ldrb r0, [r0]
 	cmp r0, #2
@@ -5663,7 +5663,7 @@ _02240B6C:
 	bl AddTextPrinterParameterized2
 _02240BA0:
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x24
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -5766,16 +5766,16 @@ _02240C6C:
 	ldr r0, [r5, #0x1c]
 	bl DestroyMsgData
 	ldr r0, [r5, #0x20]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r5, #0x24]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #0x28]
-	bl String_dtor
+	bl String_Delete
 	mov r6, #0
 	add r4, r5, #0
 _02240C9A:
 	ldr r0, [r4, #0x2c]
-	bl String_dtor
+	bl String_Delete
 	add r6, r6, #1
 	add r4, r4, #4
 	cmp r6, #4
@@ -5790,7 +5790,7 @@ _02240C9A:
 	mov r0, #0xf7
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0x69
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
@@ -5873,7 +5873,7 @@ ov81_02240D64: ; 0x02240D64
 	add r5, r0, #0
 	mov r0, #0xb7
 	mov r1, #0x64
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0xf7
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -5891,17 +5891,17 @@ ov81_02240D64: ; 0x02240D64
 	bl NewMsgDataFromNarc
 	str r0, [r5, #0x1c]
 	mov r0, #0x64
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r5, #0x20]
 	mov r0, #0x32
 	lsl r0, r0, #4
 	mov r1, #0x64
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x24]
 	mov r0, #0x32
 	lsl r0, r0, #4
 	mov r1, #0x64
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x28]
 	mov r6, #0
 	add r4, r5, #0
@@ -5909,7 +5909,7 @@ ov81_02240D64: ; 0x02240D64
 _02240DBE:
 	add r0, r7, #0
 	mov r1, #0x64
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x2c]
 	add r6, r6, #1
 	add r4, r4, #4
@@ -6027,7 +6027,7 @@ ov81_02240E78: ; 0x02240E78
 	strh r1, [r0, #0x18]
 	sub r0, r2, #4
 	ldr r0, [r4, r0]
-	bl SavArray_IsNatDexEnabled
+	bl SaveArray_IsNatDexEnabled
 	mov r1, #7
 	lsl r1, r1, #6
 	ldr r2, [r4, r1]
@@ -6043,7 +6043,7 @@ ov81_02240E78: ; 0x02240E78
 	mov r0, #0x6f
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r1, r0, #0
 	mov r0, #7
 	lsl r0, r0, #6
@@ -6140,7 +6140,7 @@ ov81_02240F48: ; 0x02240F48
 	add r1, r0, #0
 	add r0, r7, #0
 	mov r2, #0x1c
-	bl GetMonBaseStat_HandleAlternateForme
+	bl GetMonBaseStat_HandleAlternateForm
 	cmp r0, #0
 	bne _02240FA0
 	ldr r0, [r5, r4]
@@ -6214,7 +6214,7 @@ ov81_02241008: ; 0x02241008
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	add r4, r1, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	mov r0, #0x3e
 	lsl r0, r0, #4
 	strh r4, [r5, r0]
@@ -6267,7 +6267,7 @@ _02241062:
 	lsl r0, r0, #6
 	ldrh r1, [r7, r1]
 	ldr r0, [r5, r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	bl GetMonData
@@ -6296,7 +6296,7 @@ _0224109C:
 	lsl r0, r0, #6
 	ldrh r1, [r6, r1]
 	ldr r0, [r5, r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0x6f
 	mov r2, #0
 	bl GetMonData
@@ -8011,7 +8011,7 @@ _02241E0A:
 	lsl r2, r2, #2
 	ldrh r1, [r1, r2]
 	ldr r0, [r5, r0]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r2, r0, #0
 	mov r0, #0x90
 	str r0, [sp]
@@ -8071,7 +8071,7 @@ ov81_02241E68: ; 0x02241E68
 	sub r0, #0xbc
 	ldr r0, [r5, r0]
 	add r1, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r3, #0x50
 	add r2, r0, #0
 	mov r0, #0x90
@@ -8089,7 +8089,7 @@ _02241EB0:
 	sub r0, #0xbc
 	ldr r0, [r5, r0]
 	add r1, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r3, #0x70
 	add r2, r0, #0
 	mov r0, #0x90
@@ -8128,7 +8128,7 @@ ov81_02241EDC: ; 0x02241EDC
 	sub r0, #0xb8
 	ldr r0, [r5, r0]
 	add r1, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r3, #0x50
 	add r2, r0, #0
 	mov r0, #0x90
@@ -8146,7 +8146,7 @@ _02241F24:
 	sub r0, #0xb8
 	ldr r0, [r5, r0]
 	add r1, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r3, #0x70
 	add r2, r0, #0
 	mov r0, #0x90
@@ -8561,7 +8561,7 @@ ov81_02242218: ; 0x02242218
 	bhs _022422FA
 	add r0, r4, #0
 	add r1, r6, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	str r0, [sp, #0x1c]
@@ -10550,7 +10550,7 @@ ov81_022430B4: ; 0x022430B4
 	add r0, r5, #0
 	bl ov81_02243068
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r3, r4, r5, r6, pc}
 	thumb_func_end ov81_022430B4

@@ -6,12 +6,12 @@
 #include "options.h"
 #include "player_data.h"
 #include "unk_0200CF18.h"
-#include "window.h"
+#include "bg_window.h"
 #include "voltorb_flip/voltorb_flip_game.h"
 #include "voltorb_flip/voltorb_flip_input.h"
 
 typedef struct Ov122_021E70B8 {
-    BGCONFIG *bgConfig;
+    BgConfig *bgConfig;
     GameState *game;
     Ov122_021E8CFC *unk8;
     int unkC;
@@ -30,21 +30,21 @@ typedef struct VoltorbFlipAppWork {
     HeapID heapId;
     OPTIONS *options;
     u16 *coins;
-    int unkC;
-    PLAYERPROFILE *profile;
+    u32 *unkC;
+    PlayerProfile *profile;
     NARC *narc;
-    BGCONFIG *bgConfig;
+    BgConfig *bgConfig;
     void *unk1C;
     void *unk20;
-    WINDOW windows[17];
+    Window windows[17];
     LISTMENUITEM *menuItems[2];
     void *unk13C;
-    STRING *string;
+    String *string;
     Unk122_021E7C9C *unk144;
     void *unk148;
     UnkStruct_0200CF18 *unk14C[0xd];
-    MSGDATA *msgData;
-    MSGFMT *msgFmt;
+    MsgData *msgData;
+    MessageFormat *msgFmt;
     u16 unk188[10][8];
     u8 unk228;
     u8 unk229;

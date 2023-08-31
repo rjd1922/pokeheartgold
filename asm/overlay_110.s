@@ -198,7 +198,7 @@ ov110_021E5A74: ; 0x021E5A74
 	str r0, [r5, #4]
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r4, r0, #0
 	bl Options_GetTextFrameDelay
 	add r1, r5, #0
@@ -231,9 +231,9 @@ ov110_021E5AAC: ; 0x021E5AAC
 	beq _021E5AD2
 	ldr r0, [r4, #0x10]
 	ldr r0, [r0, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	ldrb r1, [r4, #0x19]
-	bl ScriptState_SetAlphPuzzleFlag
+	bl Save_VarsFlags_SetAlphPuzzleFlag
 _021E5AD2:
 	pop {r4, pc}
 	thumb_func_end ov110_021E5AAC
@@ -1121,7 +1121,7 @@ _021E6120:
 _021E612E:
 	bl NNS_GfdDoVramTransfer
 	ldr r0, [r4, #0x14]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E6148 ; =0x027E0000
 	ldr r1, _021E614C ; =0x00003FF8
 	mov r0, #1
@@ -1415,7 +1415,7 @@ ov110_021E6394: ; 0x021E6394
 	add r5, r0, #0
 	ldr r1, [r5]
 	mov r0, #0xac
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	ldr r0, [r5]
 	bl PaletteData_Init
@@ -1554,7 +1554,7 @@ ov110_021E6394: ; 0x021E6394
 	add r1, #0xd8
 	str r0, [r1]
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0
 	str r0, [sp]
 	mov r0, #0x20
@@ -1653,11 +1653,11 @@ ov110_021E6580: ; 0x021E6580
 	ldr r2, [r6]
 	mov r0, #6
 	mov r1, #0x10
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	str r0, [r6, #0x2c]
 	ldr r1, [r6]
 	mov r0, #0x80
-	bl String_ctor
+	bl String_New
 	str r0, [r6, #0x30]
 	ldr r0, [r6, #0x28]
 	mov r1, #0
@@ -1686,22 +1686,22 @@ ov110_021E65DC: ; 0x021E65DC
 	push {r4, r5, r6, lr}
 	add r6, r0, #0
 	ldr r0, [r6, #0x48]
-	bl String_dtor
+	bl String_Delete
 	mov r4, #0
 	add r5, r6, #0
 _021E65EA:
 	ldr r0, [r5, #0x38]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #4
 	blt _021E65EA
 	ldr r0, [r6, #0x34]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x30]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x2c]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r6, #0x28]
 	bl DestroyMsgData
 	mov r0, #4

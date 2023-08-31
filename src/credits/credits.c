@@ -1,3 +1,4 @@
+#include "global.h"
 #include "font.h"
 #include "gf_gfx_loader.h"
 #include "msgdata.h"
@@ -15,7 +16,7 @@
 #include "unk_020215A0.h"
 #include "unk_02022588.h"
 #include "unk_02023694.h"
-#include "window.h"
+#include "bg_window.h"
 #include "constants/rgb.h"
 #include "constants/sndseq.h"
 #include "credits/credits.h"
@@ -25,8 +26,6 @@
 #else
 #define GAME_TITLE_MSG_NO 1
 #endif //HEARTGOLD
-
-#define HEAPID_CREDITS 73
 
 #define NUM_SCENES 6
 
@@ -103,7 +102,7 @@ typedef struct {
     BOOL rendering;
     BOOL hidden;
     SysTask *sysTask;
-    BGCONFIG *bgConfig;
+    BgConfig *bgConfig;
 } PageDisplayWork;
 
 typedef struct {
@@ -120,9 +119,9 @@ typedef struct {
 } ScreenFlipWork;
 
 typedef struct {
-    MSGDATA *msgData;
-    WINDOW window;
-    STRING *string;
+    MsgData *msgData;
+    Window window;
+    String *string;
     PageDisplayWork pageDisplayWork;
     PageState pageState;
     ScreenFlipWork scrFlipWork;
@@ -153,7 +152,7 @@ typedef struct {
 
 typedef struct {
     OVY_MANAGER *man;
-    BGCONFIG *bgConfig;
+    BgConfig *bgConfig;
     u32 timer;
     int musicBoxWaitTimer;
     CreditsAppArgs *args;
@@ -198,7 +197,7 @@ static void ActivateSprite(Sprite *a0);
 static void ov76_021E68C8(CreditsAppWork *work);
 static void FlipScreensCB(int a0, ScreenFlipWork *a1, int a2);
 static void DisplayWindow(CreditsAppWork *work);
-static void ov76_021E6944(PageDisplayWork *a0, BGCONFIG *a1, BOOL a2);
+static void ov76_021E6944(PageDisplayWork *a0, BgConfig *a1, BOOL a2);
 static BOOL PageWindowRendering(PageDisplayWork *a0);
 static void TogglePageDisplayCB(int a0, PageDisplayWork *a1, int a2);
 static void ov76_021E6A34(int a0, int a1, int a2, int a3);
@@ -213,8 +212,8 @@ BOOL CreditsApp_OvyInit(OVY_MANAGER *man, int *state) {
 
     switch (*state) {
     case 0:
-        CreateHeap(3, HEAPID_CREDITS, 0x40000);
-        work = OverlayManager_CreateAndGetData(man, sizeof(CreditsAppWork), HEAPID_CREDITS);
+        CreateHeap(3, HEAP_ID_CREDITS, 0x40000);
+        work = OverlayManager_CreateAndGetData(man, sizeof(CreditsAppWork), HEAP_ID_CREDITS);
         if (work != NULL) {
             MI_CpuFill8(work, 0, sizeof(CreditsAppWork));
             Main_SetVBlankIntrCB(NULL, NULL);
@@ -241,8 +240,8 @@ BOOL CreditsApp_OvyInit(OVY_MANAGER *man, int *state) {
         work = OverlayManager_GetData(man);
         InitBgLayers(work);
         InitSprites(work);
-        work->pageWork.msgData = NewMsgDataFromNarc(0, 0x1b, 0x1b8, HEAPID_CREDITS);
-        work->pageWork.string = String_ctor(256, HEAPID_CREDITS);
+        work->pageWork.msgData = NewMsgDataFromNarc(MSGDATA_LOAD_DIRECT, NARC_msgdata_msg, 0x1b8, HEAP_ID_CREDITS);
+        work->pageWork.string = String_New(256, HEAP_ID_CREDITS);
         DisplayWindow(work);
         SetPageSysTasks(work);
 
@@ -260,7 +259,7 @@ BOOL CreditsApp_OvyInit(OVY_MANAGER *man, int *state) {
         break;
     case 2:
         work = OverlayManager_GetData(man);
-        BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 30, 1, HEAPID_CREDITS);
+        BeginNormalPaletteFade(0, 1, 1, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
         return TRUE;
     }
     return FALSE;
@@ -278,7 +277,7 @@ BOOL CreditsApp_OvyExit(OVY_MANAGER *man, int *state) {
         PageWork *ptr = &work->pageWork;
         RemoveWindow(&ptr->window);
         DestroyMsgData(ptr->msgData);
-        String_dtor(ptr->string);
+        String_Delete(ptr->string);
         FreeBG(work);
         for (u8 i = 0; i < 6; i++) {
             FreeToHeap(work->unk468[i]);
@@ -288,14 +287,14 @@ BOOL CreditsApp_OvyExit(OVY_MANAGER *man, int *state) {
         *state += 1;
         break;
     case 2:
-        NARC_dtor(work->cutsceneWork.narc);
+        NARC_Delete(work->cutsceneWork.narc);
         ov76_021E62B4(work);
         FreeOamAndObjResMgrs(work);
         *state += 1;
         break;
     case 3:
         OverlayManager_FreeData(man);
-        DestroyHeap(HEAPID_CREDITS);
+        DestroyHeap(HEAP_ID_CREDITS);
         return TRUE;
     }
     return FALSE;
@@ -315,7 +314,7 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
         // No skipping on first playthrough
         if (work->args->gameCleared && ((gSystem.newKeys & PAD_BUTTON_START) || gSystem.touchNew != 0)) {
             work->skipCredits = TRUE;
-            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 30, 1, HEAPID_CREDITS);
+            BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
             GF_SndStartFadeOutBGM(0, 26);
             *state += 1;
             break;
@@ -328,7 +327,7 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
         if (work->timer < CREDITS_FRAMES) {
             break;
         }
-        BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 30, 1, HEAPID_CREDITS);
+        BeginNormalPaletteFade(0, 0, 0, RGB_BLACK, 30, 1, HEAP_ID_CREDITS);
         *state += 1;
         break;
     case CREDITS_STATE_MAIN_FADE_OUT:
@@ -337,8 +336,8 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
                 FreeCutsceneSprites(work);
             }
             // Load the "The End" screen
-            GfGfxLoader_LoadCharData(NARC_a_2_6_3, 6, work->bgConfig, GF_BG_LYR_MAIN_1, 0, 0, TRUE, HEAPID_CREDITS);
-            GfGfxLoader_LoadScrnData(NARC_a_2_6_3, 19, work->bgConfig, GF_BG_LYR_MAIN_1, 0, 0x600, TRUE, HEAPID_CREDITS);
+            GfGfxLoader_LoadCharData(NARC_a_2_6_3, 6, work->bgConfig, GF_BG_LYR_MAIN_1, 0, 0, TRUE, HEAP_ID_CREDITS);
+            GfGfxLoader_LoadScrnData(NARC_a_2_6_3, 19, work->bgConfig, GF_BG_LYR_MAIN_1, 0, 0x600, TRUE, HEAP_ID_CREDITS);
             BgCommitTilemapBufferToVram(work->bgConfig, 1);
             GX_EngineAToggleLayers(GF_BG_LYR_MAIN_0_F, GX_LAYER_TOGGLE_OFF);
             GX_EngineAToggleLayers(GF_BG_LYR_MAIN_2_F, GX_LAYER_TOGGLE_OFF);
@@ -349,7 +348,7 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
             GX_SwapDisplay();
 
             // Start fading into the "The End" screen
-            BeginNormalPaletteFade(3, 1, 1, RGB_BLACK, 1, 1, HEAPID_CREDITS);
+            BeginNormalPaletteFade(3, 1, 1, RGB_BLACK, 1, 1, HEAP_ID_CREDITS);
             *state += 1;
         }
         break;
@@ -361,7 +360,7 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
         break;
     case CREDITS_STATE_THE_END:
         if ((gSystem.newKeys & (PAD_BUTTON_START | PAD_BUTTON_A)) || gSystem.touchNew != 0) {
-            BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 60, 1, HEAPID_CREDITS);
+            BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 60, 1, HEAP_ID_CREDITS);
             *state = CREDITS_STATE_THE_END_FADE_OUT;
             break;
         }
@@ -372,7 +371,7 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
         break;
     case CREDITS_STATE_THE_END_MUSIC_BOX:
         if ((gSystem.newKeys & (PAD_BUTTON_START | PAD_BUTTON_A)) || gSystem.touchNew != 0) {
-            BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 60, 1, HEAPID_CREDITS);
+            BeginNormalPaletteFade(3, 0, 0, RGB_BLACK, 60, 1, HEAP_ID_CREDITS);
             *state += 1;
         }
         break;
@@ -387,25 +386,25 @@ BOOL CreditsApp_OvyExec(OVY_MANAGER *man, int *state) {
 }
 
 static void VBlankCB(CreditsAppWork *work) {
-    BgConfig_HandleScheduledScrollAndTransferOps(work->bgConfig);
+    DoScheduledBgGpuUpdates(work->bgConfig);
     OamManager_ApplyAndResetBuffers();
 }
 
 static void SetGXBanks(void) {
-    GF_GXBanksConfig banks = sCreditsGXBanksConfig;
+    GraphicsBanks banks = sCreditsGraphicsBanks;
     GX_SetBanks(&banks);
 }
 
 static void InitBgLayers(CreditsAppWork *work) {
-    GFBgModeSet modeSet;
-    BGTEMPLATE tmpl2;
-    BGTEMPLATE tmpl3;
-    BGTEMPLATE tmpl1;
-    BGTEMPLATE tmpl5;
-    BGTEMPLATE tmpl6;
-    BGTEMPLATE tmpl7;
+    GraphicsModes modeSet;
+    BgTemplate tmpl2;
+    BgTemplate tmpl3;
+    BgTemplate tmpl1;
+    BgTemplate tmpl5;
+    BgTemplate tmpl6;
+    BgTemplate tmpl7;
 
-    work->bgConfig = BgConfig_Alloc(HEAPID_CREDITS);
+    work->bgConfig = BgConfig_Alloc(HEAP_ID_CREDITS);
     G2_BlendNone();
     G2S_BlendNone();
     modeSet = ov76_021E6EB0;
@@ -440,15 +439,15 @@ static void FreeBG(CreditsAppWork *work) {
 static void LoadBgGraphics(CreditsAppWork *work) {
     ScrnFileIds temp1 = ov76_021E6EE8;
     ScrnFileIds temp2 = ov76_021E6F00;
-    BGCONFIG *bgConfig = work->bgConfig;
+    BgConfig *bgConfig = work->bgConfig;
 
-    GfGfxLoader_LoadCharData(NARC_a_2_6_3, 5, bgConfig, 3, 0, 0, 1, HEAPID_CREDITS);
-    GfGfxLoader_LoadCharData(NARC_a_2_6_3, 5, bgConfig, 7, 0, 0, 1, HEAPID_CREDITS);
-    GfGfxLoader_GXLoadPal(NARC_a_2_6_3, 4, 4, 0, 0xe0, HEAPID_CREDITS);
-    GfGfxLoader_GXLoadPal(NARC_a_2_6_3, 4, 0, 0, 0xe0, HEAPID_CREDITS);
+    GfGfxLoader_LoadCharData(NARC_a_2_6_3, 5, bgConfig, GF_BG_LYR_MAIN_3, 0, 0, TRUE, HEAP_ID_CREDITS);
+    GfGfxLoader_LoadCharData(NARC_a_2_6_3, 5, bgConfig, GF_BG_LYR_SUB_3, 0, 0, TRUE, HEAP_ID_CREDITS);
+    GfGfxLoader_GXLoadPal(NARC_a_2_6_3, 4, GF_BG_LYR_SUB_0, 0, 0xe0, HEAP_ID_CREDITS);
+    GfGfxLoader_GXLoadPal(NARC_a_2_6_3, 4, GF_BG_LYR_MAIN_0, 0, 0xe0, HEAP_ID_CREDITS);
     for (u8 i = 0; i < 6; i++) {
-        work->unk468[i] = GfGfxLoader_GetScrnData(NARC_a_2_6_3, temp1.ids[i], 1, &work->unk498[i], HEAPID_CREDITS);
-        work->unk480[i] = GfGfxLoader_GetScrnData(NARC_a_2_6_3, temp2.ids[i], 1, &work->unk4B0[i], HEAPID_CREDITS);
+        work->unk468[i] = GfGfxLoader_GetScrnData(NARC_a_2_6_3, temp1.ids[i], 1, &work->unk498[i], HEAP_ID_CREDITS);
+        work->unk480[i] = GfGfxLoader_GetScrnData(NARC_a_2_6_3, temp2.ids[i], 1, &work->unk4B0[i], HEAP_ID_CREDITS);
     }
 
     BG_LoadScreenTilemapData(bgConfig, 2, work->unk498[0]->rawData, work->unk498[0]->szByte);
@@ -470,18 +469,18 @@ static void CreateOamAndObjResMgrs(CreditsAppWork *work) {
     reg_GXS_DB_DISPCNT = (reg_GXS_DB_DISPCNT & 0xffcfffef) | 0x00200010;
     temp = ov76_021E6EA0;
     sub_020215A0(&temp);
-    sub_02022588(0xd, HEAPID_CREDITS);
+    sub_02022588(0xd, HEAP_ID_CREDITS);
     sub_020216C8();
     sub_02022638();
     NNS_G2dInitOamManagerModule();
-    OamManager_Create(0, 0x80, 0, 0x20, 0, 0x80, 0, 0x20, HEAPID_CREDITS);
-    work->spriteList = G2dRenderer_Init(0x28, &work->g2dRender, HEAPID_CREDITS);
+    OamManager_Create(0, 0x80, 0, 0x20, 0, 0x80, 0, 0x20, HEAP_ID_CREDITS);
+    work->spriteList = G2dRenderer_Init(0x28, &work->g2dRender, HEAP_ID_CREDITS);
 
     temp2 = ov76_021E6E88[3];
     u8 *ptr =  (u8 *)&temp2;
 
     for (u8 i = GF_GFX_RES_TYPE_CHAR; i < GF_GFX_RES_TYPE_ANIM + 1; i++) {
-        work->_2dGfxResMan[i] = Create2DGfxResObjMan(ptr[i], i, HEAPID_CREDITS);
+        work->_2dGfxResMan[i] = Create2DGfxResObjMan(ptr[i], (GfGfxResType)i, HEAP_ID_CREDITS);
     }
 }
 
@@ -497,14 +496,14 @@ static void FreeOamAndObjResMgrs(CreditsAppWork *work) {
 
 static void ov76_021E6170(CreditsAppWork *work) {
     work->_2dGfxResObj[GF_GFX_RES_TYPE_CHAR] =
-        AddCharResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_CHAR], NARC_a_2_6_3, 1, TRUE, 1, 3, HEAPID_CREDITS);
+        AddCharResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_CHAR], NARC_a_2_6_3, 1, TRUE, 1, 3, HEAP_ID_CREDITS);
     work->_2dGfxResObj[GF_GFX_RES_TYPE_PLTT] =
-        AddPlttResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_PLTT], NARC_a_2_6_3, 0, FALSE, 1, 3, 7, HEAPID_CREDITS);
+        AddPlttResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_PLTT], NARC_a_2_6_3, 0, FALSE, 1, 3, 7, HEAP_ID_CREDITS);
     work->_2dGfxResObj[GF_GFX_RES_TYPE_CELL] =
-        AddCellOrAnimResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_CELL], NARC_a_2_6_3, 2, TRUE, 1, 2, HEAPID_CREDITS);
+        AddCellOrAnimResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_CELL], NARC_a_2_6_3, 2, TRUE, 1, GF_GFX_RES_TYPE_CELL, HEAP_ID_CREDITS);
     work->_2dGfxResObj[GF_GFX_RES_TYPE_ANIM] =
-        AddCellOrAnimResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_ANIM], NARC_a_2_6_3, 3, TRUE, 1, 3, HEAPID_CREDITS);
-    work->cutsceneWork.narc = NARC_ctor(NARC_a_2_6_3, HEAPID_CREDITS);
+        AddCellOrAnimResObjFromNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_ANIM], NARC_a_2_6_3, 3, TRUE, 1, GF_GFX_RES_TYPE_ANIM, HEAP_ID_CREDITS);
+    work->cutsceneWork.narc = NARC_New(NARC_a_2_6_3, HEAP_ID_CREDITS);
 
     CutsceneWork *cutsceneWork = &work->cutsceneWork;
     NARC **narc = &cutsceneWork->narc;
@@ -512,9 +511,9 @@ static void ov76_021E6170(CreditsAppWork *work) {
 
     for (u8 i = 0; i < UNIQUE_SPRITES_PER_CUTSCENE; i++) {
         work->cutsceneRsrs[i].charResObj =
-            AddCharResObjFromOpenNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_CHAR], *narc, 20, TRUE, i + 2, 1, HEAPID_CREDITS);
+            AddCharResObjFromOpenNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_CHAR], *narc, 20, TRUE, i + 2, 1, HEAP_ID_CREDITS);
         work->cutsceneRsrs[i].plttResObj =
-            AddPlttResObjFromOpenNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_PLTT], *narc, 149, FALSE, i + 2, 1, 1, HEAPID_CREDITS);
+            AddPlttResObjFromOpenNarc(work->_2dGfxResMan[GF_GFX_RES_TYPE_PLTT], *narc, 149, FALSE, i + 2, 1, 1, HEAP_ID_CREDITS);
     }
 
     sub_0200ACF0(work->_2dGfxResObj[GF_GFX_RES_TYPE_CHAR]);
@@ -623,7 +622,7 @@ static void InitDancingSpriteResources(int idx, CreditsAppWork *work, int sprtRe
     tmpl->rotation = 0;
     tmpl->priority = 0;
     tmpl->whichScreen = whichScreen;
-    tmpl->heapId = HEAPID_CREDITS;
+    tmpl->heapId = HEAP_ID_CREDITS;
 }
 
 static void InitCutsceneSpriteResources(u8 idx, CreditsAppWork *work, u8 sprtResPriority, int whichScreen, SpriteTemplate *tmpl, SpriteResourcesHeader *header) {
@@ -650,7 +649,7 @@ static void InitCutsceneSpriteResources(u8 idx, CreditsAppWork *work, u8 sprtRes
     tmpl->rotation = 0;
     tmpl->priority = 0;
     tmpl->whichScreen = whichScreen;
-    tmpl->heapId = HEAPID_CREDITS;
+    tmpl->heapId = HEAP_ID_CREDITS;
 }
 
 static void SetPageSysTasks(CreditsAppWork *work) {
@@ -840,12 +839,12 @@ static void FlipScreensCB(int a0, ScreenFlipWork *a1, int a2) {
 
 static void DisplayWindow(CreditsAppWork *work) {
     AddWindow(work->bgConfig, &work->pageWork.window, &ov76_021E6E98);
-    BG_FillCharDataRange(work->bgConfig, 5, 0, 1, 0);
-    LoadFontPal0(4, 0x1e0, HEAPID_CREDITS);
+    BG_FillCharDataRange(work->bgConfig, GF_BG_LYR_SUB_1, 0, 1, 0);
+    LoadFontPal0(GF_BG_LYR_SUB_0, 0x1e0, HEAP_ID_CREDITS);
     GX_EngineBToggleLayers(GF_BG_LYR_MAIN_2, GX_LAYER_TOGGLE_ON);
 }
 
-static void ov76_021E6944(PageDisplayWork *a0, BGCONFIG *bgConfig, BOOL hidden) {
+static void ov76_021E6944(PageDisplayWork *a0, BgConfig *bgConfig, BOOL hidden) {
     u32 val;
 
     GF_ASSERT(a0->rendering == FALSE);
@@ -896,7 +895,7 @@ static void TogglePageDisplayCB(int a0, PageDisplayWork *a1, int a2) {
         }
     }
     ov76_021E6A34(temp, 0, temp2, 0xc0);
-    BgSetPosTextAndCommit(a1->bgConfig, 5, BG_POS_OP_SET_X, xPos);
+    BgSetPosTextAndCommit(a1->bgConfig, GF_BG_LYR_SUB_1, BG_POS_OP_SET_X, xPos);
 }
 
 static void ov76_021E6A34(int a0, int a1, int a2, int a3) {
@@ -984,14 +983,14 @@ static void LoadCutsceneSpriteGfx(CutsceneWork *a0, int spriteId) {
     }
 
     if (playerCharacter) {
-        charData = GfGfxLoader_GetCharDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[playerId].charFileId, TRUE, &ppCharData, HEAPID_CREDITS);
-        plttData = GfGfxLoader_GetPlttDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[playerId].plttFileId, &ppPlttData, HEAPID_CREDITS);
+        charData = GfGfxLoader_GetCharDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[playerId].charFileId, TRUE, &ppCharData, HEAP_ID_CREDITS);
+        plttData = GfGfxLoader_GetPlttDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[playerId].plttFileId, &ppPlttData, HEAP_ID_CREDITS);
     } else if (friendCharacter) {
-        charData = GfGfxLoader_GetCharDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[friendId].charFileId, TRUE, &ppCharData, HEAPID_CREDITS);
-        plttData = GfGfxLoader_GetPlttDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[friendId].plttFileId, &ppPlttData, HEAPID_CREDITS);
+        charData = GfGfxLoader_GetCharDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[friendId].charFileId, TRUE, &ppCharData, HEAP_ID_CREDITS);
+        plttData = GfGfxLoader_GetPlttDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[friendId].plttFileId, &ppPlttData, HEAP_ID_CREDITS);
     } else {
-        charData = GfGfxLoader_GetCharDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].charFileId, TRUE, &ppCharData, HEAPID_CREDITS);
-        plttData = GfGfxLoader_GetPlttDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].plttFileId, &ppPlttData, HEAPID_CREDITS);
+        charData = GfGfxLoader_GetCharDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].charFileId, TRUE, &ppCharData, HEAP_ID_CREDITS);
+        plttData = GfGfxLoader_GetPlttDataFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].plttFileId, &ppPlttData, HEAP_ID_CREDITS);
     }
 
     DC_FlushRange(ppCharData->pRawData, ppCharData->szByte);
@@ -1002,8 +1001,8 @@ static void LoadCutsceneSpriteGfx(CutsceneWork *a0, int spriteId) {
     curSprite = a0->curSprite;
     GX_LoadOBJPltt(ppPlttData->pRawData, a0->spriteGfx[curSprite].plttOffset, 0x20);
 
-    a0->spriteGfx[a0->curSprite].unk2C = GfGfxLoader_GetCellBankFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].cellBankFileId, TRUE, &a0->spriteGfx[a0->curSprite].cellDataBank, HEAPID_CREDITS);
-    a0->spriteGfx[a0->curSprite].unk30 = GfGfxLoader_GetAnimBankFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].animBankFileId, TRUE, &a0->spriteGfx[a0->curSprite].animDataBank, HEAPID_CREDITS);
+    a0->spriteGfx[a0->curSprite].unk2C = GfGfxLoader_GetCellBankFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].cellBankFileId, TRUE, &a0->spriteGfx[a0->curSprite].cellDataBank, HEAP_ID_CREDITS);
+    a0->spriteGfx[a0->curSprite].unk30 = GfGfxLoader_GetAnimBankFromOpenNarc(a0->narc, sCutsceneSpriteGfxFileIds[spriteId].animBankFileId, TRUE, &a0->spriteGfx[a0->curSprite].animDataBank, HEAP_ID_CREDITS);
     FreeToHeap(charData);
     FreeToHeap(plttData);
     a0->curSprite++;

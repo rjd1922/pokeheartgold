@@ -199,7 +199,7 @@ ov17_02201D30: ; 0x02201D30
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r4, r0, #0
 	bl Options_GetTextFrameDelay
 	add r1, r5, #0
@@ -213,12 +213,12 @@ ov17_02201D30: ; 0x02201D30
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	str r0, [r5, #0xc]
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0xc]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	str r0, [r5, #0x10]
 	ldr r0, [r5]
 	bl ov16_022014A0
@@ -226,12 +226,12 @@ ov17_02201D30: ; 0x02201D30
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0xc]
-	bl Sav2_BerryPots_get
+	bl Save_BerryPots_Get
 	str r0, [r5, #0x14]
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #4]
 	ldr r0, [r0, #0xc]
-	bl Sav2_BerryPotRTC_get
+	bl Save_BerryPotRTC_Get
 	str r0, [r5, #0x18]
 	ldr r1, [r5, #4]
 	ldrb r0, [r1, #0x14]
@@ -249,13 +249,13 @@ _02201DA8:
 	bl ov17_022023B0
 	ldr r0, [r5, #0xc]
 	ldr r1, [r5]
-	bl ov16_022018F0
+	bl GetTotalBerryQuantity
 	add r1, r5, #0
 	add r1, #0x82
 	strh r0, [r1]
 	ldr r0, [r5, #0xc]
 	ldr r1, [r5]
-	bl ov16_0220191C
+	bl GetTotalMulchQuantity
 	add r1, r5, #0
 	add r1, #0x84
 	strh r0, [r1]
@@ -838,7 +838,7 @@ _0220220C:
 	mul r0, r1
 	add r5, r2, r0
 	ldrb r0, [r2, r0]
-	bl ov16_022018B4
+	bl BerryIdToItemId
 	add r1, r0, #0
 	ldrb r2, [r5, #5]
 	ldr r0, [r4, #0xc]
@@ -1060,13 +1060,13 @@ ov17_022023B0: ; 0x022023B0
 	beq _02202438
 	ldr r0, [r4, #4]
 	ldrh r0, [r0, #0x16]
-	bl ov16_022018E4
+	bl ItemIdToMulchId
 	add r1, r4, #0
 	add r1, #0x7c
 	add r2, r0, #0
 	ldrb r1, [r1]
 	ldr r0, [r4, #0x14]
-	bl ov16_0220165C
+	bl BerryPots_SetPotMulch
 	add r0, r4, #0
 	mov r1, #1
 	add r0, #0x7b
@@ -1080,7 +1080,7 @@ _022023F6:
 	beq _02202438
 	ldr r0, [r4, #4]
 	ldrh r0, [r0, #0x16]
-	bl ov16_022018C4
+	bl ItemIdToBerryId
 	add r1, r4, #0
 	add r1, #0x7c
 	add r3, r0, #0
@@ -2044,7 +2044,7 @@ ov17_02202B58: ; 0x02202B58
 	mul r0, r6
 	add r4, r2, r0
 	ldr r0, [r5, #0x14]
-	bl ov16_02201644
+	bl BerryPots_ResetPotMoisture
 	add r0, r5, #0
 	bl ov17_0220387C
 	add r0, r6, #3
@@ -2081,7 +2081,7 @@ ov17_02202B98: ; 0x02202B98
 	add r4, r6, r7
 	bl ov16_02201674
 	ldrb r0, [r6, r7]
-	bl ov16_022018B4
+	bl BerryIdToItemId
 	add r1, r0, #0
 	ldrb r2, [r4, #5]
 	ldr r0, [r5, #0xc]
@@ -2125,7 +2125,7 @@ _02202C0A:
 	bl NNS_GfdDoVramTransfer
 	add r4, #0x88
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _02202C24 ; =0x027E0000
 	ldr r1, _02202C28 ; =0x00003FF8
 	mov r0, #1
@@ -2379,7 +2379,7 @@ ov17_02202E28: ; 0x02202E28
 	add r5, r0, #0
 	ldr r1, [r5]
 	mov r0, #0xda
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0
 	str r2, [sp]
 	ldr r1, [r5]
@@ -2477,11 +2477,11 @@ ov17_02202E28: ; 0x02202E28
 ov17_02202EFC: ; 0x02202EFC
 	mov r1, #0x65
 	lsl r1, r1, #2
-	ldr r3, _02202F08 ; =NARC_dtor
+	ldr r3, _02202F08 ; =NARC_Delete
 	ldr r0, [r0, r1]
 	bx r3
 	nop
-_02202F08: .word NARC_dtor
+_02202F08: .word NARC_Delete
 	thumb_func_end ov17_02202EFC
 
 	thumb_func_start ov17_02202F0C
@@ -2502,13 +2502,13 @@ ov17_02202F0C: ; 0x02202F0C
 	mov r0, #0x10
 	ldr r2, [r6]
 	add r1, r0, #0
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	add r1, r6, #0
 	add r1, #0xa0
 	str r0, [r1]
 	ldr r1, [r6]
 	mov r0, #0x80
-	bl String_ctor
+	bl String_New
 	add r1, r6, #0
 	add r1, #0xa4
 	str r0, [r1]
@@ -2549,7 +2549,7 @@ _02202F84:
 	add r0, r5, #0
 	add r0, #0xb0
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #0x11
@@ -2557,15 +2557,15 @@ _02202F84:
 	add r0, r6, #0
 	add r0, #0xa8
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
 	add r0, #0xa4
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
 	add r0, #0xa0
 	ldr r0, [r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r6, #0x9c
 	ldr r0, [r6]
 	bl DestroyMsgData
@@ -2642,7 +2642,7 @@ ov17_02203030: ; 0x02203030
 _0220303C:
 	ldr r0, [r5]
 	ldr r1, [r7]
-	bl ListMenuItems_ctor
+	bl ListMenuItems_New
 	mov r1, #0x66
 	lsl r1, r1, #2
 	str r0, [r6, r1]
@@ -2690,7 +2690,7 @@ _02203090:
 	mov r0, #0x66
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
-	bl ListMenuItems_dtor
+	bl ListMenuItems_Delete
 	str r6, [r5, r7]
 	add r4, r4, #1
 	add r5, r5, #4
@@ -2745,7 +2745,7 @@ ov17_022030A8: ; 0x022030A8
 	bl sub_0200D2A4
 	ldr r1, [r4]
 	mov r0, #0x12
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0x19
 	lsl r2, r2, #4
 	str r0, [r4, r2]
@@ -2875,7 +2875,7 @@ ov17_0220321C: ; 0x0220321C
 	mov r0, #0x19
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r1, #0x13
 	lsl r1, r1, #4
 	ldr r0, [r4, r1]
@@ -3159,7 +3159,7 @@ ov17_02203460: ; 0x02203460
 	add r0, r5, r0
 	add r0, #0x20
 	ldrb r0, [r0]
-	bl ov16_022018B4
+	bl BerryIdToItemId
 	mov r1, #1
 	add r4, r0, #0
 	bl GetItemIndexMapping
@@ -3526,7 +3526,7 @@ _0220371E: ; jump table
 	.short _0220376C - _0220371E - 2 ; case 16
 _02203740:
 	ldrb r0, [r6, #4]
-	bl ov16_022018D4
+	bl MulchIdToItemId
 	add r2, r0, #0
 	add r0, r4, #0
 	add r0, #0xa0
@@ -3561,7 +3561,7 @@ _0220376C:
 	add r3, r1, #0
 	bl BufferString
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	b _022037AA
 _02203794:
 	lsl r1, r5, #2
@@ -3571,7 +3571,7 @@ _02203794:
 	add r1, #0xb0
 	ldr r0, [r0]
 	ldr r1, [r1]
-	bl StringCopy
+	bl String_Copy
 	add sp, #8
 	pop {r4, r5, r6, pc}
 _022037AA:
@@ -3704,13 +3704,13 @@ _02203884:
 	strb r1, [r0]
 	ldr r0, [r6, #0x14]
 	add r1, r4, #0
-	bl ov16_022015BC
+	bl BerryPots_GetPotBerryId
 	add r1, r5, #0
 	add r1, #0x20
 	strb r0, [r1]
 	ldr r0, [r6, #0x14]
 	add r1, r4, #0
-	bl ov16_022015B0
+	bl BerryPots_GetPotGrowthStage
 	add r1, r5, #0
 	add r1, #0x21
 	strb r0, [r1]
@@ -3722,13 +3722,13 @@ _02203884:
 	strb r0, [r1]
 	ldr r0, [r6, #0x14]
 	add r1, r4, #0
-	bl ov16_022015E0
+	bl BerryPots_GetPotMoisture
 	add r1, r5, #0
 	add r1, #0x23
 	strb r0, [r1]
 	ldr r0, [r6, #0x14]
 	add r1, r4, #0
-	bl ov16_02201650
+	bl BerryPots_GetPotMulch
 	add r1, r5, #0
 	add r1, #0x24
 	strb r0, [r1]

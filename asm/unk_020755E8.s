@@ -172,7 +172,7 @@ sub_02075630: ; 0x02075630
 	ldr r4, [r0]
 	ldr r1, [r5, #0x5c]
 	mov r0, #0xef
-	bl NARC_ctor
+	bl NARC_New
 	add r7, r0, #0
 	mov r1, #0
 	str r1, [sp]
@@ -213,7 +213,7 @@ sub_02075630: ; 0x02075630
 	mov r3, #0xe
 	bl sub_0200D71C
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #1
 	str r0, [sp]
 	add r0, r5, #0
@@ -351,7 +351,7 @@ sub_02075804: ; 0x02075804
 	add r0, r5, #0
 	bl CopyWindowToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -702,7 +702,7 @@ sub_02075A7C: ; 0x02075A7C
 	str r0, [r4, #0x38]
 	mov r0, #0xb4
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	add r1, r4, #0
 	add r1, #0x84
 	str r0, [r1]
@@ -846,12 +846,12 @@ sub_02075A7C: ; 0x02075A7C
 	bl NewMsgDataFromNarc
 	str r0, [r4, #8]
 	add r0, r5, #0
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0xc]
 	mov r0, #5
 	lsl r0, r0, #6
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x10]
 	add r0, r5, #0
 	mov r1, #0x3c
@@ -977,7 +977,7 @@ sub_02075D4C: ; 0x02075D4C
 	bl sub_02075770
 	ldr r0, [r4, #4]
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	add r0, r4, #0
 	add r0, #0x8c
 	bl RemoveWindow
@@ -1006,7 +1006,7 @@ sub_02075D4C: ; 0x02075D4C
 	ldr r0, [r4, #8]
 	bl DestroyMsgData
 	ldr r0, [r4, #0xc]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	ldr r0, [r4, #0x10]
 	bl FreeToHeap
 	ldr r0, [r4, #0x3c]
@@ -1018,7 +1018,7 @@ sub_02075D4C: ; 0x02075D4C
 	add r0, r4, #0
 	add r0, #0x84
 	ldr r0, [r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, r4, #0
 	bl FreeToHeap
 	mov r0, #0
@@ -2131,14 +2131,14 @@ _020766BC:
 	pop {r4, pc}
 _02076748:
 	ldr r0, [r4, #0x38]
-	bl OverlayManager_run
+	bl OverlayManager_Run
 	cmp r0, #0
 	bne _02076754
 _02076752:
 	b _02076C76
 _02076754:
 	ldr r0, [r4, #0x38]
-	bl OverlayManager_delete
+	bl OverlayManager_Delete
 	mov r0, #0
 	str r0, [r4, #0x38]
 	ldr r1, [r4]
@@ -2797,10 +2797,10 @@ _02076CC4:
 	cmp r0, #0
 	beq _02076CE4
 	ldr r0, [r4, #0x24]
-	bl GetPartyCount
+	bl Party_GetCount
 	add r5, r0, #0
 	ldr r0, [r4, #0x24]
-	bl GetPartyMaxCount
+	bl Party_GetMaxCount
 	cmp r5, r0
 	blt _02076CE6
 _02076CE4:
@@ -2912,7 +2912,7 @@ _02076D62:
 	add r2, sp, #0
 	bl SetMonData
 	ldr r0, [r4, #0x5c]
-	bl Mail_new
+	bl Mail_New
 	add r6, r0, #0
 	add r0, r5, #0
 	mov r1, #0xaa
@@ -2938,7 +2938,7 @@ _02076D62:
 	bl CalcMonLevelAndStats
 	ldr r0, [r4, #0x24]
 	add r1, r5, #0
-	bl AddMonToParty
+	bl Party_AddMon
 	ldr r0, [r4, #0x48]
 	add r1, r5, #0
 	bl Pokedex_SetMonCaughtFlag
@@ -3219,7 +3219,7 @@ _02076F38:
 	bl PaletteData_LoadNarc
 	ldr r1, [r5, #0x5c]
 	mov r0, #0xef
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -3265,7 +3265,7 @@ _02076F38:
 	mov r3, #5
 	bl GfGfxLoader_LoadScrnDataFromOpenNarc
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #5
 	mov r1, #0
 	bl ToggleBgLayer
@@ -3481,7 +3481,7 @@ _020772CE:
 	ldr r0, [r4, #0x14]
 	bl sub_0200398C
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _020772F0 ; =OS_IRQTable
 	ldr r1, _020772F4 ; =0x00003FF8
 	mov r0, #1
@@ -3583,7 +3583,7 @@ sub_02077394: ; 0x02077394
 	ldr r0, _020773A8 ; =_02103A1C
 	ldr r1, [r4, #0x3c]
 	ldr r2, [r4, #0x5c]
-	bl OverlayManager_new
+	bl OverlayManager_New
 	str r0, [r4, #0x38]
 	pop {r4, pc}
 	nop

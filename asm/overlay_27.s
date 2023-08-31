@@ -86,7 +86,7 @@ ov27_02259F80: ; 0x02259F80
 	mov r1, #8
 	bl FontID_Alloc
 	mov r0, #8
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	ldr r1, _0225A18C ; =0x000004AC
 	mov r2, #0xc4
 	str r0, [r4, r1]
@@ -174,7 +174,7 @@ ov27_02259F80: ; 0x02259F80
 	b _0225A11A
 _0225A102:
 	add r0, r5, #0
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	bne _0225A11A
 	add r0, r5, #0
@@ -264,7 +264,7 @@ _0225A1C8:
 	bl DestroyMsgData
 	ldr r0, _0225A2BC ; =0x000004AC
 	ldr r0, [r6, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r7, #0x55
 	mov r4, #0
 	add r5, r6, #0
@@ -503,7 +503,7 @@ _0225A3AE:
 	str r2, [r5, r1]
 _0225A3C8:
 	ldr r0, [r5, #0x10]
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	beq _0225A3DA
 	add r0, r5, #0
@@ -602,7 +602,7 @@ ov27_0225A48C: ; 0x0225A48C
 	cmp r1, #0
 	bne _0225A4B6
 	ldr r0, [r5, #0x10]
-	bl FieldSys_GetPlayerAvatar
+	bl FieldSystem_GetPlayerAvatar
 	add r6, r0, #0
 	bl sub_0205CB38
 	add r4, r0, #0
@@ -623,7 +623,7 @@ ov27_0225A4B8: ; 0x0225A4B8
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x10]
-	bl FieldSys_GetPlayerAvatar
+	bl FieldSystem_GetPlayerAvatar
 	bl sub_0205CB38
 	add r1, r0, #0
 	add r0, r4, #0
@@ -749,7 +749,7 @@ _0225A5A8:
 	cmp r0, #0
 	bne _0225A5E6
 	add r0, r4, #0
-	bl FieldSys_GetPlayerAvatar
+	bl FieldSystem_GetPlayerAvatar
 	bl PlayerAvatar_GetMapObject
 	add r7, r0, #0
 	bl sub_0205F330
@@ -780,7 +780,7 @@ _0225A5E6:
 	bne _0225A618
 	add r0, r4, #0
 	add r1, sp, #0
-	bl Fsys_GetFacingObject
+	bl FieldSystem_GetFacingObject
 	ldr r0, [sp]
 	bl MapObject_GetScript
 	bl ov01_021F6BD0
@@ -1286,9 +1286,9 @@ _0225A9D0:
 	beq _0225AA2E
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r4, r0, #0
-	bl Bag_GetRegisteredItemSlot1
+	bl Bag_GetRegisteredItem1
 	cmp r0, #0
 	beq _0225A9EA
 	mov r6, #1
@@ -1297,7 +1297,7 @@ _0225A9EA:
 	mov r6, #0
 _0225A9EC:
 	add r0, r4, #0
-	bl Bag_GetRegisteredItemSlot2
+	bl Bag_GetRegisteredItem2
 	cmp r0, #0
 	beq _0225A9FA
 	mov r4, #1
@@ -1722,12 +1722,12 @@ _0225AD36:
 _0225AD52:
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	add r7, r0, #0
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r1, r4, #0
 	add r1, #0x64
 	str r1, [sp]
@@ -1920,7 +1920,7 @@ _0225AEDE:
 	cmp r2, r0
 	bne _0225AF22
 	mov r0, ip
-	bl FieldSys_BugContest_get
+	bl FieldSystem_BugContest_Get
 	str r0, [sp, #0x14]
 	cmp r0, #0
 	bne _0225AEFA
@@ -1952,12 +1952,12 @@ _0225AF22:
 	str r0, [sp, #0x1c]
 	add r0, r7, #0
 	mov r6, #0x12 ; NARC_itemtool_itemdata_item_icon
-	bl Bag_GetRegisteredItemSlot1
+	bl Bag_GetRegisteredItem1
 	mov r1, #2
 	bl GetItemIndexMapping
 	str r0, [sp, #0x20]
 	add r0, r7, #0
-	bl Bag_GetRegisteredItemSlot1
+	bl Bag_GetRegisteredItem1
 	mov r1, #1
 	bl GetItemIndexMapping
 	add r2, r0, #0
@@ -1969,12 +1969,12 @@ _0225AF4A:
 	str r0, [sp, #0x1c]
 	add r0, r7, #0
 	mov r6, #0x12 ; NARC_itemtool_itemdata_item_icon
-	bl Bag_GetRegisteredItemSlot2
+	bl Bag_GetRegisteredItem2
 	mov r1, #2
 	bl GetItemIndexMapping
 	str r0, [sp, #0x20]
 	add r0, r7, #0
-	bl Bag_GetRegisteredItemSlot2
+	bl Bag_GetRegisteredItem2
 	mov r1, #1
 	bl GetItemIndexMapping
 	add r2, r0, #0
@@ -2347,7 +2347,7 @@ _0225B27E:
 	cmp r0, #2
 	bne _0225B2D2
 	ldr r0, [r5, #0x10]
-	bl FieldSys_BugContest_get
+	bl FieldSystem_BugContest_Get
 	add r4, r0, #0
 	bne _0225B298
 	bl GF_AssertFail
@@ -2727,7 +2727,7 @@ _0225B55A:
 _0225B57E:
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r6, r0, #0
 	add r0, r4, #0
 	sub r0, #8
@@ -2751,7 +2751,7 @@ _0225B5AC:
 	cmp r4, #8
 	bne _0225B5BE
 	add r0, r6, #0
-	bl Bag_GetRegisteredItemSlot1
+	bl Bag_GetRegisteredItem1
 	cmp r0, #0
 	bne _0225B5D0
 	mov r0, #1
@@ -2760,7 +2760,7 @@ _0225B5BE:
 	cmp r4, #9
 	bne _0225B5D0
 	add r0, r6, #0
-	bl Bag_GetRegisteredItemSlot2
+	bl Bag_GetRegisteredItem2
 	cmp r0, #0
 	bne _0225B5D0
 	mov r0, #1
@@ -3458,7 +3458,7 @@ ov27_0225BB6C: ; 0x0225BB6C
 	add r5, r0, #0
 	ldr r0, [r5, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, _0225BC10 ; =0x000004AC
 	mov r1, #0
@@ -3550,17 +3550,17 @@ ov27_0225BC34: ; 0x0225BC34
 	add r5, r0, #0
 	ldr r0, _0225BC78 ; =0x000004C8
 	ldr r0, [r5, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _0225BC7C ; =0x000004C4
 	ldr r0, [r5, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r7, #0x4b
 	mov r6, #0
 	add r4, r5, #0
 	lsl r7, r7, #4
 _0225BC50:
 	ldr r0, [r4, r7]
-	bl String_dtor
+	bl String_Delete
 	add r6, r6, #1
 	add r4, r4, #4
 	cmp r6, #5
@@ -3571,7 +3571,7 @@ _0225BC62:
 	ldr r0, [r5, r6]
 	cmp r0, #0
 	beq _0225BC6C
-	bl String_dtor
+	bl String_Delete
 _0225BC6C:
 	add r4, r4, #1
 	add r5, #8
@@ -3701,7 +3701,7 @@ ov27_0225BD50: ; 0x0225BD50
 	push {r3, r4, r5, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	add r5, r0, #0
 	add r0, r4, #0
 	bl sub_02067584
@@ -3711,7 +3711,7 @@ ov27_0225BD50: ; 0x0225BD50
 	pop {r3, r4, r5, pc}
 _0225BD6A:
 	add r0, r5, #0
-	bl ScriptState_CheckSafariSysFlag
+	bl Save_VarsFlags_CheckSafariSysFlag
 	cmp r0, #0
 	beq _0225BD78
 	mov r0, #1
@@ -3725,7 +3725,7 @@ _0225BD78:
 	pop {r3, r4, r5, pc}
 _0225BD86:
 	add r0, r5, #0
-	bl ScriptState_CheckPalParkSysFlag
+	bl Save_VarsFlags_CheckPalParkSysFlag
 	cmp r0, #0
 	beq _0225BD94
 	mov r0, #3
@@ -3770,9 +3770,9 @@ ov27_0225BDC8: ; 0x0225BDC8
 	push {r3, lr}
 	ldr r0, [r0, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Save_FlyPoints_get
-	bl SaveFlyPoints_GetPlayerSub
-	bl FlypointsPlayerSub_CheckRunningShoes
+	bl Save_LocalFieldData_Get
+	bl LocalFieldData_GetPlayer
+	bl PlayerSaveData_CheckRunningShoes
 	pop {r3, pc}
 	thumb_func_end ov27_0225BDC8
 
@@ -3782,7 +3782,7 @@ ov27_0225BDDC: ; 0x0225BDDC
 	add r4, r1, #0
 	add r5, r0, #0
 	ldr r0, [r4, #0x10]
-	bl Fsys_GetGearPhoneRingManager
+	bl FieldSystem_GetGearPhoneRingManager
 	str r0, [r5, #4]
 	mov r0, #0xe7
 	lsl r0, r0, #2
@@ -3853,7 +3853,7 @@ _0225BE3A:
 	mov r2, #1
 	bl ov27_0225BB38
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #8]
 	mov r1, #5
 	bl sub_02024950
@@ -3974,7 +3974,7 @@ _0225BF48:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, sp, #0x14
 	bl CopyWindowToVram
 	add r0, sp, #0x14
@@ -4092,8 +4092,8 @@ ov27_0225C044: ; 0x0225C044
 	add r4, r0, #0
 	ldr r0, [r4, #0x10]
 	ldr r0, [r0, #0xc]
-	bl Save_FlyPoints_get
-	bl FlyPoints_GetSafariBallsCounter
+	bl Save_LocalFieldData_Get
+	bl LocalFieldData_GetSafariBallsCounter
 	add r3, r0, #0
 	ldrh r3, [r3]
 	add r0, r4, #0
@@ -4111,7 +4111,7 @@ ov27_0225C06C: ; 0x0225C06C
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x10]
-	bl sub_020558BC
+	bl PalPark_CountMonsNotCaught
 	add r3, r0, #0
 	mov r1, #0xe
 	lsl r3, r3, #0x10
@@ -4127,7 +4127,7 @@ ov27_0225C088: ; 0x0225C088
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0x10]
-	bl FieldSys_BugContest_get
+	bl FieldSystem_BugContest_Get
 	add r4, r0, #0
 	bne _0225C09A
 	bl GF_AssertFail
@@ -4610,7 +4610,7 @@ ov27_0225C434: ; 0x0225C434
 	push {r4, lr}
 	add r4, r1, #0
 	ldr r0, [r4, #0x24]
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	bne _0225C46C
 	ldr r0, [r4, #0x24]
@@ -4674,7 +4674,7 @@ ov27_0225C4AC: ; 0x0225C4AC
 	add r5, r0, #0
 	mov r0, #0xef
 	mov r1, #8
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	ldr r2, _0225C53C ; =0x04001050
 	add r3, r1, #0
@@ -4729,7 +4729,7 @@ ov27_0225C4AC: ; 0x0225C4AC
 	add r0, r6, #0
 	bl FreeToHeap
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x14
 	pop {r3, r4, r5, r6, pc}
 	.balign 4, 0
@@ -4743,7 +4743,7 @@ ov27_0225C540: ; 0x0225C540
 	add r5, r0, #0
 	mov r0, #0xef
 	mov r1, #8
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -4767,7 +4767,7 @@ ov27_0225C540: ; 0x0225C540
 	mov r3, #4
 	bl GfGfxLoader_LoadScrnDataFromOpenNarc
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #8
 	str r0, [sp]
 	str r0, [sp, #4]
@@ -4856,7 +4856,7 @@ ov27_0225C618: ; 0x0225C618
 	add r6, r0, #0
 	mov r0, #0xef
 	mov r1, #8
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -4882,7 +4882,7 @@ ov27_0225C618: ; 0x0225C618
 	mov r3, #4
 	bl GfGfxLoader_LoadScrnDataFromOpenNarc
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0
 	str r0, [sp, #0x14]
 	cmp r6, #0
@@ -5209,7 +5209,7 @@ ov27_0225C8D0: ; 0x0225C8D0
 	add r0, r5, #0
 	bl ScheduleWindowCopyToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -5221,7 +5221,7 @@ ov27_0225C914: ; 0x0225C914
 	push {r4, lr}
 	add r4, r0, #0
 	mov r0, #8
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x50]
 	mov r0, #0
 	mov r1, #0x1b
@@ -5239,7 +5239,7 @@ ov27_0225C930: ; 0x0225C930
 	ldr r0, [r4, #0x4c]
 	bl DestroyMsgData
 	ldr r0, [r4, #0x50]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov27_0225C930

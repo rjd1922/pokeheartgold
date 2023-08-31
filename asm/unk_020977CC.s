@@ -85,7 +85,7 @@ _02097852:
 	strb r0, [r4, #2]
 _0209785A:
 	ldr r0, [r5, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	strb r0, [r4, #1]
 	ldr r0, [r5, #0x10]
@@ -101,7 +101,7 @@ _02097874: .word sub_02097878
 sub_02097878: ; 0x02097878
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r4, r0, #0
 	add r0, r5, #0
 	bl TaskManager_GetEnv
@@ -124,7 +124,7 @@ _020978A2:
 	b _020978C4
 _020978AC:
 	add r0, r4, #0
-	bl FieldSys_ApplicationIsRunning
+	bl FieldSystem_ApplicationIsRunning
 	cmp r0, #0
 	beq _020978C4
 	mov r0, #0
@@ -148,7 +148,7 @@ sub_020978D0: ; 0x020978D0
 	push {r3, r4, r5, r6, lr}
 	sub sp, #0xc
 	add r5, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r6, r0, #0
 	add r0, r5, #0
 	bl TaskManager_GetEnv

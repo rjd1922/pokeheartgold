@@ -8,14 +8,14 @@
 .public sub_0202F01C
 .public sub_0202F050
 .public sub_0202F300
-.public Save_SafariZone_get
+.public Save_SafariZone_Get
 .public SafariZone_GetAreaSet
 .public sub_0202F6A0
 .public sub_0202F6AC
 .public sub_0202F6B8
 .public sub_0202F720
-.public SavArray_Flags_get
-.public ScriptState_CheckSafariSysFlag
+.public Save_VarsFlags_Get
+.public Save_VarsFlags_CheckSafariSysFlag
 .public sub_02097268
 .public sub_0209730C
 .public sub_020974C4

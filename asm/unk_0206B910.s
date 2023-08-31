@@ -16,7 +16,7 @@ sub_0206B910: ; 0x0206B910
 	push {r3, r4, r5, r6, r7, lr}
 	add r7, r0, #0
 	add r5, r1, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r6, r0, #0
 	mov r0, #0xb
 	mov r1, #0x14
@@ -39,7 +39,7 @@ _0206B92C:
 	str r0, [r4, #4]
 	bl memset
 	add r0, r5, #0
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	ldr r1, [r4, #4]
 	str r0, [r1, #0x24]
 	ldr r0, [r4, #4]
@@ -74,7 +74,7 @@ sub_0206B984: ; 0x0206B984
 	add r7, r0, #0
 	ldr r0, [sp]
 	ldr r6, [r7, #4]
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r5, r0, #0
 	ldr r0, [r7, #0x10]
 	cmp r0, #6
@@ -99,7 +99,7 @@ _0206B9BC:
 	ldr r0, [sp]
 	bl sub_0205525C
 	ldr r0, [r7, #0xc]
-	bl Sav2_SealCase_get
+	bl Save_SealCase_Get
 	str r0, [r6, #0x20]
 	add r0, r6, #0
 	mov r1, #0
@@ -110,9 +110,9 @@ _0206B9BC:
 	add r0, r5, r0
 	str r0, [r6, #0x2c]
 	ldr r0, [r7, #0xc]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [r6, #0x1c]
-	bl GetPartyCount
+	bl Party_GetCount
 	mov r4, #0
 	str r0, [sp, #4]
 	str r0, [r6]
@@ -122,7 +122,7 @@ _0206B9BC:
 _0206B9F2:
 	ldr r0, [r6, #0x1c]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	str r0, [r5, #4]
 	ldr r0, [sp, #4]
 	add r4, r4, #1
@@ -175,10 +175,10 @@ _0206BA4E:
 	ldr r0, [r6, #0x1c]
 	str r0, [r4]
 	ldr r0, [r7, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	str r0, [r4, #4]
 	ldr r0, [r7, #0xc]
-	bl Sav2_Mailbox_get
+	bl Save_Mailbox_Get
 	str r0, [r4, #8]
 	add r0, r4, #0
 	mov r1, #0

@@ -8,8 +8,8 @@
 .public OverlayManager_GetData
 .public OverlayManager_FreeData
 .public OverlayManager_GetArgs
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharDataFromOpenNarc
 .public GfGfxLoader_LoadScrnDataFromOpenNarc
 .public GfGfxLoader_GXLoadPalFromOpenNarc
@@ -18,12 +18,12 @@
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public ReadMsgData_ExpandPlaceholders
-.public ScrStrBufs_new
-.public ScrStrBufs_delete
+.public MessageFormat_New
+.public MessageFormat_Delete
 .public BufferBoxMonSpeciesName
-.public MessagePrinter_new
-.public MessagePrinter_delete
-.public sub_0200CDF0
+.public MessagePrinter_New
+.public MessagePrinter_Delete
+.public PrintUIntOnWindow
 .public sub_0200CE7C
 .public sub_0200CF18
 .public sub_0200CF38
@@ -82,7 +82,7 @@
 .public GetWindowBgId
 .public GetWindowX
 .public GetWindowY
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ScheduleBgTilemapBufferTransfer
 .public ScheduleSetBgPosText
 .public ResetAllTextPrinters
@@ -98,7 +98,7 @@
 .public sub_02024B60
 .public System_GetTouchNew
 .public GF_AssertFail
-.public String_dtor
+.public String_Delete
 .public Options_GetTextFrameDelay
 .public Options_GetFrame
 .public GetMonData

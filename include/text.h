@@ -2,7 +2,7 @@
 #define POKEHEARTGOLD_TEXT_H
 
 #include "font_types_def.h"
-#include "window.h"
+#include "bg_window.h"
 #include "options.h"
 #include "text_0205B4EC.h"
 
@@ -13,9 +13,9 @@
 
 void sub_0201FFE0(const struct FontInfo *fontData);
 void DecompressGlyphTile(const u8 *src, u8 *dest);
-u16 AddTextPrinterParameterized(WINDOW* window, u8 font_id, STRING* text, u8 x, u8 y, u32 speed, void* callback);
-u8 AddTextPrinterParameterized2(WINDOW *window, FontID fontId, STRING *string, u8 x, u8 y, u32 textSpeed, u32 color, PrinterCallback_t callback);
-u8 AddTextPrinterParameterized3(WINDOW *window, int fontId, STRING *string, u8 x, u8 y, u32 textSpeed, u32 color, u32 letterSpacing, u32 lineSpacing, PrinterCallback_t callback);
+u16 AddTextPrinterParameterized(Window* window, u8 font_id, String* text, u8 x, u8 y, u32 speed, void* callback);
+u8 AddTextPrinterParameterized2(Window *window, FontID fontId, String *string, u8 x, u8 y, u32 textSpeed, u32 color, PrinterCallback_t callback);
+u8 AddTextPrinterParameterized3(Window *window, int fontId, String *string, u8 x, u8 y, u32 textSpeed, u32 color, u32 letterSpacing, u32 lineSpacing, PrinterCallback_t callback);
 BOOL TextPrinterCheckActive(u8 printerId);
 void ResetAllTextPrinters(void);
 BOOL sub_02020094(u8 a0);

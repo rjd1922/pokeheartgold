@@ -1062,7 +1062,7 @@ _0222C550:
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl ov80_0222A7EC
 	add r1, sp, #0xc
 	strh r0, [r1]
@@ -1197,7 +1197,7 @@ _0222C632:
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl ov80_0222A7EC
 	strh r0, [r6]
 	mov r7, #0x1f
@@ -1416,7 +1416,7 @@ ov80_0222C820: ; 0x0222C820
 	str r1, [sp, #4]
 	ldr r1, [r4, #0x34]
 	mov r0, #0xb8
-	bl NARC_ctor
+	bl NARC_New
 	add r7, r0, #0
 _0222C848:
 	add r0, r6, #0
@@ -1437,7 +1437,7 @@ _0222C848:
 	b _0222C848
 _0222C86E:
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [sp, #4]
 	str r0, [r6, #0x1c]
 	mov r0, #0
@@ -2328,7 +2328,7 @@ ov80_0222CEF0: ; 0x0222CEF0
 	ldr r1, _0222CF04 ; =0x000003E2
 	add r0, r4, #0
 	add r0, #0x64
-	bl sub_0200F0AC
+	bl WaitingIcon_New
 	str r0, [r4, #0x7c]
 	mov r0, #0
 	pop {r4, pc}
@@ -2482,7 +2482,7 @@ ov80_0222D008: ; 0x0222D008
 	str r1, [r5, #0x1c]
 	ldr r0, [r0, #8]
 	ldrb r4, [r2]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5]
 	add r1, r4, #0
@@ -2567,7 +2567,7 @@ ov80_0222D084: ; 0x0222D084
 	add r2, r7, #0
 	bl BufferString
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
@@ -2643,7 +2643,7 @@ ov80_0222D13C: ; 0x0222D13C
 	bl ov80_0222BDF4
 	add r5, r0, #0
 	ldr r0, [r4, #8]
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	mov r1, #0
 	add r2, r1, #0
 	bl FrontierData_BattlePointAction
@@ -2665,12 +2665,12 @@ ov80_0222D168: ; 0x0222D168
 	bl ov80_0222BE10
 	add r5, r0, #0
 	ldr r0, [r4, #8]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	mov r1, #0x45
 	add r2, r5, #0
 	bl GameStats_Add
 	ldr r0, [r4, #8]
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	add r1, r5, #0
 	mov r2, #5
 	bl FrontierData_BattlePointAction
@@ -2691,12 +2691,12 @@ ov80_0222D1A0: ; 0x0222D1A0
 	bl ov80_0222BE10
 	add r5, r0, #0
 	ldr r0, [r4, #8]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	mov r1, #0x46
 	add r2, r5, #0
 	bl GameStats_Add
 	ldr r0, [r4, #8]
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	add r1, r5, #0
 	mov r2, #6
 	bl FrontierData_BattlePointAction
@@ -2809,7 +2809,7 @@ ov80_0222D284: ; 0x0222D284
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	bl HealParty
 	mov r0, #0
 	pop {r3, pc}
@@ -2922,7 +2922,7 @@ ov80_0222D334: ; 0x0222D334
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	add r1, r6, #0
 	bl GetVarAddr
 	strh r4, [r0]
@@ -2943,7 +2943,7 @@ ov80_0222D360: ; 0x0222D360
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	add r1, r6, #0
 	bl GetVarAddr
 	ldrh r0, [r0]
@@ -3123,7 +3123,7 @@ _0222D4CC:
 	bl RemoveWindow
 	ldr r0, [r4, #0x28]
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	mov r0, #0
 	add r1, r0, #0
 	bl sub_0200FBF4
@@ -3257,7 +3257,7 @@ _0222D5E8:
 	bl RemoveWindow
 	ldr r0, [r4, #0x28]
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	mov r0, #0
 	add r1, r0, #0
 	bl sub_0200FBF4
@@ -3815,7 +3815,7 @@ _0222D9D6:
 	sub r1, #0x38
 	mov r2, #0
 	mov r3, #0x1e
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	mov r2, #1
 	ldr r0, _0222DAA8 ; =ov80_0222D644
 	add r1, r5, #0
@@ -3827,7 +3827,7 @@ _0222D9D6:
 	b _0222DA94
 _0222DA54:
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	beq _0222DA94
 	mov r0, #1
@@ -3994,7 +3994,7 @@ _0222DB70:
 	sub r1, #0x38
 	mov r2, #0
 	mov r3, #0x1c
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	mov r2, #1
 	ldr r0, _0222DC10 ; =ov80_0222D644
 	add r1, r5, #0
@@ -4006,7 +4006,7 @@ _0222DB70:
 	b _0222DBFC
 _0222DBBC:
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	beq _0222DBFC
 	mov r0, #1
@@ -4202,7 +4202,7 @@ ov80_0222DD3C: ; 0x0222DD3C
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	cmp r0, #0
 	bne _0222DD60
@@ -4507,9 +4507,9 @@ ov80_0222DF64: ; 0x0222DF64
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	ldr r1, [sp, #0x18]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	str r4, [sp]
 	add r1, r0, #0
 	str r6, [sp, #4]
@@ -4621,7 +4621,7 @@ ov80_0222E078: ; 0x0222E078
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	add r1, r4, #0
 	bl GameStats_Inc
 	mov r0, #0
@@ -4642,7 +4642,7 @@ ov80_0222E09C: ; 0x0222E09C
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	add r1, r4, #0
 	add r2, r6, #0
 	bl GameStats_Add
@@ -4660,7 +4660,7 @@ ov80_0222E0C8: ; 0x0222E0C8
 	ldr r0, [r0]
 	bl sub_02096808
 	ldr r0, [r0, #8]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	add r1, r4, #0
 	bl GameStats_AddSpecial
 	mov r0, #0
@@ -5097,7 +5097,7 @@ ov80_0222E400: ; 0x0222E400
 	add r6, r2, #0
 	add r0, sp, #0
 	add r7, r3, #0
-	bl MailMsg_init
+	bl MailMsg_Init
 	add r0, sp, #0
 	add r1, r4, #0
 	add r2, r6, #0
@@ -5117,9 +5117,9 @@ ov80_0222E400: ; 0x0222E400
 	add r4, r0, #0
 	add r0, r5, #0
 	add r1, r4, #0
-	bl StringCopy
+	bl String_Copy
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -5249,7 +5249,7 @@ _0222E51C:
 _0222E538:
 	ldr r1, [r7, #0x34]
 	mov r0, #0x50
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x1c]
 	add r5, r5, #1
 	add r4, r4, #4
@@ -5433,7 +5433,7 @@ ov80_0222E690: ; 0x0222E690
 	ldr r1, [r1, #0x34]
 	add r6, r2, #0
 	add r7, r3, #0
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	add r0, r5, #0
 	add r0, #0x8c
@@ -5463,7 +5463,7 @@ ov80_0222E690: ; 0x0222E690
 	add r1, #0xb4
 	str r0, [r1]
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	add r0, #0x9b
 	ldrb r0, [r0]
@@ -5715,7 +5715,7 @@ ov80_0222E88C: ; 0x0222E88C
 	add r5, r6, #0
 _0222E8BE:
 	ldr r0, [r5, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #0x1c
@@ -5951,7 +5951,7 @@ ov80_0222EA74: ; 0x0222EA74
 	ldr r1, [r1, #0x34]
 	add r7, r2, #0
 	add r4, r3, #0
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	add r0, r5, #0
 	add r0, #0x8c
@@ -5982,7 +5982,7 @@ ov80_0222EA74: ; 0x0222EA74
 	lsl r1, r1, #2
 	str r0, [r2, r1]
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	cmp r4, #0xfa
 	bne _0222EAE6
 	add r0, r5, #0
@@ -6386,7 +6386,7 @@ _0222EDB0:
 	add r5, r6, #0
 _0222EDD6:
 	ldr r0, [r5, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #0x1c
@@ -6424,12 +6424,12 @@ ov80_0222EE14: ; 0x0222EE14
 	mov r0, #0x50
 	ldr r1, [r1, #0x34]
 	add r7, r2, #0
-	bl String_ctor
+	bl String_New
 	ldr r1, [r5]
 	add r4, r0, #0
 	ldr r1, [r1, #0x34]
 	mov r0, #0x50
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	ldr r0, [r5, #0x18]
 	mov r1, #0xf
@@ -6455,9 +6455,9 @@ ov80_0222EE14: ; 0x0222EE14
 	add r2, r6, #0
 	bl AddTextPrinterParameterized
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov80_0222EE14
@@ -6707,7 +6707,7 @@ ov80_0222F030: ; 0x0222F030
 	add r1, r2, #0
 	str r2, [sp, #0x24]
 	add r4, r3, #0
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x30]
 	mov r0, #0
 	str r0, [sp]
@@ -6751,7 +6751,7 @@ ov80_0222F030: ; 0x0222F030
 	str r4, [sp, #4]
 	bl sub_0200D71C
 	ldr r0, [sp, #0x30]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r0, sp, #0x38
 	mov r1, #0
 	mov r2, #0x34
@@ -7072,7 +7072,7 @@ ov80_0222F33C: ; 0x0222F33C
 	add r5, r0, #0
 	mov r0, #0x15
 	mov r1, #0x65
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	bl sub_0207CAA0
 	str r4, [sp]
@@ -7122,7 +7122,7 @@ ov80_0222F33C: ; 0x0222F33C
 	ldr r1, [r5, #0x38]
 	bl sub_0200E188
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x18
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -7239,7 +7239,7 @@ ov80_0222F458: ; 0x0222F458
 	b _0222F4BC
 _0222F498:
 	ldr r0, [r0, #8]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	bl Options_GetTextFrameDelay
 	add r1, r0, #0
 	ldrh r0, [r4, #4]

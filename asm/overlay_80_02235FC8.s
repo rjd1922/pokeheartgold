@@ -140,25 +140,25 @@ ov80_0223608C: ; 0x0223608C
 	mov r2, #0x44
 	bl MIi_CpuClearFast
 	ldr r0, [r5]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r1, r5, #0
 	add r1, #0xa8
 	ldr r1, [r1]
 	str r0, [r1]
 	ldr r0, [r5]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r1, r5, #0
 	add r1, #0xa8
 	ldr r1, [r1]
 	str r0, [r1, #4]
 	ldr r0, [r5]
-	bl Sav2_Mailbox_get
+	bl Save_Mailbox_Get
 	add r1, r5, #0
 	add r1, #0xa8
 	ldr r1, [r1]
 	str r0, [r1, #8]
 	ldr r0, [r5]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r1, r5, #0
 	add r1, #0xa8
 	ldr r1, [r1]
@@ -485,19 +485,19 @@ ov80_02236330: ; 0x02236330
 	mov r2, #0x3c
 	bl MI_CpuFill8
 	ldr r0, [r4]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r1, r4, #0
 	add r1, #0xac
 	ldr r1, [r1]
 	str r0, [r1, #4]
 	ldr r0, [r4]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r1, r4, #0
 	add r1, #0xac
 	ldr r1, [r1]
 	str r0, [r1]
 	ldr r0, [r4]
-	bl SavArray_IsNatDexEnabled
+	bl SaveArray_IsNatDexEnabled
 	add r1, r4, #0
 	add r1, #0xac
 	ldr r1, [r1]
@@ -524,7 +524,7 @@ ov80_02236330: ; 0x02236330
 	add r0, #0xac
 	ldr r0, [r0]
 	ldr r0, [r0]
-	bl GetPartyCount
+	bl Party_GetCount
 	add r1, r4, #0
 	add r1, #0xac
 	ldr r1, [r1]
@@ -539,7 +539,7 @@ ov80_02236330: ; 0x02236330
 	ldr r0, [r0]
 	strb r1, [r0, #0x12]
 	ldr r0, [r4]
-	bl Save_SpecialRibbons_get
+	bl Save_SpecialRibbons_Get
 	add r1, r4, #0
 	add r1, #0xac
 	ldr r1, [r1]
@@ -556,7 +556,7 @@ ov80_02236330: ; 0x02236330
 	ldr r1, _02236414 ; =ov80_0223C040
 	bl sub_02089D40
 	ldr r0, [r4]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r1, r0, #0
 	add r0, r4, #0
 	add r0, #0xac

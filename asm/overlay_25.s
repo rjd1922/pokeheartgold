@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -21,7 +22,7 @@ ov25_022598C0: ; 0x022598C0
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
 	add r4, r1, #0
-	bl Save_TrainerHouse_get
+	bl Save_TrainerHouse_Get
 	add r2, r0, #0
 	cmp r4, #0xa
 	bne _022598FE
@@ -36,11 +37,11 @@ ov25_022598C0: ; 0x022598C0
 	add r0, r4, #0
 	ldr r1, _02259940 ; =ov25_02259D8C
 	add r0, #0x24
-	bl MailMsg_init_fromTemplate
+	bl MailMsg_Init_FromTemplate
 	add r4, #0x2c
 	ldr r1, _02259944 ; =ov25_02259D94
 	add r0, r4, #0
-	bl MailMsg_init_fromTemplate
+	bl MailMsg_Init_FromTemplate
 	b _0225990E
 _022598FE:
 	mov r1, #6
@@ -110,7 +111,7 @@ _02259988:
 	cmp r4, #0
 	beq _022599C4
 	add r0, r4, #0
-	bl StringGetLength
+	bl String_GetLength
 	add r6, r0, #0
 	cmp r6, #7
 	bls _0225999C
@@ -126,13 +127,13 @@ _022599A2:
 	mov r2, #0x10
 	bl MIi_CpuClear16
 	add r0, r4, #0
-	bl String_c_str
+	bl String_cstr
 	add r1, r5, #0
 	add r1, #8
 	lsl r2, r6, #1
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 _022599C4:
 	mov r7, #0
 	add r5, #0x30
@@ -150,7 +151,7 @@ _022599DE:
 	cmp r4, #0
 	beq _02259A1A
 	add r0, r4, #0
-	bl StringGetLength
+	bl String_GetLength
 	add r6, r0, #0
 	cmp r6, #0xa
 	bls _022599F2
@@ -166,13 +167,13 @@ _022599F8:
 	mov r2, #0x14
 	bl MIi_CpuClear16
 	add r0, r4, #0
-	bl String_c_str
+	bl String_cstr
 	add r1, r5, #0
 	add r1, #0x24
 	lsl r2, r6, #1
 	bl MIi_CpuCopy16
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 _02259A1A:
 	add r7, r7, #1
 	add r5, #0x38
@@ -201,12 +202,12 @@ ScrCmd_809: ; 0x02259A30
 	add r0, #0x80
 	ldr r0, [r0]
 	ldr r0, [r0, #0xc]
-	bl Save_TrainerHouse_get
+	bl Save_TrainerHouse_Get
 	cmp r4, #0xa
 	bne _02259A6C
 	ldr r1, _02259AA4 ; =ov25_02259D84
 	add r0, sp, #8
-	bl MailMsg_init_fromTemplate
+	bl MailMsg_Init_FromTemplate
 	add r0, sp, #8
 	add r1, sp, #0x10
 	mov r2, #8
@@ -256,7 +257,7 @@ ov25_02259AAC: ; 0x02259AAC
 	ldr r5, [r4, #0xc]
 	add r6, r0, #0
 	add r0, r5, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #0xc]
 	add r0, r4, #0
 	add r0, #0x94
@@ -283,18 +284,18 @@ ov25_02259AAC: ; 0x02259AAC
 	bl AllocMonZeroed
 	add r5, r0, #0
 	ldr r0, [sp, #0xc]
-	bl GetPartyCount
+	bl Party_GetCount
 	add r7, r0, #0
 	ldr r0, [r6, #4]
 	mov r1, #6
-	bl InitPartyWithMaxSize
+	bl Party_InitWithMaxSize
 	mov r4, #0
 	cmp r7, #0
 	ble _02259B60
 _02259B12:
 	ldr r0, [sp, #0xc]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r5, #0
 	bl CopyPokemonToPokemon
 	add r0, r5, #0
@@ -320,7 +321,7 @@ _02259B50:
 	add r0, r6, #0
 	add r1, r5, #0
 	mov r2, #0
-	bl sub_02051C9C
+	bl BattleSetup_AddMonToParty
 	add r4, r4, #1
 	cmp r4, r7
 	blt _02259B12
@@ -328,7 +329,7 @@ _02259B60:
 	add r0, r5, #0
 	bl FreeToHeap
 	add r0, r6, #0
-	bl sub_02052580
+	bl BattleSetup_SetAllySideBattlersToPlayer
 	ldr r1, [sp, #8]
 	add r0, r6, #0
 	mov r2, #1
@@ -505,7 +506,7 @@ ov25_02259CC4: ; 0x02259CC4
 	ldrb r0, [r5, #7]
 	ldrb r1, [r5, #4]
 	mov r2, #1
-	bl sub_0205B46C
+	bl GetUnionRoomAvatarAttrBySprite
 	strb r0, [r4, #1]
 	mov r0, #0
 	strb r0, [r4, #2]
@@ -520,12 +521,12 @@ ov25_02259CC4: ; 0x02259CC4
 	add r1, r5, #0
 	add r0, #0x24
 	add r1, #0x20
-	bl MailMsg_copy
+	bl MailMsg_Copy
 	add r0, r4, #0
 	add r5, #0x28
 	add r0, #0x2c
 	add r1, r5, #0
-	bl MailMsg_copy
+	bl MailMsg_Copy
 	mov r0, #0
 	str r0, [r4, #0x10]
 	pop {r3, r4, r5, pc}
@@ -560,7 +561,7 @@ ov25_02259D14: ; 0x02259D14
 	mov r1, #6
 	add r0, r0, r4
 	ldr r0, [r0, #4]
-	bl InitPartyWithMaxSize
+	bl Party_InitWithMaxSize
 	add r5, #0x30
 	mov r7, #0
 	add r4, r5, #0
@@ -575,7 +576,7 @@ _02259D56:
 	ldr r0, [sp]
 	ldr r2, [sp, #4]
 	add r1, r6, #0
-	bl sub_02051C9C
+	bl BattleSetup_AddMonToParty
 	add r7, r7, #1
 	add r5, #0x38
 	add r4, #0x38
@@ -592,17 +593,17 @@ _02259D7A:
 
 ; It's MATCH!
 ov25_02259D84:
-	.byte 0x00, msg_0294_00003, EC_GROUP_PEOPLE, 0xFF
+	.byte 0x00, msg_0294_00003, EC_GROUP_TRAINER, 0xFF
 	.short msg_0285_match, 0x0000
 
 ; VICTORY! Thank you!
 ov25_02259D8C: ; 0x02259D8C
-	.byte 0x01, msg_0296_00007, EC_GROUP_PEOPLE, 0xFF
+	.byte 0x01, msg_0296_00007, EC_GROUP_TRAINER, 0xFF
 	.short msg_0285_victory, 0x0000
 
 ; You win... THANKS!
 ov25_02259D94: ; 0x02259D94
-	.byte 0x02, msg_0292_00000, EC_GROUP_LIFESTYLE, 0xFF
+	.byte 0x02, msg_0292_00000, EC_GROUP_GREETINGS, 0xFF
 	.short msg_0287_thanks, 0x0000
 
 ov25_02259D9C: ; 0x02259D9C

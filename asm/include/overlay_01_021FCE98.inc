@@ -4,7 +4,7 @@
 .public FreeToHeap
 .public GF_ExpHeap_FndInitAllocator
 .public TaskManager_Call
-.public TaskManager_GetSys
+.public TaskManager_GetFieldSystem
 .public TaskManager_GetEnv
 .public TaskManager_GetStatePtr
 .public PlayerAvatar_GetState
@@ -12,7 +12,7 @@
 .public MapObject_GetPositionVec
 .public FollowingPokemon_GetMapObject
 .public sub_02069FB0
-.public FsysUnkSub108_AddMonMood
+.public FieldSystemUnkSub108_AddMonMood
 .public memset
 .public ov01_021FBCD8
 .public ov01_021FBDA8

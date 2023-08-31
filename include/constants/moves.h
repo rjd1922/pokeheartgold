@@ -1,8 +1,6 @@
 #ifndef POKEHEARTGOLD_CONSTANTS_MOVES_H
 #define POKEHEARTGOLD_CONSTANTS_MOVES_H
 
-#define LEARNED_MOVES_MAX     4
-
 #define MOVE_NONE             0
 #define MOVE_POUND            1
 #define MOVE_KARATE_CHOP      2
@@ -472,11 +470,24 @@
 #define MOVE_OMINOUS_WIND   466
 #define MOVE_SHADOW_FORCE   467
 
-#define CLASS_PHYSICAL 0
-#define CLASS_SPECIAL  1
-#define CLASS_STATUS   2
-
 #define NUM_MOVES   MOVE_SHADOW_FORCE
+
+#define CATEGORY_PHYSICAL 0
+#define CATEGORY_SPECIAL  1
+#define CATEGORY_STATUS   2
+
+#define RANGE_SINGLE_TARGET                  0
+#define RANGE_SINGLE_TARGET_SPECIAL         (1 << 0)    
+#define RANGE_RANDOM_OPPONENT               (1 << 1)
+#define RANGE_ADJACENT_OPPONENTS            (1 << 2)    
+#define RANGE_ALL_ADJACENT                  (1 << 3)
+#define RANGE_USER                          (1 << 4)
+#define RANGE_USER_SIDE                     (1 << 5)
+#define RANGE_FIELD                         (1 << 6)
+#define RANGE_OPPONENT_SIDE                 (1 << 7)
+#define RANGE_ALLY                          (1 << 8)
+#define RANGE_SINGLE_TARGET_USER_SIDE       (1 << 9)
+#define RANGE_FRONT                         (1 << 10)
 
 // Tutor move flags
 #define TUTOR_DIVE                  0

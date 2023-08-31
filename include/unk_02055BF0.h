@@ -2,6 +2,7 @@
 #define POKEHEARTGOLD_UNK_02055BF0_H
 
 #include "task.h"
+#include "unk_0206793C.h"
 
 typedef struct FieldFadeEnvironment {
     u32 state;
@@ -23,12 +24,12 @@ typedef struct FieldTransitionEnvironment {
     FieldEnvSubUnk18* unk18;
     u32 transitionNo;
     u32 destinationMapID;
-    u32 unk24;
+    UnkStruct_0206793C *unk24;
 } FieldTransitionEnvironment; //size: 0x28
 
 void NewFieldFadeEnvironment(TaskManager* man, int pattern, int typeTop, int typeBottom, u16 colour, int duration, int framesPer, HeapID heapID);
-void NewFieldTransitionEnvironment(FieldSystem* fsys, int mapID, int warpID, int x, int z, int dir, u32 transNo);
-void sub_02055CD8(FieldSystem* fsys, int mapID, int warpID, int x, int z, int dir);
+void NewFieldTransitionEnvironment(FieldSystem* fieldSystem, int mapID, int warpID, int x, int z, int dir, u32 transNo);
+void sub_02055CD8(FieldSystem* fieldSystem, int mapID, int warpID, int x, int z, int dir);
 
 BOOL sub_02056004(TaskManager *man);
 BOOL sub_02056040(TaskManager *man);

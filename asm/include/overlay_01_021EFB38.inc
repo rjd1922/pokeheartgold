@@ -4,8 +4,8 @@
 .public HandleLoadOverlay
 .public sub_02007200
 .public sub_02007234
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharDataFromOpenNarc
 .public GfGfxLoader_GXLoadPalFromOpenNarc
 .public GfGfxLoader_GetScrnDataFromOpenNarc
@@ -62,7 +62,7 @@
 .public sub_0201F988
 .public GX_SetBanks
 .public GX_EngineAToggleLayers
-.public GF_Camera_SetClipBounds
+.public Camera_SetPerspectiveClippingPlane
 .public sub_02024504
 .public sub_02024714
 .public GF_AssertFail

@@ -18,8 +18,8 @@
 .public BlitBitmapRectToWindow
 .public AddTextPrinterParameterized2
 .public GF_AssertFail
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public MapHeader_GetMapSec
 .public MapHeader_GetAreaIcon
 .public sub_0203B58C

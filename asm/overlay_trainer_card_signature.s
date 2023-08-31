@@ -59,10 +59,10 @@ _021E80D6:
 	str r0, [r4]
 	mov r0, #0x5b
 	mov r1, #0x27
-	bl NARC_ctor
+	bl NARC_New
 	add r7, r0, #0
 	mov r0, #0x27
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x10]
 	mov r0, #0
 	mov r1, #0x1b
@@ -92,17 +92,17 @@ _021E80D6:
 	bl BeginNormalPaletteFade
 	add r0, r6, #0
 	bl OverlayManager_GetArgs
-	bl Save_TrainerCard_get
+	bl Save_TrainerCard_Get
 	bl TrainerCard_GetSignature
 	ldr r1, _021E8238 ; =0x00005B98
 	str r0, [r4, r1]
 	add r0, r6, #0
 	bl OverlayManager_GetArgs
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	str r0, [r4, #8]
 	add r0, r6, #0
 	bl OverlayManager_GetArgs
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	str r0, [r4, #0xc]
 	add r0, r4, #0
 	add r1, r7, #0
@@ -137,7 +137,7 @@ _021E80D6:
 	and r0, r1
 	strh r0, [r2]
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [r5]
 	add r0, r0, #1
 	str r0, [r5]
@@ -277,7 +277,7 @@ _021E82FC:
 	ldr r0, [r6, #0x14]
 	bl DestroyMsgData
 	ldr r0, [r6, #0x10]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r6, #0
 	bl ov52_021E8568
 	ldr r0, [sp]
@@ -306,7 +306,7 @@ ov52_021E837C: ; 0x021E837C
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	add r0, r4, #0
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E839C ; =0x027E0000
 	ldr r1, _021E83A0 ; =0x00003FF8
 	mov r0, #1
@@ -471,7 +471,7 @@ ov52_021E84CC: ; 0x021E84CC
 _021E84DC:
 	mov r0, #8
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x18]
 	ldrb r1, [r5]
 	ldr r0, [sp]
@@ -487,15 +487,15 @@ _021E84DC:
 	blt _021E84DC
 	mov r0, #0x14
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r7, #0x2c]
 	mov r0, #0x28
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r7, #0x30]
 	mov r0, #0x50
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	str r0, [r7, #0x34]
 	ldr r0, _021E8560 ; =0x0000431A
 	mov r1, #0
@@ -540,17 +540,17 @@ ov52_021E8568: ; 0x021E8568
 	add r5, r6, #0
 _021E8578:
 	ldr r0, [r5, #0x18]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #5
 	blt _021E8578
 	ldr r0, [r6, #0x34]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x30]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r6, #0x2c]
-	bl String_dtor
+	bl String_Delete
 	pop {r4, r5, r6, pc}
 	nop
 _021E859C: .word 0x00005C9C
@@ -2230,7 +2230,7 @@ ov52_021E927C: ; 0x021E927C
 	add r6, r1, #0
 	mov r0, #0x50
 	mov r1, #0x27
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r0, [r5, #0x14]
 	add r1, r6, #0
@@ -2241,7 +2241,7 @@ ov52_021E927C: ; 0x021E927C
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0xb5
 	lsl r0, r0, #2
 	add r0, r5, r0

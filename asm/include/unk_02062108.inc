@@ -7,7 +7,7 @@
 .public FreeToHeapExplicit
 .public sub_0201F988
 .public GF_AssertFail
-.public sub_0205F19C
+.public MapObjectManager_GetHeapID
 .public MapObject_SetFlagsBits
 .public MapObject_ClearFlagsBits
 .public MapObject_TestFlagsBits
@@ -23,7 +23,7 @@
 .public MapObject_SetMovementStep
 .public MapObject_IncMovementStep
 .public MapObject_GetMovementStep
-.public MapObject_CheckFlag9
+.public MapObject_CheckVisible
 .public MapObject_SetFacingVec
 .public sub_02060F24
 .public sub_02060F78

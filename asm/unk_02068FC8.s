@@ -1,3 +1,4 @@
+#include "config.h"
 	.include "asm/macros.inc"
 	.include "unk_02068FC8.inc"
 	.include "global.inc"
@@ -15,12 +16,12 @@ sub_02068FC8: ; 0x02068FC8
 	add r0, r6, #0
 	str r3, [sp, #0x1c]
 	ldr r5, [sp, #0xbc]
-	bl FieldSys_GetSaveDataPtr
+	bl FieldSystem_GetSaveData
 	str r0, [sp, #0x20]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r7, r0, #0
 	ldr r0, [sp, #0x20]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	add r4, r0, #0
 	ldr r2, _020691A0 ; =0x0000066C
 	add r0, r5, #0
@@ -53,11 +54,11 @@ sub_02068FC8: ; 0x02068FC8
 	bl PlayerProfile_GetMoney
 	str r0, [sp, #0x34]
 	ldr r0, [r6, #0xc]
-	bl Sav2_Pokedex_get
+	bl Save_Pokedex_Get
 	bl Pokedex_CountDexOwned
 	str r0, [sp, #0x38]
 	ldr r0, [r6, #0xc]
-	bl Sav2_Pokedex_get
+	bl Save_Pokedex_Get
 	bl Pokedex_IsEnabled
 	str r0, [sp, #0x3c]
 	add r0, r4, #0
@@ -76,7 +77,7 @@ sub_02068FC8: ; 0x02068FC8
 	str r5, [sp, #0xc]
 	bl sub_020692C4
 	ldr r0, [sp, #0x20]
-	bl Sav2_PlayerData_GetIGTAddr
+	bl Save_PlayerData_GetIGTAddr
 	str r0, [sp, #0x40]
 	add r0, r6, #0
 	add r1, sp, #0x94
@@ -85,9 +86,9 @@ sub_02068FC8: ; 0x02068FC8
 	add r0, r6, #0
 	add r1, sp, #0x84
 	add r2, sp, #0x78
-	bl FieldSys_GetGameClearTime
+	bl FieldSystem_GetGameClearTime
 	ldr r0, [r6, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	bl CheckGameClearFlag
 	add r1, sp, #0x78
 	str r1, [sp]
@@ -101,7 +102,7 @@ sub_02068FC8: ; 0x02068FC8
 	add r3, sp, #0x84
 	bl sub_02069308
 	ldr r0, [r6, #0xc]
-	bl Save_TrainerCard_get
+	bl Save_TrainerCard_Get
 	str r0, [sp, #0x44]
 	add r0, r4, #0
 	mov r1, #0x21
@@ -248,11 +249,11 @@ _020691E4: .word FreeToHeap
 	thumb_func_start sub_020691E8
 sub_020691E8: ; 0x020691E8
 	push {r3, r4, r5, r6, r7, lr}
-	bl FieldSys_GetSaveDataPtr
+	bl FieldSystem_GetSaveData
 	add r7, r0, #0
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	add r0, r7, #0
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	add r6, r0, #0
 	add r0, r7, #0
 	bl sub_0203107C
@@ -267,7 +268,7 @@ sub_020691E8: ; 0x020691E8
 	lsr r4, r0, #0x18
 _02069216:
 	add r0, r7, #0
-	bl Sav2_Pokedex_get
+	bl Save_Pokedex_Get
 	bl Pokedex_NationalDexIsComplete
 	cmp r0, #0
 	beq _0206922A
@@ -537,7 +538,7 @@ sub_0206940C: ; 0x0206940C
 	add r7, r0, #0
 	ldr r0, [r1, #0xc]
 	add r6, r2, #0
-	bl Save_TrainerCard_get
+	bl Save_TrainerCard_Get
 	bl TrainerCard_GetBadgeShininessArr
 	add r1, r6, #0
 	mov r2, #0
@@ -608,7 +609,7 @@ _02069494: .word sub_02069498
 sub_02069498: ; 0x02069498
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
-	bl TaskManager_GetSys
+	bl TaskManager_GetFieldSystem
 	add r4, r0, #0
 	add r0, r5, #0
 	bl TaskManager_GetEnv
@@ -659,7 +660,7 @@ _020694E4:
 	b _0206951C
 _02069500:
 	add r0, r4, #0
-	bl FieldSys_ApplicationIsRunning
+	bl FieldSystem_ApplicationIsRunning
 	cmp r0, #0
 	bne _0206951C
 	add r4, #0x80

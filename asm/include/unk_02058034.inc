@@ -40,7 +40,7 @@
 .public sub_0203993C
 .public sub_02039980
 .public sub_020399FC
-.public FieldSys_GetSaveDataPtr
+.public FieldSystem_GetSaveData
 .public StartMapSceneScript
 .public sub_02051598
 .public sub_020515FC
@@ -69,8 +69,8 @@
 .public sub_02058AA0
 .public sub_02059538
 .public sub_02068FC8
-.public SavArray_Party_alloc
-.public Party_copy
+.public SaveArray_Party_Alloc
+.public Party_Copy
 .public sub_02091574
 .public MI_CpuFill8
 .public ov03_02255BEC

@@ -24,7 +24,7 @@ enum MysteryGiftTag {
 
 typedef struct MG_POKEMON_TAG {
     BOOL fixedOT;
-    POKEMON mon;
+    Pokemon mon;
     u8 ribbons[10];
 } MG_POKEMON_TAG;
 
@@ -38,7 +38,7 @@ typedef struct {
     u16 flag;
     union {
         MG_POKEMON_TAG pokemon;
-        POKEMON egg;
+        Pokemon egg;
         u32 item;
         u16 ruleset[24];
         int base_decoration;
@@ -64,6 +64,6 @@ typedef struct {
 } MYSTERY_GIFT_SAVE; // size = 0x1680
 
 u32 Save_MysteryGift_sizeof(void);
-void Save_MysteryGift_init(MYSTERY_GIFT_SAVE *mg);
+void Save_MysteryGift_Init(MYSTERY_GIFT_SAVE *mg);
 
 #endif //POKEHEARTGOLD_MYSTERY_GIFT_H

@@ -167,13 +167,13 @@ ov106_021E59FC: ; 0x021E59FC
 	ldrh r3, [r4, #0xe]
 	ldr r1, [r4]
 	add r2, r4, #4
-	bl GF_Camera_InitFromTargetDistanceAndAngle
+	bl Camera_Init_FromTargetDistanceAndAngle
 	ldr r0, [r4, #0x20]
 	ldr r1, [r4, #0x24]
 	ldr r2, [r5, #0x18]
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	ldr r0, [r5, #0x18]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	add sp, #0xc
 	pop {r3, r4, r5, r6, pc}
 	thumb_func_end ov106_021E59FC
@@ -457,7 +457,7 @@ _021E5C3C:
 	str r0, [r1, #4]
 	str r0, [r1, #8]
 	bl Thunk_G3X_Reset
-	bl sub_02023154
+	bl Camera_PushLookAtToNNSGlb
 	mov r1, #0xff
 	ldr r0, [sp]
 	lsl r1, r1, #2
@@ -615,7 +615,7 @@ ov106_021E5D70: ; 0x021E5D70
 	sub sp, #8
 	add r4, r0, #0
 	mov r0, #0x99
-	bl GF_Camera_Create
+	bl Camera_New
 	str r0, [r4, #0x18]
 	mov r0, #0x99
 	bl sub_0201F590
@@ -677,7 +677,7 @@ ov106_021E5DFC: ; 0x021E5DFC
 	add r4, r0, #0
 	bl sub_0201F63C
 	ldr r0, [r4, #0x18]
-	bl sub_02023120
+	bl Camera_Delete
 	pop {r4, pc}
 	thumb_func_end ov106_021E5DFC
 
@@ -1449,7 +1449,7 @@ ov106_021E63E0: ; 0x021E63E0
 	add r4, r0, #0
 	bl ov106_021E6A34
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl sub_0200D034
 	ldr r3, _021E6400 ; =0x027E0000
 	ldr r1, _021E6404 ; =0x00003FF8
@@ -1804,10 +1804,10 @@ _021E66C2:
 	b _021E66EE
 _021E66C6:
 	bl SpeciesToOverworldModelIndexOffset
-	ldr r1, _021E66F8 ; =MMODEL_TSURE_POKE_BULBASAUR
+	ldr r1, _021E66F8 ; =MMODEL_FOLLOWER_MON_BULBASAUR
 	add r4, r0, r1
 	add r0, r5, #0
-	bl OverworldModelLookupHasFemaleForme
+	bl OverworldModelLookupHasFemaleForm
 	cmp r0, #0
 	beq _021E66E0
 	cmp r7, #1
@@ -1816,7 +1816,7 @@ _021E66C6:
 	b _021E66EE
 _021E66E0:
 	add r0, r5, #0
-	bl OverworldModelLookupFormeCount
+	bl OverworldModelLookupFormCount
 	cmp r6, r0
 	ble _021E66EC
 	mov r6, #0
@@ -1827,7 +1827,7 @@ _021E66EE:
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _021E66F4: .word NATIONAL_DEX_COUNT
-_021E66F8: .word MMODEL_TSURE_POKE_BULBASAUR
+_021E66F8: .word MMODEL_FOLLOWER_MON_BULBASAUR
 	thumb_func_end ov106_021E66B0
 
 	thumb_func_start ov106_021E66FC
@@ -1839,9 +1839,9 @@ ov106_021E66FC: ; 0x021E66FC
 	ldr r0, [r0]
 	str r1, [sp, #0x18]
 	ldr r0, [r0]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r4, r0, #0
-	bl GetPartyCount
+	bl Party_GetCount
 	cmp r0, #0
 	bne _021E6720
 	mov r5, #0
@@ -1851,7 +1851,7 @@ ov106_021E66FC: ; 0x021E66FC
 _021E6720:
 	add r0, r4, #0
 	mov r1, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -1994,7 +1994,7 @@ ov106_021E6814: ; 0x021E6814
 	ldr r0, _021E68A0 ; =ov106_021E70E0
 	str r0, [r4, #0x14]
 	mov r0, #0xf7
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r4, #4]
 	bl ov106_021E6408
 	add r0, r4, #0
@@ -2031,7 +2031,7 @@ ov106_021E68A8: ; 0x021E68A8
 	add r0, r5, #0
 	bl ov106_021E64FC
 	ldr r0, [r5, #4]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, _021E68D8 ; =0x00000418
 	ldr r0, [r4, r0]
 	bl FreeToHeap

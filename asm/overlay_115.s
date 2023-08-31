@@ -180,15 +180,15 @@ ov115_0225F158: ; 0x0225F158
 	bl NewMsgDataFromNarc
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	add r4, r0, #0
 	mov r0, #0x80
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	mov r0, #0x80
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	add r5, r0, #0
 	add r0, r6, #0
 	mov r1, #0
@@ -205,9 +205,9 @@ ov115_0225F158: ; 0x0225F158
 	add r0, r6, #0
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov115_0225F158
@@ -224,15 +224,15 @@ ov115_0225F1BC: ; 0x0225F1BC
 	bl NewMsgDataFromNarc
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	add r4, r0, #0
 	mov r0, #0x80
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	mov r0, #0x80
 	add r1, r5, #0
-	bl String_ctor
+	bl String_New
 	add r5, r0, #0
 	add r0, r6, #0
 	mov r1, #0
@@ -249,9 +249,9 @@ ov115_0225F1BC: ; 0x0225F1BC
 	add r0, r6, #0
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov115_0225F1BC
@@ -363,7 +363,7 @@ _0225F2DE:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	ldr r0, [sp, #0x14]
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	add r0, #0x44
 	mov r1, #8
@@ -1192,7 +1192,7 @@ _0225F964: .word _02260374
 ov115_0225F968: ; 0x0225F968
 	push {r3, lr}
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	pop {r3, pc}
 	.balign 4, 0
@@ -1661,7 +1661,7 @@ _0225FC0E:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #3
 	str r0, [r6, #4]
 	ldr r0, [r6]

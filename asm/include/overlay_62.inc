@@ -67,7 +67,7 @@
 .public ClearWindowTilemap
 .public ClearWindowTilemapAndCopyToVram
 .public FillWindowPixelBuffer
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public sub_0201F988
 .public GF_SinDegNoWrap
 .public LCRandom
@@ -81,7 +81,7 @@
 .public GX_EngineBToggleLayers
 .public sub_02025224
 .public GF_AssertFail
-.public String_dtor
+.public String_Delete
 .public NNS_GfdDoVramTransfer
 .public VEC_Add
 .public MI_CpuFill8

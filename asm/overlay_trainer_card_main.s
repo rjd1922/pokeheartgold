@@ -79,7 +79,7 @@ TrainerCardMainApp_OvyInit: ; 0x021E5AC0
 	mov r0, #0x67
 	lsl r0, r0, #4
 	ldr r0, [r1, r0]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	add r5, r0, #0
 	bl Options_GetTextFrameDelay
 	ldr r1, _021E5D58 ; =0x0000343E
@@ -553,22 +553,22 @@ ov51_021E5F64: ; 0x021E5F64
 	str r0, [r5, r1]
 	mov r0, #4
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E601C ; =0x000033C8
 	str r0, [r5, r1]
 	mov r0, #0x20
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E6020 ; =0x000033D0
 	str r0, [r5, r1]
 	mov r0, #0xa
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	ldr r1, _021E6024 ; =0x000033D4
 	str r0, [r5, r1]
 	mov r0, #5
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	ldr r2, _021E6028 ; =0x000033CC
 	mov r1, #0xb
 	str r0, [r5, r2]
@@ -640,38 +640,38 @@ ov51_021E6038: ; 0x021E6038
 	add r5, r6, #0
 _021E6042:
 	ldr r0, [r5, r7]
-	bl String_dtor
+	bl String_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #0xe
 	blt _021E6042
 	ldr r0, _021E60AC ; =0x000033E8
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60B0 ; =0x000033E4
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60B4 ; =0x000033E0
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60B8 ; =0x000033DC
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60BC ; =0x000033D8
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60C0 ; =0x000033CC
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60C4 ; =0x000033D4
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60C8 ; =0x000033D0
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60CC ; =0x000033C8
 	ldr r0, [r6, r0]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, _021E60D0 ; =0x000033C4
 	ldr r0, [r6, r0]
 	bl DestroyMsgData
@@ -2053,7 +2053,7 @@ ov51_021E6B88: ; 0x021E6B88
 	bl ov51_021E69EC
 _021E6BD2:
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	ldr r3, _021E6BF8 ; =0x027E0000
@@ -2521,7 +2521,7 @@ _021E6F68:
 	blo _021E6F2A
 	mov r0, #0x20
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	str r0, [sp, #0x1c]
 	ldr r0, _021E71C8 ; =0x000033D0
 	mov r1, #0x20
@@ -2529,7 +2529,7 @@ _021E6F68:
 	mov r2, #0x19
 	str r0, [sp, #0x18]
 	mov r0, #6
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	add r4, r0, #0
 	ldr r0, _021E71CC ; =0x000033D4
 	mov r2, #0
@@ -2774,9 +2774,9 @@ _021E710A:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	ldr r0, [sp, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add sp, #0x28
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -2858,7 +2858,7 @@ _021E721C:
 	blo _021E721C
 	mov r0, #0x20
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	ldr r1, _021E74D0 ; =0x000033D0
 	ldr r0, [sp, #0x14]
@@ -2866,7 +2866,7 @@ _021E721C:
 	ldr r4, [r0, r1]
 	mov r0, #6
 	mov r1, #0x20
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	ldr r1, [sp, #0x18]
 	add r6, r0, #0
 	add r1, #0x33
@@ -3129,9 +3129,9 @@ _021E7324:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add sp, #0x20
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -3263,16 +3263,16 @@ _021E758E:
 	str r0, [sp, #0x10]
 	mov r0, #0x20
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	mov r0, #0x20
 	mov r1, #0x19
-	bl String_ctor
+	bl String_New
 	str r0, [sp, #0x14]
 	mov r0, #2
 	mov r1, #0x20
 	mov r2, #0x19
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	add r6, r0, #0
 	ldr r0, [r5, #0x18]
 	bl GetIGTHours
@@ -3320,11 +3320,11 @@ _021E758E:
 	ldr r0, [sp, #0x10]
 	bl DestroyMsgData
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x14]
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -3836,7 +3836,7 @@ _021E7A58:
 	bne _021E7A58
 	mov r0, #0x31
 	mov r1, #0x19
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [sp, #0x18]
 	mov r1, #0x8e
 	ldr r0, [sp, #0x14]
@@ -3878,7 +3878,7 @@ _021E7AB2:
 	cmp r4, #0x10
 	blo _021E7A74
 	ldr r0, [sp, #0x18]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0x10
 	mov r1, #1
 	bl GX_EngineAToggleLayers

@@ -128,7 +128,7 @@ ov89_02258800: ; 0x02258800
 	mov r1, #0x7d
 	bl FontID_Alloc
 	mov r0, #0x7d
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r5, #0x2c]
 	ldr r2, _02258AE0 ; =0x000002F2
 	mov r0, #0
@@ -142,13 +142,13 @@ ov89_02258800: ; 0x02258800
 	str r0, [r5, #0x10]
 	mov r0, #0xd2
 	mov r1, #0x7d
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x16
 	lsl r1, r1, #4
 	str r0, [r5, r1]
 	mov r0, #0x45
 	mov r1, #0x7d
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x59
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -168,7 +168,7 @@ ov89_02258800: ; 0x02258800
 	mov r0, #1
 	lsl r0, r0, #8
 	mov r1, #0x7d
-	bl String_ctor
+	bl String_New
 	add r1, r5, #0
 	add r1, #0xc4
 	str r0, [r1]
@@ -493,7 +493,7 @@ _02258C56:
 	mov r1, #2
 	bl ReadMsgDataIntoString
 	ldr r0, [r4, #4]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	bl Options_GetTextFrameDelay
 	mov r3, #0
 	str r3, [sp]
@@ -629,7 +629,7 @@ _02258D7A:
 	mov r1, #3
 	bl ReadMsgDataIntoString
 	ldr r0, [r4, #4]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	bl Options_GetTextFrameDelay
 	mov r3, #0
 	str r3, [sp]
@@ -814,7 +814,7 @@ ov89_02258F00: ; 0x02258F00
 	add r0, r4, #0
 	add r0, #0xc4
 	ldr r0, [r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #2
 	bl FontID_Release
 	ldr r0, [r4, #0x10]
@@ -822,7 +822,7 @@ ov89_02258F00: ; 0x02258F00
 	ldr r0, [r4, #0x30]
 	bl DestroyMsgData
 	ldr r0, [r4, #0x2c]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	add r0, r4, #0
 	bl ov89_02259D50
 	ldr r0, [r4, #8]
@@ -857,11 +857,11 @@ ov89_02258F00: ; 0x02258F00
 	mov r0, #0x16
 	lsl r0, r0, #4
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0
 	add r1, r0, #0
 	bl Main_SetVBlankIntrCB
@@ -917,7 +917,7 @@ ov89_0225901C: ; 0x0225901C
 	ldr r0, [r4, #0xc]
 	bl sub_0200398C
 	ldr r0, [r4, #8]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _02259054 ; =0x027E0000
 	ldr r1, _02259058 ; =0x00003FF8
 	mov r0, #1
@@ -1281,7 +1281,7 @@ _022592FE:
 	lsl r2, r2, #0xa
 	bl MIi_CpuClear16
 	ldr r0, [r4, #4]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	bl Options_GetFrame
 	add r5, r0, #0
 	bl sub_0200E640
@@ -1677,7 +1677,7 @@ _0225963E:
 	mov r1, #1
 	bl sub_020137C0
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x4c
 	pop {r4, r5, r6, r7, pc}
 	nop
@@ -2218,7 +2218,7 @@ ov89_02259B00: ; 0x02259B00
 	ldr r0, [r3]
 	str r0, [r2]
 	mov r0, #0x7d
-	bl GF_Camera_Create
+	bl Camera_New
 	add r1, r5, #0
 	add r1, #0xcc
 	str r0, [r1]
@@ -2234,7 +2234,7 @@ ov89_02259B00: ; 0x02259B00
 	ldr r3, _02259B98 ; =0x00000FA4
 	add r0, sp, #0x14
 	lsl r1, r1, #0xe
-	bl GF_Camera_InitFromTargetDistanceAndAngle
+	bl Camera_Init_FromTargetDistanceAndAngle
 	add r2, r5, #0
 	add r2, #0xcc
 	mov r0, #1
@@ -2242,20 +2242,20 @@ ov89_02259B00: ; 0x02259B00
 	ldr r2, [r2]
 	lsl r0, r0, #0xc
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	add r0, r5, #0
 	add r0, #0xcc
 	ldr r0, [r0]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	add r0, r5, #0
 	add r0, #0xcc
 	ldr r0, [r0]
-	bl GF_Camera_GetPerspectiveAngle
+	bl Camera_GetPerspectiveAngle
 	add r4, r0, #0
 	add r0, r5, #0
 	add r0, #0xcc
 	ldr r0, [r0]
-	bl GF_Camera_GetDistance
+	bl Camera_GetDistance
 	add r1, r0, #0
 	add r0, sp, #0xc
 	str r0, [sp]
@@ -2281,12 +2281,12 @@ _02259B9C: .word 0x00001555
 
 	thumb_func_start ov89_02259BA0
 ov89_02259BA0: ; 0x02259BA0
-	ldr r3, _02259BA8 ; =sub_02023120
+	ldr r3, _02259BA8 ; =Camera_Delete
 	add r0, #0xcc
 	ldr r0, [r0]
 	bx r3
 	.balign 4, 0
-_02259BA8: .word sub_02023120
+_02259BA8: .word Camera_Delete
 	thumb_func_end ov89_02259BA0
 
 	thumb_func_start ov89_02259BAC
@@ -2361,13 +2361,13 @@ ov89_02259C0C: ; 0x02259C0C
 	add r0, r4, #0
 	add r0, #0xcc
 	ldr r0, [r0]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	add r1, r4, #0
 	add r1, #0xcc
 	ldr r1, [r1]
 	mov r0, #0
-	bl sub_020233D8
-	bl sub_02023154
+	bl Camera_ApplyPerspectiveType
+	bl Camera_PushLookAtToNNSGlb
 	mov r0, #0
 	ldr r2, _02259CBC ; =0xFFFFF000
 	add r1, r0, #0
@@ -2644,9 +2644,9 @@ ov89_02259E50: ; 0x02259E50
 	mov r2, #0x48
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #4]
-	bl GetPartyCount
+	bl Party_GetCount
 	add r7, r0, #0
 	mov r6, #0
 	cmp r7, #0
@@ -2654,7 +2654,7 @@ ov89_02259E50: ; 0x02259E50
 _02259E78:
 	ldr r0, [sp, #4]
 	add r1, r6, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xae
 	mov r2, #0
 	add r4, r0, #0
@@ -7070,7 +7070,7 @@ _0225BF4C: ; jump table
 	.short _0225BFA4 - _0225BF4C - 2 ; case 3
 _0225BF54:
 	add r0, r5, #0
-	bl GF_Camera_GetDistance
+	bl Camera_GetDistance
 	str r0, [r4]
 	ldrb r0, [r4, #6]
 	add r0, r0, #1
@@ -7080,7 +7080,7 @@ _0225BF54:
 _0225BF68:
 	ldr r0, _0225BFDC ; =0xFFFFE556
 	add r1, r5, #0
-	bl sub_020235FC
+	bl Camera_AdjustDistance
 	mov r0, #4
 	ldrsh r1, [r4, r0]
 	add r1, r1, #1
@@ -7111,7 +7111,7 @@ _0225BF8A:
 _0225BFA4:
 	ldr r0, _0225BFE0 ; =0x00008555
 	add r1, r5, #0
-	bl sub_020235FC
+	bl Camera_AdjustDistance
 	mov r0, #4
 	ldrsh r1, [r4, r0]
 	add r1, r1, #1
@@ -7120,14 +7120,14 @@ _0225BFA4:
 	cmp r0, #6
 	bge _0225BFC6
 	add r0, r5, #0
-	bl GF_Camera_GetDistance
+	bl Camera_GetDistance
 	ldr r1, [r4]
 	cmp r0, r1
 	blt _0225BFD2
 _0225BFC6:
 	ldr r0, [r4]
 	add r1, r5, #0
-	bl GF_Camera_SetDistance
+	bl Camera_SetDistance
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _0225BFD2:
@@ -7225,7 +7225,7 @@ _0225C054:
 _0225C078:
 	add r0, r5, #0
 	add r1, r4, #0
-	bl GF_Camera_SetBindTarget
+	bl Camera_SetLookAtCamUp
 	b _0225C086
 _0225C082:
 	mov r0, #1
@@ -7267,7 +7267,7 @@ _0225C0B8: ; jump table
 _0225C0C0:
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #0
 	ldrh r1, [r0]
 	strh r1, [r4]
@@ -7296,7 +7296,7 @@ _0225C0EA:
 	str r0, [r4, #8]
 	add r0, sp, #8
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	mov r0, #2
 	ldrh r1, [r4, #2]
 	lsl r0, r0, #0xc
@@ -7331,14 +7331,14 @@ _0225C130:
 	add r1, r2, r1
 	str r1, [r4, #8]
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	ldrh r0, [r4, #2]
 	ldr r1, [r4, #8]
 	cmp r1, r0
 	blt _0225C15E
 	add r0, r4, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	add sp, #0x10
 	mov r0, #1
 	pop {r3, r4, r5, pc}
@@ -7380,7 +7380,7 @@ _0225C190: ; jump table
 _0225C198:
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #0
 	ldrh r1, [r0]
 	strh r1, [r4]
@@ -7409,7 +7409,7 @@ _0225C1C2:
 	str r0, [r4, #8]
 	add r0, sp, #8
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	mov r0, #2
 	ldrh r1, [r4, #2]
 	lsl r0, r0, #0xc
@@ -7444,14 +7444,14 @@ _0225C208:
 	sub r1, r2, r1
 	str r1, [r4, #8]
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	ldrh r0, [r4, #2]
 	ldr r1, [r4, #8]
 	cmp r1, r0
 	bgt _0225C236
 	add r0, r4, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	add sp, #0x10
 	mov r0, #1
 	pop {r3, r4, r5, pc}
@@ -7493,7 +7493,7 @@ _0225C268: ; jump table
 _0225C270:
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #0
 	ldrh r1, [r0]
 	strh r1, [r4]
@@ -7521,7 +7521,7 @@ _0225C29A:
 	str r0, [r4, #8]
 	add r0, sp, #8
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	mov r0, #2
 	ldrh r1, [r4]
 	lsl r0, r0, #0xc
@@ -7556,14 +7556,14 @@ _0225C2DE:
 	sub r1, r2, r1
 	str r1, [r4, #8]
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	ldrh r0, [r4]
 	ldr r1, [r4, #8]
 	cmp r1, r0
 	bgt _0225C30C
 	add r0, r4, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	add sp, #0x10
 	mov r0, #1
 	pop {r3, r4, r5, pc}
@@ -7598,7 +7598,7 @@ ov89_0225C31C: ; 0x0225C31C
 _0225C33E:
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #0
 	ldrh r1, [r0]
 	strh r1, [r4]
@@ -7668,7 +7668,7 @@ _0225C396:
 	strh r2, [r1, #0xa]
 	add r0, r3, #0
 	add r1, r5, #0
-	bl sub_02023534
+	bl Camera_SetAngleTarget
 	b _0225C3DC
 _0225C3D6:
 	add sp, #0x10
@@ -7704,7 +7704,7 @@ _0225C402: ; jump table
 	.short _0225C45A - _0225C402 - 2 ; case 3
 _0225C40A:
 	add r0, r5, #0
-	bl GF_Camera_GetDistance
+	bl Camera_GetDistance
 	str r0, [r4]
 	ldrb r0, [r4, #6]
 	add r0, r0, #1
@@ -7714,7 +7714,7 @@ _0225C40A:
 _0225C41E:
 	ldr r0, _0225C490 ; =0x00001AAA
 	add r1, r5, #0
-	bl sub_020235FC
+	bl Camera_AdjustDistance
 	mov r0, #4
 	ldrsh r1, [r4, r0]
 	add r1, r1, #1
@@ -7745,7 +7745,7 @@ _0225C440:
 _0225C45A:
 	ldr r0, _0225C494 ; =0xFFFF7AAB
 	add r1, r5, #0
-	bl sub_020235FC
+	bl Camera_AdjustDistance
 	mov r0, #4
 	ldrsh r1, [r4, r0]
 	add r1, r1, #1
@@ -7754,14 +7754,14 @@ _0225C45A:
 	cmp r0, #6
 	bge _0225C47C
 	add r0, r5, #0
-	bl GF_Camera_GetDistance
+	bl Camera_GetDistance
 	ldr r1, [r4]
 	cmp r0, r1
 	bgt _0225C488
 _0225C47C:
 	ldr r0, [r4]
 	add r1, r5, #0
-	bl GF_Camera_SetDistance
+	bl Camera_SetDistance
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _0225C488:
@@ -7794,7 +7794,7 @@ ov89_0225C498: ; 0x0225C498
 _0225C4B8:
 	add r0, sp, #0xc
 	add r1, r5, #0
-	bl sub_02023640
+	bl Camera_GetLookAtCamPos
 	add r3, sp, #0xc
 	add r2, r4, #0
 	ldmia r3!, {r0, r1}
@@ -7804,7 +7804,7 @@ _0225C4B8:
 	add r1, r5, #0
 	str r0, [r2]
 	add r0, sp, #0
-	bl GF_Camera_GetTarget
+	bl Camera_GetLookAtCamTarget
 	add r3, sp, #0
 	ldmia r3!, {r0, r1}
 	add r2, r4, #0
@@ -7861,14 +7861,14 @@ _0225C520:
 	str r1, [sp, #0x18]
 	add r0, r4, #0
 	add r1, r5, #0
-	bl sub_0202365C
+	bl Camera_SetLookAtCamTarget
 	add r4, #0xc
 	add r0, r4, #0
 	add r1, r5, #0
-	bl sub_0202366C
+	bl Camera_SetLookAtCamPos
 	add r0, sp, #0x18
 	add r1, r5, #0
-	bl GF_Camera_ShiftBy
+	bl Camera_OffsetLookAtPosAndTarget
 	b _0225C564
 _0225C55E:
 	add sp, #0x24
@@ -7903,7 +7903,7 @@ ov89_0225C570: ; 0x0225C570
 _0225C590:
 	add r0, sp, #0xc
 	add r1, r5, #0
-	bl sub_02023640
+	bl Camera_GetLookAtCamPos
 	add r3, sp, #0xc
 	add r2, r4, #0
 	ldmia r3!, {r0, r1}
@@ -7913,7 +7913,7 @@ _0225C590:
 	add r1, r5, #0
 	str r0, [r2]
 	add r0, sp, #0
-	bl GF_Camera_GetTarget
+	bl Camera_GetLookAtCamTarget
 	add r3, sp, #0
 	ldmia r3!, {r0, r1}
 	add r2, r4, #0
@@ -7970,14 +7970,14 @@ _0225C5F8:
 	str r1, [sp, #0x1c]
 	add r0, r4, #0
 	add r1, r5, #0
-	bl sub_0202365C
+	bl Camera_SetLookAtCamTarget
 	add r4, #0xc
 	add r0, r4, #0
 	add r1, r5, #0
-	bl sub_0202366C
+	bl Camera_SetLookAtCamPos
 	add r0, sp, #0x18
 	add r1, r5, #0
-	bl GF_Camera_ShiftBy
+	bl Camera_OffsetLookAtPosAndTarget
 	b _0225C63C
 _0225C636:
 	add sp, #0x24
@@ -8021,7 +8021,7 @@ _0225C670: ; jump table
 _0225C678:
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #0
 	ldrh r1, [r0]
 	strh r1, [r4]
@@ -8049,7 +8049,7 @@ _0225C6A2:
 	str r0, [r4, #8]
 	add r0, sp, #8
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	mov r0, #2
 	ldrh r1, [r4]
 	lsl r0, r0, #0xc
@@ -8084,14 +8084,14 @@ _0225C6E6:
 	add r1, r2, r1
 	str r1, [r4, #8]
 	add r1, r5, #0
-	bl sub_020235A8
+	bl Camera_AdjustAnglePos
 	ldrh r0, [r4]
 	ldr r1, [r4, #8]
 	cmp r1, r0
 	blt _0225C714
 	add r0, r4, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	add sp, #0x10
 	mov r0, #1
 	pop {r3, r4, r5, pc}
@@ -8138,7 +8138,7 @@ ov89_0225C724: ; 0x0225C724
 	pop {r3, r4, r5, r6, r7, pc}
 _0225C768:
 	mov r0, #0x7d
-	bl PlayerProfile_new
+	bl PlayerProfile_New
 	add r6, r0, #0
 	add r0, r7, #0
 	add r1, r6, #0
@@ -8165,7 +8165,7 @@ _0225C768:
 	str r0, [sp, #0x20]
 	mov r0, #0x40
 	mov r1, #0x7d
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	ldr r0, [sp, #0x14]
 	ldr r2, [sp, #0x20]
@@ -8197,11 +8197,11 @@ _0225C7D8:
 	add r0, r4, r5
 	bl CopyWindowToVram
 	ldr r0, [sp, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x20]
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
 	bl FreeToHeap
 _0225C80A:

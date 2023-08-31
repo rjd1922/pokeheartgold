@@ -71,7 +71,7 @@ ScrCmd_410: ; 0x02049CA8
 	add r0, r5, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetSaveDataPtr
+	bl FieldSystem_GetSaveData
 	add r1, r4, #0
 	add r2, r6, #0
 	bl sub_0204A824
@@ -890,7 +890,7 @@ ScrCmd_554: ; 0x0204A2EC
 	bl GetVarPointer
 	add r5, r0, #0
 	add r0, r4, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	mov r1, #0
 	add r2, r1, #0
 	bl FrontierData_BattlePointAction
@@ -917,12 +917,12 @@ ScrCmd_555: ; 0x0204A31C
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	mov r1, #0x45
 	add r2, r6, #0
 	bl GameStats_Add
 	add r0, r4, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	add r1, r6, #0
 	mov r2, #5
 	bl FrontierData_BattlePointAction
@@ -949,12 +949,12 @@ ScrCmd_556: ; 0x0204A360
 	add r6, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	mov r1, #0x46
 	add r2, r6, #0
 	bl GameStats_Add
 	add r0, r4, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	add r1, r6, #0
 	mov r2, #6
 	bl FrontierData_BattlePointAction
@@ -986,7 +986,7 @@ ScrCmd_CheckBattlePoints: ; 0x0204A3A4
 	bl GetVarPointer
 	add r4, r0, #0
 	add r0, r5, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	mov r1, #0
 	add r2, r1, #0
 	bl FrontierData_BattlePointAction
@@ -1269,9 +1269,9 @@ sub_0204A5B0: ; 0x0204A5B0
 	str r0, [sp]
 	add r0, r1, #0
 	str r2, [sp, #4]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #8]
-	bl GetPartyCount
+	bl Party_GetCount
 	lsl r0, r0, #0x18
 	lsr r1, r0, #0x18
 	str r1, [sp, #0x10]
@@ -1290,7 +1290,7 @@ _0204A5D6:
 _0204A5E0:
 	ldr r0, [sp, #8]
 	ldr r1, [sp, #0x14]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	add r6, r0, #0
@@ -1323,7 +1323,7 @@ _0204A61C:
 	bne _0204A65C
 	ldr r1, [sp, #0xc]
 	add r0, r5, #0
-	bl IsPokemonLegendaryOrMythical
+	bl IsPokemonBannedFromBattleFrontier 
 	cmp r0, #1
 	beq _0204A65C
 	ldr r0, [sp, #4]
@@ -1403,8 +1403,8 @@ sub_0204A6A8: ; 0x0204A6A8
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
-	bl Save_FlyPoints_get
-	bl FlyPoints_GetDynamicWarp
+	bl Save_LocalFieldData_Get
+	bl LocalFieldData_GetDynamicWarp
 	add r4, r0, #0
 	ldr r0, [r5, #0x40]
 	bl GetPlayerYCoord
@@ -1422,7 +1422,7 @@ sub_0204A6A8: ; 0x0204A6A8
 	mov r0, #0
 	str r0, [r4, #0x10]
 	ldr r0, [r5, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	bl SetFlag966
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -1432,7 +1432,7 @@ sub_0204A6A8: ; 0x0204A6A8
 sub_0204A6E8: ; 0x0204A6E8
 	push {r3, lr}
 	ldr r0, [r0, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	bl ClearFlag966
 	pop {r3, pc}
 	.balign 4, 0
@@ -1471,7 +1471,7 @@ _0204A720:
 sub_0204A730: ; 0x0204A730
 	push {r4, lr}
 	add r4, r1, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	cmp r4, #0
 	bne _0204A746
 	mov r1, #5
@@ -1488,7 +1488,7 @@ _0204A746:
 	thumb_func_start sub_0204A750
 sub_0204A750: ; 0x0204A750
 	push {r3, lr}
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	mov r1, #5
 	mov r2, #0
 	bl sub_0202D5DC
@@ -1504,7 +1504,7 @@ sub_0204A764: ; 0x0204A764
 	bl sub_0202D908
 	add r4, r0, #0
 	add r0, r5, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	mov r1, #0
 	add r6, r0, #0
 	add r0, r4, #0
@@ -1613,7 +1613,7 @@ sub_0204A824: ; 0x0204A824
 	bl sub_0202D908
 	str r0, [r4, #0x70]
 	add r0, r6, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	str r0, [r4, #0x74]
 	ldr r0, _0204AA20 ; =0x12345678
 	mov r1, #0
@@ -1749,7 +1749,7 @@ _0204A8B4:
 	bl sub_0204BA50
 _0204A972:
 	add r0, r6, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	strb r0, [r4, #0x11]
 	ldrb r0, [r4, #0xf]
@@ -1759,14 +1759,14 @@ _0204A972:
 	bl sub_0203107C
 	add r5, r0, #0
 	add r0, r6, #0
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	ldrb r1, [r4, #0xf]
 	add r7, r0, #0
 	cmp r1, #6
 	bne _0204A9A6
 	add r0, r6, #0
-	bl SavArray_Flags_get
-	bl ScriptState_GetVar4052
+	bl Save_VarsFlags_Get
+	bl Save_VarsFlags_GetVar4052
 	b _0204A9B8
 _0204A9A6:
 	add r1, #8
@@ -1903,7 +1903,7 @@ _0204AA96:
 	pop {r4, r5, r6, r7, pc}
 _0204AAA6:
 	add r0, r2, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #8]
 	ldrb r0, [r5, #0xe]
 	mov r4, #0
@@ -1922,7 +1922,7 @@ _0204AAB6:
 	add r1, #0x2a
 	ldrb r1, [r1]
 	ldr r0, [sp, #8]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	lsl r1, r4, #1
 	add r6, r5, r1
 	add r7, r0, #0
@@ -1960,7 +1960,7 @@ sub_0204AB10: ; 0x0204AB10
 	sub sp, #0x1c
 	str r0, [sp]
 	add r0, r1, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #4]
 	ldr r0, [sp]
 	mov r5, #0
@@ -1975,7 +1975,7 @@ _0204AB2C:
 	add r1, r1, r5
 	add r1, #0x2a
 	ldrb r1, [r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	str r0, [sp, #8]
 	lsl r6, r5, #1
 	mov r1, #5
@@ -2242,7 +2242,7 @@ sub_0204AD04: ; 0x0204AD04
 	add r7, r1, #0
 	add r5, r0, #0
 	add r0, r7, #0
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	str r0, [sp, #4]
 	add r0, r7, #0
 	bl sub_0203107C
@@ -2341,7 +2341,7 @@ _0204ADD0:
 	cmp r0, #6
 	beq _0204ADF8
 	add r0, r7, #0
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	mov r1, #0x10
 	mov r2, #1
 	bl GameStats_Add
@@ -2377,7 +2377,7 @@ sub_0204AE20: ; 0x0204AE20
 	cmp r0, #5
 	beq _0204AF26
 	add r0, r7, #0
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	str r0, [sp, #4]
 	add r0, r7, #0
 	bl sub_0203107C
@@ -2765,7 +2765,7 @@ sub_0204B120: ; 0x0204B120
 	add r5, r0, #0
 	add r0, r1, #0
 	add r4, r2, #0
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	add r6, r0, #0
 	cmp r4, #0
 	beq _0204B13C
@@ -2992,7 +2992,7 @@ sub_0204B2B8: ; 0x0204B2B8
 	mov r2, #1
 	add r1, sp, #8
 	strb r2, [r1]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp]
 	mov r7, #0
 	ldrb r0, [r5, #0xe]
@@ -3004,7 +3004,7 @@ _0204B2D6:
 	add r1, #0x2a
 	ldrb r1, [r1]
 	ldr r0, [sp]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r6, #0
 	mov r2, #0
 	str r0, [sp, #4]
@@ -3220,7 +3220,7 @@ sub_0204B470: ; 0x0204B470
 	str r0, [sp, #4]
 	bl MI_CpuFill8
 	add r0, r4, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	ldr r5, [sp, #4]
 	add r7, r0, #0
 	mov r4, #0
@@ -3229,7 +3229,7 @@ _0204B498:
 	add r1, #0x2a
 	ldrb r1, [r1]
 	add r0, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r0, #0
 	add r0, r5, #0
 	bl sub_0204B34C
@@ -3326,14 +3326,14 @@ sub_0204B538: ; 0x0204B538
 	mov r1, #4
 	str r3, [sp, #0xc]
 	ldr r5, [sp, #0x38]
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	mov r0, #2
 	mov r1, #4
-	bl String_ctor
+	bl String_New
 	str r0, [sp, #0x1c]
 	add r0, r4, #0
-	bl Sav2_Pokedex_get
+	bl Save_Pokedex_Get
 	str r0, [sp, #0x18]
 	mov r0, #1
 	mov r1, #0x1b
@@ -3344,7 +3344,7 @@ sub_0204B538: ; 0x0204B538
 	mov r0, #0x13
 	mov r1, #0xe
 	mov r2, #4
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	mov r1, #0
 	str r1, [sp]
 	mov r3, #1
@@ -3355,7 +3355,7 @@ sub_0204B538: ; 0x0204B538
 	mov r4, #0
 _0204B58C:
 	add r0, r4, #0
-	bl GetLegendaryMon
+	bl GetBannedBattleFrontierPokemon 
 	add r7, r0, #0
 	ldr r0, [sp, #0x18]
 	add r1, r7, #0
@@ -3388,9 +3388,9 @@ _0204B5C6:
 	ldr r0, [sp, #0x10]
 	bl DestroyMsgData
 	ldr r0, [sp, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x14]
 	add sp, #0x20
 	pop {r3, r4, r5, r6, r7, pc}
@@ -3521,12 +3521,12 @@ sub_0204B6AC: ; 0x0204B6AC
 	add r4, r1, #0
 	add r6, r0, #0
 	add r0, r4, #0
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	bl PlayerProfile_GetTrainerGender
 	ldr r1, _0204B700 ; =0x0000083E
 	strh r0, [r6, r1]
 	add r0, r4, #0
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r7, r0, #0
 	mov r4, #0
 	add r5, r6, #0
@@ -3535,7 +3535,7 @@ _0204B6CC:
 	add r1, #0x2a
 	ldrb r1, [r1]
 	add r0, r7, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	bl GetMonData
@@ -3699,7 +3699,7 @@ sub_0204B7D0: ; 0x0204B7D0
 	mov r2, #8
 	bl CopyStringToU16Array
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	bl DestroyMsgData
 	add r0, r6, #0

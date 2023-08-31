@@ -33,7 +33,7 @@ ov80_022310C4: ; 0x022310C4
 	ldr r1, _022313A4 ; =ov80_0223DD44
 	str r0, [r4]
 	ldr r4, [r1]
-	bl SavArray_Party_alloc
+	bl SaveArray_Party_Alloc
 	mov r1, #0x99
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -67,8 +67,8 @@ ov80_022310C4: ; 0x022310C4
 	bne _02231158
 	ldr r0, _022313B0 ; =0x000006FC
 	ldr r0, [r1, r0]
-	bl SavArray_Flags_get
-	bl ScriptState_GetVar4052
+	bl Save_VarsFlags_Get
+	bl Save_VarsFlags_GetVar4052
 	b _02231164
 _02231158:
 	ldr r0, [sp, #0xc]
@@ -256,12 +256,12 @@ _022312D2:
 	ldr r4, [r7]
 	ldr r0, _022313B0 ; =0x000006FC
 	ldr r0, [r4, r0]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	mov r1, #0x26
 	add r2, r4, r5
 	lsl r1, r1, #4
 	ldrb r1, [r2, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r4, [r7]
 	mov r1, #6
 	mov r2, #0
@@ -450,7 +450,7 @@ _0223145A:
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	mov r1, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	bl GetMonData
@@ -623,11 +623,11 @@ ov80_0223157C: ; 0x0223157C
 	bl sub_02030B1C
 	ldr r0, _022317B4 ; =0x000006FC
 	ldr r0, [r5, r0]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	mov r1, #0x26
 	lsl r1, r1, #4
 	ldrb r1, [r5, r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #5
 	mov r2, #0
 	str r0, [sp, #8]

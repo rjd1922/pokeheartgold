@@ -3,13 +3,13 @@
 
 typedef struct MoveTbl {
     u16 effect;
-    u8 class;
+    u8 category;
     u8 power;
     u8 type;
     u8 accuracy;
     u8 pp;
     u8 effectChance;
-    u16 unk8;
+    u16 range;
     s8 priority;
     u8 unkB;
     u8 unkC;
@@ -25,7 +25,7 @@ typedef enum MoveAttr {
     MOVEATTR_ACCURACY,
     MOVEATTR_PP,
     MOVEATTR_EFFECT_CHANCE,
-    MOVEATTR_UNK7,
+    MOVEATTR_RANGE,
     MOVEATTR_PRIORTY,
     MOVEATTR_UNK9,
     MOVEATTR_UNK10,

@@ -64,7 +64,7 @@ _0208512C:
 	str r0, [r2]
 	mov r0, #0xbe
 	mov r1, #0x6c
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0xbb
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -290,7 +290,7 @@ _02085294:
 	mov r0, #0xbb
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl NARC_dtor
+	bl NARC_Delete
 	bl sub_02021238
 	mov r1, #0x2f
 	lsl r1, r1, #4
@@ -328,7 +328,7 @@ sub_020853B4: ; 0x020853B4
 	ldr r1, [sp]
 	add r0, r6, #1
 	str r6, [r4]
-	bl String_ctor
+	bl String_New
 	str r0, [r4, #0x1c]
 	str r7, [r4, #0x20]
 	mov r2, #0
@@ -404,7 +404,7 @@ _02085446:
 	bl GF_AssertFail
 _0208544E:
 	ldr r0, [r4, #0x1c]
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	bl FreeToHeap
 	pop {r4, pc}
@@ -580,7 +580,7 @@ sub_020855CC: ; 0x020855CC
 	mov r0, #0xbe
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _020855FC ; =OS_IRQTable
 	ldr r1, _02085600 ; =0x00003FF8
 	mov r0, #1

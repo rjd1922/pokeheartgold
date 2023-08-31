@@ -11,7 +11,7 @@
 .public sub_0200E5D4
 .public DrawFrameAndWindow2
 .public ClearFrameAndWindow2
-.public ListMenuItems_ctor
+.public ListMenuItems_New
 .public ListMenuItems_AddItem
 .public AllocFromHeap
 .public FreeToHeapExplicit
@@ -27,10 +27,10 @@
 .public GetMonData
 .public SetMonData
 .public Mon_GetBoxMon
-.public Pokemon_UpdateArceusForme
-.public Mon_UpdateGiratinaForme
+.public Pokemon_UpdateArceusForm
+.public Mon_UpdateGiratinaForm
 .public Pokemon_RemoveCapsule
-.public GetPartyMonByIndex
+.public Party_GetMonByIndex
 .public Party_SwapSlots
 .public Bag_AddItem
 .public sub_02079224
@@ -72,4 +72,4 @@
 .public _s32_div_f
 .public _020FA484
 .public gNatureStatMods
-.public PartyMenu_AnimateIconFormeChange
+.public PartyMenu_AnimateIconFormChange

@@ -3,12 +3,12 @@
 .public AllocFromHeapAtEnd
 .public FreeToHeap
 .public sub_0203E30C
-.public FieldSys_GetSaveDataPtr
-.public Fsys_LaunchPokeathlonCourseApplication
+.public FieldSystem_GetSaveData
+.public FieldSystem_LaunchPokeathlonCourseApplication
 .public TaskManager_Call
-.public FieldSys_ApplicationIsRunning
+.public FieldSystem_ApplicationIsRunning
 .public sub_020505C0
 .public sub_020505C8
-.public TaskManager_GetSys
+.public TaskManager_GetFieldSystem
 .public TaskManager_GetEnv
 .public sub_02095DF4

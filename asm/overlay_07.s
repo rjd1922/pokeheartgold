@@ -152,37 +152,37 @@ _0221BEF8:
 	str r0, [r1]
 	mov r0, #7
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x1b
 	lsl r1, r1, #4
 	str r0, [r4, r1]
 	mov r0, #8
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x6d
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0x16
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x6e
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0x17
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x6f
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	mov r0, #0x18
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #7
 	lsl r1, r1, #6
 	str r0, [r4, r1]
 	mov r0, #0x19
 	add r1, r5, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r2, #0x71
 	lsl r2, r2, #2
 	str r0, [r4, r2]
@@ -272,7 +272,7 @@ _0221BFF0:
 	lsl r6, r6, #4
 _0221BFF8:
 	ldr r0, [r5, r6]
-	bl NARC_dtor
+	bl NARC_Delete
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #6
@@ -2974,7 +2974,7 @@ ov07_0221D2F4: ; 0x0221D2F4
 	lsr r0, r0, #0x18
 	mov r2, #0
 	mov r3, #0x3c
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	pop {r3, pc}
 _0221D314:
 	mov r1, #1
@@ -2987,7 +2987,7 @@ _0221D314:
 	lsr r0, r0, #0x18
 	mov r2, #0x10
 	mov r3, #0x3c
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	pop {r3, pc}
 	.balign 4, 0
 	thumb_func_end ov07_0221D2F4
@@ -2997,9 +2997,9 @@ ov07_0221D330: ; 0x0221D330
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	add r4, r1, #0
-	bl sub_0200B594
+	bl DoAllScreenBrightnessTransitionStep
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	beq _0221D370
 	ldr r0, [r4, #4]
@@ -3054,7 +3054,7 @@ ov07_0221D374: ; 0x0221D374
 	ldr r0, [r5, #0x18]
 	add r0, r0, #4
 	str r0, [r5, #0x18]
-	bl sub_0200B528
+	bl ScreenBrightnessData_InitAll
 	add r0, r4, #0
 	mov r1, #1
 	bl ov07_0221D2F4
@@ -8512,7 +8512,7 @@ ov07_0221FB90: ; 0x0221FB90
 	bl ov12_0223A8EC
 	str r0, [r4, #0xc]
 	add r0, r7, #0
-	bl ov12_0223A938
+	bl BattleSystem_GetPaletteData
 	str r0, [r4, #0x10]
 	mov r6, #0
 	add r5, r4, #0
@@ -8537,7 +8537,7 @@ _0221FBD6:
 	bl ov12_0223C1F4
 	ldr r1, [sp, #0x18]
 	mov r0, #8
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	mov r7, #0
 	str r4, [sp, #0x1c]
@@ -8605,7 +8605,7 @@ _0221FC82:
 	cmp r7, #4
 	blt _0221FC0E
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	mov r0, #0
 	str r0, [sp, #0x2c]
 	add r7, r4, #0
@@ -9083,10 +9083,10 @@ _0221FFE6:
 	add r4, r0, #0
 	add r0, sp, #8
 	add r1, r4, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #8
 	add r1, r4, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	add sp, #0x34
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -12984,7 +12984,7 @@ ov07_02221CEC: ; 0x02221CEC
 	bl sub_02015524
 	add r1, r0, #0
 	add r0, sp, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	mov r0, #1
 	add sp, #8
 	pop {r3, pc}
@@ -13013,7 +13013,7 @@ ov07_02221D10: ; 0x02221D10
 	bl sub_02015528
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	mov r0, #1
 	add sp, #8
 	pop {r3, r4, r5, pc}
@@ -13046,7 +13046,7 @@ ov07_02221D4C: ; 0x02221D4C
 	bl sub_02015524
 	add r1, r0, #0
 	add r0, sp, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	mov r0, #1
 	add sp, #0x18
 	pop {r4, pc}
@@ -13075,7 +13075,7 @@ ov07_02221D88: ; 0x02221D88
 	bl sub_02015528
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	mov r0, #1
 	add sp, #8
 	pop {r3, r4, r5, pc}
@@ -13118,12 +13118,12 @@ ov07_02221DC4: ; 0x02221DC4
 	bne _02221E12
 	add r0, sp, #8
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	b _02221E1A
 _02221E12:
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 _02221E1A:
 	mov r0, #1
 	add sp, #0x10
@@ -13155,7 +13155,7 @@ ov07_02221E24: ; 0x02221E24
 	bl sub_02015528
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	mov r0, #1
 	add sp, #8
 	pop {r3, r4, r5, pc}
@@ -13186,7 +13186,7 @@ ov07_02221E60: ; 0x02221E60
 	bl sub_02015528
 	add r0, sp, #0
 	add r1, r5, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	mov r0, #1
 	add sp, #8
 	pop {r3, r4, r5, pc}
@@ -13208,7 +13208,7 @@ ov07_02221E9C: ; 0x02221E9C
 	bl ov07_02231D70
 	add r0, sp, #0
 	add r1, r4, #0
-	bl sub_0202365C
+	bl Camera_SetLookAtCamTarget
 	mov r0, #1
 	add sp, #0xc
 	pop {r4, r5, pc}
@@ -13229,7 +13229,7 @@ ov07_02221EC4: ; 0x02221EC4
 	bl ov07_02231D70
 	add r0, sp, #0
 	add r1, r4, #0
-	bl sub_0202365C
+	bl Camera_SetLookAtCamTarget
 	mov r0, #1
 	add sp, #0xc
 	pop {r4, r5, pc}
@@ -38587,7 +38587,7 @@ _0222E978:
 	mov r1, #0x10
 	mov r2, #0
 	mov r3, #0xd
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	mov r0, #0
 	mvn r0, r0
 	str r0, [r4, #0x10]
@@ -38603,7 +38603,7 @@ _0222E99C:
 	cmp r1, r0
 	bne _0222E9C6
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	beq _0222E9C6
 	mov r0, #1
@@ -38612,7 +38612,7 @@ _0222E99C:
 	mov r1, #0
 	mov r2, #0x10
 	mov r3, #0xd
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	mov r0, #1
 	mvn r0, r0
 	str r0, [r4, #0x10]
@@ -38627,7 +38627,7 @@ _0222E9C6:
 	b _0222EA3C
 _0222E9D8:
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	beq _0222EA3C
 	ldr r0, [r4, #0xc]
@@ -46441,7 +46441,7 @@ _02232750: ; jump table
 _02232758:
 	ldr r1, [r4]
 	mov r0, #0x5f
-	bl NARC_ctor
+	bl NARC_New
 	add r1, r4, #0
 	add r1, #0x8c
 	str r0, [r1]
@@ -46726,7 +46726,7 @@ _02232990:
 	add r4, #0x8c
 	str r1, [r0]
 	ldr r0, [r4]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [sp]
 	bl DestroySysTask
 _022329AC:
@@ -50264,7 +50264,7 @@ _0223431A:
 	str r0, [sp, #0x1c]
 	ldr r1, [r1]
 	mov r0, #8
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r0, #1
 	str r0, [sp]
@@ -50335,7 +50335,7 @@ _0223431A:
 	add r2, r4, #0
 	bl sub_0200D71C
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x38
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -50999,7 +50999,7 @@ _022347D4:
 	bne _02234948
 	ldr r1, [sp, #0x10]
 	mov r0, #0xb4
-	bl NARC_ctor
+	bl NARC_New
 	add r1, sp, #0x24
 	lsl r2, r6, #0x10
 	add r1, #2
@@ -51018,7 +51018,7 @@ _022347D4:
 	lsr r2, r2, #0x10
 	bl sub_02072A20
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [r5]
 	add r2, sp, #0x24
 	lsl r0, r0, #2

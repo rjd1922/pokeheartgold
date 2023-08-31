@@ -13,8 +13,8 @@
 .public sub_02003B50
 .public sub_02003D5C
 .public sub_02004AC8
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public GfGfxLoader_LoadCharDataFromOpenNarc
 .public GfGfxLoader_LoadScrnDataFromOpenNarc
 .public GfGfxLoader_GetPlttDataFromOpenNarc
@@ -67,7 +67,7 @@
 .public ToggleBgLayer
 .public BgSetPosTextAndCommit
 .public BgClearTilemapBufferAndCommit
-.public BgConfig_HandleScheduledScrollAndTransferOps
+.public DoScheduledBgGpuUpdates
 .public ScheduleBgTilemapBufferTransfer
 .public ScheduleSetBgPosText
 .public GF_CreateVramTransferManager
@@ -86,7 +86,7 @@
 .public sub_02026E50
 .public GF_3DVramMan_Create
 .public GF_3DVramMan_Delete
-.public Sav2_PlayerData_GetProfileAddr
+.public Save_PlayerData_GetProfileAddr
 .public Options_GetFrame
 .public sub_0203A880
 .public sub_0203A914

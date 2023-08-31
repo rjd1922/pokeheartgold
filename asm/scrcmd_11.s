@@ -26,37 +26,37 @@ sScriptMysteryGiftActionTable:
 
 	.text
 
-	thumb_func_start FieldSys_InitGetMysteryGiftGmmState
-FieldSys_InitGetMysteryGiftGmmState: ; 0x0204BD78
+	thumb_func_start FieldSystem_InitGetMysteryGiftGmmState
+FieldSystem_InitGetMysteryGiftGmmState: ; 0x0204BD78
 	str r1, [r0]
 	str r2, [r0, #4]
 	str r3, [r0, #8]
 	bx lr
-	thumb_func_end FieldSys_InitGetMysteryGiftGmmState
+	thumb_func_end FieldSystem_InitGetMysteryGiftGmmState
 
-	thumb_func_start FieldSys_GetTagOfNextMG
-FieldSys_GetTagOfNextMG: ; 0x0204BD80
+	thumb_func_start FieldSystem_GetTagOfNextMG
+FieldSystem_GetTagOfNextMG: ; 0x0204BD80
 	push {r3, lr}
 	bl GetFirstQueuedMysteryGiftIdx
 	bl GetMysteryGiftTagByIdx
 	pop {r3, pc}
-	thumb_func_end FieldSys_GetTagOfNextMG
+	thumb_func_end FieldSystem_GetTagOfNextMG
 
-	thumb_func_start FieldSys_GetDataOfNextMG
-FieldSys_GetDataOfNextMG: ; 0x0204BD8C
+	thumb_func_start FieldSystem_GetDataOfNextMG
+FieldSystem_GetDataOfNextMG: ; 0x0204BD8C
 	push {r3, lr}
 	bl GetFirstQueuedMysteryGiftIdx
 	bl GetMysteryGiftDataByIdx
 	pop {r3, pc}
-	thumb_func_end FieldSys_GetDataOfNextMG
+	thumb_func_end FieldSystem_GetDataOfNextMG
 
-	thumb_func_start FieldSys_SetQueuedMGReceived
-FieldSys_SetQueuedMGReceived: ; 0x0204BD98
+	thumb_func_start FieldSystem_SetQueuedMGReceived
+FieldSystem_SetQueuedMGReceived: ; 0x0204BD98
 	push {r3, lr}
 	bl GetFirstQueuedMysteryGiftIdx
 	bl SetMysteryGiftReceivedByIdx
 	pop {r3, pc}
-	thumb_func_end FieldSys_SetQueuedMGReceived
+	thumb_func_end FieldSystem_SetQueuedMGReceived
 
 	thumb_func_start ScrCmd_MysteryGift
 ScrCmd_MysteryGift: ; 0x0204BDA4
@@ -120,7 +120,7 @@ _0204BDFC:
 	add r4, #0x80
 	add r5, r0, #0
 	ldr r0, [r4]
-	bl FieldSys_GetTagOfNextMG
+	bl FieldSystem_GetTagOfNextMG
 	cmp r0, #0
 	beq _0204BE22
 	mov r0, #1
@@ -142,7 +142,7 @@ _0204BE28:
 	add r4, #0x80
 	add r5, r0, #0
 	ldr r0, [r4]
-	bl FieldSys_GetTagOfNextMG
+	bl FieldSystem_GetTagOfNextMG
 	strh r0, [r5]
 	b _0204BF8C
 _0204BE48:
@@ -158,14 +158,14 @@ _0204BE48:
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetTagOfNextMG
+	bl FieldSystem_GetTagOfNextMG
 	sub r0, r0, #1
 	lsl r5, r0, #4
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
 	ldr r7, _0204BF94 ; =sScriptMysteryGiftActionTable
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r4, #0x80
 	add r1, r0, #0
 	ldr r0, [r4]
@@ -178,7 +178,7 @@ _0204BE84:
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetTagOfNextMG
+	bl FieldSystem_GetTagOfNextMG
 	sub r0, r0, #1
 	ldr r1, _0204BF94 ; =sScriptMysteryGiftActionTable
 	lsl r0, r0, #4
@@ -186,7 +186,7 @@ _0204BE84:
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r1, r0, #0
 	add r0, r4, #0
 	add r0, #0x80
@@ -195,14 +195,14 @@ _0204BE84:
 	blx r2
 	add r4, #0x80
 	ldr r0, [r4]
-	bl FieldSys_SetQueuedMGReceived
+	bl FieldSystem_SetQueuedMGReceived
 	b _0204BF8C
 _0204BEB6:
 	; Get GMM
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetTagOfNextMG
+	bl FieldSystem_GetTagOfNextMG
 	sub r0, r0, #1
 	ldr r1, _0204BF94 ; =sScriptMysteryGiftActionTable
 	lsl r0, r0, #4
@@ -232,13 +232,13 @@ _0204BEB6:
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r4, #0x80
 	add r3, r0, #0
 	ldr r1, [r4]
 	ldr r2, [r6]
 	add r0, sp, #0x14
-	bl FieldSys_InitGetMysteryGiftGmmState
+	bl FieldSystem_InitGetMysteryGiftGmmState
 	ldr r2, [sp]
 	ldr r3, [r5, #8]
 	add r0, sp, #0x14
@@ -250,7 +250,7 @@ _0204BF22:
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetTagOfNextMG
+	bl FieldSystem_GetTagOfNextMG
 	sub r0, r0, #1
 	ldr r1, _0204BF94 ; =sScriptMysteryGiftActionTable
 	lsl r0, r0, #4
@@ -280,13 +280,13 @@ _0204BF22:
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r4, #0x80
 	add r3, r0, #0
 	ldr r1, [r4]
 	ldr r2, [r6]
 	add r0, sp, #8
-	bl FieldSys_InitGetMysteryGiftGmmState
+	bl FieldSystem_InitGetMysteryGiftGmmState
 	ldr r2, [sp, #4]
 	ldr r3, [r5, #0xc]
 	add r0, sp, #8
@@ -304,8 +304,8 @@ _0204BF94: .word sScriptMysteryGiftActionTable
 MGCheck_PartySpace: ; 0x0204BF98
 	push {r3, lr}
 	ldr r0, [r0, #0xc]
-	bl SavArray_PlayerParty_get
-	bl GetPartyCount
+	bl SaveArray_Party_Get
+	bl Party_GetCount
 	cmp r0, #6
 	bge _0204BFAC
 	mov r0, #1
@@ -344,7 +344,7 @@ MGMessageSuccess_ManaphyEgg: ; 0x0204BFD0
 	strh r0, [r2]
 	ldr r0, [r4]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r4, #4]
 	mov r1, #0
@@ -357,13 +357,13 @@ MGGive_Mon: ; 0x0204BFF0
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x3c
 	add r7, r0, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	str r0, [sp, #0x14]
 	ldr r0, [r7, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	str r0, [sp, #0x10]
 	ldr r0, [r7, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	str r0, [sp, #0xc]
 	mov r0, #0
 	str r0, [sp, #8]
@@ -518,7 +518,7 @@ _0204C074:
 	bl SetMonData
 _0204C166:
 	ldr r0, [r7, #0xc]
-	bl Save_SpecialRibbons_get
+	bl Save_SpecialRibbons_Get
 	add r6, r0, #0
 	add r0, r4, #0
 	mov r1, #0x2e
@@ -664,7 +664,7 @@ _0204C25E:
 	bl SetMonData
 	add r0, r5, #0
 	ldr r4, [sp, #8]
-	bl String_dtor
+	bl String_Delete
 _0204C2B6:
 	ldr r1, [sp, #4]
 	mov r0, #2
@@ -690,19 +690,19 @@ _0204C2B6:
 	cmp r0, #1
 	bne _0204C2FE
 	ldr r0, [sp, #0xc]
-	bl ScriptState_GetVar404C
+	bl Save_VarsFlags_GetVar404C
 	cmp r0, #0
 	bne _0204C2FE
 	ldr r0, [sp, #0xc]
 	mov r1, #1
-	bl ScriptState_SetVar404C
+	bl Save_VarsFlags_SetVar404C
 _0204C2FE:
 	add r0, r4, #0
 	bl CalcMonLevelAndStats
 	ldr r0, [r7, #0xc]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r1, r4, #0
-	bl AddMonToParty
+	bl Party_AddMon
 	cmp r0, #0
 	beq _0204C31C
 	ldr r0, [r7, #0xc]
@@ -727,7 +727,7 @@ MGMessageSuccess_GiveMon: ; 0x0204C330
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r7, r0, #0
 	mov r0, #0xd1
 	strh r0, [r4]
@@ -735,7 +735,7 @@ MGMessageSuccess_GiveMon: ; 0x0204C330
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -774,7 +774,7 @@ MGMessageSuccess_Egg: ; 0x0204C380
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r7, r0, #0
 	mov r0, #0xd1
 	strh r0, [r4]
@@ -782,7 +782,7 @@ MGMessageSuccess_Egg: ; 0x0204C380
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -801,10 +801,10 @@ MGCheck_Item: ; 0x0204C3BC
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r4, r0, #0
 	add r0, r5, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r1, r0, #0
 	ldr r1, [r1]
 	add r0, r4, #0
@@ -822,10 +822,10 @@ MGGive_Item: ; 0x0204C3E4
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	add r6, r0, #0
 	add r0, r5, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r0, [r0]
 	lsl r0, r0, #0x10
 	lsr r4, r0, #0x10
@@ -834,7 +834,7 @@ MGGive_Item: ; 0x0204C3E4
 	cmp r4, r0
 	bne _0204C410
 	ldr r0, [r5, #0xc]
-	bl SavArray_Flags_get
+	bl Save_VarsFlags_Get
 	mov r1, #0
 	bl sub_02066B9C
 _0204C410:
@@ -854,7 +854,7 @@ MGMessageSuccess_Item: ; 0x0204C420
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r0, [r0]
 	lsl r0, r0, #0x10
 	lsr r7, r0, #0x10
@@ -864,7 +864,7 @@ MGMessageSuccess_Item: ; 0x0204C420
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -885,9 +885,9 @@ MGMessageFailure_Item: ; 0x0204C45C
 	add r4, r1, #0
 	ldr r0, [r0, #0xc]
 	add r6, r2, #0
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	ldr r0, [r5]
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r0, [r0]
 	mov r1, #0
 	lsl r0, r0, #0x10
@@ -912,7 +912,7 @@ MGCheck_BattleRules: ; 0x0204C48C
 MGGive_BattleRules: ; 0x0204C490
 	push {r4, lr}
 	add r4, r0, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r1, r0, #0
 	ldr r0, [r4, #0xc]
 	bl sub_020291D4
@@ -928,7 +928,7 @@ MGMessageSuccess_BattleRules: ; 0x0204C4A4
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r7, r0, #0
 	mov r0, #0xd1
 	strh r0, [r4]
@@ -936,7 +936,7 @@ MGMessageSuccess_BattleRules: ; 0x0204C4A4
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -954,7 +954,7 @@ MGMessageSuccess_BattleRules: ; 0x0204C4A4
 	mov r3, #0
 	bl BufferString
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -989,7 +989,7 @@ MGMessageSuccess_Decoration: ; 0x0204C50C
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r7, [r0]
 	mov r0, #0xd1
 	strh r0, [r4]
@@ -997,7 +997,7 @@ MGMessageSuccess_Decoration: ; 0x0204C50C
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -1024,7 +1024,7 @@ MGMessageFailure_Decoration: ; 0x0204C544
 MGCheck_MonDeco: ; 0x0204C550
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r4, [r0, #4]
 	ldr r0, [r0]
 	cmp r0, #1
@@ -1036,7 +1036,7 @@ MGCheck_MonDeco: ; 0x0204C550
 	b _0204C582
 _0204C56A:
 	ldr r0, [r5, #0xc]
-	bl Sav2_SealCase_get
+	bl Save_SealCase_Get
 	add r1, r4, #0
 	mov r2, #1
 	bl SealCase_CheckSealQuantity
@@ -1057,7 +1057,7 @@ _0204C582:
 MGGive_MonDeco: ; 0x0204C588
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r4, [r0, #4]
 	ldr r0, [r0]
 	cmp r0, #1
@@ -1069,23 +1069,23 @@ MGGive_MonDeco: ; 0x0204C588
 	pop {r3, r4, r5, pc}
 _0204C5A2:
 	ldr r0, [r5, #0xc]
-	bl Sav2_SealCase_get
+	bl Save_SealCase_Get
 	add r1, r4, #0
 	mov r2, #1
 	bl GiveOrTakeSeal
 	pop {r3, r4, r5, pc}
 _0204C5B2:
 	ldr r0, [r5, #0xc]
-	bl Save_DressupData_get
-	bl SaveDressupData_GetFashionCase
+	bl Save_FashionData_Get
+	bl Save_FashionData_GetFashionCase
 	add r1, r4, #0
 	mov r2, #1
 	bl sub_0202BB08
 	pop {r3, r4, r5, pc}
 _0204C5C6:
 	ldr r0, [r5, #0xc]
-	bl Save_DressupData_get
-	bl SaveDressupData_GetFashionCase
+	bl Save_FashionData_Get
+	bl Save_FashionData_GetFashionCase
 	add r1, r4, #0
 	bl sub_0202BBD8
 	pop {r3, r4, r5, pc}
@@ -1098,7 +1098,7 @@ MGMessageSuccess_MonDeco: ; 0x0204C5D8
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r2, [r0, #4]
 	ldr r0, [r0]
 	cmp r0, #1
@@ -1129,7 +1129,7 @@ _0204C614:
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -1291,10 +1291,10 @@ MGMessageFailure_PoketchApp: ; 0x0204C6A8
 MGCheck_PokewalkerCourse: ; 0x0204C6B4
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r4, r0, #0
 	ldr r0, [r5, #0xc]
-	bl Sav2_Pokewalker_get
+	bl Save_Pokewalker_Get
 	ldrb r2, [r4]
 	mov r1, #0
 	cmp r2, #0x1b
@@ -1317,10 +1317,10 @@ MGGive_PokewalkerCourse: ; 0x0204C6E0
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #0xc]
-	bl Sav2_Pokewalker_get
+	bl Save_Pokewalker_Get
 	add r4, r0, #0
 	add r0, r5, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldrb r1, [r0]
 	cmp r1, #0x1b
 	bhs _0204C6FE
@@ -1337,7 +1337,7 @@ MGMesageSuccess_PokewalkerCourse: ; 0x0204C700
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r7, r0, #0
 	mov r0, #0xd1
 	strh r0, [r4]
@@ -1345,7 +1345,7 @@ MGMesageSuccess_PokewalkerCourse: ; 0x0204C700
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -1365,18 +1365,18 @@ MGMesageFailure_PokewalkerCourse: ; 0x0204C738
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r7, r0, #0
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_Pokewalker_get
+	bl Save_Pokewalker_Get
 	mov r0, #0xd1
 	strh r0, [r4]
 	mov r0, #0x1a
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -1394,9 +1394,9 @@ MGCheck_MemorialPhoto: ; 0x0204C778
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	ldr r0, [r4, #0xc]
-	bl Save_PhotoAlbum_get
+	bl Save_PhotoAlbum_Get
 	bl PhotoAlbum_GetNumSaved
 	cmp r0, #0x24
 	bhs _0204C794
@@ -1411,11 +1411,11 @@ _0204C794:
 MGGive_MemorialPhoto: ; 0x0204C798
 	push {r3, r4, r5, lr}
 	add r4, r0, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	add r5, r0, #0
 	add r0, r4, #0
-	bl FieldSys_GetSaveDataPtr
-	bl Save_PhotoAlbum_get
+	bl FieldSystem_GetSaveData
+	bl Save_PhotoAlbum_Get
 	add r4, r0, #0
 	bl PhotoAlbum_GetIndexOfFirstEmptySlot
 	add r2, r0, #0
@@ -1437,14 +1437,14 @@ MGMessageSuccess_MemorialPhoto: ; 0x0204C7C8
 	ldr r0, [r5]
 	add r4, r1, #0
 	add r6, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	mov r0, #0xd1
 	strh r0, [r4]
 	mov r0, #0x12
 	strh r0, [r6]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0
@@ -1460,10 +1460,10 @@ MGMessageFailure_MemorialPhoto: ; 0x0204C7F4
 	ldr r0, [r5]
 	add r6, r1, #0
 	add r4, r2, #0
-	bl FieldSys_GetDataOfNextMG
+	bl FieldSystem_GetDataOfNextMG
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_Bag_get
+	bl Save_Bag_Get
 	mov r1, #0xd1
 	strh r1, [r6]
 	ldr r1, _0204C838 ; =0x000001F5
@@ -1480,7 +1480,7 @@ _0204C822:
 	strh r0, [r4]
 	ldr r0, [r5]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r5, #4]
 	mov r1, #0

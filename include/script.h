@@ -1,9 +1,10 @@
 #ifndef POKEHEARTGOLD_SCRIPT_H
 #define POKEHEARTGOLD_SCRIPT_H
 
+#include "global.h"
 #include "map_events_internal.h"
 #include "msgdata.h"
-#include "window.h"
+#include "bg_window.h"
 #include "field_player_avatar.h"
 #include "gear_phone.h"
 #include "save_pokegear.h"
@@ -11,10 +12,11 @@
 #include "constants/vars.h"
 #include "overlay_manager.h"
 #include "unk_0200E320.h"
-#include "list_menu_2.h"
-#include "unk_0200E398.h"
-#include "unk_02022D74.h"
+#include "list_menu_2d.h"
+#include "render_window.h"
+#include "camera.h"
 #include "field_system.h"
+#include "render_window.h"
 
 #define SCRIPT_MODE_STOPPED  0
 #define SCRIPT_MODE_BYTECODE 1
@@ -26,7 +28,7 @@
 
 #define ScriptReadByte(ctx) *(ctx->script_ptr++)
 
-typedef struct SCRIPTCONTEXT SCRIPTCONTEXT;
+typedef struct ScriptContext ScriptContext;
 
 #define Unk80_10_C_MAGIC         (222271)
 
@@ -34,106 +36,106 @@ typedef struct EngagedTrainer {
     int unk0;
     int unk4;
     int unk8;
-    int trainerNum;
+    int trainerId;
     int encounterType; // 0: single trainer; 1: double-battle trainer; 2: two trainers
-    LocalMapObject *objectEvent;
+    LocalMapObject *overworldEvent;
     int unk18;
 } EngagedTrainer;
-
-typedef struct _NPC_TRADE_WORK NPC_TRADE_WORK;
 
 typedef struct ScriptEnvironment {
     u32 check;
     u8 state;
     u8 textPrinterNum;
-    u8 numActiveMovement;
+    u8 activeMovementCounter;
     u8 unk_7;
     u8 unk_8;
-    u8 numActiveScrCtx;
-    u16 script;
-    u32 unk_C;
+    u8 activeScriptContextCount;
+    u16 activeScriptNumber;
+    u32 battleWinFlag;
     u32 unk_10;
-    WINDOW unk_14;
-    struct ListMenu2 *listMenu;
+    Window unk_14;
+    struct ListMenu2D *listMenu2D;
     int facingDirection;
-    LocalMapObject *lastTalked;
-    u32 cameraFocusObj;
+    LocalMapObject *lastInteracted;
+    u32 cameraTarget;
     LocalMapObject *unk_34;
-    SCRIPTCONTEXT *scriptContexts[3];
-    MSGFMT *msgfmt;
-    STRING *strbuf1;
-    STRING *strbuf2;
-    struct WaitingIconManager *unk_50;
+    ScriptContext *scriptContexts[3];
+    MessageFormat *msgfmt;
+    String *stringBuffer0;
+    String *stringBuffer1;
+    WaitingIcon *waitingIcon;
     EngagedTrainer engagedTrainers[2];
     u16 specialVars[NUM_SPECIAL_VARS];
-    void (*scrctx_end_cb)(FieldSystem *fsys);
-    void *unk_AC;
-    void *genericWorkPtr;
+    void (*scrctx_end_cb)(FieldSystem *fieldSystem);
+    void *runningAppData;
+    void *miscDataPtr;
     void *unk_B4;
-    void *unk_B8;
-    WINDOW unk_BC;
-    WINDOW moneyBox;
-    struct SaveStatsPrinter *unk_DC;
+    void *unk_B8; //PlayerMovementState
+    Window *pointsBox;
+    u8 padding[0xC]; //FIXME: ugly hack
+    Window *moneyBox;
+    u8 padding2[0xC]; //FIXME: ugly hack 2
+    struct SaveStatsPrinter *saveStatsPrinter;
 } ScriptEnvironment;
 
-enum ScriptEnvField {
-    SCRIPTENV_MENU_WINDOW                     =  0,
-    SCRIPTENV_WINDOW                          =  1,
-    SCRIPTENV_MENU                            =  2,
-    SCRIPTENV_PRINTER_NUM                     =  3,
-    SCRIPTENV_NUM_ACTIVE_MOVEMENT             =  4,
-    SCRIPTENV_07                              =  5,
-    SCRIPTENV_08                              =  6,
-    SCRIPTENV_NUM_ACTIVE_SCRCTX               =  7,
-    SCRIPTENV_SCRIPT                          =  8,
-    SCRIPTENV_FACING_DIRECTION                =  9,
-    SCRIPTENV_LAST_TALKED                     = 10,
-    SCRIPTENV_CAMERA_FOCUS_OBJ                = 11,
-    SCRIPTENV_34                              = 12,
-    SCRIPTENV_SCRCTX_0                        = 13,
-    SCRIPTENV_SCRCTX_1                        = 14,
-    SCRIPTENV_SCRCTX_2                        = 15,
-    SCRIPTENV_MSGFMT                          = 16,
-    SCRIPTENV_STRBUF1                         = 17,
-    SCRIPTENV_STRBUF2                         = 18,
-    SCRIPTENV_WAITING_ICON                    = 19,
-    SCRIPTENV_AC                              = 20,
-    SCRIPTENV_GENERIC_WORK_PTR                = 21,
-    SCRIPTENV_B4                              = 22,
-    SCRIPTENV_B8                              = 23,
-    SCRIPTENV_0C                              = 24,
-    SCRIPTENV_54_0_00                         = 25,
-    SCRIPTENV_54_0_04                         = 26,
-    SCRIPTENV_54_0_08                         = 27,
-    SCRIPTENV_EYE_TRAINER_1_NUM               = 28,
-    SCRIPTENV_EYE_TRAINER_1_ENCTYPE           = 29,
-    SCRIPTENV_EYE_TRAINER_1_OBJPTR            = 30,
-    SCRIPTENV_54_0_18                         = 31,
-    SCRIPTENV_54_1_00                         = 32,
-    SCRIPTENV_54_1_04                         = 33,
-    SCRIPTENV_54_1_08                         = 34,
-    SCRIPTENV_EYE_TRAINER_2_NUM               = 35,
-    SCRIPTENV_EYE_TRAINER_2_ENCTYPE           = 36,
-    SCRIPTENV_EYE_TRAINER_2_OBJPTR            = 37,
-    SCRIPTENV_54_1_18                         = 38,
-    SCRIPTENV_BC                              = 39,
-    SCRIPTENV_MONEY_BOX                       = 40,
-    SCRIPTENV_DC                              = 41,
-    SCRIPTENV_SPECIAL_VAR_8000                = 42,
-    SCRIPTENV_SPECIAL_VAR_8001                = 43,
-    SCRIPTENV_SPECIAL_VAR_8002                = 44,
-    SCRIPTENV_SPECIAL_VAR_8003                = 45,
-    SCRIPTENV_SPECIAL_VAR_8004                = 46,
-    SCRIPTENV_SPECIAL_VAR_8005                = 47,
-    SCRIPTENV_SPECIAL_VAR_8006                = 48,
-    SCRIPTENV_SPECIAL_VAR_8007                = 49,
-    SCRIPTENV_SPECIAL_VAR_8008                = 50,
-    SCRIPTENV_SPECIAL_VAR_8009                = 51,
-    SCRIPTENV_SPECIAL_VAR_800A                = 52,
-    SCRIPTENV_SPECIAL_VAR_800B                = 53,
-    SCRIPTENV_SPECIAL_VAR_RESULT              = 54,
-    SCRIPTENV_SPECIAL_VAR_LAST_TALKED         = 55,
-};
+typedef enum ScriptEnvField {
+    SCRIPTENV_MENU_WINDOW,
+    SCRIPTENV_WINDOW,
+    SCRIPTENV_LIST_MENU_2D,
+    SCRIPTENV_TEXT_PRINTER_NUMBER,
+    SCRIPTENV_ACTIVE_MOVEMENT_COUNTER,
+    SCRIPTENV_FIELD_07,
+    SCRIPTENV_FIELD_08,
+    SCRIPTENV_ACTIVE_SCRIPT_CONTEXT_COUNT,
+    SCRIPTENV_ACTIVE_SCRIPT_NUMBER,
+    SCRIPTENV_FACING_DIRECTION,
+    SCRIPTENV_LAST_INTERACTED,
+    SCRIPTENV_CAMERA_TARGET,
+    SCRIPTENV_FIELD_34,
+    SCRIPTENV_SCRIPT_CONTEXT_0,
+    SCRIPTENV_SCRIPT_CONTEXT_1,
+    SCRIPTENV_SCRIPT_CONTEXT_2,
+    SCRIPTENV_MESSAGE_FORMAT,
+    SCRIPTENV_STRING_BUFFER_0,
+    SCRIPTENV_STRING_BUFFER_1,
+    SCRIPTENV_WAITING_ICON,
+    SCRIPTENV_RUNNING_APP_DATA,
+    SCRIPTENV_MISC_DATA_PTR,
+    SCRIPTENV_FIELD_B4,
+    SCRIPTENV_FIELD_B8,
+    SCRIPTENV_BATTLE_WIN_FLAG,
+    SCRIPTENV_ENGAGED_TRAINER_0_FIELD_00,
+    SCRIPTENV_ENGAGED_TRAINER_0_FIELD_04,
+    SCRIPTENV_ENGAGED_TRAINER_0_FIELD_08,
+    SCRIPTENV_ENGAGED_TRAINER_0_ID,
+    SCRIPTENV_ENGAGED_TRAINER_0_ENCOUNTER_TYPE,
+    SCRIPTENV_ENGAGED_TRAINER_0_EVENT,
+    SCRIPTENV_ENGAGED_TRAINER_0_FIELD_18,
+    SCRIPTENV_ENGAGED_TRAINER_1_FIELD_00,
+    SCRIPTENV_ENGAGED_TRAINER_1_FIELD_04,
+    SCRIPTENV_ENGAGED_TRAINER_1_FIELD_08,
+    SCRIPTENV_ENGAGED_TRAINER_1_ID,
+    SCRIPTENV_ENGAGED_TRAINER_1_ENCOUNTER_TYPE,
+    SCRIPTENV_ENGAGED_TRAINER_1_EVENT,
+    SCRIPTENV_ENGAGED_TRAINER_1_FIELD_18,
+    SCRIPTENV_POINTS_BOX, //differs from diamond due to athlete points
+    SCRIPTENV_MONEY_BOX,
+    SCRIPTENV_SAVE_STATS_PRINTER,
+    SCRIPTENV_SPECIAL_VAR_8000,
+    SCRIPTENV_SPECIAL_VAR_8001,
+    SCRIPTENV_SPECIAL_VAR_8002,
+    SCRIPTENV_SPECIAL_VAR_8003,
+    SCRIPTENV_SPECIAL_VAR_8004,
+    SCRIPTENV_SPECIAL_VAR_8005,
+    SCRIPTENV_SPECIAL_VAR_8006,
+    SCRIPTENV_SPECIAL_VAR_8007,
+    SCRIPTENV_SPECIAL_VAR_8008,
+    SCRIPTENV_SPECIAL_VAR_8009,
+    SCRIPTENV_SPECIAL_VAR_800A,
+    SCRIPTENV_SPECIAL_VAR_800B,
+    SCRIPTENV_SPECIAL_VAR_RESULT,
+    SCRIPTENV_SPECIAL_VAR_LAST_INTERACTED
+} ScriptEnvField;
 
 struct UnkStruct_020FC5CC {
     u32 unk0_00:4;
@@ -151,9 +153,9 @@ struct UnkStruct_020FC5CC {
 struct UnkStruct_02059E1C;
 struct UnkStruct_0205AC88;
 
-typedef BOOL (*ScrCmdFunc)(SCRIPTCONTEXT *ctx);
+typedef BOOL (*ScrCmdFunc)(ScriptContext *ctx);
 
-struct SCRIPTCONTEXT {
+struct ScriptContext {
     u8 stackDepth;
     u8 mode;
     u8 comparisonResult;
@@ -165,24 +167,24 @@ struct SCRIPTCONTEXT {
     u32 cmd_count;
     u32 data[4];
     TaskManager *taskman;
-    MSGDATA *msgdata;
+    MsgData *msgdata;
     u8 *mapScripts;
-    FieldSystem *fsys;
+    FieldSystem *fieldSystem;
 };
 
-void InitScriptContext(SCRIPTCONTEXT *ctx, const ScrCmdFunc *cmd_table, u32 cmd_count);
-BOOL SetupBytecodeScript(SCRIPTCONTEXT *ctx, const u8 *ptr);
-void SetupNativeScript(SCRIPTCONTEXT *ctx, ScrCmdFunc ptr);
-BOOL ScrNative_WaitApplication_DestroyTaskData(SCRIPTCONTEXT *ctx);
-void StopScript(SCRIPTCONTEXT *ctx);
-void sub_0203FD68(SCRIPTCONTEXT *ctx, TaskManager *unk);
-BOOL RunScriptCommand(SCRIPTCONTEXT *ctx);
-BOOL ScriptPush(SCRIPTCONTEXT *ctx, const u8 *ptr);
-const u8 *ScriptPop(SCRIPTCONTEXT *ctx);
-void ScriptJump(SCRIPTCONTEXT *ctx, const u8 *ptr);
-void ScriptCall(SCRIPTCONTEXT *ctx, const u8 *ptr);
-void ScriptReturn(SCRIPTCONTEXT *ctx);
-u16 ScriptReadHalfword(SCRIPTCONTEXT *ctx);
-u32 ScriptReadWord(SCRIPTCONTEXT *ctx);
+void InitScriptContext(ScriptContext *ctx, const ScrCmdFunc *cmd_table, u32 cmd_count);
+BOOL SetupBytecodeScript(ScriptContext *ctx, const u8 *ptr);
+void SetupNativeScript(ScriptContext *ctx, ScrCmdFunc ptr);
+BOOL ScrNative_WaitApplication_DestroyTaskData(ScriptContext *ctx);
+void StopScript(ScriptContext *ctx);
+void sub_0203FD68(ScriptContext *ctx, TaskManager *unk);
+BOOL RunScriptCommand(ScriptContext *ctx);
+BOOL ScriptPush(ScriptContext *ctx, const u8 *ptr);
+const u8 *ScriptPop(ScriptContext *ctx);
+void ScriptJump(ScriptContext *ctx, const u8 *ptr);
+void ScriptCall(ScriptContext *ctx, const u8 *ptr);
+void ScriptReturn(ScriptContext *ctx);
+u16 ScriptReadHalfword(ScriptContext *ctx);
+u32 ScriptReadWord(ScriptContext *ctx);
 
 #endif

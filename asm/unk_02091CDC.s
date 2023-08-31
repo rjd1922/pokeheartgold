@@ -183,11 +183,11 @@ App_DeleteSave_Exit: ; 0x02091E34
 
 	thumb_func_start sub_02091E54
 sub_02091E54: ; 0x02091E54
-	ldr r3, _02091E5C ; =BgConfig_HandleScheduledScrollAndTransferOps
+	ldr r3, _02091E5C ; =DoScheduledBgGpuUpdates
 	ldr r0, [r0, #0x14]
 	bx r3
 	nop
-_02091E5C: .word BgConfig_HandleScheduledScrollAndTransferOps
+_02091E5C: .word DoScheduledBgGpuUpdates
 	thumb_func_end sub_02091E54
 
 	thumb_func_start sub_02091E60
@@ -469,7 +469,7 @@ _02092090:
 	add r0, r4, #0
 	ldr r1, _020920DC ; =0x000001E2
 	add r0, #0x1c
-	bl sub_0200F0AC
+	bl WaitingIcon_New
 	str r0, [r4, #0x34]
 	mov r0, #5
 	str r0, [r4, #4]
@@ -533,7 +533,7 @@ _020920FC:
 	mov r0, #1
 	ldr r1, [r5]
 	lsl r0, r0, #0xa
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x10]
 	ldr r0, [r5, #0x18]
 	ldr r2, [r5, #0x10]
@@ -552,7 +552,7 @@ _020920FC:
 	cmp r4, #0
 	bne _0209215C
 	ldr r0, [r5, #0x10]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #8]
 	add r0, r0, #1
 	str r0, [r5, #8]
@@ -569,7 +569,7 @@ _02092164:
 	cmp r0, #0
 	bne _02092194
 	ldr r0, [r5, #0x10]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #8]
 	add r0, r0, #1
 	str r0, [r5, #8]

@@ -3,8 +3,8 @@
 .public NewMsgDataFromNarc
 .public DestroyMsgData
 .public ReadMsgDataIntoString
-.public ScrStrBufs_new_custom
-.public ScrStrBufs_delete
+.public MessageFormat_New_Custom
+.public MessageFormat_Delete
 .public BufferIntegerAsString
 .public BufferLocationName
 .public BufferMonthNameAbbr
@@ -13,8 +13,8 @@
 .public sub_02017FE4
 .public AllocFromHeap
 .public FreeToHeap
-.public String_ctor
-.public String_dtor
+.public String_New
+.public String_Delete
 .public PlayerProfile_GetPlayerName_NewString
 .public PlayerProfile_GetTrainerID
 .public PlayerProfile_GetTrainerGender

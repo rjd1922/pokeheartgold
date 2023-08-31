@@ -1,10 +1,11 @@
+#include "global.h"
 #include "gx_layers.h"
 #include "system.h"
 
 static u32 sEngineBLayers = 0;
 static u32 sEngineALayers = 0;
 
-void GX_SetBanks(const GF_GXBanksConfig *banks) {
+void GX_SetBanks(const GraphicsBanks *banks) {
     GX_ResetBankForBG();
     GX_ResetBankForBGExtPltt();
     GX_ResetBankForSubBG();
@@ -33,7 +34,7 @@ void GX_DisableEngineALayers(void) {
     sEngineALayers = 0;
 }
 
-void GX_EngineAToggleLayers(u32 layer_mask, GX_LayerToggle enable) {
+void GX_EngineAToggleLayers(u32 layer_mask, GXLayerToggle enable) {
     if (enable == GX_LAYER_TOGGLE_ON) {
         if (sEngineALayers & layer_mask) {
             return;
@@ -56,7 +57,7 @@ void GX_DisableEngineBLayers(void) {
     sEngineBLayers = 0;
 }
 
-void GX_EngineBToggleLayers(u32 layer_mask, GX_LayerToggle enable) {
+void GX_EngineBToggleLayers(u32 layer_mask, GXLayerToggle enable) {
     if (enable == GX_LAYER_TOGGLE_ON) {
         if (sEngineBLayers & layer_mask) {
             return;

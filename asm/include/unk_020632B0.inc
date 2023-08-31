@@ -14,12 +14,12 @@
 .public sub_02023F40
 .public GF_AssertFail
 .public StartMapSceneScript
-.public FieldSys_SetEngagedTrainer
+.public FieldSystem_SetEngagedTrainer
 .public ScriptNumToTrainerNum
 .public TrainerNumIsDouble
 .public TrainerFlagCheck
 .public sub_02055780
-.public FieldSys_ApricornTree_TryGetApricorn
+.public FieldSystem_ApricornTree_TryGetApricorn
 .public PlayerAvatar_GetFacingDirection
 .public GetPlayerXCoord
 .public GetPlayerYCoord
@@ -48,7 +48,7 @@
 .public MapObject_IncMovementStep
 .public MapObject_GetFieldSysPtr
 .public MapObject_IsSingleMovementActive
-.public MapObject_CheckFlag9
+.public MapObject_CheckVisible
 .public MapObject_UnpauseMovement
 .public MapObject_CheckFlag29
 .public MapObject_GetPrevX

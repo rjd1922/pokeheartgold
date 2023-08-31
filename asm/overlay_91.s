@@ -1531,7 +1531,7 @@ _0225D09C:
 	sub r1, #0x26
 	mov r2, #0
 	mov r3, #0x3f
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	ldr r0, _0225D1BC ; =0x00001AB4
 	add r0, r4, r0
 	bl ov91_0225DBE4
@@ -1576,7 +1576,7 @@ _0225D10A:
 	mov r5, #0
 _0225D118:
 	mov r0, #2
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #0
 	bne _0225D124
 	mov r5, #0
@@ -1778,7 +1778,7 @@ ov91_0225D2D0: ; 0x0225D2D0
 	push {r3, lr}
 	ldr r1, _0225D2E4 ; =0x00001AB4
 	ldr r0, [r0, r1]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl GF_RunVramTransferTasks
 	bl OamManager_ApplyAndResetBuffers
 	pop {r3, pc}
@@ -2667,7 +2667,7 @@ _0225D908:
 	bl FillWindowPixelRect
 	mov r0, #0x80
 	add r1, r4, #0
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	ldr r0, [sp, #0x18]
 	mov r1, #0
@@ -2687,7 +2687,7 @@ _0225D908:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0
 	str r0, [sp]
 	str r0, [sp, #4]
@@ -2740,7 +2740,7 @@ _0225D908:
 	str r0, [sp, #0x28]
 	mov r0, #0x80
 	add r1, r4, #0
-	bl String_ctor
+	bl String_New
 	str r0, [sp, #0x24]
 	ldr r0, [sp, #0x1c]
 	mov r4, #0
@@ -2850,7 +2850,7 @@ _0225DAC6:
 	blo _0225DA0E
 _0225DAD2:
 	ldr r0, [sp, #0x24]
-	bl String_dtor
+	bl String_Delete
 	add r0, sp, #0x30
 	bl RemoveWindow
 	ldr r0, [sp, #0x14]
@@ -5829,7 +5829,7 @@ ov91_0225F0C0: ; 0x0225F0C0
 	bl memset
 	mov r0, #0xc8
 	add r1, r6, #0
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0x78
 	add r7, r0, #0
 	str r1, [sp]
@@ -5950,7 +5950,7 @@ _0225F162:
 	str r0, [r5, #0x34]
 	bl Set2dSpriteVisibleFlag
 	add r0, r7, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x4c
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov91_0225F0C0
@@ -6413,7 +6413,7 @@ ov91_0225F508: ; 0x0225F508
 	bl ov91_0225FCD8
 	mov r0, #0xbd
 	add r1, r4, #0
-	bl NARC_ctor
+	bl NARC_New
 	add r6, r0, #0
 	ldr r0, _0225F63C ; =0x00001AB4
 	add r1, r6, #0
@@ -6505,7 +6505,7 @@ ov91_0225F508: ; 0x0225F508
 	add r3, r4, #0
 	bl ov91_02261580
 	add r0, r6, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, _0225F664 ; =0x00001AD0
 	add r1, r4, #0
 	ldr r0, [r5, r0]
@@ -7257,7 +7257,7 @@ ov91_0225FCD8: ; 0x0225FCD8
 	add r4, r1, #0
 	add r5, r0, #0
 	add r0, r4, #0
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r5, #4]
 	mov r0, #0
 	mov r1, #0x1b
@@ -7267,11 +7267,11 @@ ov91_0225FCD8: ; 0x0225FCD8
 	str r0, [r5, #8]
 	mov r0, #0x80
 	add r1, r4, #0
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0xc]
 	mov r0, #0x80
 	add r1, r4, #0
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x10]
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -7282,13 +7282,13 @@ ov91_0225FD0C: ; 0x0225FD0C
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x10]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0xc]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #8]
 	bl DestroyMsgData
 	ldr r0, [r4, #4]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov91_0225FD0C
@@ -7301,7 +7301,7 @@ ov91_0225FD2C: ; 0x0225FD2C
 	add r0, r3, #0
 	add r4, r1, #0
 	add r6, r2, #0
-	bl GF_Camera_Create
+	bl Camera_New
 	mov r1, #0x19
 	lsl r1, r1, #4
 	str r0, [r5, r1]
@@ -7334,7 +7334,7 @@ ov91_0225FD2C: ; 0x0225FD2C
 	ldr r1, _0225FDC4 ; =0x001D9000
 	add r0, r5, r0
 	add r2, sp, #0xc
-	bl GF_Camera_InitFromTargetDistanceAndAngle
+	bl Camera_Init_FromTargetDistanceAndAngle
 	mov r1, #0
 	mov r0, #1
 	lsl r0, r0, #0xc
@@ -7345,18 +7345,18 @@ ov91_0225FD2C: ; 0x0225FD2C
 	lsl r1, r1, #4
 	ldr r1, [r5, r1]
 	add r0, sp, #0x14
-	bl GF_Camera_SetBindTarget
+	bl Camera_SetLookAtCamUp
 	mov r0, #0x19
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	bl GF_Camera_RegisterToStaticPtr
+	bl Camera_SetStaticPtr
 	mov r0, #0x32
 	lsl r0, r0, #0xe
 	lsr r2, r0, #0xb
 	mov r1, #0xfa
 	ldr r2, [r5, r2]
 	lsl r1, r1, #0xe
-	bl GF_Camera_SetClipBounds
+	bl Camera_SetPerspectiveClippingPlane
 	add sp, #0x20
 	pop {r4, r5, r6, pc}
 	nop
@@ -7370,19 +7370,19 @@ _0225FDC4: .word 0x001D9000
 ov91_0225FDC8: ; 0x0225FDC8
 	mov r1, #0x19
 	lsl r1, r1, #4
-	ldr r3, _0225FDD4 ; =sub_02023120
+	ldr r3, _0225FDD4 ; =Camera_Delete
 	ldr r0, [r0, r1]
 	bx r3
 	nop
-_0225FDD4: .word sub_02023120
+_0225FDD4: .word Camera_Delete
 	thumb_func_end ov91_0225FDC8
 
 	thumb_func_start ov91_0225FDD8
 ov91_0225FDD8: ; 0x0225FDD8
-	ldr r3, _0225FDDC ; =sub_02023154
+	ldr r3, _0225FDDC ; =Camera_PushLookAtToNNSGlb
 	bx r3
 	.balign 4, 0
-_0225FDDC: .word sub_02023154
+_0225FDDC: .word Camera_PushLookAtToNNSGlb
 	thumb_func_end ov91_0225FDD8
 
 	thumb_func_start ov91_0225FDE0
@@ -10237,14 +10237,14 @@ ov91_02261384: ; 0x02261384
 	lsl r1, r1, #4
 	ldr r1, [r5, r1]
 	add r0, sp, #0
-	bl GF_Camera_GetAngle
+	bl Camera_GetAngle
 	add r0, sp, #0
 	mov r1, #0x19
 	strh r4, [r0]
 	lsl r1, r1, #4
 	ldr r1, [r5, r1]
 	add r0, sp, #0
-	bl GF_Camera_SetAngle
+	bl Camera_SetAnglePos
 	add sp, #8
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov91_02261384
@@ -10631,7 +10631,7 @@ _02261616:
 	bl Set2dSpriteVisibleFlag
 	mov r0, #0x10
 	add r1, r6, #0
-	bl String_ctor
+	bl String_New
 	str r0, [r5, #0x5c]
 	mov r0, #0
 	str r0, [sp]
@@ -10766,7 +10766,7 @@ ov91_02261790: ; 0x02261790
 	ldr r0, [r5, #0x4c]
 	bl sub_02013938
 	ldr r0, [r5, #0x5c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #0x34]
 	bl Sprite_Delete
 	ldr r0, [r5]
@@ -11137,7 +11137,7 @@ _02261A8E:
 	mov r1, #0x10
 	mov r2, #0
 	mov r3, #0x3f
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	ldrh r0, [r4]
 	add sp, #4
 	add r0, r0, #1
@@ -11145,7 +11145,7 @@ _02261A8E:
 	pop {r3, r4, r5, r6, pc}
 _02261AA8:
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #1
 	bne _02261B08
 	add r0, r5, #0
@@ -11169,7 +11169,7 @@ _02261AD4:
 	mov r1, #0
 	mov r2, #0x10
 	mov r3, #0x3f
-	bl sub_0200B484
+	bl StartBrightnessTransition
 	ldrh r0, [r4]
 	add sp, #4
 	add r0, r0, #1
@@ -11177,7 +11177,7 @@ _02261AD4:
 	pop {r3, r4, r5, r6, pc}
 _02261AEE:
 	mov r0, #1
-	bl sub_0200B5C0
+	bl IsBrightnessTransitionActive
 	cmp r0, #1
 	bne _02261B08
 	ldrh r0, [r4]

@@ -70,7 +70,7 @@ ov86_021E5900: ; 0x021E5900
 	strh r0, [r5, #8]
 	sub r0, r1, #4
 	ldr r0, [r5, r0]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	mov r1, #0x22
 	lsl r1, r1, #4
 	str r0, [r5, r1]
@@ -88,14 +88,14 @@ ov86_021E5900: ; 0x021E5900
 	lsl r1, r1, #4
 	str r0, [r5, r1]
 	mov r0, #0x79
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	mov r1, #0x85
 	lsl r1, r1, #2
 	str r0, [r5, r1]
 	mov r0, #0x32
 	lsl r0, r0, #4
 	mov r1, #0x79
-	bl String_ctor
+	bl String_New
 	mov r1, #0x86
 	lsl r1, r1, #2
 	str r0, [r5, r1]
@@ -220,11 +220,11 @@ ov86_021E5AA4: ; 0x021E5AA4
 	mov r0, #0x85
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	mov r0, #0x86
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x8f
 	lsl r0, r0, #2
 	add r0, r4, r0
@@ -486,7 +486,7 @@ ov86_021E5CDC: ; 0x021E5CDC
 	bl sub_0200398C
 _021E5CEE:
 	ldr r0, [r4, #0xc]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	bl sub_0200D034
 	ldr r3, _021E5D08 ; =0x027E0000
 	ldr r1, _021E5D0C ; =0x00003FF8
@@ -733,7 +733,7 @@ ov86_021E5ECC: ; 0x021E5ECC
 	add r6, r1, #0
 	mov r0, #0xb7
 	mov r1, #0x79
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -785,7 +785,7 @@ ov86_021E5ECC: ; 0x021E5ECC
 	add r0, r6, #0
 	bl FreeToHeap
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x14
 	pop {r3, r4, r5, r6, pc}
 	.balign 4, 0
@@ -799,7 +799,7 @@ ov86_021E5F58: ; 0x021E5F58
 	add r6, r1, #0
 	mov r0, #0xb7
 	mov r1, #0x79
-	bl NARC_ctor
+	bl NARC_New
 	mov r1, #0
 	str r1, [sp]
 	str r1, [sp, #4]
@@ -834,7 +834,7 @@ ov86_021E5F58: ; 0x021E5F58
 	mov r3, #0
 	bl GfGfxLoader_GXLoadPalFromOpenNarc
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	add sp, #0x10
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -925,7 +925,7 @@ ov86_021E6024: ; 0x021E6024
 	add r2, r7, #0
 	bl ov86_021E5FD8
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -968,7 +968,7 @@ ov86_021E6064: ; 0x021E6064
 	add r2, r7, #0
 	bl ov86_021E5FD8
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	thumb_func_end ov86_021E6064
@@ -1687,7 +1687,7 @@ ov86_021E668C: ; 0x021E668C
 	add r3, r1, #0
 	bl BufferString
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov86_021E668C
@@ -2508,7 +2508,7 @@ ov86_021E6DD8: ; 0x021E6DD8
 	mov r1, #0x89
 	lsl r1, r1, #2
 	ldr r0, [r0, r1]
-	bl Save_FrontierData_get
+	bl Save_FrontierData_Get
 	cmp r4, #6
 	bhi _021E6E1C
 	add r1, r4, r4
@@ -2599,7 +2599,7 @@ ov86_021E6E30: ; 0x021E6E30
 	add r0, r5, r0
 	bl ScheduleWindowCopyToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0xc
 	pop {r4, r5, pc}
 	nop
@@ -2681,7 +2681,7 @@ ov86_021E6E98: ; 0x021E6E98
 	bl G2dRenderer_SetSubSurfaceCoords
 	mov r0, #0xb8
 	mov r1, #0x79
-	bl NARC_ctor
+	bl NARC_New
 	add r4, r0, #0
 	mov r0, #1
 	str r0, [sp]
@@ -2733,7 +2733,7 @@ ov86_021E6E98: ; 0x021E6E98
 	mov r3, #0x32
 	bl sub_0200D71C
 	add r0, r4, #0
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r6, _021E6FF0 ; =ov86_021E802C
 	mov r7, #0
 	add r4, r5, #0
@@ -3294,7 +3294,7 @@ ov86_021E73EC: ; 0x021E73EC
 	sub sp, #0xc
 	add r5, r0, #0
 	add r4, r1, #0
-	bl GetDexZknDataNarcID
+	bl GetPokedexDataNarcID
 	mov r1, #1
 	str r1, [sp]
 	add r1, sp, #8

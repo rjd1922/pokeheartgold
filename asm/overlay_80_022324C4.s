@@ -30,10 +30,10 @@ ov80_022324C4: ; 0x022324C4
 	mov r0, #0xb
 	str r0, [r4]
 	ldr r4, [r1]
-	bl SavArray_Party_alloc
+	bl SaveArray_Party_Alloc
 	str r0, [r4, #0x28]
 	mov r0, #0xb
-	bl SavArray_Party_alloc
+	bl SaveArray_Party_Alloc
 	str r0, [r4, #0x2c]
 	mov r0, #0xa2
 	ldr r1, [sp, #0x38]
@@ -60,8 +60,8 @@ _02232520:
 	cmp r2, #3
 	bne _02232546
 	ldr r0, [r0, #4]
-	bl SavArray_Flags_get
-	bl ScriptState_GetVar4052
+	bl Save_VarsFlags_Get
+	bl Save_VarsFlags_GetVar4052
 	b _02232552
 _02232546:
 	mov r3, #0
@@ -288,11 +288,11 @@ _0223273E:
 _02232744:
 	ldr r5, [r6]
 	ldr r0, [r5, #4]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	add r1, r5, r4
 	add r1, #0x24
 	ldrb r1, [r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r5, [r6]
 	mov r1, #6
 	mov r2, #0
@@ -306,7 +306,7 @@ _02232744:
 	cmp r4, #3
 	blo _02232744
 	ldr r0, [r5, #4]
-	bl SavArray_PlayerParty_get
+	bl SaveArray_Party_Get
 	str r0, [sp, #8]
 	ldr r0, _0223281C ; =ov80_0223DD48
 	mov r1, #0
@@ -324,15 +324,15 @@ _0223278E:
 	add r1, r1, r5
 	add r1, #0x24
 	ldrb r1, [r1]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r1, r0, #0
 	ldr r0, [r6]
 	ldr r0, [r0, #0x28]
-	bl AddMonToParty
+	bl Party_AddMon
 	ldr r0, [r6]
 	add r1, r5, #0
 	ldr r0, [r0, #0x28]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0
 	str r1, [sp, #0x14]
 	add r4, r0, #0
@@ -405,7 +405,7 @@ ov80_02232838: ; 0x02232838
 	sub sp, #0x14
 	add r7, r0, #0
 	ldr r0, [r7, #0x28]
-	bl GetPartyCount
+	bl Party_GetCount
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
 	mov r6, #0
@@ -416,7 +416,7 @@ ov80_02232838: ; 0x02232838
 _02232852:
 	ldr r0, [r7, #0x28]
 	add r1, r6, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0x3a
 	mov r2, #0
 	add r4, r0, #0
@@ -587,7 +587,7 @@ ov80_022329B4: ; 0x022329B4
 	sub sp, #0x10
 	add r5, r0, #0
 	ldr r0, [r5, #0x28]
-	bl GetPartyCount
+	bl Party_GetCount
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
 	mov r4, #0
@@ -598,7 +598,7 @@ ov80_022329B4: ; 0x022329B4
 _022329CE:
 	ldr r0, [r5, #0x28]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	add r6, r0, #0
 	mov r0, #0
 	str r0, [sp]
@@ -986,7 +986,7 @@ _02232CF8:
 	cmp r4, #3
 	blo _02232CF8
 	ldr r0, [r5, #0x28]
-	bl GetPartyCount
+	bl Party_GetCount
 	mov r4, #0
 	str r0, [sp, #8]
 	cmp r0, #0
@@ -995,7 +995,7 @@ _02232CF8:
 _02232D2A:
 	ldr r0, [r5, #0x28]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xa3
 	mov r2, #0
 	add r6, r0, #0
@@ -1095,7 +1095,7 @@ _02232D2A:
 	blo _02232D2A
 _02232E10:
 	ldr r0, [r5, #0x2c]
-	bl GetPartyCount
+	bl Party_GetCount
 	add r6, r0, #0
 	ldr r4, _02232E54 ; =0x00000000
 	beq _02232E4E
@@ -1103,7 +1103,7 @@ _02232E10:
 _02232E1E:
 	ldr r0, [r5, #0x2c]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	lsl r0, r4, #1
 	add r1, r5, r0
 	mov r0, #0x9b
@@ -1298,7 +1298,7 @@ _02232F78:
 	bl ov80_02237B24
 	add r5, r0, #0
 	ldr r0, [r6, #0x28]
-	bl GetPartyCount
+	bl Party_GetCount
 	ldr r4, [sp]
 	add r0, r4, #0
 	add r0, r5, r0
@@ -1309,7 +1309,7 @@ _02232F78:
 _02232F96:
 	ldr r0, [r6, #0x28]
 	add r1, r4, #0
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	ldr r1, [sp]
 	mov r2, #0
 	sub r1, r4, r1
@@ -1417,7 +1417,7 @@ _0223304C:
 _02233070:
 	ldr r0, [r6, #0x28]
 	ldr r1, [sp]
-	bl GetPartyMonByIndex
+	bl Party_GetMonByIndex
 	mov r1, #0xac
 	mov r2, #0
 	add r5, r0, #0
@@ -1668,7 +1668,7 @@ _02233244:
 	bl sub_02031228
 _0223326A:
 	add r0, r6, #0
-	bl Sav2_GameStats_get
+	bl Save_GameStats_Get
 	mov r1, #0x42
 	add r2, r4, #0
 	bl GameStats_Add
@@ -1884,7 +1884,7 @@ _0223340C:
 	bl sub_0200E5D4
 	add r0, r4, #0
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	b _02233480
 _02233424:
 	add r0, r5, #0
@@ -1923,13 +1923,13 @@ _0223345E:
 	bl sub_0200E5D4
 	add r0, r4, #0
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 	add r0, r6, #0
 	mov r1, #0
 	bl sub_0200E5D4
 	add r0, r6, #0
 	mov r1, #1
-	bl WindowArray_dtor
+	bl WindowArray_Delete
 _02233480:
 	add r0, r5, #0
 	mov r1, #0
@@ -1972,7 +1972,7 @@ _022334AE:
 	bl sub_020310BC
 	add r6, r0, #0
 	ldr r0, [r5, #4]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	add r0, r4, #0
 	add r4, #0xa8
@@ -2065,11 +2065,11 @@ ov80_02233594: ; 0x02233594
 	ldr r1, [r5, #0x34]
 	mov r0, #0x14
 	str r2, [sp, #0x10]
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r1, [r5, #0x34]
 	mov r0, #0x14
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	mov r0, #0
 	mov r1, #0x1b
@@ -2123,9 +2123,9 @@ ov80_02233594: ; 0x02233594
 	str r1, [sp, #8]
 	bl AddTextPrinterParameterized
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
 	bl DestroyMsgData
 	ldr r0, [sp, #0xc]

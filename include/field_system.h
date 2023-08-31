@@ -2,21 +2,22 @@
 #define POKEHEARTGOLD_FIELD_SYSTEM_H
 
 #include "bug_contest_internal.h"
-#include "field_player_avatar.h"
 #include "gear_phone.h"
 #include "map_events_internal.h"
-#include "map_object_manager.h"
 #include "map_matrix.h"
 #include "overlay_manager.h"
 #include "save_pokegear.h"
 #include "unk_0200E320.h"
-#include "unk_02022D74.h"
-#include "window.h"
+#include "camera.h"
+#include "bg_window.h"
 
 typedef struct FieldSystem FieldSystem;
 typedef struct TaskManager TaskManager;
-typedef struct FsysUnkSub2C FsysUnkSub2C;
+typedef struct FieldSystemUnkSub2C FieldSystemUnkSub2C;
 typedef struct LocalMapObject LocalMapObject;
+typedef struct FieldMapObject FieldMapObject;
+typedef struct PlayerAvatar PlayerAvatar;
+typedef struct MapObjectManager MapObjectManager;
 
 typedef struct FollowMon {
     LocalMapObject *mapObject;
@@ -28,7 +29,7 @@ typedef struct FollowMon {
     u8 unk15;
     u8 active;
     u8 shiny;
-    u16 forme;
+    u16 form;
     u16 dummy;
     u32 unk1C;
 } FollowMon;
@@ -53,7 +54,7 @@ typedef struct GearPhoneRingManager {
     PhoneBookEntry entry; //0x1c
     SavePokegear *pokegearData; //0x30
     MomsSavings *savingsData;//0x34
-    SAVEDATA *saveData; //0x38
+    SaveData *saveData; //0x38
     FieldSystem *sys; //0x3c
     struct PokegearRingingTask {
         SysTask *task;
@@ -73,7 +74,7 @@ struct FieldSystemUnk108 {
     u32 personality;
     u16 species;
     u16 isRegistered;
-    POKEMON *pokemon;
+    Pokemon *mon;
 };
 
 struct FieldSystemUnkSub0 {
@@ -89,14 +90,14 @@ typedef struct FieldEnvSubUnk18 {
 } FieldEnvSubUnk18;
 
 struct FieldSystemUnkSub68 {
-    WINDOW unk0;
+    Window unk0;
     u16 unk10;
     u8 unk12;
     u8 unk13_0:7;
     u8 unk13_7:1;
 };
 
-typedef struct FsysUnkSub4 {
+typedef struct FieldSystemUnkSub4 {
     u32 unk0;
     u32 unk4;
     u32 unk8;
@@ -105,25 +106,25 @@ typedef struct FsysUnkSub4 {
     u32 unk14;
     u32 unk18;
     u32 unk1c;
-} FsysUnkSub4;
+} FieldSystemUnkSub4;
 
 struct FieldSystem {
     struct FieldSystemUnkSub0 *unk0;
-    FsysUnkSub4 *unk4;
-    BGCONFIG *bgConfig;
-    SAVEDATA *savedata;
+    FieldSystemUnkSub4 *unk4;
+    BgConfig *bgConfig;
+    SaveData *saveData;
     TaskManager *taskman;
-    MAP_EVENTS *mapEvents;
-    FieldEnvSubUnk18 *unk18;
+    MapEvents *mapEvents;
+    u32 unk18;
     int unk1C;
     Location *location;
-    GF_Camera *camera;
+    Camera *camera;
     void *unk28;
-    FsysUnkSub2C *unk2C;
+    FieldSystemUnkSub2C *unk2C;
     MAPMATRIX *mapMatrix;
     u8 filler34[0x8];
-    MapObjectMan *mapObjectMan;
-    FIELD_PLAYER_AVATAR *playerAvatar;
+    MapObjectManager *mapObjectMan;
+    PlayerAvatar *playerAvatar;
     void *unk_44;
     u8 filler48[0xC];
     void *unk54;
@@ -180,24 +181,24 @@ BOOL Field_Continue_AppInit(OVY_MANAGER *man, int *unused);
 BOOL Field_NewGame_AppInit(OVY_MANAGER *man, int *unused);
 BOOL Field_AppExec(OVY_MANAGER *man, int *unused);
 BOOL Field_AppExit(OVY_MANAGER *man, int *unused);
-void sub_0203DEF0(FieldSystem *fsys);
-void sub_0203DF34(FieldSystem *fsys);
-u8 sub_0203DF3C(FieldSystem *fsys);
-void sub_0203DF64(FieldSystem *fsys, int a1);
-BOOL sub_0203DF7C(FieldSystem *fsys);
-BOOL sub_0203DF8C(FieldSystem *fsys);
-BOOL sub_0203DFA4(FieldSystem *fsys);
-void FieldSys_LaunchApplication(FieldSystem *fsys, const OVY_MGR_TEMPLATE *template, void *parentWork);
-FieldSystem *FieldSys_New(OVY_MANAGER *man);
-void FieldSys_Delete(OVY_MANAGER *man);
-BOOL sub_0203E13C(FieldSystem *fsys);
-void sub_0203E15C(FieldSystem *fsys);
+void sub_0203DEF0(FieldSystem *fieldSystem);
+void sub_0203DF34(FieldSystem *fieldSystem);
+u8 sub_0203DF3C(FieldSystem *fieldSystem);
+void sub_0203DF64(FieldSystem *fieldSystem, int a1);
+BOOL sub_0203DF7C(FieldSystem *fieldSystem);
+BOOL sub_0203DF8C(FieldSystem *fieldSystem);
+BOOL sub_0203DFA4(FieldSystem *fieldSystem);
+void FieldSystem_LaunchApplication(FieldSystem *fieldSystem, const OVY_MGR_TEMPLATE *template, void *parentWork);
+FieldSystem *FieldSystem_New(OVY_MANAGER *man);
+void FieldSystem_Delete(OVY_MANAGER *man);
+BOOL sub_0203E13C(FieldSystem *fieldSystem);
+void sub_0203E15C(FieldSystem *fieldSystem);
 void sub_0203E2F4();
 void sub_0203E30C();
 int sub_0203E324();
-void sub_0203E33C(FieldSystem *fsys, int a1);
-BGCONFIG *FieldSys_GetBgConfigPtr(FieldSystem *fsys);
-SAVEDATA *FieldSys_GetSaveDataPtr(FieldSystem *fsys);
+void sub_0203E33C(FieldSystem *fieldSystem, int a1);
+BgConfig *FieldSystem_GetBgConfigPtr(FieldSystem *fieldSystem);
+SaveData *FieldSystem_GetSaveData(FieldSystem *fieldSystem);
 void sub_0203E348();
 void sub_0203E354();
 

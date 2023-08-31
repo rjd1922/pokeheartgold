@@ -11,9 +11,9 @@
 .public sub_0204B4D4
 .public sub_0204B510
 .public BattleSetup_New
-.public sub_02051C9C
+.public BattleSetup_AddMonToParty
 .public sub_02051D18
-.public sub_02052580
+.public BattleSetup_SetAllySideBattlersToPlayer
 .public AllocMonZeroed
 .public CalcMonLevelAndStats
 .public GetMonData
@@ -24,10 +24,10 @@
 .public CalcShininessByOtIdAndPersonality
 .public CopyPokemonToPokemon
 .public MaskOfFlagNo
-.public InitPartyWithMaxSize
-.public AddMonToParty
-.public GetPartyMonByIndex
-.public SavArray_PlayerParty_get
+.public Party_InitWithMaxSize
+.public Party_AddMon
+.public Party_GetMonByIndex
+.public SaveArray_Party_Get
 .public MI_CpuFill8
 .public MI_CpuCopy8
 .public _s32_div_f

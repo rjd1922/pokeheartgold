@@ -89,7 +89,7 @@ ov30_0225D520: ; 0x0225D520
 	str r1, [r4, #0x30]
 	ldr r0, [r4, #0x1c]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	str r0, [r4, #0x44]
 	mov r0, #0
 	str r0, [r4, #0xc]
@@ -212,7 +212,7 @@ ov30_0225D700: ; 0x0225D700
 	push {r4, lr}
 	add r4, r1, #0
 	ldr r0, [r4, #0x1c]
-	bl Fsys_TaskIsRunning
+	bl FieldSystem_TaskIsRunning
 	cmp r0, #0
 	ldr r0, [r4, #0x1c]
 	bne _0225D73E
@@ -371,7 +371,7 @@ ov30_0225D83C: ; 0x0225D83C
 	push {r4, lr}
 	add r4, r0, #0
 	mov r0, #8
-	bl ScrStrBufs_new
+	bl MessageFormat_New
 	str r0, [r4, #0x3c]
 	mov r0, #0
 	mov r1, #0x1b
@@ -381,7 +381,7 @@ ov30_0225D83C: ; 0x0225D83C
 	str r0, [r4, #0x38]
 	ldr r0, [r4, #0x1c]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	add r2, r0, #0
 	ldr r0, [r4, #0x3c]
 	mov r1, #0
@@ -397,7 +397,7 @@ ov30_0225D86C: ; 0x0225D86C
 	ldr r0, [r4, #0x38]
 	bl DestroyMsgData
 	ldr r0, [r4, #0x3c]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov30_0225D86C
@@ -525,7 +525,7 @@ ov30_0225D954: ; 0x0225D954
 	cmp r0, #0
 	bne _0225D970
 	ldr r0, [r4, #0x5c]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r4, #0x10]
 	str r0, [r4, #0xc]
 _0225D970:
@@ -779,7 +779,7 @@ ov30_0225DB48: ; 0x0225DB48
 	add r4, r0, #0
 	add r0, #0x4c
 	mov r1, #0xec
-	bl sub_0200F0AC
+	bl WaitingIcon_New
 	str r0, [r4, #0x64]
 	mov r0, #0xc
 	str r0, [r4, #0xc]

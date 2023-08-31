@@ -1,7 +1,7 @@
 #include <nitro/fs/overlay.h>
 #pragma once
-.public NARC_ctor
-.public NARC_dtor
+.public NARC_New
+.public NARC_Delete
 .public NARC_ReadWholeMember
 .public NARC_GetMemberSize
 .public AllocFromHeap
@@ -12,11 +12,11 @@
 .public sub_02023F30
 .public sub_02023F40
 .public GF_AssertFail
-.public MapObjectMan_GetCount
-.public MapObjectMan_SetFlagsBits
-.public MapObjectMan_ClearFlagsBits
-.public MapObjectMan_GetFlagsBitsMask
-.public sub_0205F19C
+.public MapObjectManager_GetCount
+.public MapObjectManager_SetFlagsBits
+.public MapObjectManager_ClearFlagsBits
+.public MapObjectManager_GetFlagsBitsMask
+.public MapObjectManager_GetHeapID
 .public sub_0205F1A0
 .public FldObjSys_SetMModelNarc
 .public FldObjSys_GetMModelNarc
@@ -34,7 +34,7 @@
 .public sub_0205F484
 .public sub_0205F5D4
 .public MapObject_CheckFlag14
-.public MapObject_SetFlag9
+.public MapObject_SetVisible
 .public sub_0205F714
 .public MapObject_CheckFlag4
 .public MapObject_GetPositionVec

@@ -525,7 +525,7 @@ _021E5CBE:
 	bl G2x_SetBlendAlpha_
 	ldr r1, [r5, #0xc]
 	mov r0, #0xb1
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r5, #8]
 	add sp, #0xf4
 	pop {r4, r5, r6, r7, pc}
@@ -542,7 +542,7 @@ ov99_021E5D2C: ; 0x021E5D2C
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r6, _021E5D54 ; =_021E954C
 	mov r4, #0
 _021E5D3A:
@@ -1187,7 +1187,7 @@ ov99_021E6250: ; 0x021E6250
 	add r4, r0, #0
 	bl sub_0200D034
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E626C ; =0x027E0000
 	ldr r1, _021E6270 ; =0x00003FF8
 	mov r0, #1
@@ -2030,7 +2030,7 @@ ov99_021E6938: ; 0x021E6938
 	add r4, r0, #0
 	bl sub_0200D034
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E6954 ; =0x027E0000
 	ldr r1, _021E6958 ; =0x00003FF8
 	mov r0, #1
@@ -2092,7 +2092,7 @@ _021E6992:
 	blt _021E6992
 	ldr r1, [r5, #0xc]
 	mov r0, #0xb1
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r5, #8]
 	add sp, #0x80
 	pop {r3, r4, r5, r6, r7, pc}
@@ -2181,7 +2181,7 @@ ov99_021E6A70: ; 0x021E6A70
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r6, _021E6A98 ; =ov99_021E9D88
 	mov r4, #0
 _021E6A7E:
@@ -3191,7 +3191,7 @@ _021E71F4:
 	bl ov99_021E71DC
 	add r1, r4, #0
 	mov r2, #0
-	bl Pokedex_GetSeenFormeByIdx
+	bl Pokedex_GetSeenFormByIdx
 	pop {r4, pc}
 	nop
 _021E7204: .word 0x000001ED
@@ -4022,11 +4022,11 @@ _021E783C:
 	bl ov98_0221F090
 	ldr r1, [r4, #0xc]
 	mov r0, #0xb1
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r4, #4]
 	ldr r1, [r4, #0xc]
 	mov r0, #0x4a
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r4, #8]
 	add r0, r4, #0
 	bl ov99_021E72C0
@@ -4248,7 +4248,7 @@ ov99_021E7A54: ; 0x021E7A54
 	add r4, r0, #0
 	bl sub_0200D034
 	ldr r0, [r4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E7A70 ; =0x027E0000
 	ldr r1, _021E7A74 ; =0x00003FF8
 	mov r0, #1
@@ -4831,9 +4831,9 @@ ov99_021E7EBC: ; 0x021E7EBC
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r0, [r5, #4]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r6, _021E7EEC ; =ov99_021EA348
 	mov r4, #0
 _021E7ED0:
@@ -5655,7 +5655,7 @@ ov99_021E856C: ; 0x021E856C
 	add r4, r0, #0
 	bl sub_0200D034
 	ldr r0, [r4, #4]
-	bl BgConfig_HandleScheduledScrollAndTransferOps
+	bl DoScheduledBgGpuUpdates
 	ldr r3, _021E8588 ; =0x027E0000
 	ldr r1, _021E858C ; =0x00003FF8
 	mov r0, #1
@@ -5717,7 +5717,7 @@ _021E85C6:
 	blt _021E85C6
 	ldr r1, [r5, #0xc]
 	mov r0, #0xb1
-	bl NARC_ctor
+	bl NARC_New
 	str r0, [r5, #8]
 	add sp, #0xb8
 	pop {r3, r4, r5, r6, r7, pc}
@@ -5902,7 +5902,7 @@ ov99_021E875C: ; 0x021E875C
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	bl NARC_dtor
+	bl NARC_Delete
 	ldr r6, _021E8784 ; =ov99_021EA59C
 	mov r4, #0
 _021E876A:
@@ -7544,7 +7544,7 @@ ov99_021E93DC: ; 0x021E93DC
 	bl ov99_021E92EC
 	ldr r1, [r5, #0xc]
 	mov r0, #8
-	bl String_ctor
+	bl String_New
 	mov r1, #0x6f
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -7560,7 +7560,7 @@ ov99_021E9418: ; 0x021E9418
 	mov r0, #0x6f
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	bl FreeToHeap
 	pop {r4, pc}

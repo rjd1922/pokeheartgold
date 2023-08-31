@@ -35,19 +35,19 @@ ov31_0225D520: ; 0x0225D520
 	str r1, [r4, #0x30]
 	ldr r0, [r4, #0x1c]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetOptionsAddr
+	bl Save_PlayerData_GetOptionsAddr
 	mov r1, #0x59
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	ldr r0, [r4, #0x1c]
 	ldr r0, [r0, #0xc]
-	bl Sav2_PlayerData_GetProfileAddr
+	bl Save_PlayerData_GetProfileAddr
 	mov r1, #0x5a
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	ldr r0, [r4, #0x1c]
 	ldr r0, [r0, #0xc]
-	bl Save_Pokeathlon_get
+	bl Save_Pokeathlon_Get
 	mov r1, #0x5b
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -110,7 +110,7 @@ ov31_0225D60C: ; 0x0225D60C
 	mov r0, #8
 	mov r1, #0x40
 	add r2, r0, #0
-	bl ScrStrBufs_new_custom
+	bl MessageFormat_New_Custom
 	mov r2, #0x55
 	lsl r2, r2, #2
 	str r0, [r4, r2]
@@ -132,7 +132,7 @@ ov31_0225D60C: ; 0x0225D60C
 	str r0, [r4, r1]
 	mov r0, #0x90
 	mov r1, #8
-	bl String_ctor
+	bl String_New
 	mov r1, #0x62
 	lsl r1, r1, #2
 	str r0, [r4, r1]
@@ -146,7 +146,7 @@ ov31_0225D654: ; 0x0225D654
 	mov r0, #0x62
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x57
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -158,7 +158,7 @@ ov31_0225D654: ; 0x0225D654
 	mov r0, #0x55
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	bl ScrStrBufs_delete
+	bl MessageFormat_Delete
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov31_0225D654
@@ -223,7 +223,7 @@ _0225D6F8:
 	add r0, r5, #0
 	bl ScheduleWindowCopyToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r4, r5, r6, pc}
 	nop
@@ -1035,7 +1035,7 @@ _0225DD60:
 	add r3, r4, #0
 	bl ov31_0225DE00
 	ldr r0, [sp, #0x10]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [r5, #0x14]
 	ldr r1, [sp, #0xc]
 	add r2, r7, #0
@@ -1148,7 +1148,7 @@ _0225DE3A:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -1198,10 +1198,10 @@ _0225DEBC:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x10
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	ldr r1, [r5, #0x14]
 	ldr r0, _0225DF90 ; =0x00000283
@@ -1270,9 +1270,9 @@ _0225DF2A:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r5, #0x74
 	add r0, r5, #0
 	bl ScheduleWindowCopyToVram
@@ -1293,7 +1293,7 @@ ov31_0225DF98: ; 0x0225DF98
 	bl FillWindowPixelBuffer
 	mov r0, #6
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	mov r0, #0x56
 	lsl r0, r0, #2
@@ -1360,9 +1360,9 @@ _0225DFEC:
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r4, #0x54
 	add r0, r4, #0
 	bl ScheduleWindowCopyToVram
@@ -1554,7 +1554,7 @@ ov31_0225E184: ; 0x0225E184
 	add r3, r6, #0
 	bl ov31_0225DE00
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	mov r2, #0x9a
 	ldr r0, [r5, #0x14]
 	lsl r2, r2, #2
@@ -1617,10 +1617,10 @@ ov31_0225E20C: ; 0x0225E20C
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #5
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r4, r0, #0
 	mov r0, #0x56
 	lsl r0, r0, #2
@@ -1669,9 +1669,9 @@ ov31_0225E20C: ; 0x0225E20C
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x49
 	lsl r0, r0, #2
 	add r0, r5, r0
@@ -1690,11 +1690,11 @@ ov31_0225E2D4: ; 0x0225E2D4
 	add r4, r1, #0
 	mov r0, #2
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	mov r0, #2
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r7, r0, #0
 	mov r0, #0x56
 	lsl r0, r0, #2
@@ -1780,13 +1780,13 @@ ov31_0225E2D4: ; 0x0225E2D4
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x10]
-	bl String_dtor
+	bl String_Delete
 	ldr r0, [sp, #0x14]
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	add r0, #0xf4
 	bl ScheduleWindowCopyToVram
@@ -1801,7 +1801,7 @@ ov31_0225E2D4: ; 0x0225E2D4
 	bl FillWindowPixelBuffer
 	mov r0, #9
 	mov r1, #0xb
-	bl String_ctor
+	bl String_New
 	add r6, r0, #0
 	mov r0, #0x56
 	lsl r0, r0, #2
@@ -1850,9 +1850,9 @@ ov31_0225E2D4: ; 0x0225E2D4
 	str r1, [sp, #0xc]
 	bl AddTextPrinterParameterized2
 	add r0, r6, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r7, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x4d
 	lsl r0, r0, #2
 	add r0, r5, r0
@@ -1891,7 +1891,7 @@ ov31_0225E474: ; 0x0225E474
 	add r0, r5, r0
 	bl ScheduleWindowCopyToVram
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	nop
@@ -2022,7 +2022,7 @@ ov31_0225E54C: ; 0x0225E54C
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
@@ -2144,7 +2144,7 @@ _0225E684:
 	add r2, r5, #0
 	bl StringExpandPlaceholders
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	mov r0, #0x59
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
@@ -2439,7 +2439,7 @@ _0225E8DA:
 	add r2, r5, #0
 	bl StringExpandPlaceholders
 	add r0, r5, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r4, #0
 	add r0, #0x44
 	mov r1, #0xf
@@ -2607,7 +2607,7 @@ ov31_0225EA08: ; 0x0225EA08
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	add r0, #0x44
 	mov r1, #0xf
@@ -2675,7 +2675,7 @@ ov31_0225EA9C: ; 0x0225EA9C
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	add r0, #0x44
 	mov r1, #0xf
@@ -2743,7 +2743,7 @@ ov31_0225EB30: ; 0x0225EB30
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	add r0, #0x44
 	mov r1, #0xf
@@ -2811,7 +2811,7 @@ ov31_0225EBC4: ; 0x0225EBC4
 	add r2, r4, #0
 	bl StringExpandPlaceholders
 	add r0, r4, #0
-	bl String_dtor
+	bl String_Delete
 	add r0, r5, #0
 	add r0, #0x44
 	mov r1, #0xf
