@@ -1504,7 +1504,7 @@
           "moves": [
             "MOVE_SWIFT",
             "MOVE_AIR_CUTTER",
-            "MOVE_SPIKES,
+            "MOVE_SPIKES",
             "MOVE_STEEL_WING"
           ],
           "capsule": 0
