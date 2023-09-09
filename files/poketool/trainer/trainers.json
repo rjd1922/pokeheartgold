@@ -21724,7 +21724,7 @@
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_ROAR",
-            "MOVE_BITE",
+            "MOVE_HOWL",
             "MOVE_FEINT_ATTACK"
           ],
           "capsule": 0
@@ -21752,7 +21752,7 @@
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_SMOG",
-            "MOVE_BITE",
+            "MOVE_THUNDER_FANG",
             "MOVE_FEINT_ATTACK"
           ],
           "capsule": 0
