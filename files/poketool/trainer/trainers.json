@@ -1427,13 +1427,13 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 30,
-          "species": "SPECIES_SEEL",
+          "species": "SPECIES_DELIBIRD",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_SNORE",
+            "MOVE_PRESENT",
             "MOVE_HAIL",
-            "MOVE_ICY_WIND",
-            "MOVE_REST"
+            "MOVE_ICE_BEAM",
+            "MOVE_FLY"
           ],
           "capsule": 0
         },
