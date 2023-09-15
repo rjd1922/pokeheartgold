@@ -1010,7 +1010,7 @@
 	</row>
 	<row id="msg_0223_00252" index="252">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">an {COLOR 255}Up-Grade{COLOR 0}</language>
+		<language name="English">an {COLOR 255}Upgrade{COLOR 0}</language>
 	</row>
 	<row id="msg_0223_00253" index="253">
 		<attribute name="window_context_name">used</attribute>
@@ -1038,7 +1038,7 @@
 	</row>
 	<row id="msg_0223_00259" index="259">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">a {COLOR 255}Stick{COLOR 0}</language>
+		<language name="English">a {COLOR 255}Leek{COLOR 0}</language>
 	</row>
 	<row id="msg_0223_00260" index="260">
 		<attribute name="window_context_name">used</attribute>
