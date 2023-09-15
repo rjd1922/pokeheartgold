@@ -21724,8 +21724,8 @@
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_ROAR",
-            "MOVE_HOWL",
-            "MOVE_FEINT_ATTACK"
+            "MOVE_BITE",
+            "MOVE_HOWL"
           ],
           "capsule": 0
         },
