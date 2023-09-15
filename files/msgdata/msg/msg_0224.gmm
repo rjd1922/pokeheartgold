@@ -1010,7 +1010,7 @@
 	</row>
 	<row id="msg_0224_00252" index="252">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Up-Grades</language>
+		<language name="English">Upgrades</language>
 	</row>
 	<row id="msg_0224_00253" index="253">
 		<attribute name="window_context_name">used</attribute>
@@ -1038,7 +1038,7 @@
 	</row>
 	<row id="msg_0224_00259" index="259">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Sticks</language>
+		<language name="English">Leeks</language>
 	</row>
 	<row id="msg_0224_00260" index="260">
 		<attribute name="window_context_name">used</attribute>
