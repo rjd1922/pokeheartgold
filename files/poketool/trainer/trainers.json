@@ -10450,7 +10450,7 @@
           "moves": [
             "MOVE_DOUBLE_TEAM",
             "MOVE_CONFUSE_RAY",
-            "MOVE_FEINT_ATTACK",
+            "MOVE_BITE",
             "MOVE_PAYBACK"
           ],
           "capsule": 0
