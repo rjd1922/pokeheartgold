@@ -742,7 +742,7 @@
 	</row>
 	<row id="msg_0751_feint_attack" index="185">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">FAINT ATTACK</language>
+		<language name="English">FEINT ATTACK</language>
 	</row>
 	<row id="msg_0751_sweet_kiss" index="186">
 		<attribute name="window_context_name">used</attribute>
