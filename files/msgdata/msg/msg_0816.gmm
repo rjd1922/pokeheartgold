@@ -38,7 +38,7 @@
 	</row>
 	<row id="msg_0816_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Shellfish Pokémon</language>
+		<language name="English">Shell Pokémon</language>
 	</row>
 	<row id="msg_0816_00010" index="10">
 		<attribute name="window_context_name">used</attribute>
@@ -78,11 +78,11 @@
 	</row>
 	<row id="msg_0816_00019" index="19">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Mouse Pokémon</language>
+		<language name="English">Rat Pokémon</language>
 	</row>
 	<row id="msg_0816_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Mouse Pokémon</language>
+		<language name="English">Rat Pokémon</language>
 	</row>
 	<row id="msg_0816_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
