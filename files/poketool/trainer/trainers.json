@@ -19540,7 +19540,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 40,
           "species": "SPECIES_DITTO",
-          "item": "ITEM_NONE",
+          "item": "ITEM_METAL_POWDER",
           "capsule": 0
         }
       ],
