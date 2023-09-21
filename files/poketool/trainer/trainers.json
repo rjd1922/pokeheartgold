@@ -23097,7 +23097,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 56,
-          "species": "SPECIES_MAGNETON",
+          "species": "SPECIES_MAGNEZONE",
           "moves": [
             "MOVE_GYRO_BALL",
             "MOVE_MIRROR_SHOT",
@@ -27649,6 +27649,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 53,
           "species": "SPECIES_VILEPLUME",
+          "item": "ITEM_NONE",
           "capsule": 0
         },
         {
@@ -27657,6 +27658,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 54,
           "species": "SPECIES_MAROWAK",
+          "item": "ITEM_THICK_CLUB",
           "capsule": 0
         }
       ],
