@@ -19075,10 +19075,10 @@
           "species": "SPECIES_STEELIX",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_DRAGON_BREATH",
+            "MOVE_IRON_TAIL",
             "MOVE_EARTHQUAKE",
             "MOVE_SANDSTORM",
-            "MOVE_IRON_TAIL"
+            "MOVE_ROCK_SLIDE"
           ],
           "capsule": 0
         },
