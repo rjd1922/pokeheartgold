@@ -10552,7 +10552,7 @@
           "moves": [
             "MOVE_POISON_JAB",
             "MOVE_SPIDER_WEB",
-            "MOVE_BATON_PASS",
+            "MOVE_BUG_BITE",
             "MOVE_GIGA_DRAIN"
           ],
           "capsule": 0
