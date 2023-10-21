@@ -10612,7 +10612,7 @@
           "moves": [
             "MOVE_DOUBLE_TEAM",
             "MOVE_QUICK_ATTACK",
-            "MOVE_AERIAL_ACE",
+            "MOVE_WING_ATTACK",
             "MOVE_POISON_FANG"
           ],
           "capsule": 0
@@ -28490,7 +28490,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_SCHOOL_KID_M",
       "name": "{TRNAME}Billy",
       "items": [],
@@ -28503,6 +28503,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 42,
           "species": "SPECIES_PARASECT",
+          "item": "ITEM_NONE",
           "capsule": 0
         },
         {
@@ -28511,6 +28512,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 43,
           "species": "SPECIES_POLIWHIRL",
+          "item": "ITEM_NONE",
           "capsule": 0
         },
         {
@@ -28519,6 +28521,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 40,
           "species": "SPECIES_DITTO",
+          "item": "ITEM_QUICK_POWDER",
           "capsule": 0
         }
       ],
@@ -28530,7 +28533,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_SCHOOL_KID_M",
       "name": "{TRNAME}Billy",
       "items": [],
@@ -28543,6 +28546,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 46,
           "species": "SPECIES_PARASECT",
+          "item": "ITEM_NONE",
           "capsule": 0
         },
         {
@@ -28551,6 +28555,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 47,
           "species": "SPECIES_POLIWHIRL",
+          "item": "ITEM_NONE",
           "capsule": 0
         },
         {
@@ -28559,6 +28564,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 46,
           "species": "SPECIES_DITTO",
+          "item": "ITEM_QUICK_POWDER",
           "capsule": 0
         }
       ],
@@ -28570,7 +28576,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON_MOVES",
+      "type": "TRTYPE_MON_ITEM_MOVES",
       "class": "TRAINERCLASS_SCHOOL_KID_M",
       "name": "{TRNAME}Billy",
       "items": [],
@@ -28583,6 +28589,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 50,
           "species": "SPECIES_MR_MIME",
+          "item": "ITEM_NONE",
           "moves": [
             "MOVE_TRICK_ROOM",
             "MOVE_PSYCHIC",
@@ -28596,6 +28603,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 55,
           "species": "SPECIES_PARASECT",
+          "item": "ITEM_NONE",
           "moves": [
             "MOVE_SPORE",
             "MOVE_GIGA_DRAIN",
@@ -28610,6 +28618,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 53,
           "species": "SPECIES_POLIWRATH",
+          "item": "ITEM_NONE",
           "moves": [
             "MOVE_WAKE_UP_SLAP",
             "MOVE_BELLY_DRUM",
@@ -28624,6 +28633,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 51,
           "species": "SPECIES_DITTO",
+          "item": "ITEM_QUICK_POWDER",
           "moves": [
             "MOVE_TRANSFORM"
           ],
