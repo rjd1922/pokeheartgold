@@ -11264,9 +11264,9 @@
           "item": "ITEM_NONE",
           "moves": [
             "MOVE_SCREECH",
-            "MOVE_SUPERSONIC",
+            "MOVE_MEAN_LOOK",
             "MOVE_CONFUSE_RAY",
-            "MOVE_WING_ATTACK"
+            "MOVE_AERIAL_ACE"
           ],
           "capsule": 0
         },
