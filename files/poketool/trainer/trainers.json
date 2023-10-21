@@ -21873,7 +21873,7 @@
           "level": 32,
           "species": "SPECIES_WEEZING",
           "moves": [
-            "MOVE_TACKLE",
+            "MOVE_ASSURANCE",
             "MOVE_EXPLOSION",
             "MOVE_SLUDGE",
             "MOVE_SMOKESCREEN"
