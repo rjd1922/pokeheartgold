@@ -14110,7 +14110,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_BIRD_KEEPER_GS",
       "name": "{TRNAME}Jose",
       "items": [],
@@ -14123,6 +14123,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 44,
           "species": "SPECIES_FARFETCHD",
+          "item": "ITEM_STICK",
           "capsule": 0
         }
       ],
@@ -20078,7 +20079,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_BIRD_KEEPER_GS",
       "name": "{TRNAME}Jose",
       "items": [],
@@ -20091,6 +20092,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 38,
           "species": "SPECIES_FARFETCHD",
+          "item": "ITEM_STICK",
           "capsule": 0
         },
         {
@@ -20099,6 +20101,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 45,
           "species": "SPECIES_FARFETCHD",
+          "item": "ITEM_STICK",
           "capsule": 0
         }
       ],
@@ -27090,7 +27093,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_BIRD_KEEPER_GS",
       "name": "{TRNAME}Jose",
       "items": [
@@ -27105,6 +27108,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 50,
           "species": "SPECIES_FARFETCHD",
+          "item": "ITEM_STICK",
           "capsule": 0
         },
         {
@@ -27113,6 +27117,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 52,
           "species": "SPECIES_FARFETCHD",
+          "item": "ITEM_STICK",
           "capsule": 0
         },
         {
@@ -27121,6 +27126,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 53,
           "species": "SPECIES_FARFETCHD",
+          "item": "ITEM_STICK",
           "capsule": 0
         }
       ],
@@ -27604,7 +27610,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_LASS",
       "name": "{TRNAME}Krise",
       "items": [],
@@ -27617,6 +27623,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_GLOOM",
+          "item": "ITEM_NONE",
           "capsule": 0
         },
         {
@@ -27625,6 +27632,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 38,
           "species": "SPECIES_MAROWAK",
+          "item": "ITEM_THICK_CLUB",
           "capsule": 0
         }
       ],
@@ -27636,7 +27644,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_LASS",
       "name": "{TRNAME}Krise",
       "items": [],
