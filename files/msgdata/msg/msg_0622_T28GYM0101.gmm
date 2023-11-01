@@ -14,7 +14,7 @@
 	</row>
 	<row id="msg_0622_T28GYM0101_00003" index="3">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Pryce: That Badge will raise the Special\nstats of Pokémon.\rIt also lets your Pokémon use\nWhirlpool to get across\freal whirlpools.\rAnd this... This is a gift from me!\r</language>
+		<language name="English">Pryce: That Badge lets your Pokémon use\nWhirlpool to get across\freal whirlpools.\rAnd this... This is a gift from me!\r</language>
 	</row>
 	<row id="msg_0622_T28GYM0101_00004" index="4">
 		<attribute name="window_context_name">used</attribute>
