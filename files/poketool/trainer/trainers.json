@@ -21992,7 +21992,7 @@
           "moves": [
             "MOVE_ICY_WIND",
             "MOVE_SHADOW_CLAW",
-            "MOVE_FEINT_ATTACK",
+            "MOVE_NIGHT_SLASH",
             "MOVE_METAL_CLAW"
           ],
           "capsule": 0
@@ -22007,7 +22007,7 @@
             "MOVE_TOXIC",
             "MOVE_BITE",
             "MOVE_CONFUSE_RAY",
-            "MOVE_AIR_CUTTER"
+            "MOVE_AIR_SLASH"
           ],
           "capsule": 0
         },
@@ -22107,7 +22107,7 @@
           "moves": [
             "MOVE_ICY_WIND",
             "MOVE_SHADOW_CLAW",
-            "MOVE_FEINT_ATTACK",
+            "MOVE_NIGHT_SLASH",
             "MOVE_METAL_CLAW"
           ],
           "capsule": 0
@@ -22122,7 +22122,7 @@
             "MOVE_TOXIC",
             "MOVE_BITE",
             "MOVE_CONFUSE_RAY",
-            "MOVE_AIR_CUTTER"
+            "MOVE_AIR_SLASH"
           ],
           "capsule": 0
         },
@@ -22223,7 +22223,7 @@
           "moves": [
             "MOVE_ICY_WIND",
             "MOVE_SHADOW_CLAW",
-            "MOVE_FEINT_ATTACK",
+            "MOVE_NIGHT_SLASH",
             "MOVE_METAL_CLAW"
           ],
           "capsule": 0
@@ -22239,7 +22239,7 @@
             "MOVE_TOXIC",
             "MOVE_BITE",
             "MOVE_CONFUSE_RAY",
-            "MOVE_AIR_CUTTER"
+            "MOVE_AIR_SLASH"
           ],
           "capsule": 0
         },
@@ -34395,7 +34395,7 @@
             "MOVE_TOXIC",
             "MOVE_BITE",
             "MOVE_CONFUSE_RAY",
-            "MOVE_AIR_CUTTER"
+            "MOVE_AIR_SLASH"
           ],
           "capsule": 0
         },
@@ -34454,7 +34454,7 @@
             "MOVE_TOXIC",
             "MOVE_BITE",
             "MOVE_CONFUSE_RAY",
-            "MOVE_AIR_CUTTER"
+            "MOVE_AIR_SLASH"
           ],
           "capsule": 0
         },
@@ -34513,7 +34513,7 @@
             "MOVE_TOXIC",
             "MOVE_BITE",
             "MOVE_CONFUSE_RAY",
-            "MOVE_AIR_CUTTER"
+            "MOVE_AIR_SLASH"
           ],
           "capsule": 0
         },
