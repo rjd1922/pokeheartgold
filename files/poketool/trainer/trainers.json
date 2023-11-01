@@ -19064,7 +19064,7 @@
             "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
             "MOVE_FIRE_PUNCH",
-            "MOVE_MACH_PUNCH"
+            "MOVE_BULLET_PUNCH"
           ],
           "capsule": 0
         },
