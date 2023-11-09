@@ -39,6 +39,15 @@ static const u16 sPokemonCenterMaps[] = {
     MAP_EVERYWHERE,
 };
 
+static const u16 sMapEvolutionMethods[] = {
+    MAP_D11R0102, EVO_ROUTE217,
+    MAP_D11R0103, EVO_ROUTE217,
+    MAP_D11R0104, EVO_ROUTE217,
+    MAP_D11R0105, EVO_ROUTE217,
+    MAP_D46R0101, EVO_ETERNA,
+    MAP_R10, EVO_CORONET,
+};
+
 #include "data/map_headers.h"
 
 static u32 MapNumberBoundsCheck(u32 map_no) {
@@ -234,7 +243,15 @@ BOOL MapHeader_MapIsPokemonLeagueLobby(u32 map_no) {
     return map_no == MAP_T10R0101;
 }
 
-u16 MapHeader_GetMapEvolutionMethod(u32 map_no) {
-    // Leftover from D/P/Pl.
-    return 0;
+u16 MapHeader_GetMapEvolutionMethod(u32 mapno)
+{
+    int i;
+
+    for (i = 0; i < NELEMS(sMapEvolutionMethods); i += 2)
+    {
+        if (mapno == sMapEvolutionMethods[i + 0])
+            return sMapEvolutionMethods[i + 1];
+    }
+
+    return EVO_NONE;
 }
