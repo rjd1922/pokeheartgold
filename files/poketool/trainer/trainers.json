@@ -11526,7 +11526,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 80,
           "species": "SPECIES_LAPRAS",
-          "item": "ITEM_NONE",
+          "item": "ITEM_SITRUS_BERRY",
           "moves": [
             "MOVE_BLIZZARD",
             "MOVE_BRINE",
@@ -11541,7 +11541,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 82,
           "species": "SPECIES_SNORLAX",
-          "item": "ITEM_NONE",
+          "item": "ITEM_QUICK_CLAW",
           "moves": [
             "MOVE_SHADOW_BALL",
             "MOVE_CRUNCH",
@@ -11556,7 +11556,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 84,
           "species": "SPECIES_VENUSAUR",
-          "item": "ITEM_NONE",
+          "item": "ITEM_BIG_ROOT",
           "moves": [
             "MOVE_SLUDGE_BOMB",
             "MOVE_GIGA_DRAIN",
@@ -11571,7 +11571,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 84,
           "species": "SPECIES_CHARIZARD",
-          "item": "ITEM_NONE",
+          "item": "ITEM_FOCUS_SASH",
           "moves": [
             "MOVE_FLARE_BLITZ",
             "MOVE_AIR_SLASH",
@@ -11586,7 +11586,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 84,
           "species": "SPECIES_BLASTOISE",
-          "item": "ITEM_NONE",
+          "item": "ITEM_WIDE_LENS",
           "moves": [
             "MOVE_FOCUS_BLAST",
             "MOVE_HYDRO_CANNON",
