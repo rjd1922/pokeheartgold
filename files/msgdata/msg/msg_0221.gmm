@@ -1208,7 +1208,7 @@
 	</row>
 	<row id="msg_0221_00296" index="296">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A Pokémon held item that boosts the\npower of HP-stealing moves to let the\nholder recover more HP.</language>
+		<language name="English">A Pokémon held item that boosts the\namount of HP the holder recovers\nfrom HP-stealing moves.</language>
 	</row>
 	<row id="msg_0221_00297" index="297">
 		<attribute name="window_context_name">used</attribute>
