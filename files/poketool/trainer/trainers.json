@@ -21737,6 +21737,20 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 35,
+          "species": "SPECIES_ELECTRODE",
+          "moves": [
+            "MOVE_SPARK",
+            "MOVE_ROLLOUT",
+            "MOVE_SCREECH",
+            "MOVE_SELFDESTRUCT"
+          ],
+          "capsule": 0
+        },
+        {
+          "difficulty": 200,
+          "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
+          "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
+          "level": 35,
           "species": "SPECIES_WEEZING",
           "moves": [
             "MOVE_GYRO_BALL",
