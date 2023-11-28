@@ -234,7 +234,7 @@
 	</row>
 	<row id="msg_0222_00058" index="58">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">X Defend</language>
+		<language name="English">X Defense</language>
 	</row>
 	<row id="msg_0222_00059" index="59">
 		<attribute name="window_context_name">used</attribute>
@@ -246,7 +246,7 @@
 	</row>
 	<row id="msg_0222_00061" index="61">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">X Special</language>
+		<language name="English">X Sp. Atk</language>
 	</row>
 	<row id="msg_0222_00062" index="62">
 		<attribute name="window_context_name">used</attribute>
