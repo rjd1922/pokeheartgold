@@ -10450,7 +10450,7 @@
           "moves": [
             "MOVE_DOUBLE_TEAM",
             "MOVE_CONFUSE_RAY",
-            "MOVE_BITE",
+            "MOVE_FEINT_ATTACK",
             "MOVE_PAYBACK"
           ],
           "capsule": 0
@@ -22349,7 +22349,7 @@
           "difficulty": 0,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
-          "level": 29,
+          "level": 38,
           "species": "SPECIES_NIDOKING",
           "capsule": 0
         },
@@ -22357,7 +22357,7 @@
           "difficulty": 0,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
-          "level": 29,
+          "level": 38,
           "species": "SPECIES_SLOWKING",
           "capsule": 0
         },
@@ -22365,8 +22365,8 @@
           "difficulty": 0,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
-          "level": 65,
-          "species": "SPECIES_MAGIKARP",
+          "level": 38,
+          "species": "SPECIES_SEAKING",
           "capsule": 0
         }
       ],
