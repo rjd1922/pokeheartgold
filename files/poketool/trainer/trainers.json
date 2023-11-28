@@ -2005,7 +2005,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON_MOVES",
+      "type": "TRTYPE_MON_ITEM_MOVES",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Derek",
       "items": [],
@@ -2018,6 +2018,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 18,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "moves": [
             "MOVE_DOUBLE_TEAM",
             "MOVE_QUICK_ATTACK",
@@ -2047,7 +2048,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON_MOVES",
+      "type": "TRTYPE_MON_ITEM_MOVES",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Ruth",
       "items": [],
@@ -2060,6 +2061,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 17,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "moves": [
             "MOVE_DOUBLE_TEAM",
             "MOVE_QUICK_ATTACK",
@@ -7628,7 +7630,7 @@
       "messages": []
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}William",
       "items": [],
@@ -7641,6 +7643,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 16,
           "species": "SPECIES_RAICHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -7660,7 +7663,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Beverly",
       "items": [],
@@ -7673,6 +7676,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 16,
           "species": "SPECIES_SNUBBULL",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -15906,7 +15910,7 @@
       "messages": []
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Robert",
       "items": [],
@@ -15919,6 +15923,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 43,
           "species": "SPECIES_QUAGSIRE",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -15938,7 +15943,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Joshua",
       "items": [],
@@ -15951,6 +15956,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -15959,6 +15965,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -15967,6 +15974,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -15975,6 +15983,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -15983,6 +15992,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -15991,6 +16001,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 32,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -16010,7 +16021,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Carter",
       "items": [],
@@ -16023,6 +16034,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 38,
           "species": "SPECIES_BULBASAUR",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         },
         {
@@ -16031,6 +16043,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 38,
           "species": "SPECIES_CHARMANDER",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         },
         {
@@ -16039,6 +16052,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 38,
           "species": "SPECIES_SQUIRTLE",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -16058,7 +16072,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Trevor",
       "items": [],
@@ -16071,6 +16085,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 42,
           "species": "SPECIES_PSYDUCK",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -16090,7 +16105,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Georgia",
       "items": [],
@@ -16103,6 +16118,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 31,
           "species": "SPECIES_SENTRET",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -16111,6 +16127,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 31,
           "species": "SPECIES_SENTRET",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -16119,6 +16136,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 31,
           "species": "SPECIES_SENTRET",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -16127,6 +16145,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 36,
           "species": "SPECIES_FURRET",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -16135,6 +16154,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 31,
           "species": "SPECIES_SENTRET",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -18608,7 +18628,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Brandon",
       "items": [],
@@ -18621,6 +18641,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 13,
           "species": "SPECIES_SNUBBULL",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -18629,6 +18650,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 13,
           "species": "SPECIES_MAREEP",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -19267,7 +19289,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Jeremy",
       "items": [],
@@ -19280,6 +19302,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 36,
           "species": "SPECIES_MEOWTH",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -19288,6 +19311,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 36,
           "species": "SPECIES_MEOWTH",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -19296,6 +19320,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 36,
           "species": "SPECIES_MEOWTH",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -19315,7 +19340,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON_MOVES",
+      "type": "TRTYPE_MON_ITEM_MOVES",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Colin",
       "items": [],
@@ -19328,6 +19353,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 40,
           "species": "SPECIES_DELIBIRD",
+          "item": "ITEM_ORAN_BERRY",
           "moves": [
             "MOVE_PRESENT",
             "MOVE_AERIAL_ACE",
@@ -19769,7 +19795,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Beverly",
       "items": [],
@@ -19782,6 +19808,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 31,
           "species": "SPECIES_SNUBBULL",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -19793,7 +19820,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Beverly",
       "items": [],
@@ -19806,6 +19833,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 43,
           "species": "SPECIES_GRANBULL",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -19817,7 +19845,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Derek",
       "items": [],
@@ -19830,6 +19858,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 24,
           "species": "SPECIES_TEDDIURSA",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -19838,6 +19867,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 30,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -19849,7 +19879,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Derek",
       "items": [],
@@ -19862,6 +19892,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 13,
           "species": "SPECIES_PICHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -19870,6 +19901,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 15,
           "species": "SPECIES_TEDDIURSA",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -19878,6 +19910,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 37,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -19886,6 +19919,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 29,
           "species": "SPECIES_TEDDIURSA",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -22338,7 +22372,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Alex",
       "items": [],
@@ -22351,6 +22385,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 38,
           "species": "SPECIES_NIDOKING",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -22359,6 +22394,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 38,
           "species": "SPECIES_SLOWKING",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -22367,6 +22403,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 38,
           "species": "SPECIES_SEAKING",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -24321,7 +24358,7 @@
       "messages": []
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Marigold",
       "items": [],
@@ -24334,6 +24371,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 16,
           "species": "SPECIES_MEOWTH",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -24491,7 +24529,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Rex",
       "items": [],
@@ -24504,6 +24542,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 45,
           "species": "SPECIES_PHANPY",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -24523,7 +24562,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Andy",
       "items": [],
@@ -24536,6 +24575,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 44,
           "species": "SPECIES_TEDDIURSA",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -25853,7 +25893,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Boone",
       "items": [],
@@ -25866,6 +25906,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 43,
           "species": "SPECIES_SPINDA",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         },
         {
@@ -25874,6 +25915,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 41,
           "species": "SPECIES_VOLBEAT",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -25893,7 +25935,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Eleanor",
       "items": [],
@@ -25906,6 +25948,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 43,
           "species": "SPECIES_SPINDA",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         },
         {
@@ -25914,6 +25957,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 41,
           "species": "SPECIES_ILLUMISE",
+          "item": "ITEM_SITRUS_BERRY",
           "capsule": 0
         }
       ],
@@ -27480,7 +27524,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN_M",
       "name": "{TRNAME}Derek",
       "items": [],
@@ -27493,6 +27537,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 18,
           "species": "SPECIES_PICHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -27501,6 +27546,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 22,
           "species": "SPECIES_TEDDIURSA",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -27509,6 +27555,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 39,
           "species": "SPECIES_PIKACHU",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         },
         {
@@ -27517,6 +27564,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 47,
           "species": "SPECIES_URSARING",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
@@ -27528,7 +27576,7 @@
       ]
     },
     {
-      "type": "TRTYPE_MON",
+      "type": "TRTYPE_MON_ITEM",
       "class": "TRAINERCLASS_POKEFAN",
       "name": "{TRNAME}Beverly",
       "items": [],
@@ -27541,6 +27589,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 53,
           "species": "SPECIES_GRANBULL",
+          "item": "ITEM_ORAN_BERRY",
           "capsule": 0
         }
       ],
