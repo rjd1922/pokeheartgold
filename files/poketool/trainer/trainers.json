@@ -4132,7 +4132,7 @@
           "level": 21,
           "species": "SPECIES_HORSEA",
           "moves": [
-            "MOVE_BUBBLE",
+            "MOVE_FOCUS_ENERGY",
             "MOVE_SMOKESCREEN",
             "MOVE_LEER",
             "MOVE_BUBBLE_BEAM"
