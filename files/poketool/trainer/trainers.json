@@ -1631,8 +1631,8 @@
           "species": "SPECIES_GYARADOS",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_TWISTER",
-            "MOVE_DRAGON_RAGE",
+            "MOVE_ICE_FANG",
+            "MOVE_AQUA_TAIL",
             "MOVE_BITE",
             "MOVE_DRAGON_PULSE"
           ],
