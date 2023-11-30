@@ -19086,7 +19086,7 @@
             "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
             "MOVE_FIRE_PUNCH",
-            "MOVE_BULLET_PUNCH"
+            "MOVE_MACH_PUNCH"
           ],
           "capsule": 0
         },
@@ -31851,7 +31851,7 @@
           "item": "ITEM_NONE",
           "moves": [
             "MOVE_BULLET_PUNCH",
-            "MOVE_FORESIGHT",
+            "MOVE_PAYBACK",
             "MOVE_STONE_EDGE",
             "MOVE_DYNAMIC_PUNCH"
           ],
