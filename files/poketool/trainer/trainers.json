@@ -11598,7 +11598,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 84,
           "species": "SPECIES_BLASTOISE",
-          "item": "ITEM_WIDE_LENS",
+          "item": "ITEM_ZOOM_LENS",
           "moves": [
             "MOVE_FOCUS_BLAST",
             "MOVE_HYDRO_CANNON",
