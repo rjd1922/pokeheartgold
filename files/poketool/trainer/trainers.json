@@ -31559,7 +31559,7 @@
         {
           "difficulty": 250,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
-          "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
+          "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 58,
           "species": "SPECIES_BRONZONG",
           "item": "ITEM_NONE",
