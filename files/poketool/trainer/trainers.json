@@ -845,10 +845,10 @@
           "species": "SPECIES_PIDGEOTTO",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_SAND_ATTACK",
+            "MOVE_TACKLE",
             "MOVE_ROOST",
             "MOVE_GUST",
-            "MOVE_QUICK_ATTACK"
+            "MOVE_SAND_ATTACK"
           ],
           "capsule": 0
         }
