@@ -843,7 +843,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 13,
           "species": "SPECIES_PIDGEOTTO",
-          "item": "ITEM_NONE",
+          "item": "ITEM_ORAN_BERRY",
           "moves": [
             "MOVE_TACKLE",
             "MOVE_ROOST",
