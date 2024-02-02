@@ -1534,7 +1534,7 @@
           "moves": [
             "MOVE_SCREECH",
             "MOVE_SANDSTORM",
-            "MOVE_ROCK_THROW",
+            "MOVE_DIG",
             "MOVE_IRON_TAIL"
           ],
           "capsule": 0
@@ -32853,7 +32853,7 @@
           "species": "SPECIES_STEELIX",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_STONE_EDGE",
+            "MOVE_EARTHQUAKE",
             "MOVE_STEALTH_ROCK",
             "MOVE_ROAR",
             "MOVE_IRON_TAIL"
