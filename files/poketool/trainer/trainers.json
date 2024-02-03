@@ -309,7 +309,7 @@
       "double": 0,
       "party": [
         {
-          "difficulty": 0,
+          "difficulty": 50,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 4,
@@ -12834,7 +12834,7 @@
       "double": 0,
       "party": [
         {
-          "difficulty": 0,
+          "difficulty": 100,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 34,
@@ -12858,7 +12858,7 @@
       "double": 0,
       "party": [
         {
-          "difficulty": 0,
+          "difficulty": 150,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 40,
@@ -23268,7 +23268,7 @@
       "double": 0,
       "party": [
         {
-          "difficulty": 0,
+          "difficulty": 250,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 54,
@@ -33017,7 +33017,7 @@
             "MOVE_DRAGON_DANCE",
             "MOVE_EARTHQUAKE",
             "MOVE_WATERFALL",
-            "MOVE_DRAGON_PULSE"
+            "MOVE_OUTRAGE"
           ],
           "capsule": 0
         },
