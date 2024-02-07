@@ -1432,7 +1432,7 @@
           "moves": [
             "MOVE_PRESENT",
             "MOVE_HAIL",
-            "MOVE_ICE_BEAM",
+            "MOVE_BLIZZARD",
             "MOVE_FLY"
           ],
           "capsule": 0
