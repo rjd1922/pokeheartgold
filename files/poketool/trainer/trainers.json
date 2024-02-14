@@ -6930,14 +6930,6 @@
           "species": "SPECIES_HITMONCHAN",
           "capsule": 0
         }
-        {
-          "difficulty": 100,
-          "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
-          "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
-          "level": 34,
-          "species": "SPECIES_HITMONTOP",
-          "capsule": 0
-        }
       ],
       "messages": [
         {
