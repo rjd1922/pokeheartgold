@@ -10378,7 +10378,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 41,
           "species": "SPECIES_EXEGGUTOR",
-          "item": "ITEM_NONE",
+          "item": "ITEM_LIGHT_CLAY",
           "moves": [
             "MOVE_REFLECT",
             "MOVE_SLEEP_POWDER",
@@ -10572,7 +10572,7 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_AIR_CUTTER",
             "MOVE_PSYCHIC",
-            "MOVE_TOXIC"
+            "MOVE_SLUDGE_BOMB"
           ],
           "capsule": 0
         },
@@ -10615,8 +10615,8 @@
           "item": "ITEM_SITRUS_BERRY",
           "moves": [
             "MOVE_DOUBLE_TEAM",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_WING_ATTACK",
+            "MOVE_BITE",
+            "MOVE_PLUCK",
             "MOVE_POISON_FANG"
           ],
           "capsule": 0
