@@ -31950,7 +31950,7 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
           "level": 64,
           "species": "SPECIES_HONCHKROW",
-          "item": "ITEM_NONE",
+          "item": "ITEM_SCOPE_LENS",
           "moves": [
             "MOVE_DRILL_PECK",
             "MOVE_WHIRLWIND",
