@@ -902,9 +902,9 @@
           "item": "ITEM_NONE",
           "moves": [
             "MOVE_STRING_SHOT",
-            "MOVE_HARDEN",
+            "MOVE_POISON_STING",
             "MOVE_FURY_ATTACK",
-            "MOVE_TWINEEDLE"
+            "MOVE_U_TURN"
           ],
           "capsule": 0
         },
@@ -916,10 +916,10 @@
           "species": "SPECIES_YANMA",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_FORESIGHT",
             "MOVE_QUICK_ATTACK",
             "MOVE_DOUBLE_TEAM",
-            "MOVE_SONIC_BOOM"
+            "MOVE_SONIC_BOOM",
+            "MOVE_U_TURN"
           ],
           "capsule": 0
         }
