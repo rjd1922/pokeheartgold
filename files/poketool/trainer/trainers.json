@@ -10600,7 +10600,7 @@
           "item": "ITEM_BLACK_SLUDGE",
           "moves": [
             "MOVE_MINIMIZE",
-            "MOVE_SCREECH",
+            "MOVE_ACID_ARMOR",
             "MOVE_GUNK_SHOT",
             "MOVE_TOXIC"
           ],
