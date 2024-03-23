@@ -10452,7 +10452,7 @@
           "species": "SPECIES_UMBREON",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_DOUBLE_TEAM",
+            "MOVE_MUD_SLAP",
             "MOVE_CONFUSE_RAY",
             "MOVE_FEINT_ATTACK",
             "MOVE_PAYBACK"
