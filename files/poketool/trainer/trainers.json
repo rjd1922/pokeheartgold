@@ -10515,7 +10515,7 @@
             "MOVE_NASTY_PLOT",
             "MOVE_DARK_PULSE",
             "MOVE_FLAMETHROWER",
-            "MOVE_CRUNCH"
+            "MOVE_THUNDER_FANG"
           ],
           "capsule": 0
         }
@@ -21761,8 +21761,8 @@
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_ROAR",
-            "MOVE_BITE",
-            "MOVE_HOWL"
+            "MOVE_HOWL",
+            "MOVE_FAINT_ATTACK"
           ],
           "capsule": 0
         },
@@ -21803,8 +21803,8 @@
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_SMOG",
-            "MOVE_THUNDER_FANG",
-            "MOVE_FEINT_ATTACK"
+            "MOVE_BITE",
+            "MOVE_THUNDER_FANG"
           ],
           "capsule": 0
         }
