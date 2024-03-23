@@ -22067,9 +22067,9 @@
           "species": "SPECIES_MAGNEZONE",
           "moves": [
             "MOVE_DISCHARGE",
-            "MOVE_MIRROR_SHOT",
+            "MOVE_FLASH_CANNON",
             "MOVE_THUNDER_WAVE",
-            "MOVE_MAGNET_BOMB"
+            "MOVE_TRI_ATTACK"
           ],
           "capsule": 0
         },
@@ -22182,9 +22182,9 @@
           "species": "SPECIES_MAGNEZONE",
           "moves": [
             "MOVE_DISCHARGE",
-            "MOVE_MIRROR_SHOT",
+            "MOVE_FLASH_CANNON",
             "MOVE_THUNDER_WAVE",
-            "MOVE_MAGNET_BOMB"
+            "MOVE_TRI_ATTACK"
           ],
           "capsule": 0
         },
@@ -22300,9 +22300,9 @@
           "item": "ITEM_NONE",
           "moves": [
             "MOVE_DISCHARGE",
-            "MOVE_MIRROR_SHOT",
+            "MOVE_FLASH_CANNON",
             "MOVE_THUNDER_WAVE",
-            "MOVE_MAGNET_BOMB"
+            "MOVE_TRI_ATTACK"
           ],
           "capsule": 0
         },
