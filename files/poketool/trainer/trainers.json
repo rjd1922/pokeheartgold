@@ -901,8 +901,8 @@
           "species": "SPECIES_BEEDRILL",
           "item": "ITEM_NONE",
           "moves": [
-            "MOVE_STRING_SHOT",
             "MOVE_POISON_STING",
+            "MOVE_STRING_SHOT",
             "MOVE_FURY_ATTACK",
             "MOVE_U_TURN"
           ],
@@ -8625,7 +8625,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 26,
-          "species": "SPECIES_CHARMELEON",
+          "species": "SPECIES_CHARMANDER",
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_SMOKESCREEN",
@@ -8639,7 +8639,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 26,
-          "species": "SPECIES_WARTORTLE",
+          "species": "SPECIES_SQUIRTLE",
           "moves": [
             "MOVE_WITHDRAW",
             "MOVE_WATER_GUN",
@@ -8653,7 +8653,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 26,
-          "species": "SPECIES_IVYSAUR",
+          "species": "SPECIES_BULBASAUR",
           "moves": [
             "MOVE_LEECH_SEED",
             "MOVE_POISON_POWDER",
