@@ -1639,7 +1639,7 @@
 	</row>
 	<row id="msg_0805_00409" index="409">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Its powerful head butt has enough\npower to shatter even the most\ndurable things upon impact.</language>
+		<language name="English">Its powerful headbutt has enough\npower to shatter even the most\ndurable things upon impact.</language>
 	</row>
 	<row id="msg_0805_00410" index="410">
 		<attribute name="window_context_name">used</attribute>
