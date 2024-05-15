@@ -10306,10 +10306,10 @@
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 50,
           "species": "SPECIES_DRAGONITE",
-          "item": "ITEM_LUM_BERRY",
+          "item": "ITEM_PERSIM_BERRY",
           "moves": [
             "MOVE_FIRE_BLAST",
-            "MOVE_SAFEGUARD",
+            "MOVE_AQUA_TAIL",
             "MOVE_OUTRAGE",
             "MOVE_HYPER_BEAM"
           ],
