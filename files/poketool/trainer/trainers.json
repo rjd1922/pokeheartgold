@@ -33054,7 +33054,7 @@
             "MOVE_YAWN",
             "MOVE_HYDRO_PUMP",
             "MOVE_ICE_BEAM",
-            "MOVE_DRAGON_BREATH"
+            "MOVE_DRAGON_PULSE"
           ],
           "capsule": 0
         },
