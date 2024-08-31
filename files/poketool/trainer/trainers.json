@@ -33083,7 +33083,7 @@
           "moves": [
             "MOVE_THUNDER",
             "MOVE_SAFEGUARD",
-            "MOVE_DRAGON_BREATH",
+            "MOVE_DRAGON_PULSE",
             "MOVE_HYPER_BEAM"
           ],
           "capsule": 0
@@ -34394,7 +34394,7 @@
             "MOVE_YAWN",
             "MOVE_HYDRO_PUMP",
             "MOVE_ICE_BEAM",
-            "MOVE_DRAGON_BREATH"
+            "MOVE_DRAGON_PULSE"
           ],
           "capsule": 0
         },
@@ -34408,7 +34408,7 @@
           "moves": [
             "MOVE_THUNDER",
             "MOVE_PROTECT",
-            "MOVE_DRAGON_BREATH",
+            "MOVE_DRAGON_PULSE",
             "MOVE_HYPER_BEAM"
           ],
           "capsule": 0
