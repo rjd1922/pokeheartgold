@@ -21787,9 +21787,9 @@
           "level": 35,
           "species": "SPECIES_WEEZING",
           "moves": [
-            "MOVE_GYRO_BALL",
+            "MOVE_DOUBLE_HIT",
             "MOVE_SLUDGE",
-            "MOVE_SMOKESCREEN",
+            "MOVE_ASSURANCE",
             "MOVE_HAZE"
           ],
           "capsule": 0
