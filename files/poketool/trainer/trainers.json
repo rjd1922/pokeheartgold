@@ -21787,7 +21787,7 @@
           "level": 35,
           "species": "SPECIES_WEEZING",
           "moves": [
-            "MOVE_DOUBLE_HIT",
+            "MOVE_GYRO_BALL",
             "MOVE_SLUDGE",
             "MOVE_ASSURANCE",
             "MOVE_HAZE"
