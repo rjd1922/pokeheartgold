@@ -122,7 +122,7 @@
 	</row>
 	<row id="msg_0221_00030" index="30">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Water with a high mineral content.\nIt restores the HP of one Pokémon by\n50 points.</language>
+		<language name="English">Mineral water collected from Mt. Silver.\nIt restores the HP of one Pokémon by\n50 points.</language>
 	</row>
 	<row id="msg_0221_00031" index="31">
 		<attribute name="window_context_name">used</attribute>
