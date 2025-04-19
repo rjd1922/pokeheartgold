@@ -8625,7 +8625,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 26,
-          "species": "SPECIES_CHARMANDER",
+          "species": "SPECIES_CHARMELEON",
           "moves": [
             "MOVE_FIRE_FANG",
             "MOVE_SMOKESCREEN",
@@ -8639,7 +8639,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 26,
-          "species": "SPECIES_SQUIRTLE",
+          "species": "SPECIES_WARTORTLE",
           "moves": [
             "MOVE_WITHDRAW",
             "MOVE_WATER_GUN",
@@ -8653,7 +8653,7 @@
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
           "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 26,
-          "species": "SPECIES_BULBASAUR",
+          "species": "SPECIES_IVYSAUR",
           "moves": [
             "MOVE_LEECH_SEED",
             "MOVE_POISON_POWDER",
