@@ -32460,7 +32460,7 @@
         {
           "difficulty": 250,
           "genderOverride": "TRPOKE_GENDER_OVERRIDE_OFF",
-          "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_SECOND",
+          "abilityOverride": "TRPOKE_ABILITY_OVERRIDE_OFF",
           "level": 54,
           "species": "SPECIES_DELCATTY",
           "item": "ITEM_NONE",
