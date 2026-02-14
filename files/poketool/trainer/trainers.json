@@ -431,7 +431,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_KIMONO_GIRL",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Kyoko",
       "items": [],
       "ai_flags": 1,
       "double": 0,
@@ -782,7 +782,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_BIKER",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Kazu",
       "items": [],
       "ai_flags": 1,
       "double": 0,
@@ -1876,7 +1876,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_SUPER_NERD",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Stan",
       "items": [],
       "ai_flags": 5,
       "double": 0,
@@ -2785,7 +2785,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Grunt",
       "items": [],
       "ai_flags": 1,
       "double": 0,
@@ -3820,7 +3820,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_SAGE",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Jeffrey",
       "items": [],
       "ai_flags": 5,
       "double": 0,
@@ -3839,7 +3839,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_SAGE",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Ping",
       "items": [],
       "ai_flags": 5,
       "double": 0,
@@ -8212,7 +8212,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Executive",
       "items": [],
       "ai_flags": 7,
       "double": 0,
@@ -9282,7 +9282,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Executive",
       "items": [],
       "ai_flags": 7,
       "double": 0,
@@ -9405,7 +9405,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Executive",
       "items": [],
       "ai_flags": 7,
       "double": 0,
@@ -9424,7 +9424,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Executive",
       "items": [],
       "ai_flags": 7,
       "double": 0,
@@ -9523,7 +9523,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Grunt",
       "items": [],
       "ai_flags": 1,
       "double": 0,
@@ -11733,7 +11733,7 @@
     {
       "type": "TRTYPE_MON",
       "class": "TRAINERCLASS_TEAM_ROCKET",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Grunt",
       "items": [],
       "ai_flags": 1,
       "double": 0,
@@ -24208,7 +24208,7 @@
     {
       "type": "TRTYPE_MON_MOVES",
       "class": "TRAINERCLASS_TWINS",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Lea & Pia",
       "items": [],
       "ai_flags": 1,
       "double": 2,
@@ -24597,7 +24597,7 @@
     {
       "type": "TRTYPE_MON_MOVES",
       "class": "TRAINERCLASS_SAGE",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Gaku",
       "items": [],
       "ai_flags": 5,
       "double": 0,
@@ -24636,7 +24636,7 @@
     {
       "type": "TRTYPE_MON_MOVES",
       "class": "TRAINERCLASS_SAGE",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Masa",
       "items": [],
       "ai_flags": 5,
       "double": 0,
@@ -24675,7 +24675,7 @@
     {
       "type": "TRTYPE_MON_MOVES",
       "class": "TRAINERCLASS_SAGE",
-      "name": "{TRNAME}Mickey",
+      "name": "{TRNAME}Koji",
       "items": [],
       "ai_flags": 5,
       "double": 0,
