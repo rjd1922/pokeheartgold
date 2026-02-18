@@ -21416,7 +21416,7 @@
           "species": "SPECIES_VILEPLUME",
           "moves": [
             "MOVE_MEGA_DRAIN",
-            "MOVE_SWEET_SCENT",
+            "MOVE_POISON_POWDER",
             "MOVE_SLEEP_POWDER",
             "MOVE_ACID"
           ],
@@ -21490,7 +21490,7 @@
           "species": "SPECIES_GLOOM",
           "moves": [
             "MOVE_MEGA_DRAIN",
-            "MOVE_SWEET_SCENT",
+            "MOVE_POISON_POWDER",
             "MOVE_SLEEP_POWDER",
             "MOVE_ACID"
           ],
