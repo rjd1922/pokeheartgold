@@ -1507,6 +1507,7 @@
         46,
         47,
         51,
+        54,
         58,
         78,
         82,
@@ -1577,6 +1578,7 @@
         46,
         47,
         51,
+        54,
         58,
         68,
         78,
@@ -1689,7 +1691,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_POISON_BARB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -2939,8 +2941,8 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_ORAN_BERRY",
+        "ITEM_MOON_STONE"
       ],
       "genderRatio": 0.75,
       "eggCycles": 10,
@@ -3031,8 +3033,8 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_ORAN_BERRY",
+        "ITEM_MOON_STONE"
       ],
       "genderRatio": 0.75,
       "eggCycles": 10,
@@ -4325,6 +4327,7 @@
         52,
         56,
         58,
+        60,
         66,
         78,
         80,
@@ -4410,6 +4413,7 @@
         52,
         56,
         58,
+        60,
         66,
         68,
         71,
@@ -5097,7 +5101,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_FOCUS_BAND"
       ],
       "genderRatio": 0.25,
       "eggCycles": 20,
@@ -5176,7 +5180,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_FOCUS_BAND"
       ],
       "genderRatio": 0.25,
       "eggCycles": 20,
@@ -5255,7 +5259,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_FOCUS_BAND"
       ],
       "genderRatio": 0.25,
       "eggCycles": 20,
@@ -6629,7 +6633,7 @@
       "spatk_yield": 0,
       "spdef_yield": 1,
       "items": [
-        "ITEM_NONE",
+        "ITEM_ASPEAR_BERRY",
         "ITEM_NONE"
       ],
       "genderRatio": 0.5,
@@ -6701,8 +6705,8 @@
       "spatk_yield": 0,
       "spdef_yield": 2,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_ASPEAR_BERRY",
+        "ITEM_NEVERMELTICE"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -7171,7 +7175,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_SPELL_TAG"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -7254,7 +7258,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_SPELL_TAG"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -7347,7 +7351,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_HARD_STONE"
       ],
       "genderRatio": 0.5,
       "eggCycles": 25,
@@ -9235,7 +9239,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_MYSTIC_WATER"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -9304,7 +9308,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_MYSTIC_WATER"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -15731,7 +15735,7 @@
       "spdef_yield": 1,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_SPELL_TAG"
       ],
       "genderRatio": 0.5,
       "eggCycles": 25,
@@ -16750,7 +16754,7 @@
       "growthRate": "MEDIUM_SLOW",
       "eggGroups": [
         "EGG_GROUP_BUG",
-        "EGG_GROUP_BUG"
+        "EGG_GROUP_MINERAL"
       ],
       "abilities": [
         "ABILITY_STURDY",
@@ -16857,6 +16861,7 @@
         45,
         46,
         52,
+        54,
         56,
         58,
         65,
@@ -16990,8 +16995,8 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_ORAN_BERRY",
+        "ITEM_SITRUS_BERRY"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -17071,8 +17076,8 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_ORAN_BERRY",
+        "ITEM_SITRUS_BERRY"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -17309,7 +17314,7 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
+        "ITEM_ASPEAR_BERRY",
         "ITEM_NONE"
       ],
       "genderRatio": 0.5,
@@ -17384,8 +17389,8 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_ASPEAR_BERRY",
+        "ITEM_NEVERMELTICE"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -17859,7 +17864,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_METAL_COAT"
       ],
       "genderRatio": 0.5,
       "eggCycles": 25,
@@ -18320,8 +18325,8 @@
       "spatk_yield": 2,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_UPGRADE",
+        "ITEM_UPGRADE"
       ],
       "genderRatio": 2.0,
       "eggCycles": 20,
@@ -20914,8 +20919,8 @@
       "spatk_yield": 0,
       "spdef_yield": 0,
       "items": [
-        "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_PECHA_BERRY",
+        "ITEM_BRIGHTPOWDER"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21190,7 +21195,7 @@
       "spdef_yield": 1,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_MENTAL_HERB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21266,7 +21271,7 @@
       "spdef_yield": 2,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_MENTAL_HERB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21348,7 +21353,7 @@
       "spdef_yield": 3,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_MENTAL_HERB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21435,7 +21440,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_POWER_HERB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21470,6 +21475,7 @@
         44,
         45,
         53,
+        54,
         58,
         64,
         70,
@@ -21507,7 +21513,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_POWER_HERB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21547,6 +21553,7 @@
         45,
         46,
         53,
+        54,
         56,
         58,
         63,
@@ -21592,7 +21599,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_POWER_HERB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -21634,6 +21641,7 @@
         46,
         52,
         53,
+        54,
         56,
         58,
         62,
@@ -21983,7 +21991,7 @@
       "friendship": 35,
       "growthRate": "SLOW",
       "eggGroups": [
-        "EGG_GROUP_AMORPHOUS",
+        "EGG_GROUP_HUMAN_LIKE",
         "EGG_GROUP_AMORPHOUS"
       ],
       "abilities": [
@@ -22066,7 +22074,7 @@
       "friendship": 35,
       "growthRate": "SLOW",
       "eggGroups": [
-        "EGG_GROUP_AMORPHOUS",
+        "EGG_GROUP_HUMAN_LIKE",
         "EGG_GROUP_AMORPHOUS"
       ],
       "abilities": [
@@ -22149,7 +22157,7 @@
       "friendship": 35,
       "growthRate": "SLOW",
       "eggGroups": [
-        "EGG_GROUP_AMORPHOUS",
+        "EGG_GROUP_HUMAN_LIKE",
         "EGG_GROUP_AMORPHOUS"
       ],
       "abilities": [
@@ -22412,6 +22420,7 @@
         45,
         49,
         53,
+        54,
         58,
         70,
         75,
@@ -22489,6 +22498,7 @@
         49,
         52,
         53,
+        54,
         56,
         58,
         60,
@@ -22793,7 +22803,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_SOFT_SAND"
       ],
       "genderRatio": 0.5,
       "eggCycles": 15,
@@ -22932,8 +22942,8 @@
       ],
       "catchRate": 45,
       "expYield": 95,
-      "hp_yield": 2,
-      "atk_yield": 0,
+      "hp_yield": 0,
+      "atk_yield": 2,
       "def_yield": 0,
       "speed_yield": 0,
       "spatk_yield": 0,
@@ -23255,7 +23265,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_BLACK_BELT"
       ],
       "genderRatio": 0.25,
       "eggCycles": 20,
@@ -23725,7 +23735,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_WIDE_LENS"
       ],
       "genderRatio": 0.5,
       "eggCycles": 25,
@@ -23857,6 +23867,7 @@
         44,
         45,
         52,
+        54,
         56,
         57,
         58,
@@ -24486,7 +24497,7 @@
       "friendship": 70,
       "growthRate": "MEDIUM_FAST",
       "eggGroups": [
-        "EGG_GROUP_FAIRY",
+        "EGG_GROUP_FIELD",
         "EGG_GROUP_FAIRY"
       ],
       "abilities": [
@@ -24556,7 +24567,7 @@
       "friendship": 70,
       "growthRate": "MEDIUM_FAST",
       "eggGroups": [
-        "EGG_GROUP_FAIRY",
+        "EGG_GROUP_FIELD",
         "EGG_GROUP_FAIRY"
       ],
       "abilities": [
@@ -24619,7 +24630,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_BRIGHTPOWDER"
       ],
       "genderRatio": 0.0,
       "eggCycles": 15,
@@ -24700,7 +24711,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_BRIGHTPOWDER"
       ],
       "genderRatio": 1.0,
       "eggCycles": 15,
@@ -25471,7 +25482,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_CHARCOAL"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -25815,7 +25826,7 @@
       "growthRate": "MEDIUM_SLOW",
       "eggGroups": [
         "EGG_GROUP_BUG",
-        "EGG_GROUP_BUG"
+        "EGG_GROUP_DRAGON"
       ],
       "abilities": [
         "ABILITY_HYPER_CUTTER",
@@ -25886,7 +25897,7 @@
       "growthRate": "MEDIUM_SLOW",
       "eggGroups": [
         "EGG_GROUP_BUG",
-        "EGG_GROUP_BUG"
+        "EGG_GROUP_DRAGON"
       ],
       "abilities": [
         "ABILITY_LEVITATE",
@@ -25963,7 +25974,7 @@
       "growthRate": "MEDIUM_SLOW",
       "eggGroups": [
         "EGG_GROUP_BUG",
-        "EGG_GROUP_BUG"
+        "EGG_GROUP_DRAGON"
       ],
       "abilities": [
         "ABILITY_LEVITATE",
@@ -26423,6 +26434,7 @@
         90
       ],
       "hms": [
+        1,
         4,
         6,
         8
@@ -26450,7 +26462,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_SHED_SHELL"
       ],
       "genderRatio": 0.5,
       "eggCycles": 20,
@@ -27020,7 +27032,7 @@
       "spdef_yield": 1,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_LIGHT_CLAY"
       ],
       "genderRatio": 2.0,
       "eggCycles": 20,
@@ -27104,7 +27116,7 @@
       "spdef_yield": 2,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_LIGHT_CLAY"
       ],
       "genderRatio": 2.0,
       "eggCycles": 20,
@@ -28324,7 +28336,7 @@
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
-        "ITEM_NONE"
+        "ITEM_LIFE_ORB"
       ],
       "genderRatio": 0.5,
       "eggCycles": 25,
@@ -30939,6 +30951,7 @@
         52,
         56,
         58,
+        60,
         61,
         65,
         75,
@@ -31031,6 +31044,7 @@
         52,
         56,
         58,
+        60,
         61,
         65,
         68,
@@ -35802,6 +35816,7 @@
         52,
         56,
         58,
+        60,
         63,
         66,
         78,
@@ -35888,6 +35903,7 @@
         52,
         56,
         58,
+        60,
         63,
         66,
         68,
@@ -37100,10 +37116,10 @@
       "catchRate": 30,
       "expYield": 198,
       "hp_yield": 0,
-      "atk_yield": 2,
+      "atk_yield": 0,
       "def_yield": 0,
       "speed_yield": 0,
-      "spatk_yield": 0,
+      "spatk_yield": 2,
       "spdef_yield": 0,
       "items": [
         "ITEM_NONE",
@@ -37158,7 +37174,9 @@
         89,
         90
       ],
-      "hms": []
+      "hms": [
+        2
+      ]
     },
     {
       "species": "LEAFEON",
@@ -37596,7 +37614,7 @@
       "friendship": 35,
       "growthRate": "SLOW",
       "eggGroups": [
-        "EGG_GROUP_AMORPHOUS",
+        "EGG_GROUP_HUMAN_LIKE",
         "EGG_GROUP_AMORPHOUS"
       ],
       "abilities": [
@@ -38588,6 +38606,7 @@
         10,
         11,
         15,
+        17,
         18,
         20,
         21,
@@ -38602,6 +38621,7 @@
         40,
         42,
         43,
+        44,
         52,
         56,
         58,
@@ -39955,7 +39975,7 @@
       "spdef": 107,
       "types": [
         "TYPE_ELECTRIC",
-        "TYPE_GHOST"
+        "TYPE_FIRE"
       ],
       "catchRate": 45,
       "expYield": 132,
@@ -40029,7 +40049,7 @@
       "spdef": 107,
       "types": [
         "TYPE_ELECTRIC",
-        "TYPE_GHOST"
+        "TYPE_WATER"
       ],
       "catchRate": 45,
       "expYield": 132,
@@ -40103,7 +40123,7 @@
       "spdef": 107,
       "types": [
         "TYPE_ELECTRIC",
-        "TYPE_GHOST"
+        "TYPE_ICE"
       ],
       "catchRate": 45,
       "expYield": 132,
@@ -40177,7 +40197,7 @@
       "spdef": 107,
       "types": [
         "TYPE_ELECTRIC",
-        "TYPE_GHOST"
+        "TYPE_FLYING"
       ],
       "catchRate": 45,
       "expYield": 132,
@@ -40251,7 +40271,7 @@
       "spdef": 107,
       "types": [
         "TYPE_ELECTRIC",
-        "TYPE_GHOST"
+        "TYPE_GRASS"
       ],
       "catchRate": 45,
       "expYield": 132,
