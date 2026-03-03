@@ -1184,6 +1184,7 @@
         "TUTOR_KNOCK_OFF",
         "TUTOR_SWIFT",
         "TUTOR_UPROAR",
+        "TUTOR_SKY_ATTACK",
         "TUTOR_HEADBUTT"
       ]
     },
@@ -2311,6 +2312,7 @@
         "TUTOR_THUNDER_PUNCH",
         "TUTOR_FIRE_PUNCH",
         "TUTOR_SNORE",
+        "TUTOR_EARTH_POWER",
         "TUTOR_HEAT_WAVE",
         "TUTOR_SWIFT",
         "TUTOR_LOW_KICK",
