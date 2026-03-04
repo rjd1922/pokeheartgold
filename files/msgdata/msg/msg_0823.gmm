@@ -38,7 +38,7 @@
 	</row>
 	<row id="msg_0823_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Shellfish Pokémon</language>
+		<language name="English">Shell Pokémon</language>
 	</row>
 	<row id="msg_0823_00010" index="10">
 		<attribute name="window_context_name">used</attribute>
@@ -78,11 +78,11 @@
 	</row>
 	<row id="msg_0823_00019" index="19">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Mouse Pokémon</language>
+		<language name="English">Rat Pokémon</language>
 	</row>
 	<row id="msg_0823_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Mouse Pokémon</language>
+		<language name="English">Rat Pokémon</language>
 	</row>
 	<row id="msg_0823_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
@@ -110,11 +110,11 @@
 	</row>
 	<row id="msg_0823_00027" index="27">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Mouse Pokémon</language>
+		<language name="English">Armadillo Pokémon</language>
 	</row>
 	<row id="msg_0823_00028" index="28">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Mouse Pokémon</language>
+		<language name="English">Pangolin Pokémon</language>
 	</row>
 	<row id="msg_0823_00029" index="29">
 		<attribute name="window_context_name">used</attribute>
@@ -322,7 +322,7 @@
 	</row>
 	<row id="msg_0823_00080" index="80">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Hermit Crab Pokémon</language>
+		<language name="English">Squatter Pokémon</language>
 	</row>
 	<row id="msg_0823_00081" index="81">
 		<attribute name="window_context_name">used</attribute>
@@ -778,11 +778,11 @@
 	</row>
 	<row id="msg_0823_00194" index="194">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Water Fish Pokémon</language>
+		<language name="English">Axolotl Pokémon</language>
 	</row>
 	<row id="msg_0823_00195" index="195">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Water Fish Pokémon</language>
+		<language name="English">Salamander Pokémon</language>
 	</row>
 	<row id="msg_0823_00196" index="196">
 		<attribute name="window_context_name">used</attribute>
@@ -810,7 +810,7 @@
 	</row>
 	<row id="msg_0823_00202" index="202">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Patient Pokémon</language>
+		<language name="English">Endurance Pokémon</language>
 	</row>
 	<row id="msg_0823_00203" index="203">
 		<attribute name="window_context_name">used</attribute>
@@ -1194,7 +1194,7 @@
 	</row>
 	<row id="msg_0823_00298" index="298">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Polka Dot Pokémon</language>
+		<language name="English">Aqua Ball Pokémon</language>
 	</row>
 	<row id="msg_0823_00299" index="299">
 		<attribute name="window_context_name">used</attribute>
@@ -1342,7 +1342,7 @@
 	</row>
 	<row id="msg_0823_00335" index="335">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Cat Ferret Pokémon</language>
+		<language name="English">Mongoose Pokémon</language>
 	</row>
 	<row id="msg_0823_00336" index="336">
 		<attribute name="window_context_name">used</attribute>
@@ -1366,11 +1366,11 @@
 	</row>
 	<row id="msg_0823_00341" index="341">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Ruffian Pokémon</language>
+		<language name="English">Rogue Pokémon</language>
 	</row>
 	<row id="msg_0823_00342" index="342">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Rogue Pokémon</language>
+		<language name="English">Ruffian Pokémon</language>
 	</row>
 	<row id="msg_0823_00343" index="343">
 		<attribute name="window_context_name">used</attribute>
@@ -1490,7 +1490,7 @@
 	</row>
 	<row id="msg_0823_00372" index="372">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Endurance Pokémon</language>
+		<language name="English">Patient Pokémon</language>
 	</row>
 	<row id="msg_0823_00373" index="373">
 		<attribute name="window_context_name">used</attribute>
@@ -1634,11 +1634,11 @@
 	</row>
 	<row id="msg_0823_00408" index="408">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Head Butt Pokémon</language>
+		<language name="English">Headbutt Pokémon</language>
 	</row>
 	<row id="msg_0823_00409" index="409">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Head Butt Pokémon</language>
+		<language name="English">Headbutt Pokémon</language>
 	</row>
 	<row id="msg_0823_00410" index="410">
 		<attribute name="window_context_name">used</attribute>
@@ -1770,7 +1770,7 @@
 	</row>
 	<row id="msg_0823_00442" index="442">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Forbidden Pokémon</language>
+		<language name="English">Sealed Pokémon</language>
 	</row>
 	<row id="msg_0823_00443" index="443">
 		<attribute name="window_context_name">used</attribute>
