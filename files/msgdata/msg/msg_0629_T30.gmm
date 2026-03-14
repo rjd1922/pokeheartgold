@@ -58,6 +58,6 @@
 	</row>
 	<row id="msg_0629_T30_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Trainer Tips\rWild Pokémon will appear regularly\nif you don’t run, but walk quietly in the\ftall grass.\rIf your party Pokémon are\ntired, it is better to avoid running,\fand go straight to a Pokémon Center.</language>
+		<language name="English">Trainer Tips\rWild Pokémon will appear less regularly\nif you don’t run, but walk quietly in the\ftall grass.\rIf your party Pokémon are\ntired, it is better to avoid running,\fand go straight to a Pokémon Center.</language>
 	</row>
 </body>
