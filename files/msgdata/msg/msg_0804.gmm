@@ -1915,7 +1915,7 @@
 	</row>
 	<row id="msg_0804_00478" index="478">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Legends in snowy regions say that\na woman who was lost on an icy\nmountain was reborn as FROSLASS</language>
+		<language name="English">Legends in snowy regions say that\na woman who was lost on an icy\nmountain was reborn as FROSLASS.</language>
 	</row>
 	<row id="msg_0804_00479" index="479">
 		<attribute name="window_context_name">used</attribute>
