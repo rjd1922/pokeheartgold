@@ -291,11 +291,11 @@
 	</row>
 	<row id="msg_0302_00072" index="72">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Often dozes off.</language>
+		<language name="English">Takes plenty of siestas.</language>
 	</row>
 	<row id="msg_0302_00073" index="73">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Often scatters things.</language>
+		<language name="English">Nods off a lot.</language>
 	</row>
 	<row id="msg_0302_00074" index="74">
 		<attribute name="window_context_name">used</attribute>
