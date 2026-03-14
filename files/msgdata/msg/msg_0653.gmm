@@ -22,7 +22,7 @@
 	</row>
 	<row id="msg_0653_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">I’m competely free today.\nWhy don’t we have a battle? {YESNO 0}</language>
+		<language name="English">I’m completely free today.\nWhy don’t we have a battle? {YESNO 0}</language>
 	</row>
 	<row id="msg_0653_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
