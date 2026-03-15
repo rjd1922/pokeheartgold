@@ -44,6 +44,15 @@ static const u16 sPokemonCenterMaps[] = {
     MAP_EVERYWHERE,
 };
 
+static const u16 sMapEvolutionMethods[] = {
+    MAP_SEAFOAM_ISLANDS_B1F, EVO_ROUTE217,
+    MAP_SEAFOAM_ISLANDS_B2F, EVO_ROUTE217,
+    MAP_SEAFOAM_ISLANDS_B3F, EVO_ROUTE217,
+    MAP_SEAFOAM_ISLANDS_B4F, EVO_ROUTE217,
+    MAP_VIRIDIAN_FOREST, EVO_ETERNA,
+    MAP_ROUTE_10, EVO_CORONET,
+};
+
 #include "data/map_headers.h"
 
 static u32 MapNumberBoundsCheck(u32 mapId) {
@@ -240,6 +249,11 @@ BOOL MapHeader_MapIsPokemonLeagueLobby(u32 mapId) {
 }
 
 EvoMethod MapHeader_GetMapEvolutionMethod(u32 mapId) {
-    // Leftover from D/P/Pl.
+    for (int i = 0; i < NELEMS(mapEvolutionMethods); i += 2) {
+        if (mapEvolutionMethods[i] == headerID) {
+            return mapEvolutionMethods[i + 1];
+        }
+    }
+
     return EVO_NONE;
 }
