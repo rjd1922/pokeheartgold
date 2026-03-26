@@ -8179,10 +8179,10 @@
                     },
                     {
                         "level": {
-                            "min": 10,
-                            "max": 20
+                            "min": 15,
+                            "max": 25
                         },
-                        "species": "SPECIES_TENTACOOL"
+                        "species": "SPECIES_GRIMER"
                     },
                     {
                         "level": {
@@ -8356,7 +8356,7 @@
                             "min": 15,
                             "max": 25
                         },
-                        "species": "SPECIES_GRIMER"
+                        "species": "SPECIES_TENTACOOL"
                     },
                     {
                         "level": {
@@ -10060,7 +10060,7 @@
                         "species": {
                             "morn": "SPECIES_FLAAFFY",
                             "day": "SPECIES_FLAAFFY",
-                            "nite": "SPECIES_FLAAFFY"
+                            "nite": "SPECIES_MARILL"
                         }
                     },
                     {
@@ -10076,7 +10076,7 @@
                         "species": {
                             "morn": "SPECIES_FLAAFFY",
                             "day": "SPECIES_FLAAFFY",
-                            "nite": "SPECIES_FLAAFFY"
+                            "nite": "SPECIES_MARILL"
                         }
                     },
                     {
@@ -19682,7 +19682,7 @@
                             "min": 30,
                             "max": 30
                         },
-                        "species": "SPECIES_TENTACOOL"
+                        "species": "SPECIES_GRIMER"
                     },
                     {
                         "level": {
