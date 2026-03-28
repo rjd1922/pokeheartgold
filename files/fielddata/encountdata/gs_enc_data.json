@@ -13439,17 +13439,25 @@
                     {
                         "level": 2,
                         "species": {
-                            "morn": "SPECIES_GEODUDE",
-                            "day": "SPECIES_GEODUDE",
-                            "nite": "SPECIES_GEODUDE"
+                            "morn": {
+                                "HEARTGOLD": "SPECIES_PHANPY",
+                                "SOULSILVER": "SPECIES_TEDDIURSA"
+                            },
+                            "day": {
+                                "HEARTGOLD": "SPECIES_PHANPY",
+                                "SOULSILVER": "SPECIES_TEDDIURSA"
+                            },
+                            "nite": {
+                                "HEARTGOLD": "SPECIES_PHANPY",
+                                "SOULSILVER": "SPECIES_TEDDIURSA"
                         }
                     },
                     {
                         "level": 3,
                         "species": {
-                            "morn": "SPECIES_JIGGLYPUFF",
-                            "day": "SPECIES_JIGGLYPUFF",
-                            "nite": "SPECIES_JIGGLYPUFF"
+                            "morn": "SPECIES_GEODUDE",
+                            "day": "SPECIES_GEODUDE",
+                            "nite": "SPECIES_GEODUDE"
                         }
                     },
                     {
@@ -22149,9 +22157,9 @@
                     {
                         "level": 34,
                         "species": {
-                            "morn": "SPECIES_ONIX",
-                            "day": "SPECIES_ONIX",
-                            "nite": "SPECIES_ONIX"
+                            "morn": "SPECIES_LARVITAR",
+                            "day": "SPECIES_LARVITAR",
+                            "nite": "SPECIES_LARVITAR"
                         }
                     },
                     {
@@ -27432,9 +27440,9 @@
                     {
                         "level": 34,
                         "species": {
-                            "morn": "SPECIES_ONIX",
-                            "day": "SPECIES_ONIX",
-                            "nite": "SPECIES_ONIX"
+                            "morn": "SPECIES_LARVITAR",
+                            "day": "SPECIES_LARVITAR",
+                            "nite": "SPECIES_LARVITAR"
                         }
                     },
                     {
@@ -27590,9 +27598,9 @@
                     {
                         "level": 34,
                         "species": {
-                            "morn": "SPECIES_ONIX",
-                            "day": "SPECIES_ONIX",
-                            "nite": "SPECIES_ONIX"
+                            "morn": "SPECIES_LARVITAR",
+                            "day": "SPECIES_LARVITAR",
+                            "nite": "SPECIES_LARVITAR"
                         }
                     },
                     {
