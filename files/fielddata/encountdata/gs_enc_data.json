@@ -22157,9 +22157,9 @@
                     {
                         "level": 34,
                         "species": {
-                            "morn": "SPECIES_LARVITAR",
-                            "day": "SPECIES_LARVITAR",
-                            "nite": "SPECIES_LARVITAR"
+                            "morn": "SPECIES_MAROWAK",
+                            "day": "SPECIES_MAROWAK",
+                            "nite": "SPECIES_MAROWAK"
                         }
                     },
                     {
@@ -27440,9 +27440,9 @@
                     {
                         "level": 34,
                         "species": {
-                            "morn": "SPECIES_LARVITAR",
-                            "day": "SPECIES_LARVITAR",
-                            "nite": "SPECIES_LARVITAR"
+                            "morn": "SPECIES_MAROWAK",
+                            "day": "SPECIES_MAROWAK",
+                            "nite": "SPECIES_MAROWAK"
                         }
                     },
                     {
