@@ -5332,11 +5332,11 @@
                                 "HEARTGOLD": "SPECIES_CATERPIE",
                                 "SOULSILVER": "SPECIES_WEEDLE"
                             },
-                                "nite": "SPECIES_MURKROW"
+                                "nite": "SPECIES_HOOTHOOT"
                         }
                     },
                     {
-                        "level": 10,
+                        "level": 12,
                         "species": {
                             "morn": {
                                 "HEARTGOLD": "SPECIES_METAPOD",
@@ -5346,7 +5346,7 @@
                                 "HEARTGOLD": "SPECIES_METAPOD",
                                 "SOULSILVER": "SPECIES_KAKUNA"
                             },
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_PSYDUCK"
                         }
                     },
                     {
@@ -5385,7 +5385,7 @@
                                 "SOULSILVER": "SPECIES_WEEDLE"
                             },
                             "day": "SPECIES_SUNKERN",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_PSYDUCK"
                         }
                     },
                     {
@@ -5396,7 +5396,7 @@
                                 "SOULSILVER": "SPECIES_WEEDLE"
                             },
                             "day": "SPECIES_SUNKERN",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_MURKROW"
                         }
                     },
                     {
@@ -5404,7 +5404,7 @@
                         "species": {
                             "morn": "SPECIES_PIDGEY",
                             "day": "SPECIES_PIDGEY",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_MURKROW"
                         }
                     },
                     {
@@ -5412,7 +5412,7 @@
                         "species": {
                             "morn": "SPECIES_PIDGEY",
                             "day": "SPECIES_PIDGEY",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_VENONAT"
                         }
                     },
                     {
@@ -5420,7 +5420,7 @@
                         "species": {
                             "morn": "SPECIES_PIDGEY",
                             "day": "SPECIES_SUNKERN",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_VENONAT"
                         }
                     },
                     {
@@ -5428,7 +5428,7 @@
                         "species": {
                             "morn": "SPECIES_PIDGEY",
                             "day": "SPECIES_PIDGEY",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_MURKROW"
                         }
                     },
                     {
@@ -5436,7 +5436,7 @@
                         "species": {
                             "morn": "SPECIES_PIDGEY",
                             "day": "SPECIES_SUNKERN",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_VENONAT"
                         }
                     },
                     {
@@ -5444,7 +5444,7 @@
                         "species": {
                             "morn": "SPECIES_PIDGEY",
                             "day": "SPECIES_PIDGEY",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_MURKROW"
                         }
                     }
                 ]
