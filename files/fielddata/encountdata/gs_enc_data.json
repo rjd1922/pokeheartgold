@@ -196,7 +196,7 @@
                         "species": {
                             "morn": "SPECIES_SENTRET",
                             "day": "SPECIES_SENTRET",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_RATTATA"
                         }
                     },
                     {
@@ -212,7 +212,7 @@
                         "species": {
                             "morn": "SPECIES_SENTRET",
                             "day": "SPECIES_SENTRET",
-                            "nite": "SPECIES_HOOTHOOT"
+                            "nite": "SPECIES_RATTATA"
                         }
                     },
                     {
@@ -270,8 +270,8 @@
                     {
                         "level": 4,
                         "species": {
-                            "morn": "SPECIES_PIDGEY",
-                            "day": "SPECIES_PIDGEY",
+                            "morn": "SPECIES_HOPPIP",
+                            "day": "SPECIES_HOPPIP",
                             "nite": "SPECIES_HOOTHOOT"
                         }
                     },
@@ -292,8 +292,8 @@
                     {
                         "level": 4,
                         "species": {
-                            "morn": "SPECIES_PIDGEY",
-                            "day": "SPECIES_PIDGEY",
+                            "morn": "SPECIES_HOPPIP",
+                            "day": "SPECIES_HOPPIP",
                             "nite": "SPECIES_HOOTHOOT"
                         }
                     }
