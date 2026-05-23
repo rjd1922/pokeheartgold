@@ -14,7 +14,7 @@
 	</row>
 	<row id="msg_0751_double_slap" index="3">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">DOUBLESLAP</language>
+		<language name="English">DOUBLE SLAP</language>
 	</row>
 	<row id="msg_0751_comet_punch" index="4">
 		<attribute name="window_context_name">used</attribute>
@@ -114,7 +114,7 @@
 	</row>
 	<row id="msg_0751_sand_attack" index="28">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SAND-ATTACK</language>
+		<language name="English">SAND ATTACK</language>
 	</row>
 	<row id="msg_0751_headbutt" index="29">
 		<attribute name="window_context_name">used</attribute>
@@ -198,7 +198,7 @@
 	</row>
 	<row id="msg_0751_sonic_boom" index="49">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SONICBOOM</language>
+		<language name="English">SONIC BOOM</language>
 	</row>
 	<row id="msg_0751_disable" index="50">
 		<attribute name="window_context_name">used</attribute>
@@ -246,7 +246,7 @@
 	</row>
 	<row id="msg_0751_bubble_beam" index="61">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">BUBBLEBEAM</language>
+		<language name="English">BUBBLE BEAM</language>
 	</row>
 	<row id="msg_0751_aurora_beam" index="62">
 		<attribute name="window_context_name">used</attribute>
@@ -306,7 +306,7 @@
 	</row>
 	<row id="msg_0751_solar_beam" index="76">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SOLARBEAM</language>
+		<language name="English">SOLAR BEAM</language>
 	</row>
 	<row id="msg_0751_poison_powder" index="77">
 		<attribute name="window_context_name">used</attribute>
@@ -542,7 +542,7 @@
 	</row>
 	<row id="msg_0751_soft_boiled" index="135">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">SOFTBOILED</language>
+		<language name="English">SOFT-BOILED</language>
 	</row>
 	<row id="msg_0751_high_jump_kick" index="136">
 		<attribute name="window_context_name">used</attribute>
