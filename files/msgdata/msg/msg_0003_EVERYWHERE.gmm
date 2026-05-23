@@ -38,15 +38,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00009" index="9">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nDoubleSlap!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDouble Slap!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00010" index="10">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDoubleSlap!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDouble Slap!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDoubleSlap!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDouble Slap!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
@@ -338,15 +338,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00084" index="84">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSand-Attack!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSand Attack!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00085" index="85">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSand-Attack!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSand Attack!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00086" index="86">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSand-Attack!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSand Attack!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00087" index="87">
 		<attribute name="window_context_name">used</attribute>
@@ -590,15 +590,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00147" index="147">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSonicBoom!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSonic Boom!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00148" index="148">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSonicBoom!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSonic Boom!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00149" index="149">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSonicBoom!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSonic Boom!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00150" index="150">
 		<attribute name="window_context_name">used</attribute>
@@ -734,15 +734,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00183" index="183">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBubbleBeam!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nBubble Beam!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00184" index="184">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBubbleBeam!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBubble Beam!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00185" index="185">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBubbleBeam!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBubble Beam!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00186" index="186">
 		<attribute name="window_context_name">used</attribute>
@@ -914,15 +914,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00228" index="228">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSolarBeam!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSolar Beam!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00229" index="229">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSolarBeam!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSolar Beam!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00230" index="230">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSolarBeam!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSolar Beam!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00231" index="231">
 		<attribute name="window_context_name">used</attribute>
@@ -1298,15 +1298,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00324" index="324">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSmokeScreen!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSmokescreen!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00325" index="325">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSmokeScreen!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSmokescreen!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00326" index="326">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSmokeScreen!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSmokescreen!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00327" index="327">
 		<attribute name="window_context_name">used</attribute>
@@ -1622,15 +1622,15 @@
 	</row>
 	<row id="msg_0003_EVERYWHERE_00405" index="405">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSoftboiled!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSoft-Boiled!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00406" index="406">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSoftboiled!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSoft-Boiled!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00407" index="407">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSoftboiled!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSoft-Boiled!</language>
 	</row>
 	<row id="msg_0003_EVERYWHERE_00408" index="408">
 		<attribute name="window_context_name">used</attribute>
