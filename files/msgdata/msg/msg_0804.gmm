@@ -475,7 +475,7 @@
 	</row>
 	<row id="msg_0804_00118" index="118">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A strong swimmer, it is capable of\nswimming nonstop up fast streams at\na steady speed of five knots per hour.</language>
+		<language name="English">A strong swimmer, it is capable of\nswimming nonstop up fast streams at\na steady speed of five knots.</language>
 	</row>
 	<row id="msg_0804_00119" index="119">
 		<attribute name="window_context_name">used</attribute>
