@@ -1447,7 +1447,7 @@
           "moves": [
             "MOVE_SLEEP_TALK",
             "MOVE_AQUA_JET",
-            "MOVE_AURORA_BEAM",
+            "MOVE_ICE_BEAM",
             "MOVE_REST"
           ],
           "capsule": 0
